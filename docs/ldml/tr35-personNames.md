@@ -92,18 +92,18 @@ The LDML specification is divided into the following parts:
     * [Handling foreign names](#Handling_foreign_names) 
     * [Setting the spaceReplacement](#Setting_the_spaceReplacement) 
     * [Examples of space replacement](#Examples_of_space_replacement) 
-  * [Formatting examples](#formatting-examples)
-* [Sample Name](#sample-name)
-  * [Syntax](#syntax)
-  * [Expected values](#expected-values)
-* [Person Name Validation](#person-name-validation)
-  * [Letters](#letters)
-  * [Non-Letters](#non-letters)
-  * [Normalization](#normalization)
-  * [Additional possible constraints](#additional-possible-constraints)
-* [PersonName Data Interface Examples](#personname-data-interface-examples)
-  * [Example 1](#example-1)
-  * [Example 2](#example-2)
+  * [Formatting examples](#Formatting_examples) 
+* [Sample Name](#Sample_Name) 
+  * [Syntax](#Syntax) 
+  * [Expected values](#Expected_values) 
+* [Person Name Validation](#Person_Name_Validation) 
+  * [Letters](#Letters) 
+  * [Non-Letters](#NonLetters) 
+  * [Normalization](#Normalization) 
+  * [Additional possible constraints](#Additional_possible_constraints) 
+* [PersonName Data Interface Examples](#PersonName_Data_Interface_Examples) 
+  * [Example 1](#Example_1) 
+  * [Example 2](#Example_2) 
 
 ## <a name="CLDR_Person_Names" id="CLDR_Person_Names" href="#CLDR_Person_Names">CLDR Person Names</a> <a id="personNames-cldr-person-names"></a>
 
@@ -1021,7 +1021,7 @@ The name data would resolve as follows:
 <br/>
 ```
 
-### Formatting examples
+### <a name="Formatting_examples" id="Formatting_examples" href="#Formatting_examples">Formatting examples</a> <a id="personNames-formatting-process-formatting-examples"></a>
 
 The personName element contains:
 
@@ -1144,12 +1144,12 @@ The output is:
 
 > F. Baz
 
-## Sample Name
+## <a name="Sample_Name" id="Sample_Name" href="#Sample_Name">Sample Name</a> <a id="personNames-sample-name"></a>
 
 * <a id="personNames-sample-name-rule-1"></a> **The sampleName element**: The sampleName element is used for test names in the personNames LDML data for each locale to aid in testing and display in the CLDR Survey Tool. They are not intended to be used in production software as prompts or placeholders in a user interface and should not be displayed in a user interface.
 
 
-### Syntax
+### <a name="Syntax" id="Syntax" href="#Syntax">Syntax</a> <a id="personNames-sample-name-syntax"></a>
 
 ```xml
 <!ELEMENT sampleName ( nameField+ )  >
@@ -1158,7 +1158,7 @@ The output is:
 
 * `NMTOKEN` must be one of `( nativeG, nativeGS, nativeGGS, nativeFull, foreignG, foreignGS, foreignGGS, foreignFull )`. However, these may change arbitrarily in the future.
 
-### Expected values
+### <a name="Expected_values" id="Expected_values" href="#Expected_values">Expected values</a> <a id="personNames-sample-name-expected-values"></a>
 
 The item values starting with "native" are expected to be native names, in native script.
 The item values starting with "foreign" are expected to be foreign names, in native script.
@@ -1174,7 +1174,7 @@ For the expected sample name items, assume a name such as Mr. Richard “Rich”
 
 The `nameField` values and their modifiers are described in the [Person Name Object](#person-name-object) and [namePattern Syntax](#namepattern-syntax) sections.
 
-## Person Name Validation
+## <a name="Person_Name_Validation" id="Person_Name_Validation" href="#Person_Name_Validation">Person Name Validation</a> <a id="personNames-person-name-validation"></a>
 
 * <a id="personNames-person-name-validation-rule-1"></a> **When implementations allow**: When implementations allow entry of person names, they are often too strict; there are many instances where people can’t enter their real names, such as O’Brian, Stéphanie, Wałęsa, Þjóðólfr. Conversely, when an implementation is too lenient, it allows names like Ȟěl̀a, or B🅾️b. (See also [Zalgo](https://en.wikipedia.org/wiki/Zalgo_text).)
 
@@ -1185,7 +1185,7 @@ The `nameField` values and their modifiers are described in the [Person Name Obj
 * <a id="personNames-person-name-validation-rule-3"></a> **However, when the**: However, when the limitations are due to unfamiliarity with the kinds of characters that can appear in languages, Unicode properties and CLDR data can help implementers to avoid being either too strict or too lenient.
 
 
-### Letters
+### <a name="Letters" id="Letters" href="#Letters">Letters</a> <a id="personNames-person-name-validation-letters"></a>
 
 A common restriction is that the letters in a name only come from a single script. That may be too lenient: there are over 1,453 letters in the Latin script in Unicode 17\!
 
@@ -1210,7 +1210,7 @@ It is often useful to explicitly include the exemplars from multiple languages.
 For example, an implementation may choose to include the exemplars from official languages of the EU, or for major languages of Africa.
 There is data in CLDR for the populations of languages in countries, and their official status, that may be useful for this.
 
-### Non-Letters
+### <a name="NonLetters" id="NonLetters" href="#NonLetters">Non-Letters</a> <a id="personNames-person-name-validation-non-letters"></a>
 
 * <a id="personNames-person-name-validation-non-letters-rule-1"></a> **Names, even for**: Names, even for a single name field like the family name, may have spaces, such as “de Silva”. Some additional punctuation characters commonly used in names are provided by the punctuation-person exemplars.
 
@@ -1222,7 +1222,7 @@ Those may include some variants of the ASCII hyphen; typically the best approach
 
 Examples include: Jean-Luc; Dr. Doom; James Smith Jr., MD
 
-### Normalization
+### <a name="Normalization" id="Normalization" href="#Normalization">Normalization</a> <a id="personNames-person-name-validation-normalization"></a>
 
 When names are input from the keyboard, they should be normalized before validation. Typically the best foundation for that is Unicode NFC format. Additional useful normalizations are
 
@@ -1231,7 +1231,7 @@ When names are input from the keyboard, they should be normalized before validat
 * Replacement of  U+2010 HYPHEN and U+2011 NON-BREAKING HYPHEN
   * \[‐‑\] → \-
 
-### Additional possible constraints
+### <a name="Additional_possible_constraints" id="Additional_possible_constraints" href="#Additional_possible_constraints">Additional possible constraints</a> <a id="personNames-person-name-validation-additional-possible-constraints"></a>
 
 * <a id="personNames-person-name-validation-additional-possible-constraints-rule-1"></a> **Other useful constraints**: Other useful constraints include testing for extremely unusual cases, which may be mistakes or jokes ([Zalgo](https://en.wikipedia.org/wiki/Zalgo_text)). For these it is helpful to transform first into NFD, then apply the tests.
 
@@ -1245,9 +1245,9 @@ When names are input from the keyboard, they should be normalized before validat
 
 For further information, including confusables, mixed script detection, and so on, see [UTS \#39: Unicode Security Mechanisms](https://www.unicode.org/reports/tr39/).
 
-## PersonName Data Interface Examples
+## <a name="PersonName_Data_Interface_Examples" id="PersonName_Data_Interface_Examples" href="#PersonName_Data_Interface_Examples">PersonName Data Interface Examples</a> <a id="personNames-personname-data-interface-examples"></a>
 
-### Example 1
+### <a name="Example_1" id="Example_1" href="#Example_1">Example 1</a> <a id="personNames-personname-data-interface-examples-example-1"></a>
 
 Greek initials can be produced via the following process in the PersonName object, and returned to the formatter.
 
@@ -1259,7 +1259,7 @@ Examples:
 * Χριστίνα Λόπεζ (Christina Lopez) ⟶ Χ. Λόπεζ (C. Lopez)
 * Ντέιβιντ Λόπεζ (David Lopez) ⟶ Ντ. Λόπεζ (D. Lopez)<br/>Note that Ντ is a digraph representing the sound D.
 
-### Example 2
+### <a name="Example_2" id="Example_2" href="#Example_2">Example 2</a> <a id="personNames-personname-data-interface-examples-example-2"></a>
 
 To make an initial when there are multiple words, an implementation might produce the following:
 

@@ -59,62 +59,62 @@ The LDML specification is divided into the following parts:
       * [Table: Date-Time Combination Examples](#Date_Time_Combination_Examples) 
     * [Elements availableFormats, appendItems](#availableFormats_appendItems) 
       * [Table: Mapping Requested Time Skeletons To Patterns](#Mapping_Requested_Time_Skeletons_To_Patterns) 
-      * [Matching Skeletons](#Matching_Skeletons)
-      * [Missing Skeleton Fields](#Missing_Skeleton_Fields)
-    * [Element intervalFormats](#intervalFormats)
-* [Calendar Fields](#Calendar_Fields)
-* [Supplemental Calendar Data](#Supplemental_Calendar_Data)
-  * [Calendar Data](#Calendar_Data)
-  * [Calendar Preference Data](#calendar-preference-data)
-  * [Week Data](#Week_Data)
-    * Table: [Week Designation Types](#Week_Designation_Types)
-    * [First Day Overrides](#first-day-overrides)
-  * [Time Data](#Time_Data)
-  * [Day Period Rule Sets](#Day_Period_Rule_Sets)
-    * [Day Period Rules](#Day_Period_Rules)
-      * [Fixed periods](#Fixed_periods)
-      * [Variable periods](#Variable_periods)
-      * [Parsing Day Periods](#Parsing_Day_Periods)
-* [Time Zone Names](#Time_Zone_Names)
-  * Table: [timeZoneNames Elements Used for Fallback](#timeZoneNames_Elements_Used_for_Fallback)
-  * [Metazone Names](#Metazone_Names)
-* [Supplemental Time Zone Data](#Supplemental_Time_Zone_Data)
-  * [Metazones](#Metazones)
-  * [Windows Zones](#Windows_Zones)
-  * [Primary Zones](#Primary_Zones)
-* [Using Time Zone Names](#Using_Time_Zone_Names)
-  * [Time Zone Format Terminology](#Time_Zone_Format_Terminology)
-  * [Goals](#Time_Zone_Goals)
-  * [Parsing](#Time_Zone_Parsing)
-* [Date Format Patterns](#Date_Format_Patterns)
-  * Table: [Date Format Pattern Examples](#Date_Format_Pattern_Examples)
-  * Table: [Date Field Symbol Table](#Date_Field_Symbol_Table)
-  * [Localized Pattern Characters (deprecated)](#Localized_Pattern_Characters)
-  * [AM / PM](#Date_Patterns_AM_PM)
-  * [Eras](#Date_Patterns_Eras)
-  * [Week of Year](#Date_Patterns_Week_Of_Year)
-  * [Week Elements](#Date_Patterns_Week_Elements)
-* [Parsing Dates and Times](#Parsing_Dates_Times)
-* [Semantic Skeletons](#Semantic_Skeletons)
-  * [Parts of a Semantic Skeleton](#Parts_of_a_Semantic_Skeleton)
-    * [Semantic Field Sets](#Semantic_Field_Sets)
-      * [Date Field Sets](#Semantic_Date_Field_Sets)
-      * [Calendar Period Field Sets](#Semantic_Calendar_Period_Field_Sets)
-      * [Time Field Sets](#Semantic_Time_Field_Sets)
-      * [Time Zone Field Sets](#Semantic_Time_Zone_Field_Sets)
-      * [Composite Field Sets](#Semantic_Composite_Field_Sets)
-    * [Semantic Skeleton Options](#Semantic_Skeleton_Options)
-      * [Length](#Semantic_Skeleton_Length)
-      * [Alignment](#Semantic_Skeleton_Alignment)
-      * [Year Style](#Semantic_Skeleton_Year_Style)
-      * [Hour Cycle](#Semantic_Skeleton_Hour_Cycle)
-      * [Time Precision](#Semantic_Skeleton_Time_Precision)
-      * [Time Zone Style](#Semantic_Skeleton_Time_Zone_Style)
-  * [Generating Patterns for Semantic Skeletons](#Generating_Patterns_for_Semantic_Skeletons)
-    * [Mapping to Standard Skeletons](#mapping-to-standard-skeletons)
-      * [Time Precision Skeleton Variations](#Semantic_Time_Precision_Skeleton_Variations)
-      * [Year Style Skeleton Variations](#Semantic_Year_Style_Skeleton_Variations)
-  * [Semantic Skeleton Conformance](#Semantic_Skeleton_Conformance)
+      * [Matching Skeletons](#Matching_Skeletons) 
+      * [Missing Skeleton Fields](#Missing_Skeleton_Fields) 
+    * [Element intervalFormats](#intervalFormats) 
+* [Calendar Fields](#Calendar_Fields) 
+* [Supplemental Calendar Data](#Supplemental_Calendar_Data) 
+  * [Calendar Data](#Calendar_Data) 
+  * [Calendar Preference Data](#Calendar_Preference_Data) 
+  * [Week Data](#Week_Data) 
+    * [Table: Week Designation Types](#Week_Designation_Types) 
+    * [First Day Overrides](#First_Day_Overrides) 
+  * [Time Data](#Time_Data) 
+  * [Day Period Rule Sets](#Day_Period_Rule_Sets) 
+    * [Day Period Rules](#Day_Period_Rules) 
+      * [Fixed periods](#Fixed_periods) 
+      * [Variable periods](#Variable_periods) 
+      * [Parsing Day Periods](#Parsing_Day_Periods) 
+* [Time Zone Names](#Time_Zone_Names) 
+  * [Table: timeZoneNames Elements Used for Fallback](#timeZoneNames_Elements_Used_for_Fallback) 
+  * [Metazone Names](#Metazone_Names) 
+* [Supplemental Time Zone Data](#Supplemental_Time_Zone_Data) 
+  * [Metazones](#Metazones) 
+  * [Windows Zones](#Windows_Zones) 
+  * [Primary Zones](#Primary_Zones) 
+* [Using Time Zone Names](#Using_Time_Zone_Names) 
+  * [Time Zone Format Terminology](#Time_Zone_Format_Terminology) 
+  * [Goals](#Time_Zone_Goals) 
+  * [Parsing](#Time_Zone_Parsing) 
+* [Date Format Patterns](#Date_Format_Patterns) 
+  * [Table: Date Format Pattern Examples](#Date_Format_Pattern_Examples) 
+  * [Table: Date Field Symbol Table](#Date_Field_Symbol_Table) 
+  * [Localized Pattern Characters (deprecated)](#Localized_Pattern_Characters) 
+  * [AM / PM](#Date_Patterns_AM_PM) 
+  * [Eras](#Date_Patterns_Eras) 
+  * [Week of Year](#Date_Patterns_Week_Of_Year) 
+  * [Week Elements](#Date_Patterns_Week_Elements) 
+* [Parsing Dates and Times](#Parsing_Dates_Times) 
+* [Semantic Skeletons](#Semantic_Skeletons) 
+  * [Parts of a Semantic Skeleton](#Parts_of_a_Semantic_Skeleton) 
+    * [Semantic Field Sets](#Semantic_Field_Sets) 
+      * [Date Field Sets](#Semantic_Date_Field_Sets) 
+      * [Calendar Period Field Sets](#Semantic_Calendar_Period_Field_Sets) 
+      * [Time Field Sets](#Semantic_Time_Field_Sets) 
+      * [Time Zone Field Sets](#Semantic_Time_Zone_Field_Sets) 
+      * [Composite Field Sets](#Semantic_Composite_Field_Sets) 
+    * [Semantic Skeleton Options](#Semantic_Skeleton_Options) 
+      * [Length](#Semantic_Skeleton_Length) 
+      * [Alignment](#Semantic_Skeleton_Alignment) 
+      * [Year Style](#Semantic_Skeleton_Year_Style) 
+      * [Hour Cycle](#Semantic_Skeleton_Hour_Cycle) 
+      * [Time Precision](#Semantic_Skeleton_Time_Precision) 
+      * [Time Zone Style](#Semantic_Skeleton_Time_Zone_Style) 
+  * [Generating Patterns for Semantic Skeletons](#Generating_Patterns_for_Semantic_Skeletons) 
+    * [Mapping to Standard Skeletons](#Mapping_to_Standard_Skeletons) 
+      * [Time Precision Skeleton Variations](#Semantic_Time_Precision_Skeleton_Variations) 
+      * [Year Style Skeleton Variations](#Semantic_Year_Style_Skeleton_Variations) 
+  * [Semantic Skeleton Conformance](#Semantic_Skeleton_Conformance) 
 
 ## <a name="Overview_Dates_Element_Supplemental" id="Overview_Dates_Element_Supplemental" href="#Overview_Dates_Element_Supplemental">Overview: Dates Element, Supplemental Date and Calendar Information</a> <a id="dates-overview-dates-element-supplemental-date-and-calendar-information"></a>
 
@@ -795,7 +795,7 @@ Locales that use 12-hour-cycle time formats with B may provide availableFormats 
 
 The dateFormatItems inherit from their parent locale, so the inherited items need to be considered when processing.
 
-##### <a name="Matching_Skeletons" href="#Matching_Skeletons">Matching Skeletons</a>
+##### <a name="Matching_Skeletons" id="Matching_Skeletons" href="#Matching_Skeletons">Matching Skeletons</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons"></a>
 
 It is not necessary to supply `dateFormatItem`s with skeletons for every field length; fields in the skeleton and pattern are expected to be adjusted in parallel to handle a request.
 
@@ -870,7 +870,7 @@ For an example of not converting a pattern field length if the corresponding ske
 * <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-rule-5"></a> **Finally: If the**: Finally: If the requested skeleton included both seconds and fractional seconds and the dateFormatItem skeleton included seconds but not fractional seconds, then the seconds field of the corresponding pattern should be adjusted by appending the locale’s decimal separator, followed by the sequence of ‘S’ characters from the requested skeleton.
 
 
-##### <a name="Missing_Skeleton_Fields" href="#Missing_Skeleton_Fields">Missing Skeleton Fields</a>
+##### <a name="Missing_Skeleton_Fields" id="Missing_Skeleton_Fields" href="#Missing_Skeleton_Fields">Missing Skeleton Fields</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields"></a>
 
 * <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-rule-1"></a> **If a client-requested**: If a client-requested set of fields includes both date and time fields, and if the `availableFormats` data does not include a `dateFormatItem` whose skeleton matches the same set of fields, then the request should be handled as follows:
 
@@ -903,7 +903,7 @@ For an example of not converting a pattern field length if the corresponding ske
 * <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-rule-5"></a> **Note: as described**: Note: as described above `appendItems` for date fields should be appended to the date, and `appendItems` for time fields should be appended to the time, _before_ combining them with the `dateTimeFormat`.
 
 
-#### <a name="intervalFormats" href="#intervalFormats">Element intervalFormats</a>
+#### <a name="intervalFormats" id="intervalFormats" href="#intervalFormats">Element intervalFormats</a> <a id="dates-calendar-elements-element-datetimeformats-element-intervalformats"></a>
 
 ```xml
 <!ELEMENT intervalFormats (alias | (intervalFormatFallback*, intervalFormatItem*, special*)) >
@@ -962,7 +962,7 @@ To format a start and end datetime, given a particular "skeleton":
 6. If there is a match, use the pieces of the corresponding pattern to format the start and end datetime, as above.
 7. Otherwise, format the start and end datetime using the fallback pattern.
 
-## <a name="Calendar_Fields" href="#Calendar_Fields">Calendar Fields</a>
+## <a name="Calendar_Fields" id="Calendar_Fields" href="#Calendar_Fields">Calendar Fields</a> <a id="dates-calendar-fields"></a>
 
 ```xml
 <!ELEMENT fields ( alias | (field*, special*)) >
@@ -1100,9 +1100,9 @@ Different widths can be supplied for certain fields, such as:
 
 As in other cases, **narrow** may be ambiguous out of context.
 
-## <a name="Supplemental_Calendar_Data" href="#Supplemental_Calendar_Data">Supplemental Calendar Data</a>
+## <a name="Supplemental_Calendar_Data" id="Supplemental_Calendar_Data" href="#Supplemental_Calendar_Data">Supplemental Calendar Data</a> <a id="dates-supplemental-calendar-data"></a>
 
-### <a name="Calendar_Data" href="#Calendar_Data">Calendar Data</a>
+### <a name="Calendar_Data" id="Calendar_Data" href="#Calendar_Data">Calendar Data</a> <a id="dates-supplemental-calendar-data-calendar-data"></a>
 
 ```xml
 <!ELEMENT calendarData ( calendar* )>
@@ -1192,7 +1192,7 @@ The `end` attribute is unused, and is slated for deprecation in the future.
 
 **Note:** The `territories` attribute in the `calendar` element is deprecated. It was formerly used to indicate calendar preference by territory, but this is now given by the _[Calendar Preference Data](#Calendar_Preference_Data)_ below.
 
-### Calendar Preference Data
+### <a name="Calendar_Preference_Data" id="Calendar_Preference_Data" href="#Calendar_Preference_Data">Calendar Preference Data</a> <a id="dates-supplemental-calendar-data-calendar-preference-data"></a>
 
 ```xml
 <!ELEMENT calendarPreferenceData ( calendarPreference* ) >
@@ -1218,7 +1218,7 @@ The `calendarPreference` elements above indicate:
 
 The calendars in common use for a locale should typically be shown in UIs that provide a choice of calendars. (An 'Other...' button could give access to the other available calendars.)
 
-### <a name="Week_Data" href="#Week_Data">Week Data</a>
+### <a name="Week_Data" id="Week_Data" href="#Week_Data">Week Data</a> <a id="dates-supplemental-calendar-data-week-data"></a>
 
 ```xml
 <!ELEMENT weekData ( minDays*, firstDay*, weekendStart*, weekendEnd*, weekOfPreference* )>
@@ -1281,7 +1281,7 @@ The calendars in common use for a locale should typically be shown in UIs that p
 * <a id="dates-supplemental-calendar-data-week-data-rule-5"></a> **Each `weekOfPreference` element**: Each `weekOfPreference` element provides, for its specified locales, an ordered list of the preferred types of week designations for that set of locales. There are four types of week designations, each of which makes use of date patterns available in the locale, as follows:
 
 
-###### Table: <a name="Week_Designation_Types" href="#Week_Designation_Types">Week Designation Types</a>
+###### <a name="Week_Designation_Types" id="Week_Designation_Types" href="#Week_Designation_Types">Table: Week Designation Types</a> <a id="dates-supplemental-calendar-data-week-data-table-week-designation-types"></a>
 
 | Type           | Examples                          | Date Pattern                                                | Comments    |
 |----------------|-----------------------------------|-------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1290,7 +1290,7 @@ The calendars in common use for a locale should typically be shown in UIs that p
 | weekOfDate     | the week of April 11, 2016        | \<field type="week"\>\<relativePeriod>the week of {0}\<…        | The date pattern that replaces {0} is determined separately and may use the first day or workday of the week, the range of the full week or work week, etc.   |
 | weekOfInterval | the week of April 11–15           | \<field type="week"\>\<relativePeriod>the week of {0}\<…    |  (same comment as above) |
 
-#### First Day Overrides
+#### <a name="First_Day_Overrides" id="First_Day_Overrides" href="#First_Day_Overrides">First Day Overrides</a> <a id="dates-supplemental-calendar-data-week-data-first-day-overrides"></a>
 
 * <a id="dates-supplemental-calendar-data-week-data-first-day-overrides-rule-1"></a> **The calculation of**: The calculation of the first day of the week depends on various fields in a locale_identifier, according to the following algorithm. The data in the `firstDay` elements is treated as a map from region to day, with any missing value using the value for 001.
 
@@ -1315,7 +1315,7 @@ The calendars in common use for a locale should typically be shown in UIs that p
 |en | | US (from likely subtags) |
 |zxx | 001 | (fallback) |
 
-### <a name="Time_Data" href="#Time_Data">Time Data</a>
+### <a name="Time_Data" id="Time_Data" href="#Time_Data">Time Data</a> <a id="dates-supplemental-calendar-data-time-data"></a>
 
 ```xml
 <!ELEMENT timeData ( hours* ) >
@@ -1360,7 +1360,7 @@ locale IDs (`gu_IN`).
 
 The preferred value for the locale can be overridden by the locale keyword "hc", see [Unicode Hour Cycle Identifier ](tr35.md#UnicodeHourCycleIdentifier).
 
-### <a name="Day_Period_Rule_Sets" href="#Day_Period_Rule_Sets">Day Period Rule Sets</a>
+### <a name="Day_Period_Rule_Sets" id="Day_Period_Rule_Sets" href="#Day_Period_Rule_Sets">Day Period Rule Sets</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets"></a>
 
 ```xml
 <!ELEMENT dayPeriodRuleSet ( dayPeriodRules* ) >
@@ -1406,11 +1406,11 @@ These are relative times within a single day. If the event can occur on multiple
 * <a id="dates-supplemental-calendar-data-day-period-rule-sets-rule-3"></a> **As with plurals**: As with plurals, the exact set of periods used for any language may be different. It is the responsibility of any translation software to pick the relevant day periods for the locale for display to the translator (and end user).
 
 
-#### <a name="Day_Period_Rules" href="#Day_Period_Rules">Day Period Rules</a>
+#### <a name="Day_Period_Rules" id="Day_Period_Rules" href="#Day_Period_Rules">Day Period Rules</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules"></a>
 
 Here are the requirements for a rule set.
 
-##### <a name="Fixed_periods" href="#Fixed_periods">Fixed periods</a>
+##### <a name="Fixed_periods" id="Fixed_periods" href="#Fixed_periods">Fixed periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods"></a>
 
 * <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-rule-1"></a> **There are 4**: There are 4 dayPeriods that are fixed; am/pm are always defined, and always have the same meaning and definition for every locale. Midnight and noon are optional, however if they are defined, they have the same meaning and definition as in all other locales where they are defined.
 
@@ -1432,7 +1432,7 @@ Note that midnight and am can overlap, as can noon and pm.
 * <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-rule-3"></a> **It is strongly**: It is strongly recommended that implementations provide for the ability to specify whether **midnight** is supported or not (and for either 00:00 or 24:00 or both), since only the caller knows enough of the context to determine what to use. In the absence of such information, 24:00 may be the best choice.
 
 
-##### <a name="Variable_periods" href="#Variable_periods">Variable periods</a>
+##### <a name="Variable_periods" id="Variable_periods" href="#Variable_periods">Variable periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-variable-periods"></a>
 
 1. If a locale has a set of dayPeriodRules for variable periods, it needs to completely cover the 24 hours in a day (from 0:00 before 24:00), with **no** overlaps between any dayPeriodRules. They may overlap with the **Fixed Periods**.
    If it does not have a rule set for variable periods, behavior should fall back to using the fixed periods (am, pm).
@@ -1451,7 +1451,7 @@ Note that midnight and am can overlap, as can noon and pm.
      * `<dayPeriod type = "night1" from="21:00" to="24:00"/>`
 9. 24:00 is _only_ allowed in _before_="24:00".
 
-##### <a name="Parsing_Day_Periods" href="#Parsing_Day_Periods">Parsing Day Periods</a>
+##### <a name="Parsing_Day_Periods" id="Parsing_Day_Periods" href="#Parsing_Day_Periods">Parsing Day Periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods"></a>
 
 * <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-rule-1"></a> **When parsing, if**: When parsing, if the hour is present with a strict parse the dayperiod is checked for consistency with the hour. If there is no hour, the center of the first matching dayPeriodRule can be chosen (starting from 0:00). However, if there is other information available when parsing, a different point within the interval may be chosen.
 
@@ -1466,7 +1466,7 @@ If rounding is done—including the rounding done by the time format—then it n
 
 For examples, see [Day Periods Chart](https://www.unicode.org/cldr/charts/latest/supplemental/day_periods.html).
 
-## <a name="Time_Zone_Names" href="#Time_Zone_Names">Time Zone Names</a>
+## <a name="Time_Zone_Names" id="Time_Zone_Names" href="#Time_Zone_Names">Time Zone Names</a> <a id="dates-time-zone-names"></a>
 
 ```xml
 <!ELEMENT timeZoneNames (alias | (hourFormat*, gmtFormat*, gmtUnknownFormat*, regionFormat*, fallbackFormat*, zone*, metazone*, special*)) >
@@ -1585,7 +1585,7 @@ For more information, see [[Data Formats](tr35.md#DataFormats)].
 
 The following subelements of `<timeZoneNames>` are used to control the fallback process described in [Using Time Zone Names](#Using_Time_Zone_Names).
 
-###### Table: <a name="timeZoneNames_Elements_Used_for_Fallback" href="#timeZoneNames_Elements_Used_for_Fallback">timeZoneNames Elements Used for Fallback</a>
+###### <a name="timeZoneNames_Elements_Used_for_Fallback" id="timeZoneNames_Elements_Used_for_Fallback" href="#timeZoneNames_Elements_Used_for_Fallback">Table: timeZoneNames Elements Used for Fallback</a> <a id="dates-time-zone-names-table-timezonenames-elements-used-for-fallback"></a>
 
 <table><tbody>
 ```xml
@@ -1607,7 +1607,7 @@ The following subelements of `<timeZoneNames>` are used to control the fallback 
 
 > **Note:** User interfaces for time zone selection can use the "generic location format" for time zone names to obtain the most useful ordering of names in a menu or list; see _[Using Time Zone Names](#Using_Time_Zone_Names)_ and the zone section of the _[Date Field Symbol Table](#Date_Field_Symbol_Table)._
 
-### <a name="Metazone_Names" href="#Metazone_Names">Metazone Names</a>
+### <a name="Metazone_Names" id="Metazone_Names" href="#Metazone_Names">Metazone Names</a> <a id="dates-time-zone-names-metazone-names"></a>
 
 * <a id="dates-time-zone-names-metazone-names-rule-1"></a> **A metazone is**: A metazone is a grouping of one or more internal TZIDs that share a common display name in current customary usage, or that have shared a common display name during some particular time period. For example, the zones _Europe/Paris, Europe/Andorra, Europe/Tirane, Europe/Vienna, Europe/Sarajevo, Europe/Brussels, Europe/Zurich, Europe/Prague, Europe/Berlin_, and so on are often simply designated _Central European Time_ (or translated equivalent).
 
@@ -1690,9 +1690,9 @@ In practice this is not an issue, since metazone IDs and TZIDs are never used in
 * <a id="dates-time-zone-names-metazone-names-rule-6"></a> **The `commonlyUsed` element**: The `commonlyUsed` element is now deprecated. The CLDR committee has found it nearly impossible to obtain accurate and reliable data regarding which time zone abbreviations may be understood in a given territory, and therefore has changed to a simpler approach. Thus, if the short metazone form is available in a given locale, it is to be used for formatting regardless of the value of commonlyUsed. If a given short metazone form is known NOT to be understood in a given locale and the parent locale has this value such that it would normally be inherited, the inheritance of this value can be explicitly disabled by use of the 'no inheritance marker' as the value, which is 3 simultaneous empty set characters (U+2205).
 
 
-## <a name="Supplemental_Time_Zone_Data" href="#Supplemental_Time_Zone_Data">Supplemental Time Zone Data</a>
+## <a name="Supplemental_Time_Zone_Data" id="Supplemental_Time_Zone_Data" href="#Supplemental_Time_Zone_Data">Supplemental Time Zone Data</a> <a id="dates-supplemental-time-zone-data"></a>
 
-### <a name="Metazones" href="#Metazones">Metazones</a>
+### <a name="Metazones" id="Metazones" href="#Metazones">Metazones</a> <a id="dates-supplemental-time-zone-data-metazones"></a>
 
 ```xml
 <!ELEMENT metaZones (metazoneInfo?, mapTimezones?) >
@@ -1751,7 +1751,7 @@ In practice this is not an issue, since metazone IDs and TZIDs are never used in
     ....
 ```
 
-### <a name="Windows_Zones" href="#Windows_Zones">Windows Zones</a>
+### <a name="Windows_Zones" id="Windows_Zones" href="#Windows_Zones">Windows Zones</a> <a id="dates-supplemental-time-zone-data-windows-zones"></a>
 
 ```xml
 <!ELEMENT windowsZones (mapTimezones?) >
@@ -1782,7 +1782,7 @@ The `<mapTimezones>` element can be also used to provide mappings between Unicod
 
 **Note:** Not all Unicode time zones have equivalent Windows TZID mappings. Also, not all Windows TZIDs have equivalent Unicode time zones. For example, there is no equivalent Windows zone for Unicode time zone "Australia/Lord_Howe", and there is no equivalent Unicode time zone for Windows zone "E. Europe Standard Time" (as of CLDR 25 release).
 
-### <a name="Primary_Zones" href="#Primary_Zones">Primary Zones</a>
+### <a name="Primary_Zones" id="Primary_Zones" href="#Primary_Zones">Primary Zones</a> <a id="dates-supplemental-time-zone-data-primary-zones"></a>
 
 ```xml
 <!ELEMENT primaryZones ( primaryZone* ) >
@@ -1804,12 +1804,12 @@ The `<mapTimezones>` element can be also used to provide mappings between Unicod
 * <a id="dates-supplemental-time-zone-data-primary-zones-rule-2"></a> **This information was**: This information was previously specified by the LDML `<singleCountries>` element under each locale’s `<timeZoneNames>` element. However, that approach had inheritance issues, and the data is not really locale-specific anyway.
 
 
-## <a name="Using_Time_Zone_Names" href="#Using_Time_Zone_Names">Using Time Zone Names</a>
+## <a name="Using_Time_Zone_Names" id="Using_Time_Zone_Names" href="#Using_Time_Zone_Names">Using Time Zone Names</a> <a id="dates-using-time-zone-names"></a>
 
 * <a id="dates-using-time-zone-names-rule-1"></a> **There are three**: There are three main types of formats for zone identifiers: GMT, generic (wall time), and standard/daylight. Standard and daylight are equivalent to a particular offset from GMT, and can be represented by a GMT offset as a fallback. In general, this is not true for the generic format, which is used for picking timezones or for conveying a timezone for specifying a recurring time (such as a meeting in a calendar). For either purpose, a GMT offset would lose information.
 
 
-### <a name="Time_Zone_Format_Terminology" href="#Time_Zone_Format_Terminology">Time Zone Format Terminology</a>
+### <a name="Time_Zone_Format_Terminology" id="Time_Zone_Format_Terminology" href="#Time_Zone_Format_Terminology">Time Zone Format Terminology</a> <a id="dates-using-time-zone-names-time-zone-format-terminology"></a>
 
 The following terminology defines more precisely the formats that are used.
 
@@ -1936,7 +1936,7 @@ Zones may join or leave a metazone over time. The data relating between zones an
 
 **regionFormat:** a formatting string such as "{0} Time", where {0} is the country or city.
 
-### <a name="Time_Zone_Goals" href="#Time_Zone_Goals">Goals</a>
+### <a name="Time_Zone_Goals" id="Time_Zone_Goals" href="#Time_Zone_Goals">Goals</a> <a id="dates-using-time-zone-names-goals"></a>
 
 The timezones are designed so that:
 
@@ -2081,7 +2081,7 @@ In composing the metazone + city or country:
 
 **Note:** As with the _regionFormat_, exceptional cases need to be explicitly translated.
 
-### <a name="Time_Zone_Parsing" href="#Time_Zone_Parsing">Parsing</a>
+### <a name="Time_Zone_Parsing" id="Time_Zone_Parsing" href="#Time_Zone_Parsing">Parsing</a> <a id="dates-using-time-zone-names-parsing"></a>
 
 In parsing, an implementation will be able to either determine the zone id, or a simple offset from GMT for anything formatting according to the above process.
 
@@ -2138,7 +2138,7 @@ The GMT formats (Z and ZZZZ) will return back an offset, and thus lose the origi
   * PST8PDT → America/Los_Angeles → “PST” → America/Los_Angeles
   * America/Vancouver → “Pacific Time (Canada)” → America/Vancouver
 
-## <a name="Date_Format_Patterns" href="#Date_Format_Patterns">Date Format Patterns</a>
+## <a name="Date_Format_Patterns" id="Date_Format_Patterns" href="#Date_Format_Patterns">Date Format Patterns</a> <a id="dates-date-format-patterns"></a>
 
 A date pattern is a character string consisting of two types of elements:
 
@@ -2150,7 +2150,7 @@ A date pattern is a character string consisting of two types of elements:
 
 The following are examples:
 
-###### Table: <a name="Date_Format_Pattern_Examples" href="#Date_Format_Pattern_Examples">Date Format Pattern Examples</a>
+###### <a name="Date_Format_Pattern_Examples" id="Date_Format_Pattern_Examples" href="#Date_Format_Pattern_Examples">Table: Date Format Pattern Examples</a> <a id="dates-date-format-patterns-table-date-format-pattern-examples"></a>
 
 | Pattern | Result (in a particular locale) |
 | ------- | ------------------------------- |
@@ -2206,7 +2206,7 @@ Notes for the table below:
 * Any sequence of pattern characters other than those listed below is invalid. Invalid pattern fields should be handled for formatting and parsing as described in [Handling Invalid Patterns](tr35.md#Invalid_Patterns).
 * The examples in the table below are merely illustrative and may not reflect current actual data.
 
-###### Table: <a name="Date_Field_Symbol_Table" href="#Date_Field_Symbol_Table">Date Field Symbol Table</a>
+###### <a name="Date_Field_Symbol_Table" id="Date_Field_Symbol_Table" href="#Date_Field_Symbol_Table">Table: Date Field Symbol Table</a> <a id="dates-date-format-patterns-table-date-field-symbol-table"></a>
 
 <!-- HTML: spanned rows, spanned columns, vertical header cells -->
 <table><tbody>
@@ -2530,7 +2530,7 @@ Notes for the table below:
 </tbody></table>
 ```
 
-### <a name="Localized_Pattern_Characters" href="#Localized_Pattern_Characters">Localized Pattern Characters (deprecated)</a>
+### <a name="Localized_Pattern_Characters" id="Localized_Pattern_Characters" href="#Localized_Pattern_Characters">Localized Pattern Characters (deprecated)</a> <a id="dates-date-format-patterns-localized-pattern-characters-deprecated"></a>
 
 * <a id="dates-date-format-patterns-localized-pattern-characters-deprecated-rule-1"></a> **These are characters**: These are characters that can be used when displaying a date pattern to an end user. This can occur, for example, when a spreadsheet allows users to specify date patterns. Whatever is in the string is substituted one-for-one with the characters "GyMdkHmsSEDFwWahKzYeugAZvcLQqVUOXxr", with the above meanings. Thus, for example, if 'J' is to be used instead of 'Y' to mean Year (for Week of Year), then the string would be: "GyMdkHmsSEDFwWahKzJeugAZvcLQqVUOXxr".
 
@@ -2538,24 +2538,24 @@ Notes for the table below:
 * <a id="dates-date-format-patterns-localized-pattern-characters-deprecated-rule-2"></a> **This element is**: This element is deprecated. It is recommended instead that a more sophisticated UI be used for localization, such as using icons to represent the different formats (and lengths) in the [Date Field Symbol Table](#Date_Field_Symbol_Table).
 
 
-### <a name="Date_Patterns_AM_PM" href="#Date_Patterns_AM_PM">AM / PM</a>
+### <a name="Date_Patterns_AM_PM" id="Date_Patterns_AM_PM" href="#Date_Patterns_AM_PM">AM / PM</a> <a id="dates-date-format-patterns-am-pm"></a>
 
 * <a id="dates-date-format-patterns-am-pm-rule-1"></a> **Even for countries**: Even for countries where the customary date format only has a 24 hour format, both the am and pm localized strings must be present and must be distinct from one another. Note that as long as the 24 hour format is used, these strings will normally never be used, but for testing and unusual circumstances they must be present.
 
 
-### <a name="Date_Patterns_Eras" href="#Date_Patterns_Eras">Eras</a>
+### <a name="Date_Patterns_Eras" id="Date_Patterns_Eras" href="#Date_Patterns_Eras">Eras</a> <a id="dates-date-format-patterns-eras"></a>
 
 * <a id="dates-date-format-patterns-eras-rule-1"></a> **There are only**: There are only two values for era in the Gregorian calendar, with two common naming conventions (here in abbreviated form for English): "BC" and "AD", or "BCE" and "CE". These values can be translated into other languages, like "a.C." and "d.C." for Spanish, but there are no other eras in the Gregorian calendar. Other calendars have different numbers of eras. Care should be taken when translating the era names for a specific calendar.
 
 
-### <a name="Date_Patterns_Week_Of_Year" href="#Date_Patterns_Week_Of_Year">Week of Year</a>
+### <a name="Date_Patterns_Week_Of_Year" id="Date_Patterns_Week_Of_Year" href="#Date_Patterns_Week_Of_Year">Week of Year</a> <a id="dates-date-format-patterns-week-of-year"></a>
 
 * <a id="dates-date-format-patterns-week-of-year-rule-1"></a> **Values calculated for**: Values calculated for the Week of Year field range from 1 to 53 for the Gregorian calendar (they may have different ranges for other calendars). Week 1 for a year is the first week that contains at least the specified minimum number of days from that year. Weeks between week 1 of one year and week 1 of the following year are numbered sequentially from 2 to 52 or 53 (if needed). For example, January 1, 1998 was a Thursday. If the first day of the week is MONDAY and the minimum days in a week is 4 (these are the values reflecting ISO 8601 and many national standards), then week 1 of 1998 starts on December 29, 1997, and ends on January 4, 1998. However, if the first day of the week is SUNDAY, then week 1 of 1998 starts on January 4, 1998, and ends on January 10, 1998. The first three days of 1998 are then part of week 53 of 1997.
 
 
 Values are similarly calculated for the Week of Month.
 
-### <a name="Date_Patterns_Week_Elements" href="#Date_Patterns_Week_Elements">Week Elements</a>
+### <a name="Date_Patterns_Week_Elements" id="Date_Patterns_Week_Elements" href="#Date_Patterns_Week_Elements">Week Elements</a> <a id="dates-date-format-patterns-week-elements"></a>
 
 **firstDay**
 
@@ -2571,7 +2571,7 @@ Values are similarly calculated for the Week of Month.
 
 Indicates the day and time that the weekend starts or ends. As with firstDay, keywords are used instead of numbers.
 
-## <a name="Parsing_Dates_Times" href="#Parsing_Dates_Times">Parsing Dates and Times</a>
+## <a name="Parsing_Dates_Times" id="Parsing_Dates_Times" href="#Parsing_Dates_Times">Parsing Dates and Times</a> <a id="dates-parsing-dates-and-times"></a>
 
 * <a id="dates-parsing-dates-and-times-rule-1"></a> **For general information**: For general information on lenient parsing, see [Lenient Parsing](tr35.md#Lenient_Parsing) in the core specification. This section provides additional information specific to parsing of dates and times.
 
@@ -2598,7 +2598,7 @@ Indicates the day and time that the weekend starts or ends. As with firstDay, ke
 
   * If that fails, use other format strings from the locale (including those in `<availableFormats>`) to try to match the previous or next symbol or literal (again, using a loose match).
 
-## <a name="Semantic_Skeletons" href="#Semantic_Skeletons">Semantic Skeletons</a>
+## <a name="Semantic_Skeletons" id="Semantic_Skeletons" href="#Semantic_Skeletons">Semantic Skeletons</a> <a id="dates-semantic-skeletons"></a>
 
 * <a id="dates-semantic-skeletons-rule-1"></a> **When speaking about**: When speaking about dates and times, not all combinations of fields are semantically valid. For example, it does not make sense to talk about a particular minute without knowing the hour, or a day-of-month and year without knowing the month. This section defines _semantic skeletons_, a mechanism for expressing the subset of date and time skeletons that are sufficient for almost all use cases.
 
@@ -2614,7 +2614,7 @@ Note: This document does not currently define a string form, but we may need one
 > [!IMPORTANT]
 > Semantic skeletons (this section) are a technical preview and should not be considered stable.
 
-### <a name="Parts_of_a_Semantic_Skeleton" href="#Parts_of_a_Semantic_Skeleton">Parts of a Semantic Skeleton</a>
+### <a name="Parts_of_a_Semantic_Skeleton" id="Parts_of_a_Semantic_Skeleton" href="#Parts_of_a_Semantic_Skeleton">Parts of a Semantic Skeleton</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton"></a>
 
 A semantic skeleton is composed of two parts:
 
@@ -2623,7 +2623,7 @@ A semantic skeleton is composed of two parts:
 
 As a general rule, the field set determines _what is being displayed_, and the options determine _how to display it_.
 
-#### <a name="Semantic_Field_Sets" href="#Semantic_Field_Sets">Semantic Field Sets</a>
+#### <a name="Semantic_Field_Sets" id="Semantic_Field_Sets" href="#Semantic_Field_Sets">Semantic Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets"></a>
 
 This section defines four disjoint categories of field sets:
 
@@ -2634,7 +2634,7 @@ This section defines four disjoint categories of field sets:
 
 Certain combinations of categories form [Composite Field Sets](#Semantic_Composite_Field_Sets).
 
-##### <a name="Semantic_Date_Field_Sets" href="#Semantic_Date_Field_Sets">Date Field Sets</a>
+##### <a name="Semantic_Date_Field_Sets" id="Semantic_Date_Field_Sets" href="#Semantic_Date_Field_Sets">Date Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-date-field-sets"></a>
 
 A _date field set_ refers to a particular day in time. Higher-order fields, such as the month or year, could be omitted, but there must always be a reference to a particular day.
 
@@ -2661,7 +2661,7 @@ Note: Month and Year are not valid date field sets on their own because they do 
 
 Note: This table may be extended in the future to include additional fields, such as week and quarter.
 
-##### <a name="Semantic_Calendar_Period_Field_Sets" href="#Semantic_Calendar_Period_Field_Sets">Calendar Period Field Sets</a>
+##### <a name="Semantic_Calendar_Period_Field_Sets" id="Semantic_Calendar_Period_Field_Sets" href="#Semantic_Calendar_Period_Field_Sets">Calendar Period Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-calendar-period-field-sets"></a>
 
 A _calendar period field set_ refers to a span of time in a calendar system, _above_ the order of a day.
 
@@ -2679,7 +2679,7 @@ Note: This table may be extended in the future to include additional fields, suc
 
 Note: A _calendar period_ is distinct from a _date_ because it cannot be paired with time to form a composite field set.
 
-##### <a name="Semantic_Time_Field_Sets" href="#Semantic_Time_Field_Sets">Time Field Sets</a>
+##### <a name="Semantic_Time_Field_Sets" id="Semantic_Time_Field_Sets" href="#Semantic_Time_Field_Sets">Time Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-field-sets"></a>
 
 The **Time** field signifies the time of day.
 
@@ -2693,7 +2693,7 @@ Note: A day period (AM/PM) may be implied by the time field, depending on factor
 
 Note: Durations, such as "3 minutes and 12 seconds" (or 3:12), are not handled through the skeleton mechanisms.
 
-##### <a name="Semantic_Time_Zone_Field_Sets" href="#Semantic_Time_Zone_Field_Sets">Time Zone Field Sets</a>
+##### <a name="Semantic_Time_Zone_Field_Sets" id="Semantic_Time_Zone_Field_Sets" href="#Semantic_Time_Zone_Field_Sets">Time Zone Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-zone-field-sets"></a>
 
 The **Zone** field signifies the time zone.
 
@@ -2703,7 +2703,7 @@ The rendering can be configured with the [Zone Style](#Semantic_Skeleton_Time_Zo
 |-----------|-------------------------------------|
 | { Zone }  | PST / PT / Los Angeles Time / GMT-8 |
 
-##### <a name="Semantic_Composite_Field_Sets" href="#Semantic_Composite_Field_Sets">Composite Field Sets</a>
+##### <a name="Semantic_Composite_Field_Sets" id="Semantic_Composite_Field_Sets" href="#Semantic_Composite_Field_Sets">Composite Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-composite-field-sets"></a>
 
 Date, calendar period, and time field sets can be combined in certain ways shown in the following table:
 
@@ -2719,12 +2719,12 @@ Date, calendar period, and time field sets can be combined in certain ways shown
 
 Note: This table may be extended in the future to include additional combinations.
 
-#### <a name="Semantic_Skeleton_Options" href="#Semantic_Skeleton_Options">Semantic Skeleton Options</a>
+#### <a name="Semantic_Skeleton_Options" id="Semantic_Skeleton_Options" href="#Semantic_Skeleton_Options">Semantic Skeleton Options</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options"></a>
 
 * <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-rule-1"></a> **A semantic skeleton**: A semantic skeleton associates fields with zero or more options, listed in this section. Options apply to specific fields, and they should not be specified if their respective fields are not in the field set. Some options have a default value.
 
 
-##### <a name="Semantic_Skeleton_Length" href="#Semantic_Skeleton_Length">Length</a>
+##### <a name="Semantic_Skeleton_Length" id="Semantic_Skeleton_Length" href="#Semantic_Skeleton_Length">Length</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-length"></a>
 
 **Required Fields: Year, Month, Day, Weekday, Hour, or Zone**
 
@@ -2750,7 +2750,7 @@ The _length_ determines how wide the fields should be rendered. There are three 
 
 Note: Additional lengths could be added in the future, such as "narrow" or "conversational".
 
-##### <a name="Semantic_Skeleton_Alignment" href="#Semantic_Skeleton_Alignment">Alignment</a>
+##### <a name="Semantic_Skeleton_Alignment" id="Semantic_Skeleton_Alignment" href="#Semantic_Skeleton_Alignment">Alignment</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-alignment"></a>
 
 **Required Fields: Year, Month, Day, or Hour**
 
@@ -2764,7 +2764,7 @@ The _alignment_ provides additional context that can be used for determining how
 * <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-alignment-rule-1"></a> **Note: The most**: Note: The most common behavior with "column" alignment is for implementations to render a minimum of two digits on impacted fields. For example, an implementation might render "01/01/2000" instead of "1/1/2000" in US English.
 
 
-##### <a name="Semantic_Skeleton_Year_Style" href="#Semantic_Skeleton_Year_Style">Year Style</a>
+##### <a name="Semantic_Skeleton_Year_Style" id="Semantic_Skeleton_Year_Style" href="#Semantic_Skeleton_Year_Style">Year Style</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-year-style"></a>
 
 **Required Field: Year**
 
@@ -2796,7 +2796,7 @@ Examples in Gregorian:
 
 Note: This algorithm and the list of choices is likely to evolve as CLDR learns more about era display customs in different regions and calendar systems, and it may become normative.
 
-##### <a name="Semantic_Skeleton_Hour_Cycle" href="#Semantic_Skeleton_Hour_Cycle">Hour Cycle</a>
+##### <a name="Semantic_Skeleton_Hour_Cycle" id="Semantic_Skeleton_Hour_Cycle" href="#Semantic_Skeleton_Hour_Cycle">Hour Cycle</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-hour-cycle"></a>
 
 **Required Field: Hour**
 
@@ -2820,7 +2820,7 @@ The choices are:
 
 Note: An option could be added in the future to give the developer more control over how day periods are displayed or to disable day periods when there is sufficient context.
 
-##### <a name="Semantic_Skeleton_Time_Precision" href="#Semantic_Skeleton_Time_Precision">Time Precision</a>
+##### <a name="Semantic_Skeleton_Time_Precision" id="Semantic_Skeleton_Time_Precision" href="#Semantic_Skeleton_Time_Precision">Time Precision</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-precision"></a>
 
 **Required Field: Time**
 
@@ -2841,7 +2841,7 @@ Note: The finest level of precision is currently specified as nanoseconds, consi
 
 Note: The default value of time precision may change as more options are added.
 
-##### <a name="Semantic_Skeleton_Time_Zone_Style" href="#Semantic_Skeleton_Time_Zone_Style">Time Zone Style</a>
+##### <a name="Semantic_Skeleton_Time_Zone_Style" id="Semantic_Skeleton_Time_Zone_Style" href="#Semantic_Skeleton_Time_Zone_Style">Time Zone Style</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-zone-style"></a>
 
 **Required Field: Zone**
 
@@ -2864,11 +2864,11 @@ Examples:
 | Location  | Los Angeles Time      |
 | Offset    | GMT-8                 |
 
-### <a name="Generating_Patterns_for_Semantic_Skeletons" href="#Generating_Patterns_for_Semantic_Skeletons">Generating Patterns for Semantic Skeletons</a>
+### <a name="Generating_Patterns_for_Semantic_Skeletons" id="Generating_Patterns_for_Semantic_Skeletons" href="#Generating_Patterns_for_Semantic_Skeletons">Generating Patterns for Semantic Skeletons</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons"></a>
 
 A semantic skeleton can be mapped to a standard skeleton, which in turn can be mapped to a pattern according to the procedure described in  [Matching Skeletons](#Matching_Skeletons).
 
-#### Mapping to Standard Skeletons
+#### <a name="Mapping_to_Standard_Skeletons" id="Mapping_to_Standard_Skeletons" href="#Mapping_to_Standard_Skeletons">Mapping to Standard Skeletons</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons"></a>
 
 To convert from a semantic skeleton to a standard skeleton, use the following procedure:
 
@@ -2922,7 +2922,7 @@ This means that the Year, Month, and Day semantic field mapping in en-US should 
 | Month          | Japanese  | MMMM   | MMM    | M      |
 | Day            | Japanese  | d      | d      | d      |
 
-##### <a name="Semantic_Time_Precision_Skeleton_Variations" href="#Semantic_Time_Precision_Skeleton_Variations">Time Precision Skeleton Variations</a>
+##### <a name="Semantic_Time_Precision_Skeleton_Variations" id="Semantic_Time_Precision_Skeleton_Variations" href="#Semantic_Time_Precision_Skeleton_Variations">Time Precision Skeleton Variations</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-time-precision-skeleton-variations"></a>
 
 The [time precision](#Semantic_Skeleton_Time_Precision) should change the skeleton for all lengths as follows:
 
@@ -2932,7 +2932,7 @@ The [time precision](#Semantic_Skeleton_Time_Precision) should change the skelet
 - Second: Add "m" and "s"
 - FractionalSecond: Add "m", "s", and a number of "S" characters equal to the integer option
 
-##### <a name="Semantic_Year_Style_Skeleton_Variations" href="#Semantic_Year_Style_Skeleton_Variations">Year Style Skeleton Variations</a>
+##### <a name="Semantic_Year_Style_Skeleton_Variations" id="Semantic_Year_Style_Skeleton_Variations" href="#Semantic_Year_Style_Skeleton_Variations">Year Style Skeleton Variations</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-year-style-skeleton-variations"></a>
 
 The [year style](#Semantic_Skeleton_Year_Style) should change the skeleton for all lengths as follows:
 
@@ -2940,7 +2940,7 @@ The [year style](#Semantic_Skeleton_Year_Style) should change the skeleton for a
 - Full or Auto resolving to Full: Replace "yy" with "y"
 - WithEra or Auto/Full resolving to WithEra: Replace "yy" with "y" and add "G" if there is not already an era field
 
-### <a name="Semantic_Skeleton_Conformance" href="#Semantic_Skeleton_Conformance">Semantic Skeleton Conformance</a>
+### <a name="Semantic_Skeleton_Conformance" id="Semantic_Skeleton_Conformance" href="#Semantic_Skeleton_Conformance">Semantic Skeleton Conformance</a> <a id="dates-semantic-skeletons-semantic-skeleton-conformance"></a>
 
 This specification describes at a high level the space of legal configurations for a semantic skeleton. The exact shape of the API or syntax is left to the implementation.
 

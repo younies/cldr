@@ -57,6 +57,9 @@ The LDML specification is divided into the following parts:
   * [Number Formats](#Number_Formats) 
     * [Compact Number Formats](#Compact_Number_Formats) 
     * [Currency Formats](#Currency_Formats) 
+      * [Element Placement](#Element_Placement) 
+      * [Format Types & Display Forms](#Format_Types_and_Display_Forms) 
+      * [Pattern Variant Usage Rules](#Pattern_Variant_Usage_Rules) 
   * [Miscellaneous Patterns](#Miscellaneous_Patterns) 
   * [Minimal Pairs](#Minimal_Pairs) 
 * [Number Format Patterns](#Number_Format_Patterns) 
@@ -65,48 +68,48 @@ The LDML specification is divided into the following parts:
   * [Special Pattern Characters](#Special_Pattern_Characters) 
     * [Table: Number Pattern Character Definitions](#Number_Pattern_Character_Definitions) 
     * [Table: Sample Patterns and Results](#Sample_Patterns_and_Results) 
-    * [Explicit Plus Signs](#Explicit_Plus)
-  * [Formatting](#Formatting)
-  * [Scientific Notation](#sci)
-  * [Significant Digits](#sigdig)
-    * Table: [Significant Digits Examples](#Significant_Digits_Examples)
-  * [Padding](#Padding)
-  * [Rounding](#Rounding)
-  * [Quoting Rules](#Quoting_Rules)
-* [Rational Numbers](#rational-numbers)
-* [Currencies](#Currencies)
-  * [Supplemental Currency Data](#Supplemental_Currency_Data)
-* [Language Plural Rules](#Language_Plural_Rules)
-  * [Explicit 0 and 1 rules](#Explicit_0_1_rules)
-  * [Plural rules syntax](#Plural_rules_syntax)
-    * [Operands](#Operands)
-      * Table: [Plural Operand Meanings](#Plural_Operand_Meanings)
-      * Table: [Plural Operand Examples](#Plural_Operand_Examples)
-    * [Relations](#Relations)
-      * Table: [Relations Examples](#Relations_Examples)
-      * Table: [Plural Rules Examples](#Plural_Rules_Examples)
-    * [Samples](#Samples)
-      * Table: [Plural Samples Examples](#Plural_Samples_Examples)
-    * [Using Cardinals](#Using_cardinals)
-  * [Plural Ranges](#Plural_Ranges)
-* [Rule-Based Number Formatting](#Rule-Based_Number_Formatting)
-  * [Rule-Based Number Formatting Scope](#Rule-Based_Number_Formatting_Scope)
-    * [SpelloutRules](#SpelloutRules)
-      * [numbering](#numbering)
-      * [numbering-year](#numbering-year)
-      * [cardinal](#cardinal)
-      * [ordinal](#ordinal)
-    * [NumberingSystemRules](#NumberingSystemRules)
-    * [OrdinalRules](#OrdinalRules)
-  * [Limitations](#RBNF_Limitations)
-  * [Syntax of `rbnfRules`](#RBNF_Syntax)
-  * [Rule Sets](#RBNF_Syntax_Rule_Set)
-  * [Planned removal of ruleset and rule tags](#RBNF_Remove_Ruleset_Rule)
-* [Parsing Numbers](#Parsing_Numbers)
-* [Number Range Formatting](#Number_Range_Formatting)
-  * [Approximate Number Formatting](#Approximate_Number_Formatting)
-  * [Collapsing Number Ranges](#Collapsing_Number_Ranges)
-  * [Range Pattern Processing](#Range_Pattern_Processing)
+    * [Explicit Plus Signs](#Explicit_Plus) 
+  * [Formatting](#Formatting) 
+  * [Scientific Notation](#sci) 
+  * [Significant Digits](#sigdig) 
+    * [Table: Significant Digits Examples](#Significant_Digits_Examples) 
+  * [Padding](#Padding) 
+  * [Rounding](#Rounding) 
+  * [Quoting Rules](#Quoting_Rules) 
+* [Rational Numbers](#Rational_Numbers) 
+* [Currencies](#Currencies) 
+  * [Supplemental Currency Data](#Supplemental_Currency_Data) 
+* [Language Plural Rules](#Language_Plural_Rules) 
+  * [Explicit 0 and 1 rules](#Explicit_0_1_rules) 
+  * [Plural rules syntax](#Plural_rules_syntax) 
+    * [Operands](#Operands) 
+      * [Table: Plural Operand Meanings](#Plural_Operand_Meanings) 
+      * [Table: Plural Operand Examples](#Plural_Operand_Examples) 
+    * [Relations](#Relations) 
+      * [Table: Relations Examples](#Relations_Examples) 
+      * [Table: Plural Rules Examples](#Plural_Rules_Examples) 
+    * [Samples](#Samples) 
+      * [Table: Plural Samples Examples](#Plural_Samples_Examples) 
+    * [Using Cardinals](#Using_cardinals) 
+  * [Plural Ranges](#Plural_Ranges) 
+* [Rule-Based Number Formatting](#Rule-Based_Number_Formatting) 
+  * [Rule-Based Number Formatting Scope](#Rule-Based_Number_Formatting_Scope) 
+    * [SpelloutRules](#SpelloutRules) 
+      * [numbering](#numbering) 
+      * [numbering-year](#numberingyear) 
+      * [cardinal](#cardinal) 
+      * [ordinal](#ordinal) 
+    * [NumberingSystemRules](#NumberingSystemRules) 
+    * [OrdinalRules](#OrdinalRules) 
+  * [Limitations](#RBNF_Limitations) 
+  * [Syntax of `rbnfRules`](#RBNF_Syntax) 
+  * [Rule Sets](#RBNF_Syntax_Rule_Set) 
+  * [Planned removal of ruleset and rule tags](#RBNF_Remove_Ruleset_Rule) 
+* [Parsing Numbers](#Parsing_Numbers) 
+* [Number Range Formatting](#Number_Range_Formatting) 
+  * [Approximate Number Formatting](#Approximate_Number_Formatting) 
+  * [Collapsing Number Ranges](#Collapsing_Number_Ranges) 
+  * [Range Pattern Processing](#Range_Pattern_Processing) 
 
 ## <a name="Numbering_Systems" id="Numbering_Systems" href="#Numbering_Systems">Numbering Systems</a> <a id="numbers-numbering-systems"></a>
 
@@ -508,6 +511,8 @@ Patterns for use with currency formatting:
 <!ELEMENT currencyPatternAppendISO ( #PCDATA ) >
 ```
 
+##### <a name="Element_Placement" id="Element_Placement" href="#Element_Placement">Element Placement</a> <a id="numbers-currency-formats-element-placement"></a>
+
 * <a id="numbers-number-elements-number-formats-currency-formats-rule-1"></a> **The following additional**: The following additional elements were intended to allow proper placement of the currency symbol relative to the numeric quantity. These are specified in the root locale and typically not overridden in any other locale. However, as of CLDR 42, the preferred approach to controlling placement of the currency symbol is use of the `alt="alphaNextToNumber"` variant for `currencyFormat` `pattern`s. See below and _[- Currencies](#Currencies)_ for additional information on the use of these options.
 
 
@@ -516,9 +521,11 @@ Patterns for use with currency formatting:
 <!ELEMENT beforeCurrency (alias | (currencyMatch*, surroundingMatch*, insertBetween*)) >
 <!ELEMENT afterCurrency (alias | (currencyMatch*, surroundingMatch*, insertBetween*)) >
 <!ELEMENT currencyMatch ( #PCDATA ) >
-<!ELEMENT surroundingMatch ( #PCDATA )) >
+<!ELEMENT surroundingMatch ( #PCDATA ) >
 <!ELEMENT insertBetween ( #PCDATA ) >
 ```
+
+##### <a name="Format_Types_and_Display_Forms" id="Format_Types_and_Display_Forms" href="#Format_Types_and_Display_Forms">Format Types & Display Forms</a> <a id="numbers-currency-formats-format-types-display-forms"></a>
 
 * <a id="numbers-number-elements-number-formats-currency-formats-rule-2"></a> **In addition to**: In addition to a standard currency format, in which negative currency amounts might typically be displayed as something like “-$3.27”, locales may provide an "accounting" form, in which for "en_US" the same example would appear as “($3.27)”. The locale keyword "cf" can be used to select the standard or accounting form, see [Unicode Currency Format Identifier](tr35.md#UnicodeCurrencyFormatIdentifier).
 
@@ -550,6 +557,8 @@ Patterns for use with currency formatting:
     </currencyFormatLength>
 </currencyFormats>
 ```
+
+##### <a name="Pattern_Variant_Usage_Rules" id="Pattern_Variant_Usage_Rules" href="#Pattern_Variant_Usage_Rules">Pattern Variant Usage Rules</a> <a id="numbers-currency-formats-pattern-variant-usage-rules"></a>
 
 * <a id="numbers-number-elements-number-formats-currency-formats-rule-3"></a> **The `alt="alphaNextToNumber"` pattern**: The `alt="alphaNextToNumber"` pattern, if available, should be used instead of the standard pattern when the currency symbol character closest to the numeric value has Unicode General Category L (letter). The `alt="alphaNextToNumber"` pattern is typically provided when the standard currency pattern does not have a space between currency symbol and numeric value; the alphaNextToNumber variant adds a non-breaking space if appropriate for the locale.
 
@@ -777,7 +786,7 @@ For consistency in the CLDR data, the following conventions are observed:
         |                      1 |                4 |        10000 |    1,0000 |
         |                      2 |                4 |        10000 |     10000 |
 
-#### <a name="Explicit_Plus" href="#Explicit_Plus">Explicit Plus Signs</a>
+#### <a name="Explicit_Plus" id="Explicit_Plus" href="#Explicit_Plus">Explicit Plus Signs</a> <a id="numbers-number-format-patterns-special-pattern-characters-explicit-plus-signs"></a>
 
 * <a id="numbers-number-format-patterns-special-pattern-characters-explicit-plus-signs-rule-1"></a> **An explicit "plus**: An explicit "plus" format can be formed, so as to show a visible + sign when formatting a non-negative number. The displayed plus sign can be an ASCII plus or another character, such as ＋ U+FF0B FULLWIDTH PLUS SIGN or ➕ U+2795 HEAVY PLUS SIGN; it is taken from whatever is set for plusSign in _[Number Symbols](#Number_Symbols)_.
 
@@ -788,7 +797,7 @@ For consistency in the CLDR data, the following conventions are observed:
 
 For an example, see [Sample Patterns and Results](#Sample_Patterns_and_Results).
 
-### <a name="Formatting" href="#Formatting">Formatting</a>
+### <a name="Formatting" id="Formatting" href="#Formatting">Formatting</a> <a id="numbers-number-format-patterns-formatting"></a>
 
 * <a id="numbers-number-format-patterns-formatting-rule-1"></a> **Formatting is guided**: Formatting is guided by several parameters, all of which can be specified either using a pattern or using an external API designed for number formatting. The following description applies to formats that do not use [scientific notation](#sci) or [significant digits](#sigdig).
 
@@ -807,7 +816,7 @@ For an example, see [Sample Patterns and Results](#Sample_Patterns_and_Results).
 * <a id="numbers-number-format-patterns-formatting-rule-3"></a> **Infinity is represented**: Infinity is represented as a single character, typically ∞ `(U+221E)` , with the positive or negative prefixes and suffixes applied. The infinity character is determined by the localized number symbols.
 
 
-### <a name="sci" href="#sci">Scientific Notation</a>
+### <a name="sci" id="sci" href="#sci">Scientific Notation</a> <a id="numbers-number-format-patterns-scientific-notation"></a>
 
 * <a id="numbers-number-format-patterns-scientific-notation-rule-1"></a> **Numbers in scientific**: Numbers in scientific notation are expressed as the product of a mantissa and a power of ten, for example, 1234 can be expressed as 1.234 x 10<sup>3</sup>. The mantissa is typically in the half-open interval [1.0, 10.0) or sometimes [0.0, 1.0), but it need not be. In a pattern, the exponent character immediately followed by one or more digit characters indicates scientific notation. Example: "0.###E0" formats the number 1234 as "1.234E3".
 
@@ -838,12 +847,12 @@ For an example, see [Sample Patterns and Results](#Sample_Patterns_and_Results).
     *   ###E0 means engineering notation with infinite precision.
 *   Exponential patterns may not contain grouping separators.
 
-### <a name="sigdig" href="#sigdig">Significant Digits</a>
+### <a name="sigdig" id="sigdig" href="#sigdig">Significant Digits</a> <a id="numbers-number-format-patterns-significant-digits"></a>
 
 * <a id="numbers-number-format-patterns-significant-digits-rule-1"></a> **There are two**: There are two ways of controlling how many digits are shown: (a) significant digits counts, or (b) integer and fraction digit counts. Integer and fraction digit counts are described above. When a formatter is using significant digits counts, it uses however many integer and fraction digits are required to display the specified number of significant digits. It may ignore min/max integer/fraction digits, or it may use them to the extent possible.
 
 
-###### Table: <a name="Significant_Digits_Examples" href="#Significant_Digits_Examples">Significant Digits Examples</a>
+###### <a name="Significant_Digits_Examples" id="Significant_Digits_Examples" href="#Significant_Digits_Examples">Table: Significant Digits Examples</a> <a id="numbers-number-format-patterns-significant-digits-table-significant-digits-examples"></a>
 
 | Pattern | Minimum significant digits | Maximum significant digits | Number | Output |
 | :-- | :-- | :-- | :-- | :-- |
@@ -859,7 +868,7 @@ For an example, see [Sample Patterns and Results](#Sample_Patterns_and_Results).
 * The number of significant digits has no effect on parsing.
 * Significant digits may be used together with exponential notation. Such patterns are equivalent to a normal exponential pattern with a minimum and maximum integer digit count of one, a minimum fraction digit count of `Minimum Significant Digits - 1`, and a maximum fraction digit count of `Maximum Significant Digits - 1`. For example, the pattern `"@@###E0"` is equivalent to `"0.0###E0"`.
 
-### <a name="Padding" href="#Padding">Padding</a>
+### <a name="Padding" id="Padding" href="#Padding">Padding</a> <a id="numbers-number-format-patterns-padding"></a>
 
 * <a id="numbers-number-format-patterns-padding-rule-1"></a> **Patterns support padding**: Patterns support padding the result to a specific width. In a pattern the pad escape character, followed by a single pad character, causes padding to be parsed and formatted. The pad escape character is '*'. For example, `"$*x#,##0.00"` formats 123 to `"$xx123.00"` , and 1234 to `"$1,234.00"` .
 
@@ -869,7 +878,7 @@ For an example, see [Sample Patterns and Results](#Sample_Patterns_and_Results).
 * Padding may be inserted at one of four locations: before the prefix, after the prefix, before the suffix, or after the suffix. No padding can be specified in any other location. If there is no prefix, before the prefix and after the prefix are equivalent, likewise for the suffix.
 * When specified in a pattern, the code point immediately following the pad escape is the pad character. This may be any character, including a special pattern character. That is, the pad escape _escapes_ the following character. If there is no character after the pad escape, then the pattern is illegal.
 
-### <a name="Rounding" href="#Rounding">Rounding</a>
+### <a name="Rounding" id="Rounding" href="#Rounding">Rounding</a> <a id="numbers-number-format-patterns-rounding"></a>
 
 * <a id="numbers-number-format-patterns-rounding-rule-1"></a> **Patterns support rounding**: Patterns support rounding to a specific increment. For example, 1230 rounded to the nearest 50 is 1250. Mathematically, rounding to specific increments is performed by dividing by the increment, rounding to an integer, then multiplying by the increment. To take a more bizarre example, 1.234 rounded to the nearest 0.65 is 1.3, as follows:
 
@@ -890,12 +899,12 @@ To specify a rounding increment in a pattern, include the increment in the patte
 * Some locales use rounding in their currency formats to reflect the smallest currency denomination.
 * In a pattern, digits '1' through '9' specify rounding, but otherwise behave identically to digit '0'.
 
-### <a name="Quoting_Rules" href="#Quoting_Rules">Quoting Rules</a>
+### <a name="Quoting_Rules" id="Quoting_Rules" href="#Quoting_Rules">Quoting Rules</a> <a id="numbers-number-format-patterns-quoting-rules"></a>
 
 * <a id="numbers-number-format-patterns-quoting-rules-rule-1"></a> **Single quotes (**'****: Single quotes (**'**) enclose bits of the pattern that should be treated literally. Inside a quoted string, two single quotes ('') are replaced with a single one ('). For example: `'X '`#`' Q '` -> **X 1939 Q** (Literal strings `shaded`.)
 
 
-## Rational Numbers
+## <a name="Rational_Numbers" id="Rational_Numbers" href="#Rational_Numbers">Rational Numbers</a> <a id="numbers-rational-numbers"></a>
 
 > [!IMPORTANT]
 > Rational numbers (this section) are a technical preview and should not be considered stable.
@@ -955,7 +964,7 @@ In environments where the rendering system and font can't be trusted to handle U
     - The Latin superscript (¹ ² ³ …) and subscript digits (₁ ₂ ₃ …) digits can be used with the U+2044 FRACTION SLASH, such as ²²⁄₇.
     - In both cases, some fonts don't have consistent support for these characters, and so the sizes and positioning may vary.
 
-## <a name="Currencies" href="#Currencies">Currencies</a>
+## <a name="Currencies" id="Currencies" href="#Currencies">Currencies</a> <a id="numbers-currencies"></a>
 
 ```dtd
 <!ELEMENT currencies (alias | (default?, currency*, special*)) >
@@ -1076,7 +1085,7 @@ For more information on the matching used in the `currencyMatch` and `surroundin
 
 For background information on currency names, see [[CurrencyInfo](tr35.md#CurrencyInfo)].
 
-### <a name="Supplemental_Currency_Data" href="#Supplemental_Currency_Data">Supplemental Currency Data</a>
+### <a name="Supplemental_Currency_Data" id="Supplemental_Currency_Data" href="#Supplemental_Currency_Data">Supplemental Currency Data</a> <a id="numbers-currencies-supplemental-currency-data"></a>
 
 ```dtd
 <!ELEMENT currencyData ( fractions*, region+ ) >
@@ -1213,7 +1222,7 @@ When codes merge, the data is copied from the most populous part.
 > * RS & ME copy the former CS, except that the line for EUR is dropped from RS
 > * CS now terminates on Jun 3, 2006 (following the UN info)
 
-## <a name="Language_Plural_Rules" href="#Language_Plural_Rules">Language Plural Rules</a>
+## <a name="Language_Plural_Rules" id="Language_Plural_Rules" href="#Language_Plural_Rules">Language Plural Rules</a> <a id="numbers-language-plural-rules"></a>
 
 ```dtd
 <!ELEMENT plurals (pluralRules*, pluralRanges*) >
@@ -1310,7 +1319,7 @@ There are also variants of the above: for example, short fractions may have the 
 
 Currently there are no locale keywords that affect plural rule selection; they are selected using the base locale ID, ignoring any -u- extension keywords.
 
-#### <a name="Explicit_0_1_rules" href="#Explicit_0_1_rules">Explicit 0 and 1 rules</a>
+#### <a name="Explicit_0_1_rules" id="Explicit_0_1_rules" href="#Explicit_0_1_rules">Explicit 0 and 1 rules</a> <a id="numbers-language-plural-rules-explicit-0-and-1-rules"></a>
 
 * <a id="numbers-language-plural-rules-explicit-0-and-1-rules-rule-1"></a> **Some types of**: Some types of CLDR data (such as [unitPatterns](tr35-general.md#Unit_Elements) and [currency displayNames](#Currencies)) allow specification of plural rules for explicit cases “0” and “1”, in addition to the language-specific plural cases specified above: “zero”, “one”, “two” ... “other”. For the language-specific plural rules:
 
@@ -1331,7 +1340,7 @@ Usage example: In English (which only defines language-specific rules for “one
 * count=“one”: {0} book, e.g. “1 book”
 * count=“other”: {0} books, e.g. “3 books”
 
-### <a name="Plural_rules_syntax" href="#Plural_rules_syntax">Plural rules syntax</a>
+### <a name="Plural_rules_syntax" id="Plural_rules_syntax" href="#Plural_rules_syntax">Plural rules syntax</a> <a id="numbers-language-plural-rules-plural-rules-syntax"></a>
 
 The plural categories for each locale are determined by evaluating rules in a plural rule set, which is defined by the contents of the element `pluralRules`.
 For example:
@@ -1409,13 +1418,13 @@ digitPos        = [1-9]
 * The samples should be included, since they are used by client software for samples and determining whether the keyword has finite values or not.
 * The 'other' keyword must have no condition, and all other keywords must have a condition.
 
-#### <a name="Operands" href="#Operands">Operands</a>
+#### <a name="Operands" id="Operands" href="#Operands">Operands</a> <a id="numbers-language-plural-rules-plural-rules-syntax-operands"></a>
 
 The operands are numeric values corresponding to features of the *source number N*, and have the following meanings given in the table below.
 Note that, contrary to source numbers, operands are treated numerically.
 Although some of them are used to describe insignificant 0s in the source number, any insignificant 0s in the operands themselves are ignored, e.g., f=03 is equivalent to f=3.
 
-###### Table: <a name="Plural_Operand_Meanings" href="#Plural_Operand_Meanings">Plural Operand Meanings</a>
+###### <a name="Plural_Operand_Meanings" id="Plural_Operand_Meanings" href="#Plural_Operand_Meanings">Table: Plural Operand Meanings</a> <a id="numbers-language-plural-rules-plural-rules-syntax-operands-table-plural-operand-meanings"></a>
 
 | Symbol | Value                                                                                           |
 |--------|-------------------------------------------------------------------------------------------------|
@@ -1433,7 +1442,7 @@ So for 1.2c3, the n, i, f, t, v, and w values are the same as those of 1200:  i=
 Similarly, 1.2005c3 has i=1200 and f=5 (corresponding to 1200.5).
 - The old keywords 'mod', 'in', 'is', and 'within' are present only for backwards compatibility. The preferred form is to use '%' for modulo, and '=' or '!=' for the relations, with the operand 'i' instead of within. (The difference between **in** and **within** is that **in** only includes integers in the specified range, while **within** includes all values.)
 
-###### Table: <a name="Plural_Operand_Examples" href="#Plural_Operand_Examples">Plural Operand Examples</a>
+###### <a name="Plural_Operand_Examples" id="Plural_Operand_Examples" href="#Plural_Operand_Examples">Table: Plural Operand Examples</a> <a id="numbers-language-plural-rules-plural-rules-syntax-operands-table-plural-operand-examples"></a>
 
 |    source |         n |         i | v | w |   f |  t | c |
 |----------:|----------:|----------:|--:|--:|----:|---:|--:|
@@ -1452,12 +1461,12 @@ Similarly, 1.2005c3 has i=1200 and f=5 (corresponding to 1200.5).
 | 1.20050c3 |    1200.5 |      1200 | 2 | 1 |  50 |  5 | 3 |
 
 
-#### <a name="Relations" href="#Relations">Relations</a>
+#### <a name="Relations" id="Relations" href="#Relations">Relations</a> <a id="numbers-language-plural-rules-plural-rules-syntax-relations"></a>
 
 * <a id="numbers-language-plural-rules-plural-rules-syntax-relations-rule-1"></a> **The positive relations**: The positive relations are of the format **x = y** and **x = y mod z**. The **y** value can be a comma-separated list, such as **n = 3, 5, 7..15**, and is treated as if each relation were expanded into an OR statement. The range value **a..b** is equivalent to listing all the ***integers*** between **a** and **b**, inclusive. When **!=** is used, it means the entire relation is negated.
 
 
-###### Table: <a name="Relations_Examples" href="#Relations_Examples">Relations Examples</a>
+###### <a name="Relations_Examples" id="Relations_Examples" href="#Relations_Examples">Table: Relations Examples</a> <a id="numbers-language-plural-rules-plural-rules-syntax-relations-table-relations-examples"></a>
 
 | Expression    | Meaning                                 |
 |---------------|-----------------------------------------|
@@ -1494,7 +1503,7 @@ The modulus (% or **mod**) is a remainder operation as defined in Java; for exam
    * if starti ≤ BV ≤ endi then return R.
 7. Otherwise return !R.
 
-###### Table: <a name="Plural_Rules_Examples" href="#Plural_Rules_Examples">Plural Rules Examples</a>
+###### <a name="Plural_Rules_Examples" id="Plural_Rules_Examples" href="#Plural_Rules_Examples">Table: Plural Rules Examples</a> <a id="numbers-language-plural-rules-plural-rules-syntax-relations-table-plural-rules-examples"></a>
 
 | Rules | Comments |
 | --- | --- |
@@ -1503,7 +1512,7 @@ The modulus (% or **mod**) is a remainder operation as defined in Java; for exam
 | one: n = 1 <br/> few: n mod 10 = 2..4 and n mod 100 != 12..14 | This illustrates conjunction and negation. The condition for 'few' has two parts, both of which must be met: "n mod 10 = 2..4" and "n mod 100 != 12..14". The first part applies a modulus to n before the test as in the previous example. The second part applies a different modulus and also uses negation, thus it matches all numbers _not_ in 12, 13, 14, 112, 113, 114, 212, 213, 214, … |
 
 
-#### <a name="Samples" href="#Samples">Samples</a>
+#### <a name="Samples" id="Samples" href="#Samples">Samples</a> <a id="numbers-language-plural-rules-plural-rules-syntax-samples"></a>
 
 Samples are provided if sample indicator (@integer or @decimal) is present on any rule. (CLDR always provides samples.)
 
@@ -1516,7 +1525,7 @@ Samples are provided if sample indicator (@integer or @decimal) is present on an
 * <a id="numbers-language-plural-rules-plural-rules-syntax-samples-rule-3"></a> **Samples must indicate**: Samples must indicate whether they are infinite or not. The '…' marker must be present if and only if infinitely many values (integer or decimal) can satisfy the rule. If a set is not infinite, it must list all the possible values.
 
 
-###### Table: <a name="Plural_Samples_Examples" href="#Plural_Samples_Examples">Plural Samples Examples</a>
+###### <a name="Plural_Samples_Examples" id="Plural_Samples_Examples" href="#Plural_Samples_Examples">Table: Plural Samples Examples</a> <a id="numbers-language-plural-rules-plural-rules-syntax-samples-table-plural-samples-examples"></a>
 
 | Rules | Comments |
 | --- | --- |
@@ -1527,7 +1536,7 @@ Samples are provided if sample indicator (@integer or @decimal) is present on an
 * <a id="numbers-language-plural-rules-plural-rules-syntax-samples-table-plural-samples-examples-rule-1"></a> **In determining whether**: In determining whether a set of samples is infinite, leading zero integer digits and trailing zero decimals are not significant. Thus "i = 1000 and f = 0" is satisfied by 01000, 1000, 1000.0, 1000.00, 1000.000, 01c3 etc. but is still considered finite.
 
 
-#### <a name="Using_cardinals" href="#Using_cardinals">Using Cardinals</a>
+#### <a name="Using_cardinals" id="Using_cardinals" href="#Using_cardinals">Using Cardinals</a> <a id="numbers-language-plural-rules-plural-rules-syntax-using-cardinals"></a>
 
 * <a id="numbers-language-plural-rules-plural-rules-syntax-using-cardinals-rule-1"></a> **Elements such as**: Elements such as `<currencyFormats>`, `<currency>` and `<unit>` provide selection among subelements designating various localized cardinal plural forms by tagging each of the relevant subelements with a different count value, or with no count value in some cases. Note that the plural forms for a specific currencyFormat, unit type, or currency type may not use all of the different plural-form tags defined for the language. To format a currency or unit type for a particular numeric value, determine the count value according to the plural rules for the language, then select the appropriate display form for the currency format, currency type or unit type using the rules in those sections:
 
@@ -1536,7 +1545,7 @@ Samples are provided if sample indicator (@integer or @decimal) is present on an
 * [Currencies](#Currencies) (for `currency` elements)
 * The main document [Unit Elements](tr35.md#Unit_Elements)
 
-### <a name="Plural_Ranges" href="#Plural_Ranges">Plural Ranges</a>
+### <a name="Plural_Ranges" id="Plural_Ranges" href="#Plural_Ranges">Plural Ranges</a> <a id="numbers-language-plural-rules-plural-ranges"></a>
 
 ```dtd
 <!ELEMENT pluralRanges (pluralRange*) >
@@ -1559,7 +1568,7 @@ Samples are provided if sample indicator (@integer or @decimal) is present on an
 
 For the formatting of number ranges, see <a href="#Number_Range_Formatting">Number Range Formatting</a>.
 
-## <a name="Rule-Based_Number_Formatting" href="#Rule-Based_Number_Formatting">Rule-Based Number Formatting</a>
+## <a name="Rule-Based_Number_Formatting" id="Rule-Based_Number_Formatting" href="#Rule-Based_Number_Formatting">Rule-Based Number Formatting</a> <a id="numbers-rule-based-number-formatting"></a>
 
 ```dtd
 <!ELEMENT rbnf ( alias | rulesetGrouping*) >
@@ -1585,7 +1594,7 @@ For the formatting of number ranges, see <a href="#Number_Range_Formatting">Numb
 * <a id="numbers-rule-based-number-formatting-rule-2"></a> **Where, however, the**: Where, however, the [[CLDR plurals or ordinals]](#language-plural-rules) can be used, their usage is recommended in preference to the RBNF data. First, the RBNF data may be missing some relevant forms for grammatical case or types over some languages that otherwise have modern coverage. Secondly, the choice of rules requires additional language specific context. CLDR does not supply any data for when to use one vs another (e.g. when to use `spellout-cardinal-masculine` vs `spellout-cardinal-feminine`). So these data are insufficient without additional software that provides grammatical context to choose the correct rule for grammatical agreement in a sentence.
 
 
-### <a name="Rule-Based_Number_Formatting_Scope" href="#Rule-Based_Number_Formatting_Scope">Rule-Based Number Formatting Scope</a>
+### <a name="Rule-Based_Number_Formatting_Scope" id="Rule-Based_Number_Formatting_Scope" href="#Rule-Based_Number_Formatting_Scope">Rule-Based Number Formatting Scope</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope"></a>
 
 ```xml
 <ruleSetGrouping>
@@ -1593,34 +1602,34 @@ For the formatting of number ranges, see <a href="#Number_Range_Formatting">Numb
 
 Used to group rules into functional sets. There are 3 known rule types. They are `SpelloutRules`, `NumberingSystemRules`, and `OrdinalRules`.
 
-#### <a name="SpelloutRules" href="#SpelloutRules">SpelloutRules</a>
+#### <a name="SpelloutRules" id="SpelloutRules" href="#SpelloutRules">SpelloutRules</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules"></a>
 
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-rule-1"></a> **The `SpelloutRules` type**: The `SpelloutRules` type is used for representing a numerical datatype with words that are typically found in speech. There are 4 common rule categories for spellout rules. A language with complete coverage will cover all of these categories. Some languages may provide more than these 4 types depending on what is relevant for a given language:
 
 
-##### numbering
+##### <a name="numbering" id="numbering" href="#numbering">numbering</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering"></a>
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering-rule-1"></a> **This is the**: This is the default used when there is no context for the number. Usually this is used for counting without reference to a noun. For many languages, this may also be used for enumeration of objects, like used when pronouncing "table number one" and "table number two". It can also be used for pronouncing a math equation, like "2 - 3 = -1".
 
-##### numbering-year
+##### <a name="numberingyear" id="numberingyear" href="#numberingyear">numbering-year</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering-year"></a>
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering-year-rule-1"></a> **This is used**: This is used for cases where years are pronounced or written a certain way. An example in English is the year 1999, which comes out as "nineteen ninety-nine" instead of the numbering value "one thousand nine hundred ninety-nine". The rules for this type have undefined behavior for non-integer numbers, and values less than 1.
 
-##### cardinal
+##### <a name="cardinal" id="cardinal" href="#cardinal">cardinal</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-cardinal"></a>
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-cardinal-rule-1"></a> **This is used**: This is used when providing the quantity of the number of objects. For many languages, there may not be a default cardinal type. Many languages require the notion of the gender and other grammatical properties so that the number and the objects being referenced are in grammatical agreement. An example of its usage is "one e-mail", "two people" or "three kilometers". Some languages may not have dedicated words for 0 or negative numbers for cardinals. In those cases, the words from the numbering type can be reused.
 
-##### ordinal
+##### <a name="ordinal" id="ordinal" href="#ordinal">ordinal</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-ordinal"></a>
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-ordinal-rule-1"></a> **This is used**: This is used when providing the order of the number of objects. For many languages, there may not be a default ordinal type. Many languages also require the notion of the gender for ordinal so that the ordinal number and the objects being referenced are in grammatical agreement. An example of its usage is "first place", "second e-mail" or "third house on the right". The rules for this type have undefined behavior for non-integer numbers, and values less than 1.
 
 
-#### <a name="NumberingSystemRules" href="#NumberingSystemRules">NumberingSystemRules</a>
+#### <a name="NumberingSystemRules" id="NumberingSystemRules" href="#NumberingSystemRules">NumberingSystemRules</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-numberingsystemrules"></a>
 
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-numberingsystemrules-rule-1"></a> **The `NumberingSystemRules` type**: The `NumberingSystemRules` type is used for numbering systems. Even though they may be derived from a specific culture, they are typically not translated and the rules are in **root**. An example of these rules are the Roman numerals where the value 8 comes out as VIII. These are typically supported in scenarios where the numbering system does not use decimal digits, but symbols are used to represent a number.
 
 
-#### <a name="OrdinalRules" href="#OrdinalRules">OrdinalRules</a>
+#### <a name="OrdinalRules" id="OrdinalRules" href="#OrdinalRules">OrdinalRules</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-ordinalrules"></a>
 
 The `OrdinalRules` type is used for ordinal numbers with digits (e.g. 1st, 2nd, 3rd, …). If a language does not have such a concept, then it should be the format of numbers in an ordered list.
 
-### <a name="RBNF_Limitations" href="#RBNF_Limitations">Limitations</a>
+### <a name="RBNF_Limitations" id="RBNF_Limitations" href="#RBNF_Limitations">Limitations</a> <a id="numbers-rule-based-number-formatting-limitations"></a>
 
 * <a id="numbers-rule-based-number-formatting-limitations-rule-1"></a> **With regards to**: With regards to the number range supported for all these number types, the largest possible number range tries to be supported, but some languages may not have words for large numbers. For example, the old Roman numbering system can't support the value 5000 and beyond. For those unsupported cases, the default number format from CLDR is used.
 
@@ -1634,7 +1643,7 @@ The `OrdinalRules` type is used for ordinal numbers with digits (e.g. 1st, 2nd, 
 * <a id="numbers-rule-based-number-formatting-limitations-rule-4"></a> **Numbers with units**: Numbers with units are inappropriate to use within these number rules. It's more appropriate to format or parse the number component, and to use a message format framework to format the unit. This number rules based system does not scale well with the number of combinations of possible values with units and subunits. Such implementations will also struggle with adjusting the precision for formatting or the relevant unit recognized when parsing. It is more scalable to use this number rules with a [[Language Plural Rules]](#language-plural-rules) with a message formatting framework.
 
 
-### <a name="RBNF_Syntax" href="#RBNF_Syntax">Syntax of `rbnfRules`</a>
+### <a name="RBNF_Syntax" id="RBNF_Syntax" href="#RBNF_Syntax">Syntax of `rbnfRules`</a> <a id="numbers-rule-based-number-formatting-syntax-of-rbnfrules"></a>
 ```xml
 <rbnfRules>
 ```
@@ -1752,7 +1761,7 @@ the number's integral part, and the >> to the number's fractional part. The
 fractional part is formatted as a series of single-digit numbers (e.g., 123.456 would be
 formatted as "one hundred twenty-three point four five six").
 
-### <a name="RBNF_Syntax_Rule_Set" href="#RBNF_Syntax_Rule_Set">Rule Sets</a>
+### <a name="RBNF_Syntax_Rule_Set" id="RBNF_Syntax_Rule_Set" href="#RBNF_Syntax_Rule_Set">Rule Sets</a> <a id="numbers-rule-based-number-formatting-rule-sets"></a>
 
 Multiple sets of rules can be defined with one or more *rule
 sets*. Each rule set consists of a name, a colon, and a list of *rules*. A rule
@@ -1878,7 +1887,7 @@ is not allowed in rule set names or in rule text, and the colon is not allowed i
 names. The characters beginning a substitution token are always treated as the beginning
 of a substitution token.
 
-### <a name="RBNF_Remove_Ruleset_Rule" href="#RBNF_Remove_Ruleset_Rule">Planned removal of ruleset and rule tags</a>
+### <a name="RBNF_Remove_Ruleset_Rule" id="RBNF_Remove_Ruleset_Rule" href="#RBNF_Remove_Ruleset_Rule">Planned removal of ruleset and rule tags</a> <a id="numbers-rule-based-number-formatting-planned-removal-of-ruleset-and-rule-tags"></a>
 
 The following `<ruleset>` and `<rule>` tags will be removed in the next release. They contain redundant information contained in `<rbnfRules>` to provide time to transition to `<rbnfRules>`.
 
@@ -1895,7 +1904,7 @@ This element denotes a specific rule set to the number formatter. The ruleset is
 * <a id="numbers-rule-based-number-formatting-planned-removal-of-ruleset-and-rule-tags-rule-1"></a> **Contains the actual**: Contains the actual formatting rule for a particular number or sequence of numbers. The `value` attribute is used to indicate the starting number to which the rule applies. The actual text of the rule is identical to the ICU syntax, with the exception that Unicode left and right arrow characters are used to replace < and > in the rule text, since < and > are reserved characters in XML. The `radix` attribute is used to indicate an alternate radix to be used in calculating the prefix and postfix values for number formatting. Alternate radix values are typically used for formatting year numbers in formal documents, such as "nineteen hundred seventy-six" instead of "one thousand nine hundred seventy-six".
 
 
-## <a name="Parsing_Numbers" href="#Parsing_Numbers">Parsing Numbers</a>
+## <a name="Parsing_Numbers" id="Parsing_Numbers" href="#Parsing_Numbers">Parsing Numbers</a> <a id="numbers-parsing-numbers"></a>
 
 The following elements are relevant to determining the value of a parsed number:
 
@@ -1923,7 +1932,7 @@ Here is a set of heuristic rules that may be helpful:
 * A currency symbol in the input should be interpreted as the longest match found in the set of possible currency symbols.
 * Especially in cases of ambiguity, the user's input should be echoed back, properly formatted according to the locale, before it is actually used for anything.
 
-## <a name="Number_Range_Formatting" href="#Number_Range_Formatting">Number Range Formatting</a>
+## <a name="Number_Range_Formatting" id="Number_Range_Formatting" href="#Number_Range_Formatting">Number Range Formatting</a> <a id="numbers-number-range-formatting"></a>
 
 Often ranges of numbers are presented to users, such as in “Length: 3.2–4.5 centimeters”. This means any length from 3.2 cm to 4.5 cm, inclusive.
 
@@ -1940,7 +1949,7 @@ To format a number range, the following steps are taken:
 
 For plural rule selection of number ranges, see [Plural Ranges](#Plural_Ranges).
 
-### <a name="Approximate_Number_Formatting" href="#Approximate_Number_Formatting">Approximate Number Formatting</a>
+### <a name="Approximate_Number_Formatting" id="Approximate_Number_Formatting" href="#Approximate_Number_Formatting">Approximate Number Formatting</a> <a id="numbers-number-range-formatting-approximate-number-formatting"></a>
 
 *Approximate number formatting* refers to a specific format of numbers in which the value is understood to not be exact; for example, "\~5 minutes".
 
@@ -1950,7 +1959,7 @@ For plural rule selection of number ranges, see [Plural Ranges](#Plural_Ranges).
 * <a id="numbers-number-range-formatting-approximate-number-formatting-rule-2"></a> **If the number**: If the number is negative, or if the formatting options request the sign to be displayed, *prepend* the `approximatelySign` to the plus or minus sign before substituting it into the pattern. For example, "\~-5" means "approximately negative five". This procedure may change in the future.
 
 
-### <a name="Collapsing_Number_Ranges" href="#Collapsing_Number_Ranges">Collapsing Number Ranges</a>
+### <a name="Collapsing_Number_Ranges" id="Collapsing_Number_Ranges" href="#Collapsing_Number_Ranges">Collapsing Number Ranges</a> <a id="numbers-number-range-formatting-collapsing-number-ranges"></a>
 
 *Collapsing* a number range refers to the process of removing duplicated information in the *lower* and *upper* values. For example, if the lower string is "3.2 centimeters" and the upper string is "4.5 centimeters", it is desirable to remove the extra "centimeters" token.
 
@@ -1998,7 +2007,7 @@ For example, if a range from 2 km to 5 km would be presented visually as "_mk 5 
 This requires consistent visually reordering among the elements: the range, the prefixes and the suffixes.
 Thus a prefix value will be reordered to be visually a suffix value, and the order of the range will be visually reversed.
 
-### <a name="Range_Pattern_Processing" href="#Range_Pattern_Processing">Range Pattern Processing</a>
+### <a name="Range_Pattern_Processing" id="Range_Pattern_Processing" href="#Range_Pattern_Processing">Range Pattern Processing</a> <a id="numbers-number-range-formatting-range-pattern-processing"></a>
 
 To obtain a number range pattern, the following steps are taken:
 

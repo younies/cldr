@@ -2,27 +2,24 @@
 appendix: B
 title: Acknowledgments
 ---
-## Unicode Technical Standard #35 <a id="acknowledgments-unicode-technical-standard-35"></a>
+## Unicode Technical Standard #35
 
 # Unicode Locale Data Markup Language (LDML)<br/>Appendix B: Acknowledgments
 
 For the full header, table of contents, and status, see [Part 1: Core](tr35.md).
 
-### _Summary_ <a id="acknowledgments-unicode-technical-standard-35-summary"></a>
+### _Summary_
 
-<a id="acknowledgments-unicode-technical-standard-35-summary-p-1"></a>
 This is a partial document, describing only the acknowledgments of contributors to LDML. For the other parts of the LDML see the [main LDML document](tr35.md).
 
-## <a name="Contents" id="Contents" href="#Contents">Contents of Appendix B, Acknowledgments</a> <a id="acknowledgments-contents-of-appendix-b-acknowledgments"></a>
+## <a name="Contents" href="#Contents">Contents of Appendix B, Acknowledgments</a>
 
-  * [_Summary_ ](#summary-)
-* [Contents of Appendix B, Acknowledgments](#Contents) 
-* [Acknowledgments ](#acknowledgments-)
+* [Acknowledgments](#acknowledgments)
 
-## Acknowledgments <a id="acknowledgments-acknowledgments"></a>
+## Acknowledgments
 
-<a id="acknowledgments-acknowledgments-p-1"></a>
-Special thanks to the following people for their continuing overall contributions to the CLDR project, and for their specific contributions in the following areas. These descriptions only touch on the many contributions that they have made.
+* <a id="acknowledgments-acknowledgments-rule-1"></a> **Special thanks to**: Special thanks to the following people for their continuing overall contributions to the CLDR project, and for their specific contributions in the following areas. These descriptions only touch on the many contributions that they have made.
+
 
 * Mark Davis for creating the initial version of LDML, and adding to and maintaining this specification, and for his work on the LDML code and tests, much of the supplemental data and overall structure, and transforms and keyboards.
 * John Emmons for the POSIX conversion tool and metazones.
@@ -54,21 +51,16 @@ Special thanks to the following people for their continuing overall contribution
 
 © 2001–2026 Unicode, Inc.
 This publication is protected by copyright, and permission must be obtained from Unicode, Inc.
-<a id="acknowledgments-acknowledgments-p-2"></a>
 prior to any reproduction, modification, or other use not permitted by the [Terms of Use](https://www.unicode.org/copyright.html).
-<a id="acknowledgments-acknowledgments-p-3"></a>
 Specifically, you may make copies of this publication and may annotate and translate it solely for personal or internal business purposes and not for public distribution,
-<a id="acknowledgments-acknowledgments-p-4"></a>
 provided that any such permitted copies and modifications fully reproduce all copyright and other legal notices contained in the original.
-<a id="acknowledgments-acknowledgments-p-5"></a>
-You may not make copies of or modifications to this publication for public distribution, or incorporate it in whole or in part into any product or publication without the express written permission of Unicode.
+* <a id="acknowledgments-acknowledgments-rule-2"></a> **You may not**: You may not make copies of or modifications to this publication for public distribution, or incorporate it in whole or in part into any product or publication without the express written permission of Unicode.
 
-<a id="acknowledgments-acknowledgments-p-6"></a>
+
 Use of all Unicode Products, including this publication, is governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html).
 The authors, contributors, and publishers have taken care in the preparation of this publication,
-<a id="acknowledgments-acknowledgments-p-7"></a>
-but make no express or implied representation or warranty of any kind and assume no responsibility or liability for errors or omissions or for consequential or incidental damages that may arise therefrom.
+* <a id="acknowledgments-acknowledgments-rule-3"></a> **but make no**: but make no express or implied representation or warranty of any kind and assume no responsibility or liability for errors or omissions or for consequential or incidental damages that may arise therefrom.
+
 This publication is provided “AS-IS” without charge as a convenience to users.
 
-<a id="acknowledgments-acknowledgments-p-8"></a>
 Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the United States and other countries.

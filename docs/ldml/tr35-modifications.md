@@ -2,39 +2,36 @@
 appendix: A
 title: Modifications
 ---
-## Unicode Technical Standard #35 <a id="modifications-unicode-technical-standard-35"></a>
+## Unicode Technical Standard #35
 
 # Unicode Locale Data Markup Language (LDML)<br/>Appendix A: Modifications
 
 For the full header, table of contents, and status, see [Part 1: Core](tr35.md).
 
-### _Summary_ <a id="modifications-unicode-technical-standard-35-summary"></a>
+### _Summary_
 
-<a id="modifications-unicode-technical-standard-35-summary-p-1"></a>
 This is a partial document, describing only the changes to the LDML since the previous release. For the other parts of the LDML see the [main LDML document](tr35.md).
 
-## <a name="Contents" id="Contents" href="#Contents">Contents of Appendix A, Modifications</a> <a id="modifications-contents-of-appendix-a-modifications"></a>
+## <a name="Contents" href="#Contents">Contents of Appendix A, Modifications</a>
 
-  * [_Summary_ ](#summary-)
-* [Contents of Appendix A, Modifications](#Contents) 
-* [Modifications ](#modifications-)
-  * [MessageFormat ](#messageformat-)
-  * [Locale Identifiers and Names ](#locale-identifiers-and-names-)
-  * [Misc. ](#misc-)
-  * [DateTime formats ](#datetime-formats-)
-  * [Numbers ](#numbers-)
-  * [Units of Measurement ](#units-of-measurement-)
-  * [Collation ](#collation-)
-  * [MessageFormat ](#messageformat-)
-  * [Keyboards ](#keyboards-)
-  * [Modifications section ](#modifications-section-)
-  * [Acknowledgments section ](#acknowledgments-section-)
+* [Modifications](#modifications)
+  * [MessageFormat](#messageformat)
+  * [Locale Identifiers and Names](#locale-identifiers-and-names)
+  * [Misc.](#misc)
+  * [DateTime formats](#datetime-formats)
+  * [Numbers](#numbers)
+  * [Units of Measurement](#units-of-measurement)
+  * [Collation](#collation)
+  * [MessageFormat](#messageformat)
+  * [Keyboards](#keyboards)
+  * [Modifications section](#modifications-section)
+  * [Acknowledgments section](#acknowledgments-section)
 
-## Modifications <a id="modifications-modifications"></a>
+## Modifications
 
 <!--
-<a id="modifications-modifications-p-1"></a>
-Note: As of CLDR-18209, ALL changes to the spec require this file, tr35-modifications.md to be modified as well. If you are making a change that doesn't need to be noted, or is already noted, please simply add an HTML comment (such as this one) to the appropriate section.  The comment will not be visible to viewers of the HTML page.
+* <a id="modifications-modifications-rule-1"></a> **Note: As of**: Note: As of CLDR-18209, ALL changes to the spec require this file, tr35-modifications.md to be modified as well. If you are making a change that doesn't need to be noted, or is already noted, please simply add an HTML comment (such as this one) to the appropriate section.  The comment will not be visible to viewers of the HTML page.
+
 
       - regenerated ToC
       - bump spec date
@@ -61,8 +58,7 @@ Note: As of CLDR-18209, ALL changes to the spec require this file, tr35-modifica
 
 * New section [Nested Bracket Replacement](tr35-general.md#Character_Nested_Bracket_Replacement)
 * [Locale Display Name Algorithm](tr35-general.md#locale_display_name_algorithm) updated to use the nested bracket replacement data and avoid nested parentheses by flattening `-t-` (transform) language names.
-<a id="modifications-modifications-p-2"></a>
-* As part of this, the display name order is changed so that any names for `-u-` items appear _before_ (instead of after) any names for `-t-` items.
+    * As part of this, the display name order is changed so that any names for `-u-` items appear _before_ (instead of after) any names for `-t-` items.
 * Specify that missing `<keys>` translations should fall back to the key identifier
 * The section "Enhanced Language Matching" is retitled as [Language Matching Variables](tr35.md#enhanced-language-matching) and clarified.
 
@@ -70,7 +66,7 @@ Note: As of CLDR-18209, ALL changes to the spec require this file, tr35-modifica
 * Clarified the process of selecting the best `dateFormatItem` when there is no exact match, and how to use `appendItems` to add missing fields. This includes a clarification of what are date fields and what are time fields, and a note that `appendItems` for date and time fields should be appended before combining them.
 <!-- Updated spec date -->
 
-### MessageFormat <a id="modifications-modifications-messageformat"></a>
+### MessageFormat
 
 * The `:currency` and `:percent` functions are now Stable, with the same implementations as previously.
 * The `u:locale` option (previously in Draft) is dropped from the specification.
@@ -81,7 +77,7 @@ Note: As of CLDR-18209, ALL changes to the spec require this file, tr35-modifica
 
 **Changes in LDML Version 48 (Differences from Version 47)**
 
-### Locale Identifiers and Names <a id="modifications-modifications-locale-identifiers-and-names"></a>
+### Locale Identifiers and Names
 * [Display Name Elements](tr35-general.md#display-name-elements) Described the usage of the `language` element `menu` values `core` and `extension`, and `alt="menu"`.
 Also revamped the description of how to construct names for locale IDs, for clarity.
 * [Special Script Codes](tr35.md#special-script-codes) Added the `Hntl` compound script. (This is also reflected in the `<scriptData>` elements in supplementalData.xml.)
@@ -92,16 +88,15 @@ and to reduce confusion with XML attributes.
 explanation about the potential reuse of ISO 3166-2 codes, and clarified that
 CLDR does not closely monitor all ISO 3166-2 changes.
 
-### Misc. <a id="modifications-modifications-misc"></a>
+### Misc.
 * [Character Elements](tr35-general.md#character-elements) Added new exemplar types.
 * [DTD Annotations](tr35.md#DTD_Annotations) Added the @CDATA annotation, to indicate which elements are generated with @CDATA format
 * [Person Name Validation](tr35-personNames.md#person-name-validation) Added guidance for validating person names.
 * [Supplemental Language Data](tr35-info.md#Supplemental_Language_Data) For the `language` subelement of `languageData`, the `territory`
-<a id="modifications-modifications-misc-p-1"></a>
 attribute has been deprecated (and data using it has been removed). A better source for such information is the more detailed data
 in [Supplemental Territory Information](tr35-info.md#Supplemental_Territory_Information).
 
-### DateTime formats <a id="modifications-modifications-datetime-formats"></a>
+### DateTime formats
 
 * [Element dateTimeFormat](tr35-dates.md#dateTimeFormat) Added a new type `relative` for relative date/times, such as "tomorrow at 10:00",
 and updated the guidelines for using the different `dateTimeFormat` types.
@@ -110,28 +105,26 @@ and updated the guidelines for using the different `dateTimeFormat` types.
 * [Metazone Names](tr35-dates.md#metazone-names) Added `usesMetazone`, to specify which offset is considered standard time, and which offset is considered daylight.
 * [Time Zone Format Terminology](tr35-dates.md#time-zone-format-terminology) Added the **Localized GMT format** (replacing the **Specific location format**).
 This affects the behavior of the `z` timezone format symbol.
-<a id="modifications-modifications-datetime-formats-p-1"></a>
 There is also now a mechanism for finding the region code from short timezone identifier, which is used for the _non-location formats (generic or specific)_
 * [Calendar Data](tr35-dates.md#calendar-data) Specified more precisely the meaning of the `era` attributes in supplemental data, and how to determine the transition point in time between eras.
 
-### Numbers <a id="modifications-modifications-numbers"></a>
+### Numbers
 * [Plural rules syntax](tr35-numbers.md#plural-rules-syntax) Added substantial clarifications and new examples.
 The order of execution is also clearly specified.
 * [Compact Number Formats](tr35-numbers.md#compact-number-formats) Specified the mechanism for formatting compact numbers more precisely.
 * [Rule-Based Number Formatting](tr35-numbers.md#) Added a full specification.
-<a id="modifications-modifications-numbers-p-1"></a>
 The rules have been converted to a “flat” format, which is easier for clients to handle (the old format will be retained for one more release).
 * [Rational Numbers](tr35-numbers.md#rational-numbers) Added support for formatting fractions like 5½ in technical preview.
 
-### Units of Measurement <a id="modifications-modifications-units-of-measurement"></a>
+### Units of Measurement
 * [Unit Syntax](tr35-general.md#unit-syntax) Simplified the EBNF `product_unit` and added an additional well-formedness constraint for mixed units.
 * [Unit Identifier Normalization](tr35-info.md#Unit_Identifier_Normalization) Modified the normalization process
 * [Mixed Units](tr35-general.md#Unit_Sequences) Modified the guidance for handling precision.
 
-### Collation <a id="modifications-modifications-collation"></a>
+### Collation
 * [Collation](tr35-collation.md) Added the new `FractionalUCA_blanked.txt` to the root collation data files.
 
-### MessageFormat <a id="modifications-modifications-messageformat"></a>
+### MessageFormat
 * Syntax and data model errors must now be prioritized over other errors <!-- ([\#1011](https://github.com/unicode-org/message-format-wg/pull/1011)) -->
 * The Default Bidi Strategy is now required and default <!-- ([\#1066](https://github.com/unicode-org/message-format-wg/pull/1066)) -->
 * The `:offset` function (previously named `:math`) is now available as Stable <!-- ([\#1073](https://github.com/unicode-org/message-format-wg/pull/1073)) -->
@@ -140,18 +133,18 @@ The rules have been converted to a “flat” format, which is easier for client
 * The format is renamed to "Unicode MessageFormat" for clarity <!-- ([\#1064](https://github.com/unicode-org/message-format-wg/pull/1064)) -->
 * The pattern selection definition is refactored to be easier to understand without changing its meaning <!-- ([\#1080](https://github.com/unicode-org/message-format-wg/pull/1080)) -->
 
-### Keyboards <a id="modifications-modifications-keyboards"></a>
+### Keyboards
 
 * [`display`](tr35-keyboards.md#element-display): Noted that a key without output may be indicated by means of the `keyId=` attribute on the display.
 * [`layer`](tr35-keyboards.md#element-layer): Noted the use of the `modifiers=` attribute for hardware layouts being used as touch layouts.
 * References and links into the section concerning keyboard test data (which was removed prior to spec finalization) were removed.
 * Normalization for the default backspace transform was clarified, and authors were encouraged to add backspace transforms to avoid the default.
 
-### Modifications section <a id="modifications-modifications-modifications-section"></a>
+### Modifications section
 
 * The Modifications section was split out to its own file, [Appendix A, Modifications](tr35-modifications.md)
 
-### Acknowledgments section <a id="modifications-modifications-acknowledgments-section"></a>
+### Acknowledgments section
 
 * The Acknowledgments section was split out to its own file, [Appendix B, Acknowledgments](tr35-acknowledgments.md)
 
@@ -163,22 +156,17 @@ Click on **Previous Version** in the header until you get to the desired version
 
 © 2001–2026 Unicode, Inc.
 This publication is protected by copyright, and permission must be obtained from Unicode, Inc.
-<a id="modifications-modifications-acknowledgments-section-p-1"></a>
 prior to any reproduction, modification, or other use not permitted by the [Terms of Use](https://www.unicode.org/copyright.html).
-<a id="modifications-modifications-acknowledgments-section-p-2"></a>
 Specifically, you may make copies of this publication and may annotate and translate it solely for personal or internal business purposes and not for public distribution,
-<a id="modifications-modifications-acknowledgments-section-p-3"></a>
 provided that any such permitted copies and modifications fully reproduce all copyright and other legal notices contained in the original.
-<a id="modifications-modifications-acknowledgments-section-p-4"></a>
-You may not make copies of or modifications to this publication for public distribution, or incorporate it in whole or in part into any product or publication without the express written permission of Unicode.
+* <a id="modifications-modifications-acknowledgments-section-rule-1"></a> **You may not**: You may not make copies of or modifications to this publication for public distribution, or incorporate it in whole or in part into any product or publication without the express written permission of Unicode.
 
-<a id="modifications-modifications-acknowledgments-section-p-5"></a>
+
 Use of all Unicode Products, including this publication, is governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html).
 The authors, contributors, and publishers have taken care in the preparation of this publication,
-<a id="modifications-modifications-acknowledgments-section-p-6"></a>
-but make no express or implied representation or warranty of any kind and assume no responsibility or liability for errors or omissions or for consequential or incidental damages that may arise therefrom.
+* <a id="modifications-modifications-acknowledgments-section-rule-2"></a> **but make no**: but make no express or implied representation or warranty of any kind and assume no responsibility or liability for errors or omissions or for consequential or incidental damages that may arise therefrom.
+
 This publication is provided “AS-IS” without charge as a convenience to users.
 
-<a id="modifications-modifications-acknowledgments-section-p-7"></a>
 Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the United States and other countries.
 <!-- Auto SpecFix Wed Apr 29 15:28:28 UTC 2026 -->

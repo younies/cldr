@@ -5,36 +5,31 @@ editors:
 - name: Peter Edberg
 ---
 
-## Unicode Technical Standard #35 <a id="dates-unicode-technical-standard-35"></a>
+## Unicode Technical Standard #35
 
 # Unicode Locale Data Markup Language (LDML)<br/>Part 4: Dates
 
-### _Summary_ <a id="dates-unicode-technical-standard-35-summary"></a>
+### _Summary_
 
-<a id="dates-unicode-technical-standard-35-summary-p-1"></a>
-This document describes parts of an XML format (_vocabulary_) for the exchange of structured locale data. This format is used in the [Unicode Common Locale Data Repository](https://www.unicode.org/cldr/).
+* <a id="dates-unicode-technical-standard-35-summary-rule-1"></a> **This document describes**: This document describes parts of an XML format (_vocabulary_) for the exchange of structured locale data. This format is used in the [Unicode Common Locale Data Repository](https://www.unicode.org/cldr/).
 
-<a id="dates-unicode-technical-standard-35-summary-p-2"></a>
-This is a partial document, describing only those parts of the LDML that are relevant for date, time, and time zone formatting. For the other parts of the LDML see the [main LDML document](tr35.md) and the links above.
 
-### _Status_ <a id="dates-unicode-technical-standard-35-status"></a>
+* <a id="dates-unicode-technical-standard-35-summary-rule-2"></a> **This is a**: This is a partial document, describing only those parts of the LDML that are relevant for date, time, and time zone formatting. For the other parts of the LDML see the [main LDML document](tr35.md) and the links above.
+
+
+### _Status_
 
 <div id='currentStatus'></div>
 
 > _**A Unicode Technical Standard (UTS)** is an independent specification. Conformance to the Unicode Standard does not imply conformance to any UTS._
 
-<a id="dates-unicode-technical-standard-35-status-p-1"></a>
 _Please submit corrigenda and other comments with the CLDR bug reporting form [[Bugs](https://cldr.unicode.org/index/bug-reports)].
-<a id="dates-unicode-technical-standard-35-status-p-2"></a>
 Related information that is useful in understanding this document is found in the [References](tr35.md#References).
-<a id="dates-unicode-technical-standard-35-status-p-3"></a>
 For the latest version of the Unicode Standard see [[Unicode](https://www.unicode.org/versions/latest/)].
-<a id="dates-unicode-technical-standard-35-status-p-4"></a>
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
-<a id="dates-unicode-technical-standard-35-status-p-5"></a>
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
+## Parts
 
 The LDML specification is divided into the following parts:
 
@@ -50,88 +45,83 @@ The LDML specification is divided into the following parts:
 *   Appendix A: [Modifications](tr35-modifications.md#modifications)
 *   Appendix B: [Acknowledgments](tr35-acknowledgments.md#acknowledgments)
 
-## <a name="Contents" id="Contents" href="#Contents">Contents of Part 4, Dates</a> <a id="dates-contents-of-part-4-dates"></a>
+## <a name="Contents" href="#Contents">Contents of Part 4, Dates</a>
 
-  * [_Summary_ ](#summary-)
-  * [_Status_ ](#status-)
-* [Parts ](#parts-)
-* [Contents of Part 4, Dates](#Contents) 
-* [Overview: Dates Element, Supplemental Date and Calendar Information](#Overview_Dates_Element_Supplemental) 
-* [Calendar Elements](#Calendar_Elements) 
-  * [Elements months, days, quarters, eras](#months_days_quarters_eras) 
-  * [Elements monthPatterns, cyclicNameSets](#monthPatterns_cyclicNameSets) 
-  * [Element dayPeriods](#dayPeriods) 
-  * [Element dateFormats](#dateFormats) 
-  * [Element timeFormats](#timeFormats) 
-  * [Element dateTimeFormats](#dateTimeFormats) 
-    * [Element dateTimeFormat](#dateTimeFormat) 
-      * [Table: Date-Time Combination Examples ](#table-date-time-combination-examples-)
-    * [Elements availableFormats, appendItems](#availableFormats_appendItems) 
-      * [Table: Mapping Requested Time Skeletons To Patterns ](#table-mapping-requested-time-skeletons-to-patterns-)
-      * [Matching Skeletons](#Matching_Skeletons) 
-      * [Missing Skeleton Fields](#Missing_Skeleton_Fields) 
-    * [Element intervalFormats](#intervalFormats) 
-* [Calendar Fields](#Calendar_Fields) 
-* [Supplemental Calendar Data](#Supplemental_Calendar_Data) 
-  * [Calendar Data](#Calendar_Data) 
-  * [Calendar Preference Data ](#calendar-preference-data-)
-  * [Week Data](#Week_Data) 
-    * [Table: Week Designation Types ](#table-week-designation-types-)
-    * [First Day Overrides ](#first-day-overrides-)
-  * [Time Data](#Time_Data) 
-  * [Day Period Rule Sets](#Day_Period_Rule_Sets) 
-    * [Day Period Rules](#Day_Period_Rules) 
-      * [Fixed periods](#Fixed_periods) 
-      * [Variable periods](#Variable_periods) 
-      * [Parsing Day Periods](#Parsing_Day_Periods) 
-* [Time Zone Names](#Time_Zone_Names) 
-  * [Table: timeZoneNames Elements Used for Fallback ](#table-timezonenames-elements-used-for-fallback-)
-  * [Metazone Names](#Metazone_Names) 
-* [Supplemental Time Zone Data](#Supplemental_Time_Zone_Data) 
-  * [Metazones](#Metazones) 
-  * [Windows Zones](#Windows_Zones) 
-  * [Primary Zones](#Primary_Zones) 
-* [Using Time Zone Names](#Using_Time_Zone_Names) 
-  * [Time Zone Format Terminology](#Time_Zone_Format_Terminology) 
-  * [Goals](#Time_Zone_Goals) 
-  * [Parsing](#Time_Zone_Parsing) 
-* [Date Format Patterns](#Date_Format_Patterns) 
-  * [Table: Date Format Pattern Examples ](#table-date-format-pattern-examples-)
-  * [Table: Date Field Symbol Table ](#table-date-field-symbol-table-)
-  * [Localized Pattern Characters (deprecated)](#Localized_Pattern_Characters) 
-  * [AM / PM](#Date_Patterns_AM_PM) 
-  * [Eras](#Date_Patterns_Eras) 
-  * [Week of Year](#Date_Patterns_Week_Of_Year) 
-  * [Week Elements](#Date_Patterns_Week_Elements) 
-* [Parsing Dates and Times](#Parsing_Dates_Times) 
-* [Semantic Skeletons](#Semantic_Skeletons) 
-  * [Parts of a Semantic Skeleton](#Parts_of_a_Semantic_Skeleton) 
-    * [Semantic Field Sets](#Semantic_Field_Sets) 
-      * [Date Field Sets](#Semantic_Date_Field_Sets) 
-      * [Calendar Period Field Sets](#Semantic_Calendar_Period_Field_Sets) 
-      * [Time Field Sets](#Semantic_Time_Field_Sets) 
-      * [Time Zone Field Sets](#Semantic_Time_Zone_Field_Sets) 
-      * [Composite Field Sets](#Semantic_Composite_Field_Sets) 
-    * [Semantic Skeleton Options](#Semantic_Skeleton_Options) 
-      * [Length](#Semantic_Skeleton_Length) 
-      * [Alignment](#Semantic_Skeleton_Alignment) 
-      * [Year Style](#Semantic_Skeleton_Year_Style) 
-      * [Hour Cycle](#Semantic_Skeleton_Hour_Cycle) 
-      * [Time Precision](#Semantic_Skeleton_Time_Precision) 
-      * [Time Zone Style](#Semantic_Skeleton_Time_Zone_Style) 
-  * [Generating Patterns for Semantic Skeletons](#Generating_Patterns_for_Semantic_Skeletons) 
-    * [Mapping to Standard Skeletons ](#mapping-to-standard-skeletons-)
-      * [Time Precision Skeleton Variations](#Semantic_Time_Precision_Skeleton_Variations) 
-      * [Year Style Skeleton Variations](#Semantic_Year_Style_Skeleton_Variations) 
-  * [Semantic Skeleton Conformance](#Semantic_Skeleton_Conformance) 
+* [Overview: Dates Element, Supplemental Date and Calendar Information](#Overview_Dates_Element_Supplemental)
+* [Calendar Elements](#Calendar_Elements)
+  * [Elements months, days, quarters, eras](#months_days_quarters_eras)
+  * [Elements monthPatterns, cyclicNameSets](#monthPatterns_cyclicNameSets)
+  * [Element dayPeriods](#dayPeriods)
+  * [Element dateFormats](#dateFormats)
+  * [Element timeFormats](#timeFormats)
+  * [Element dateTimeFormats](#dateTimeFormats)
+    * [Element dateTimeFormat](#dateTimeFormat)
+      * Table: [Date-Time Combination Examples](#Date_Time_Combination_Examples)
+    * [Elements availableFormats, appendItems](#availableFormats_appendItems)
+      * Table: [Mapping Requested Time Skeletons To Patterns](#Mapping_Requested_Time_Skeletons_To_Patterns)
+      * [Matching Skeletons](#Matching_Skeletons)
+      * [Missing Skeleton Fields](#Missing_Skeleton_Fields)
+    * [Element intervalFormats](#intervalFormats)
+* [Calendar Fields](#Calendar_Fields)
+* [Supplemental Calendar Data](#Supplemental_Calendar_Data)
+  * [Calendar Data](#Calendar_Data)
+  * [Calendar Preference Data](#calendar-preference-data)
+  * [Week Data](#Week_Data)
+    * Table: [Week Designation Types](#Week_Designation_Types)
+    * [First Day Overrides](#first-day-overrides)
+  * [Time Data](#Time_Data)
+  * [Day Period Rule Sets](#Day_Period_Rule_Sets)
+    * [Day Period Rules](#Day_Period_Rules)
+      * [Fixed periods](#Fixed_periods)
+      * [Variable periods](#Variable_periods)
+      * [Parsing Day Periods](#Parsing_Day_Periods)
+* [Time Zone Names](#Time_Zone_Names)
+  * Table: [timeZoneNames Elements Used for Fallback](#timeZoneNames_Elements_Used_for_Fallback)
+  * [Metazone Names](#Metazone_Names)
+* [Supplemental Time Zone Data](#Supplemental_Time_Zone_Data)
+  * [Metazones](#Metazones)
+  * [Windows Zones](#Windows_Zones)
+  * [Primary Zones](#Primary_Zones)
+* [Using Time Zone Names](#Using_Time_Zone_Names)
+  * [Time Zone Format Terminology](#Time_Zone_Format_Terminology)
+  * [Goals](#Time_Zone_Goals)
+  * [Parsing](#Time_Zone_Parsing)
+* [Date Format Patterns](#Date_Format_Patterns)
+  * Table: [Date Format Pattern Examples](#Date_Format_Pattern_Examples)
+  * Table: [Date Field Symbol Table](#Date_Field_Symbol_Table)
+  * [Localized Pattern Characters (deprecated)](#Localized_Pattern_Characters)
+  * [AM / PM](#Date_Patterns_AM_PM)
+  * [Eras](#Date_Patterns_Eras)
+  * [Week of Year](#Date_Patterns_Week_Of_Year)
+  * [Week Elements](#Date_Patterns_Week_Elements)
+* [Parsing Dates and Times](#Parsing_Dates_Times)
+* [Semantic Skeletons](#Semantic_Skeletons)
+  * [Parts of a Semantic Skeleton](#Parts_of_a_Semantic_Skeleton)
+    * [Semantic Field Sets](#Semantic_Field_Sets)
+      * [Date Field Sets](#Semantic_Date_Field_Sets)
+      * [Calendar Period Field Sets](#Semantic_Calendar_Period_Field_Sets)
+      * [Time Field Sets](#Semantic_Time_Field_Sets)
+      * [Time Zone Field Sets](#Semantic_Time_Zone_Field_Sets)
+      * [Composite Field Sets](#Semantic_Composite_Field_Sets)
+    * [Semantic Skeleton Options](#Semantic_Skeleton_Options)
+      * [Length](#Semantic_Skeleton_Length)
+      * [Alignment](#Semantic_Skeleton_Alignment)
+      * [Year Style](#Semantic_Skeleton_Year_Style)
+      * [Hour Cycle](#Semantic_Skeleton_Hour_Cycle)
+      * [Time Precision](#Semantic_Skeleton_Time_Precision)
+      * [Time Zone Style](#Semantic_Skeleton_Time_Zone_Style)
+  * [Generating Patterns for Semantic Skeletons](#Generating_Patterns_for_Semantic_Skeletons)
+    * [Mapping to Standard Skeletons](#mapping-to-standard-skeletons)
+      * [Time Precision Skeleton Variations](#Semantic_Time_Precision_Skeleton_Variations)
+      * [Year Style Skeleton Variations](#Semantic_Year_Style_Skeleton_Variations)
+  * [Semantic Skeleton Conformance](#Semantic_Skeleton_Conformance)
 
-## <a name="Overview_Dates_Element_Supplemental" id="Overview_Dates_Element_Supplemental" href="#Overview_Dates_Element_Supplemental">Overview: Dates Element, Supplemental Date and Calendar Information</a> <a id="dates-overview-dates-element-supplemental-date-and-calendar-information"></a>
+## <a name="Overview_Dates_Element_Supplemental" href="#Overview_Dates_Element_Supplemental">Overview: Dates Element, Supplemental Date and Calendar Information</a>
 
 ```xml
 <!ELEMENT dates (alias | (calendars?, fields?, timeZoneNames?, special*)) >
 ```
 
-<a id="dates-overview-dates-element-supplemental-date-and-calendar-information-p-1"></a>
 The LDML top-level `<dates>` element contains information regarding the format and parsing of dates and times, the formatting of date/time intervals, and the naming of various calendar elements.
 
 *   The `<calendars>` element is described in [Calendar Elements](#Calendar_Elements).
@@ -149,7 +139,7 @@ The relevant top-level supplemental elements are listed above.
 *   The `<timezoneData>` element is deprecated and no longer used; the `<metazoneInfo>` element is deprecated at this level, and is now only used as a sub-element of `<metaZones>`.
 *   The `<metaZones>`, `<primaryZones>`, and `<windowsZones>` elements are described in [Supplemental Time Zone Data](#Supplemental_Time_Zone_Data).
 
-## <a name="Calendar_Elements" id="Calendar_Elements" href="#Calendar_Elements">Calendar Elements</a> <a id="dates-calendar-elements"></a>
+## <a name="Calendar_Elements" href="#Calendar_Elements">Calendar Elements</a>
 
 ```xml
 <!ELEMENT calendars (alias | (calendar*, special*)) >
@@ -157,21 +147,21 @@ The relevant top-level supplemental elements are listed above.
 <!ATTLIST calendar type NMTOKEN #REQUIRED >
 ```
 
-<a id="dates-calendar-elements-p-1"></a>
-The `<calendars>` element contains multiple `<calendar>` elements, each of which specifies the fields used for formatting and parsing dates and times according to the calendar specified by the `type` attribute (e.g. "gregorian", "buddhist", "islamic"). The behaviors for different calendars in a locale may share certain aspects, such as the names for weekdays. They differ in other respects; for example, the Japanese calendar is similar to the Gregorian calendar but has many more eras (one for each Emperor), and years are numbered within each era. All calendar data inherits either from the Gregorian calendar or other calendars in the same locale (and if not present there then from the parent up to root), or else inherits directly from the parent locale for certain calendars, so only data that differs from what would be inherited needs to be supplied. See _[Multiple Inheritance](tr35.md#Multiple_Inheritance)_.
+* <a id="dates-calendar-elements-rule-1"></a> **The `` element**: The `<calendars>` element contains multiple `<calendar>` elements, each of which specifies the fields used for formatting and parsing dates and times according to the calendar specified by the `type` attribute (e.g. "gregorian", "buddhist", "islamic"). The behaviors for different calendars in a locale may share certain aspects, such as the names for weekdays. They differ in other respects; for example, the Japanese calendar is similar to the Gregorian calendar but has many more eras (one for each Emperor), and years are numbered within each era. All calendar data inherits either from the Gregorian calendar or other calendars in the same locale (and if not present there then from the parent up to root), or else inherits directly from the parent locale for certain calendars, so only data that differs from what would be inherited needs to be supplied. See _[Multiple Inheritance](tr35.md#Multiple_Inheritance)_.
+
 
 Each calendar provides—directly or indirectly—two general types of data:
 
 *   _Calendar symbols, such as names for eras, months, weekdays, and dayPeriods._ Names for weekdays, quarters and dayPeriods are typically inherited from the Gregorian calendar data in the same locale. Symbols for eras and months should be provided for each calendar, except that the "Gregorian-like" Buddhist, Japanese, and Minguo (ROC) calendars also inherit their month names from the Gregorian data in the same locale.
 *   _Format data for dates, times, and date-time intervals._ Non-Gregorian calendars inherit standard time formats (in the `<timeFormats>` element) from the Gregorian calendar in the same locale. Most non-Gregorian calendars (other than Chinese and Dangi) inherit general date format data (in the `<dateFormats>` and `<dateTimeFormats>` elements) from the "generic" calendar format data in the same locale, which in turn inherits from Gregorian.
 
-<a id="dates-calendar-elements-p-2"></a>
-Calendars that use cyclicNameSets and monthPatterns (such as Chinese and Dangi) have additional symbols and distinct formats, and typically inherit these items (along with month names) from their parent locales, instead of inheriting them from Gregorian or generic data in the same locale.
+* <a id="dates-calendar-elements-rule-2"></a> **Calendars that use**: Calendars that use cyclicNameSets and monthPatterns (such as Chinese and Dangi) have additional symbols and distinct formats, and typically inherit these items (along with month names) from their parent locales, instead of inheriting them from Gregorian or generic data in the same locale.
 
-<a id="dates-calendar-elements-p-3"></a>
-The primary difference between Gregorian and "generic" format data is that date formats in "generic" usually include era with year, in order to provide an indication of which calendar is being used (Gregorian calendar formats may also commonly include era with year when Gregorian is not the default calendar for the locale). Otherwise, the "generic" date formats should normally be consistent with those in the Gregorian calendar. The "generic" calendar formats are intended to provide a consistent set of default formats for non-Gregorian calendars in the locale, so that in most cases the only data items that need be provided for non-Gregorian calendars are the era names and month names (and the latter only for calendars other than Buddhist, Japanese, and Minguo, since those inherit month names from Gregorian).
 
-### <a name="months_days_quarters_eras" id="months_days_quarters_eras" href="#months_days_quarters_eras">Elements months, days, quarters, eras</a> <a id="dates-calendar-elements-elements-months-days-quarters-eras"></a>
+* <a id="dates-calendar-elements-rule-3"></a> **The primary difference**: The primary difference between Gregorian and "generic" format data is that date formats in "generic" usually include era with year, in order to provide an indication of which calendar is being used (Gregorian calendar formats may also commonly include era with year when Gregorian is not the default calendar for the locale). Otherwise, the "generic" date formats should normally be consistent with those in the Gregorian calendar. The "generic" calendar formats are intended to provide a consistent set of default formats for non-Gregorian calendars in the locale, so that in most cases the only data items that need be provided for non-Gregorian calendars are the era names and month names (and the latter only for calendars other than Buddhist, Japanese, and Minguo, since those inherit month names from Gregorian).
+
+
+### <a name="months_days_quarters_eras" href="#months_days_quarters_eras">Elements months, days, quarters, eras</a>
 
 ```xml
 <!ELEMENT months ( alias | (monthContext*, special*)) >
@@ -205,31 +195,29 @@ The primary difference between Gregorian and "generic" format data is that date 
 <!ELEMENT eraNarrow ( alias | (era*, special*) ) >
 ```
 
-<a id="dates-calendar-elements-elements-months-days-quarters-eras-p-1"></a>
 The month and quarter names are identified numerically, starting at 1. The weekday names are identified with short strings, since there is no universally-accepted numeric designation.
 
 Month, day, and quarter names may vary along two axes: the width and the context.
 
-<a id="dates-calendar-elements-elements-months-days-quarters-eras-p-2"></a>
-The context is either _format_ (the default), the form used within a complete date format string (such as "Saturday, November 12"), or _stand-alone_, the form for date elements used independently, such as in calendar headers. The _stand-alone_ form may be used in any other date format that shares the same form of the name. For month names, this is typically the nominative grammatical form, and might also be used in patterns such as "LLLL y" (month name + year). The _format_ form is an additional form that can be used in contexts where it is different than the stand-alone form. For example, in many languages, patterns that combine month name with day-of-month (and possibly other elements) may require the month name to be in a grammatical form such as genitive or partitive.
+* <a id="dates-calendar-elements-elements-months-days-quarters-eras-rule-1"></a> **The context is**: The context is either _format_ (the default), the form used within a complete date format string (such as "Saturday, November 12"), or _stand-alone_, the form for date elements used independently, such as in calendar headers. The _stand-alone_ form may be used in any other date format that shares the same form of the name. For month names, this is typically the nominative grammatical form, and might also be used in patterns such as "LLLL y" (month name + year). The _format_ form is an additional form that can be used in contexts where it is different than the stand-alone form. For example, in many languages, patterns that combine month name with day-of-month (and possibly other elements) may require the month name to be in a grammatical form such as genitive or partitive.
+
 * In past versions of CLDR, the distinction between format and stand-alone forms was used to control capitalization (with stand-alone forms using titlecase); however, this can be controlled separately and more precisely using the `<contextTransforms>` element as described in _[ContextTransform Elements](tr35-general.md#Context_Transform_Elements)_, so both format and stand-alone forms should generally use middle-of-sentence capitalization.
 * However, if in a given language, certain context/width combinations are always used in a titlecase form — for example, stand-alone narrow forms for months or weekdays — then these should be provided in that form.
 * The distinctions between stand-alone (e.g. LLLL) and format (e.g. MMMM) forms are only relevant for how date elements are used within a date format. They are not intended to reflect how a date format is used within a sentence. For example, they are not intended to be used to generate the dative form of a date format when that format is used after a preposition that takes dative form.
 
-<a id="dates-calendar-elements-elements-months-days-quarters-eras-p-3"></a>
-The width can be _wide_ (the default), _abbreviated_, or _narrow_; for days only, the width can also be _short,_ which is ideally between the abbreviated and narrow widths, but must be no longer than abbreviated and no shorter than narrow (if short day names are not explicitly specified, abbreviated day names are used instead). Note that for `<monthPattern>`, described in the next section:
+* <a id="dates-calendar-elements-elements-months-days-quarters-eras-rule-2"></a> **The width can**: The width can be _wide_ (the default), _abbreviated_, or _narrow_; for days only, the width can also be _short,_ which is ideally between the abbreviated and narrow widths, but must be no longer than abbreviated and no shorter than narrow (if short day names are not explicitly specified, abbreviated day names are used instead). Note that for `<monthPattern>`, described in the next section:
+
 
 *   There is an additional context type _numeric_
 *   When the context type is numeric, the width has a special type _all_
 
-<a id="dates-calendar-elements-elements-months-days-quarters-eras-p-4"></a>
-The format values must be distinct for the wide, abbreviated, and short widths. However, values for the narrow width in either format or stand-alone contexts, as well as values for other widths in stand-alone contexts, need not be distinct; they might only be distinguished by context. For example, "S" may be used both for Saturday and for Sunday. The narrow width is typically used in calendar headers; it must be the shortest possible width, no more than one character (or grapheme cluster, or exemplar set element) in stand-alone values (not including punctuation), and the shortest possible widths (in terms of grapheme clusters) in format values. The short width (if present) is often the shortest unambiguous form.
+* <a id="dates-calendar-elements-elements-months-days-quarters-eras-rule-3"></a> **The format values**: The format values must be distinct for the wide, abbreviated, and short widths. However, values for the narrow width in either format or stand-alone contexts, as well as values for other widths in stand-alone contexts, need not be distinct; they might only be distinguished by context. For example, "S" may be used both for Saturday and for Sunday. The narrow width is typically used in calendar headers; it must be the shortest possible width, no more than one character (or grapheme cluster, or exemplar set element) in stand-alone values (not including punctuation), and the shortest possible widths (in terms of grapheme clusters) in format values. The short width (if present) is often the shortest unambiguous form.
 
-<a id="dates-calendar-elements-elements-months-days-quarters-eras-p-5"></a>
+
 Era names should be distinct within each of the widths, including narrow; there is less disambiguating information for them, and they are more likely to be used in a format that requires parsing.
 
-<a id="dates-calendar-elements-elements-months-days-quarters-eras-p-6"></a>
-Due to aliases in root, the forms inherit "sideways". (See _[Multiple Inheritance](tr35.md#Multiple_Inheritance)_.) For example, if the abbreviated format data for Gregorian does not exist in a language X (in the chain up to root), then it inherits from the wide format data in that same language X.
+* <a id="dates-calendar-elements-elements-months-days-quarters-eras-rule-4"></a> **Due to aliases**: Due to aliases in root, the forms inherit "sideways". (See _[Multiple Inheritance](tr35.md#Multiple_Inheritance)_.) For example, if the abbreviated format data for Gregorian does not exist in a language X (in the chain up to root), then it inherits from the wide format data in that same language X.
+
 
 ```xml
 <monthContext type="format">
@@ -260,11 +248,11 @@ Due to aliases in root, the forms inherit "sideways". (See _[Multiple Inheritanc
 </monthContext>
 ```
 
-<a id="dates-calendar-elements-elements-months-days-quarters-eras-p-7"></a>
-The `yeartype` attribute for months is used to distinguish alternate month names that would be displayed for certain calendars during leap years. The practical example of this usage occurs in the Hebrew calendar, where the 7th month "Adar" occurs in non-leap years, with the 6th month being skipped, but in leap years there are two months named "Adar I" and "Adar II". There are currently only two defined year types, standard (the implied default) and leap.
+* <a id="dates-calendar-elements-elements-months-days-quarters-eras-rule-5"></a> **The `yeartype` attribute**: The `yeartype` attribute for months is used to distinguish alternate month names that would be displayed for certain calendars during leap years. The practical example of this usage occurs in the Hebrew calendar, where the 7th month "Adar" occurs in non-leap years, with the 6th month being skipped, but in leap years there are two months named "Adar I" and "Adar II". There are currently only two defined year types, standard (the implied default) and leap.
 
-<a id="dates-calendar-elements-elements-months-days-quarters-eras-p-8"></a>
-For `era` elements, an additional `alt="variant"` form may be supplied. This is primarily intended for use in the "gregorian" calendar, with which two parallel sets of era designations are used in some locales: one set with a religious reference (e.g. English BC/AD), and one set without (e.g. English BCE/CE). The most commonly-used set for the locale should be provided as the default, and the other set may be provided as the `alt="variant"` forms. See the example below.
+
+* <a id="dates-calendar-elements-elements-months-days-quarters-eras-rule-6"></a> **For `era` elements**: For `era` elements, an additional `alt="variant"` form may be supplied. This is primarily intended for use in the "gregorian" calendar, with which two parallel sets of era designations are used in some locales: one set with a religious reference (e.g. English BC/AD), and one set without (e.g. English BCE/CE). The most commonly-used set for the locale should be provided as the default, and the other set may be provided as the `alt="variant"` forms. See the example below.
+
 
 Example:
 
@@ -378,7 +366,7 @@ Example:
     </eras>
 ```
 
-### <a name="monthPatterns_cyclicNameSets" id="monthPatterns_cyclicNameSets" href="#monthPatterns_cyclicNameSets">Elements monthPatterns, cyclicNameSets</a> <a id="dates-calendar-elements-elements-monthpatterns-cyclicnamesets"></a>
+### <a name="monthPatterns_cyclicNameSets" href="#monthPatterns_cyclicNameSets">Elements monthPatterns, cyclicNameSets</a>
 
 ```xml
 <!ELEMENT monthPatterns ( alias | (monthPatternContext*, special*)) >
@@ -400,15 +388,15 @@ Example:
 <!ATTLIST cyclicName type NMTOKEN #REQUIRED >
 ```
 
-<a id="dates-calendar-elements-elements-monthpatterns-cyclicnamesets-p-1"></a>
-The Chinese lunar calendar can insert a leap month after nearly any month of its year; when this happens, the month takes the name of the preceding month plus a special marker. The Hindu lunar calendars can insert a leap month before any one or two months of the year; when this happens, not only does the leap month take the name of the following month plus a special marker, the following month also takes a special marker. Moreover, in the Hindu calendar sometimes a month is skipped, in which case the preceding month takes a special marker plus the names of both months. The `<monthPatterns>` element structure supports these special kinds of month names. It parallels the `<months>` element structure, with various contexts and widths, but with some differences:
+* <a id="dates-calendar-elements-elements-monthpatterns-cyclicnamesets-rule-1"></a> **The Chinese lunar**: The Chinese lunar calendar can insert a leap month after nearly any month of its year; when this happens, the month takes the name of the preceding month plus a special marker. The Hindu lunar calendars can insert a leap month before any one or two months of the year; when this happens, not only does the leap month take the name of the following month plus a special marker, the following month also takes a special marker. Moreover, in the Hindu calendar sometimes a month is skipped, in which case the preceding month takes a special marker plus the names of both months. The `<monthPatterns>` element structure supports these special kinds of month names. It parallels the `<months>` element structure, with various contexts and widths, but with some differences:
+
 
 * Since the month markers may be applied to numeric months as well, there is an additional `monthPatternContext` type `numeric` for this case. When the numeric context is used, there is no need for different widths, so the `monthPatternWidth` type is `all` for this case.
 * The `<monthPattern>` element itself is a pattern showing how to create the modified month name from the standard month name(s). The three types of possible pattern are for `leap`, `standardAfterLeap`, and `combined`.
 * The `<monthPatterns>` element is not present for calendars that do not need it.
 
-<a id="dates-calendar-elements-elements-monthpatterns-cyclicnamesets-p-2"></a>
-The Chinese and Hindu lunar calendars also use a 60-name cycle for designating years. The Chinese lunar calendars can also use that cycle for months and days, and can use 12-name cycles for designating day subdivisions or zodiac names associated with years; a 24-name cycle of solar terms (12 pairs of minor and major terms) is used to mark intervals in the solar cycle. The `<cyclicNameSets>` element structure supports these special kinds of name cycles; a `cyclicNameSet` can be provided for types `year`, `month`, `day`, `dayParts`, or `zodiacs`. For each `cyclicNameSet`, there is a context and width structure similar to that for day names. For a given context and width, a set of `cyclicName` elements provides the actual names.
+* <a id="dates-calendar-elements-elements-monthpatterns-cyclicnamesets-rule-2"></a> **The Chinese and**: The Chinese and Hindu lunar calendars also use a 60-name cycle for designating years. The Chinese lunar calendars can also use that cycle for months and days, and can use 12-name cycles for designating day subdivisions or zodiac names associated with years; a 24-name cycle of solar terms (12 pairs of minor and major terms) is used to mark intervals in the solar cycle. The `<cyclicNameSets>` element structure supports these special kinds of name cycles; a `cyclicNameSet` can be provided for types `year`, `month`, `day`, `dayParts`, or `zodiacs`. For each `cyclicNameSet`, there is a context and width structure similar to that for day names. For a given context and width, a set of `cyclicName` elements provides the actual names.
+
 
 Example:
 
@@ -467,7 +455,7 @@ Example:
     </cyclicNameSets>
 ```
 
-### <a name="dayPeriods" id="dayPeriods" href="#dayPeriods">Element dayPeriods</a> <a id="dates-calendar-elements-element-dayperiods"></a>
+### <a name="dayPeriods" href="#dayPeriods">Element dayPeriods</a>
 
 The former `am`/`pm` elements have been deprecated, and replaced by the more flexible `dayPeriods`.
 
@@ -484,14 +472,14 @@ The former `am`/`pm` elements have been deprecated, and replaced by the more fle
 <!ATTLIST dayPeriod type NMTOKEN #REQUIRED >
 ```
 
-<a id="dates-calendar-elements-element-dayperiods-p-1"></a>
-These behave like months, days, and so on in terms of having context and width. Each locale has an associated dayPeriodRuleSet in the supplemental data, rules that specify when the day periods start and end for that locale. Each type in the rules needs to have a translation in a dayPeriod (but if translation data is missing for a particular variable dayPeriod in the locale’s language and script, formatting should fall back to using the am/pm values). For more information, see _[Day Period Rules](#Day_Period_Rules)_.
+* <a id="dates-calendar-elements-element-dayperiods-rule-1"></a> **These behave like**: These behave like months, days, and so on in terms of having context and width. Each locale has an associated dayPeriodRuleSet in the supplemental data, rules that specify when the day periods start and end for that locale. Each type in the rules needs to have a translation in a dayPeriod (but if translation data is missing for a particular variable dayPeriod in the locale’s language and script, formatting should fall back to using the am/pm values). For more information, see _[Day Period Rules](#Day_Period_Rules)_.
 
-<a id="dates-calendar-elements-element-dayperiods-p-2"></a>
-The dayPeriod names should be distinct within each of the context/width combinations, including narrow; as with era names, there is less disambiguating information for them, and they are more likely to be used in a format that requires parsing. In some unambiguous cases, it is acceptable for certain overlapping dayPeriods to be the same, such as the names for `am` and `morning`, or the names for `pm` and `afternoon`.
 
-<a id="dates-calendar-elements-element-dayperiods-p-3"></a>
-If dayPeriods are specified for `noon` and `midnight`, they can often be formatted without also specifying the numeric time, e.g. "May 6, noon" instead of "May 6, 12:00 noon" or "May 6, 12:00 PM". To prevent parse issues, this should only be done if the names for `noon` and `midnight` are not also used for any other day periods, such as for `morning2` or `night1`.
+* <a id="dates-calendar-elements-element-dayperiods-rule-2"></a> **The dayPeriod names**: The dayPeriod names should be distinct within each of the context/width combinations, including narrow; as with era names, there is less disambiguating information for them, and they are more likely to be used in a format that requires parsing. In some unambiguous cases, it is acceptable for certain overlapping dayPeriods to be the same, such as the names for `am` and `morning`, or the names for `pm` and `afternoon`.
+
+
+* <a id="dates-calendar-elements-element-dayperiods-rule-3"></a> **If dayPeriods are**: If dayPeriods are specified for `noon` and `midnight`, they can often be formatted without also specifying the numeric time, e.g. "May 6, noon" instead of "May 6, 12:00 noon" or "May 6, 12:00 PM". To prevent parse issues, this should only be done if the names for `noon` and `midnight` are not also used for any other day periods, such as for `morning2` or `night1`.
+
 
 Example:
 
@@ -507,7 +495,7 @@ Example:
     </dayPeriods>
 ```
 
-### <a name="dateFormats" id="dateFormats" href="#dateFormats">Element dateFormats</a> <a id="dates-calendar-elements-element-dateformats"></a>
+### <a name="dateFormats" href="#dateFormats">Element dateFormats</a>
 
 ```xml
 <!ELEMENT dateFormats (alias | (default*, dateFormatLength*, special*)) >
@@ -566,19 +554,18 @@ Standard date formats have the following form:
         ...
 ```
 
-<a id="dates-calendar-elements-element-dateformats-p-1"></a>
-The patterns for date formats and time formats are defined in _[Date Format Patterns](#Date_Format_Patterns)._ These patterns are intended primarily for display of isolated date and time strings in user-interface elements, rather than for date and time strings in the middle of running text, so capitalization and grammatical form should be chosen appropriately.
+* <a id="dates-calendar-elements-element-dateformats-rule-1"></a> **The patterns for**: The patterns for date formats and time formats are defined in _[Date Format Patterns](#Date_Format_Patterns)._ These patterns are intended primarily for display of isolated date and time strings in user-interface elements, rather than for date and time strings in the middle of running text, so capitalization and grammatical form should be chosen appropriately.
 
-<a id="dates-calendar-elements-element-dateformats-p-2"></a>
+
 Standard date and time patterns are each normally provided in four types: full (usually with weekday name), long (with wide month name), medium, and short (usually with numeric month).
 
-<a id="dates-calendar-elements-element-dateformats-p-3"></a>
-The `numbers` attribute can be used to explicitly specify a number system to be used for all of the numeric fields in the date format (as in `numbers="hebr"`), or for a specific field in the date format (as in `numbers="d=hanidays"`). This attribute overrides any default numbering system specified for the locale.
+* <a id="dates-calendar-elements-element-dateformats-rule-2"></a> **The `numbers` attribute**: The `numbers` attribute can be used to explicitly specify a number system to be used for all of the numeric fields in the date format (as in `numbers="hebr"`), or for a specific field in the date format (as in `numbers="d=hanidays"`). This attribute overrides any default numbering system specified for the locale.
 
-<a id="dates-calendar-elements-element-dateformats-p-4"></a>
-The `datetimeSkeleton` element contains a _skeleton_ (see [availableFormats](#availableFormats_appendItems)) derived from the pattern. In the future the intent is to be able to generate the standard patterns from these `datetimeSkeleton` elements. However, in CLDR 40, the mechanisms associated with the `availableFormats` elements are not quite powerful enough to generate patterns that exactly match all of the ones provided in the `pattern` elements.
 
-### <a name="timeFormats" id="timeFormats" href="#timeFormats">Element timeFormats</a> <a id="dates-calendar-elements-element-timeformats"></a>
+* <a id="dates-calendar-elements-element-dateformats-rule-3"></a> **The `datetimeSkeleton` element**: The `datetimeSkeleton` element contains a _skeleton_ (see [availableFormats](#availableFormats_appendItems)) derived from the pattern. In the future the intent is to be able to generate the standard patterns from these `datetimeSkeleton` elements. However, in CLDR 40, the mechanisms associated with the `availableFormats` elements are not quite powerful enough to generate patterns that exactly match all of the ones provided in the `pattern` elements.
+
+
+### <a name="timeFormats" href="#timeFormats">Element timeFormats</a>
 
 ```xml
 <!ELEMENT timeFormats (alias | (default*, timeFormatLength*, special*)) >
@@ -606,18 +593,18 @@ Standard time formats have the following form:
     </timeFormats>
 ```
 
-<a id="dates-calendar-elements-element-timeformats-p-1"></a>
-The preference of 12 hour versus 24 hour for the locale can be derived from the [Time Data](#Time_Data). If the preferred hour symbol is 'h' or 'K' then the format is 12 hour; otherwise it is 24 hour. Formats with 'h' or 'K' must also include a field with one of the day period pattern characters: 'a', 'b', or 'B'.
+* <a id="dates-calendar-elements-element-timeformats-rule-1"></a> **The preference of**: The preference of 12 hour versus 24 hour for the locale can be derived from the [Time Data](#Time_Data). If the preferred hour symbol is 'h' or 'K' then the format is 12 hour; otherwise it is 24 hour. Formats with 'h' or 'K' must also include a field with one of the day period pattern characters: 'a', 'b', or 'B'.
 
-<a id="dates-calendar-elements-element-timeformats-p-2"></a>
-To account for customary usage in some countries, APIs should allow for formatting times that go beyond 23:59:59. For example, in some countries it would be customary to indicate that opening hours extending from _Friday at 7pm_ to _Saturday at 2am_ in a format like the following:
+
+* <a id="dates-calendar-elements-element-timeformats-rule-2"></a> **To account for**: To account for customary usage in some countries, APIs should allow for formatting times that go beyond 23:59:59. For example, in some countries it would be customary to indicate that opening hours extending from _Friday at 7pm_ to _Saturday at 2am_ in a format like the following:
+
 
 Friday: 19:00 – 26:00
 
-<a id="dates-calendar-elements-element-timeformats-p-3"></a>
-Time formats use the specific non-location format (z or zzzz) for the time zone name. This is the format that should be used when formatting a specific time for presentation. When formatting a time referring to a recurring time (such as a meeting in a calendar), applications should substitute the generic non-location format (v or vvvv) for the time zone in the time format pattern. See _[Using Time Zone Names](#Using_Time_Zone_Names)_ for a complete description of available time zone formats and their uses.
+* <a id="dates-calendar-elements-element-timeformats-rule-3"></a> **Time formats use**: Time formats use the specific non-location format (z or zzzz) for the time zone name. This is the format that should be used when formatting a specific time for presentation. When formatting a time referring to a recurring time (such as a meeting in a calendar), applications should substitute the generic non-location format (v or vvvv) for the time zone in the time format pattern. See _[Using Time Zone Names](#Using_Time_Zone_Names)_ for a complete description of available time zone formats and their uses.
 
-### <a name="dateTimeFormats" id="dateTimeFormats" href="#dateTimeFormats">Element dateTimeFormats</a> <a id="dates-calendar-elements-element-datetimeformats"></a>
+
+### <a name="dateTimeFormats" href="#dateTimeFormats">Element dateTimeFormats</a>
 
 ```xml
 <!ELEMENT dateTimeFormats (alias | (default*, dateTimeFormatLength*, availableFormats*, appendItems*, intervalFormats*, special*)) >
@@ -704,7 +691,7 @@ Date/Time formats have the following form:
 
 These formats allow for date and time formats to be composed in various ways.
 
-#### <a name="dateTimeFormat" id="dateTimeFormat" href="#dateTimeFormat">Element dateTimeFormat</a> <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat"></a>
+#### <a name="dateTimeFormat" href="#dateTimeFormat">Element dateTimeFormat</a>
 
 ```xml
 <!ELEMENT dateTimeFormatLength (alias | (default*, dateTimeFormat*, special*))>
@@ -714,38 +701,36 @@ These formats allow for date and time formats to be composed in various ways.
     <!--@MATCH:literal/standard, atTime, relative-->
 ```
 
-<a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-p-1"></a>
-The `dateTimeFormat` element works like the dateFormats and timeFormats, except that the pattern is of the form "{1} {0}", where {0} is replaced by the time format, and {1} is replaced by the date format, with results such as "8/27/06 7:31 AM". Except for the substitution markers {0} and {1}, text in the dateTimeFormat is interpreted as part of a date/time pattern, and is subject to the same rules described in [Date Format Patterns](#Date_Format_Patterns). This includes the need to enclose ASCII letters in single quotes if they are intended to represent literal text.
+* <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-rule-1"></a> **The `dateTimeFormat` element**: The `dateTimeFormat` element works like the dateFormats and timeFormats, except that the pattern is of the form "{1} {0}", where {0} is replaced by the time format, and {1} is replaced by the date format, with results such as "8/27/06 7:31 AM". Except for the substitution markers {0} and {1}, text in the dateTimeFormat is interpreted as part of a date/time pattern, and is subject to the same rules described in [Date Format Patterns](#Date_Format_Patterns). This includes the need to enclose ASCII letters in single quotes if they are intended to represent literal text.
 
-<a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-p-2"></a>
-When combining a standard date pattern with a standard time pattern, start with the `dateTimeFormatLength` whose `type` matches the type of the *date* pattern, and then use one of the `dateTimeFormat`s for that `dateTimeFormatLength` (as described after the following table). For example:
 
-###### Table: Date-Time Combination Examples <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples"></a>
+* <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-rule-2"></a> **When combining a**: When combining a standard date pattern with a standard time pattern, start with the `dateTimeFormatLength` whose `type` matches the type of the *date* pattern, and then use one of the `dateTimeFormat`s for that `dateTimeFormatLength` (as described after the following table). For example:
+
+
+###### Table: <a name="Date_Time_Combination_Examples" href="#Date_Time_Combination_Examples">Date-Time Combination Examples</a>
 
 | Date-Time Combination   | dateTimeFormat            | Results |
 | ----------------------- | ------------------------- | ------- |
 | full date + short time  | full, e.g. "{1} 'at' {0}" | Wednesday, September 18, 2013 at 4:30 PM |
 | medium date + long time | medium, e.g. "{1}, {0}"   | Sep 18, 2013, 4:30:00 PM PDT |
 
-<a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-p-1"></a>
-For each `dateTimeFormatLength`, there is a standard `dateTimeFormat`. In addition to the placeholders {0} and {1}, this should not have characters other than space and punctuation; it should impose no grammatical context that might require specific grammatical forms for the date and/or time. For English, this might be “{1}, {0}”.
+* <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-rule-1"></a> **For each `dateTimeFormatLength**: For each `dateTimeFormatLength`, there is a standard `dateTimeFormat`. In addition to the placeholders {0} and {1}, this should not have characters other than space and punctuation; it should impose no grammatical context that might require specific grammatical forms for the date and/or time. For English, this might be “{1}, {0}”.
 
-<a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-p-2"></a>
-In addition, especially for the full and long `dateTimeFormatLength`s, there may be `dateTimeFormat`s with `type="atTime"` and/or `type="relative"`. These are used to indicate an event at a specific time, and may impose specific grammatical requirements on the formats for date and/or time. For English, this might be “{1} 'at' {0}”.
 
-<a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-p-3"></a>
+* <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-rule-2"></a> **In addition, especially**: In addition, especially for the full and long `dateTimeFormatLength`s, there may be `dateTimeFormat`s with `type="atTime"` and/or `type="relative"`. These are used to indicate an event at a specific time, and may impose specific grammatical requirements on the formats for date and/or time. For English, this might be “{1} 'at' {0}”.
+
+
 The default guidelines for choosing which `dateTimeFormat` to use for a given `dateTimeFormatLength` are as follows:
 * If an interval is being formatted, use the standard combining pattern to produce e.g. “March 15, 3:00 – 5:00 PM” or “March 15, 9:00 AM – March 16, 5:00 PM”.
 * If a single date or relative date is being combined with a single time:
-<a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-p-4"></a>
-* For a single date with a single time, by default use the `atTime` pattern (if available) to produce an event time: “March 15 at 3:00 PM”. If there is no `atTime` pattern, use the `standard` pattern.
-<a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-p-5"></a>
-* For a relative date with a single time, by default use the `relative` pattern (if available) to produce an event time: “tomorrow at 3:00 PM”. If there is no `relative` pattern, use the `standard` pattern.
-<a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-p-6"></a>
-* However, at least in the case of combining a single date and time, APIs should also offer a “current time” option of using the `standard` combining pattern to produce a format more suitable for indicating  the current time: “March 15, 3:00 PM”.
+    * For a single date with a single time, by default use the `atTime` pattern (if available) to produce an event time: “March 15 at 3:00 PM”. If there is no `atTime` pattern, use the `standard` pattern.
+* <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-rule-3"></a> *** For a**: * For a relative date with a single time, by default use the `relative` pattern (if available) to produce an event time: “tomorrow at 3:00 PM”. If there is no `relative` pattern, use the `standard` pattern.
+
+* <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples-rule-4"></a> *** However, at**: * However, at least in the case of combining a single date and time, APIs should also offer a “current time” option of using the `standard` combining pattern to produce a format more suitable for indicating  the current time: “March 15, 3:00 PM”.
+
 * For all other uses of these patterns, use the `standard` pattern.
 
-#### <a name="availableFormats_appendItems" id="availableFormats_appendItems" href="#availableFormats_appendItems">Elements availableFormats, appendItems</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems"></a>
+#### <a name="availableFormats_appendItems" href="#availableFormats_appendItems">Elements availableFormats, appendItems</a>
 
 ```xml
 <!ELEMENT availableFormats (alias | (dateFormatItem*, special*))>
@@ -753,21 +738,21 @@ The default guidelines for choosing which `dateTimeFormat` to use for a given `d
 <!ATTLIST dateFormatItem id CDATA #REQUIRED >
 ```
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-p-1"></a>
-The `availableFormats` element and its subelements provide a more flexible formatting mechanism than the predefined list of patterns represented by dateFormatLength, timeFormatLength, and dateTimeFormatLength. Instead, there is an open-ended list of patterns (represented by `dateFormatItem` elements as well as the predefined patterns mentioned above) that can be matched against a requested set of calendar fields and field lengths. Software can look through the list and find the pattern that best matches the original request, based on the desired calendar fields and lengths. For example, the full month and year may be needed for a calendar application; the request is MMMMyyyy, but the best match may be "y MMMM" or even "G yy MMMM", depending on the locale and calendar.
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-rule-1"></a> **The `availableFormats` element**: The `availableFormats` element and its subelements provide a more flexible formatting mechanism than the predefined list of patterns represented by dateFormatLength, timeFormatLength, and dateTimeFormatLength. Instead, there is an open-ended list of patterns (represented by `dateFormatItem` elements as well as the predefined patterns mentioned above) that can be matched against a requested set of calendar fields and field lengths. Software can look through the list and find the pattern that best matches the original request, based on the desired calendar fields and lengths. For example, the full month and year may be needed for a calendar application; the request is MMMMyyyy, but the best match may be "y MMMM" or even "G yy MMMM", depending on the locale and calendar.
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-p-2"></a>
-For some calendars, such as Japanese, a displayed year must have an associated era, so for these calendars dateFormatItem patterns with a year field should also include an era field. When matching availableFormats patterns: If a client requests a format string containing a year, and all the availableFormats patterns with a year also contain an era, then include the era as part of the result.
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-p-3"></a>
-The `id` attribute is a so-called "skeleton", containing only field information, and in a canonical order. Examples are "yMMMM" for year + full month, or "MMMd" for abbreviated month + day. In particular:
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-rule-2"></a> **For some calendars**: For some calendars, such as Japanese, a displayed year must have an associated era, so for these calendars dateFormatItem patterns with a year field should also include an era field. When matching availableFormats patterns: If a client requests a format string containing a year, and all the availableFormats patterns with a year also contain an era, then include the era as part of the result.
+
+
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-rule-3"></a> **The `id` attribute**: The `id` attribute is a so-called "skeleton", containing only field information, and in a canonical order. Examples are "yMMMM" for year + full month, or "MMMd" for abbreviated month + day. In particular:
+
 
 * The fields are from the [Date Field Symbol Table](#Date_Field_Symbol_Table) in _[Date Format Patterns](#Date_Format_Patterns)_.
 * The canonical order is from top to bottom in that table; that is, "yM" not "My".
 * Only one field of each type is allowed; that is, "Hh" is not valid.
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-p-4"></a>
-In order to support user overrides of default locale behavior, data should be supplied for both 12-hour-cycle time formats (using h or K) and 24-hour-cycle time formats (using H or k), even if one of those styles is not commonly used; the locale's actual preference for 12-hour or 24-hour time cycle is determined from the [Time Data](#Time_Data) as described above in [timeFormats](#timeFormats). Thus skeletons using h or K should have patterns that only use h or K for hours, while skeletons using H or k should have patterns that only use H or k for hours.
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-rule-4"></a> **In order to**: In order to support user overrides of default locale behavior, data should be supplied for both 12-hour-cycle time formats (using h or K) and 24-hour-cycle time formats (using H or k), even if one of those styles is not commonly used; the locale's actual preference for 12-hour or 24-hour time cycle is determined from the [Time Data](#Time_Data) as described above in [timeFormats](#timeFormats). Thus skeletons using h or K should have patterns that only use h or K for hours, while skeletons using H or k should have patterns that only use H or k for hours.
+
 
 The rules governing use of day period pattern characters in patterns and skeletons are as follows:
 
@@ -775,23 +760,22 @@ The rules governing use of day period pattern characters in patterns and skeleto
 * Patterns for 12-hour-cycle time formats (using h or K) _must_ include a day period field using one of a, b, or B.
 * Skeletons for 12-hour-cycle time formats (using h or K) _may_ include a day period field using one of a, b, or B. If they do not, the skeleton will be treated as implicitly containing a.
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-p-5"></a>
 Locales should generally provide availableFormats data for a fairly complete set of time skeletons without B, typically the following:
 
 `H, h, Hm, hm, Hms, hms, Hmv, hmv, Hmsv, hmsv`
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-p-6"></a>
 Locales that use 12-hour-cycle time formats with B may provide availableFormats data for a smaller set of time skeletons with B, for example:
 
 `Bh, Bhm, Bhms`
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-p-7"></a>
-When matching a requested skeleton containing b or B to the skeletons actually available in the data, if there is no skeleton matching the specified day period field, then find a match in which the b or B matches an explicit or implicit 'a' in the skeleton, but replace the 'a' in the corresponding pattern with the requested day period b or B. The following table illustrates how requested skeletons map to patterns with different sets of `availableFormats` data:
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-rule-5"></a> **When matching a**: When matching a requested skeleton containing b or B to the skeletons actually available in the data, if there is no skeleton matching the specified day period field, then find a match in which the b or B matches an explicit or implicit 'a' in the skeleton, but replace the 'a' in the corresponding pattern with the requested day period b or B. The following table illustrates how requested skeletons map to patterns with different sets of `availableFormats` data:
 
-###### Table: Mapping Requested Time Skeletons To Patterns <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-table-mapping-requested-time-skeletons-to-patterns"></a>
+
+###### Table: <a name="Mapping_Requested_Time_Skeletons_To_Patterns" href="#Mapping_Requested_Time_Skeletons_To_Patterns">Mapping Requested Time Skeletons To Patterns</a>
 
 <!-- HTML: spanning columns, header cells on non-first row -->
 <table><tbody>
+```xml
 <tr><th></th><th colspan="2">results for different availableFormats data sets</th></tr>
 <tr><th>requested skeleton</th>
     <th>set 1:<br/>
@@ -804,19 +788,17 @@ When matching a requested skeleton containing b or B to the skeletons actually a
 <tr><td>"h" (or "ah")</td><td>"h a"</td><td>"h a"</td></tr><tr><td>"bh"</td><td>"h b"</td><td>"h b"</td></tr>
 <tr><td>"Bh"</td><td>"h B"</td><td>"B h"</td></tr><tr><td>"H" (or "aH", "bH", "BH")</td><td>"H"</td><td>"H"</td></tr>
 </tbody></table>
+```
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-table-mapping-requested-time-skeletons-to-patterns-p-1"></a>
-The hour input skeleton symbols 'j', 'J', and 'C' can be used to select the best hour format (h, H, …) before processing, and the appropriate dayperiod format (a, b, B) after a successful match that contains an 'a' symbol.
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-table-mapping-requested-time-skeletons-to-patterns-rule-1"></a> **The hour input**: The hour input skeleton symbols 'j', 'J', and 'C' can be used to select the best hour format (h, H, …) before processing, and the appropriate dayperiod format (a, b, B) after a successful match that contains an 'a' symbol.
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-table-mapping-requested-time-skeletons-to-patterns-p-2"></a>
+
 The dateFormatItems inherit from their parent locale, so the inherited items need to be considered when processing.
 
-##### <a name="Matching_Skeletons" id="Matching_Skeletons" href="#Matching_Skeletons">Matching Skeletons</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons"></a>
+##### <a name="Matching_Skeletons" href="#Matching_Skeletons">Matching Skeletons</a>
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-1"></a>
 It is not necessary to supply `dateFormatItem`s with skeletons for every field length; fields in the skeleton and pattern are expected to be adjusted in parallel to handle a request.
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-2"></a>
 Typically a “best match” from requested skeleton to the `id` portion of a `dateFormatItem` is found using a closest distance match, such as:
 
 1. Skeleton symbols requesting a best choice for the locale are replaced.
@@ -825,22 +807,20 @@ Typically a “best match” from requested skeleton to the `id` portion of a `d
 2. For skeleton and `id` fields with symbols representing the same type (year, month, day, etc):
    1. Most symbols have a small distance from each other.
       * M ≅ L; E ≅ c; a ≅ b ≅ B; H ≅ k ≅ h ≅ K; ...
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-3"></a>
-2. Width differences among fields, other than those marking text vs numeric, are given small distance from each other.
+   2. Width differences among fields, other than those marking text vs numeric, are given small distance from each other.
       * MMM ≅ MMMM
       * MM ≅ M
    3. Numeric and text fields are given a larger distance from each other.
       * MMM ≈ MM
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-4"></a>
-4. Symbols representing substantial differences (week of year vs week of month) are given a much larger distance from each other.
+   4. Symbols representing substantial differences (week of year vs week of month) are given a much larger distance from each other.
       * d ≋ D; ...
 
 3. A requested skeleton that includes both seconds and fractional seconds (e.g. “mmssSSS”) is allowed to match a dateFormatItem skeleton that includes seconds but not fractional seconds (e.g. “ms”). In this case the requested sequence of ‘S’ characters (or its length) should be retained separately and used when adjusting the pattern, as described below.
 
 4. Otherwise, missing or extra fields between requested skeleton and `id` cause a match to fail. (But see **[Missing Skeleton Fields](#Missing_Skeleton_Fields)** below.)
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-5"></a>
-Once a best match is found between requested skeleton and `dateFormatItem` `id`, the corresponding `dateFormatItem` pattern is used, but with adjustments primarily to make the pattern field lengths match the skeleton field lengths. However, the pattern field lengths should not be matched in some cases:
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-rule-1"></a> **Once a best**: Once a best match is found between requested skeleton and `dateFormatItem` `id`, the corresponding `dateFormatItem` pattern is used, but with adjustments primarily to make the pattern field lengths match the skeleton field lengths. However, the pattern field lengths should not be matched in some cases:
+
 
 1. When the best-match `dateFormatItem` has an alphabetic field (such as MMM or MMMM) that corresponds to a numeric field in the pattern (such as M or MM), that numeric field in the pattern should _not_ be adjusted to match the skeleton length, and vice versa; i.e. adjustments should _never_ convert a numeric element in the pattern to an alphabetic element, or the opposite. See the second set of examples below.
 
@@ -856,8 +836,8 @@ For an example of general behavior, consider the following `dateFormatItem`:
 <dateFormatItem id="yMMMd">d MMM y</dateFormatItem>
 ```
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-6"></a>
-If this is the best match for yMMMMd, the pattern is automatically expanded to produce a pattern "d MMMM y" in response to the request. Of course, if the desired behavior is that a request for yMMMMd should produce something _other_ than "d MMMM y", a separate `dateFormatItem` must be present, for example:
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-rule-2"></a> **If this is**: If this is the best match for yMMMMd, the pattern is automatically expanded to produce a pattern "d MMMM y" in response to the request. Of course, if the desired behavior is that a request for yMMMMd should produce something _other_ than "d MMMM y", a separate `dateFormatItem` must be present, for example:
+
 
 ```xml
 <dateFormatItem id="yMMMMd">d 'de' MMMM 'de' y</dateFormatItem>
@@ -865,58 +845,50 @@ If this is the best match for yMMMMd, the pattern is automatically expanded to p
 
 ---
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-7"></a>
 For an example of not converting a pattern fields between numeric and alphabetic (point 1 above), consider the following `dateFormatItem`:
 
 ```xml
 <dateFormatItem id="yMMM">y年M月</dateFormatItem>
 ```
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-8"></a>
-If this is the best match for a requested skeleton yMMMM, automatic expansion should not produce a corresponding pattern “y年MMMM月”; rather, since “y年M月” specifies a numeric month M, automatic expansion should not modify the pattern, and should produce “y年M月” as the match for requested skeleton yMMMM.
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-rule-3"></a> **If this is**: If this is the best match for a requested skeleton yMMMM, automatic expansion should not produce a corresponding pattern “y年MMMM月”; rather, since “y年M月” specifies a numeric month M, automatic expansion should not modify the pattern, and should produce “y年M月” as the match for requested skeleton yMMMM.
+
 
 ---
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-9"></a>
 For an example of not converting a pattern field length if the corresponding skeleton field matches the requested field length (point 2 above), consider the following `dateFormatItem`:
 
 ```xml
 <dateFormatItem id="MMMEd">E, d בMMMM</dateFormatItem>
 ```
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-10"></a>
-For Hebrew calendar date formats in the Hebrew locale, only the full month names should be used, even if abbreviated months are requested. Hence the `dateFormatItem` maps a request for abbreviated months to a pattern with full months. The same `dateFormatItem` can be expanded to expanded to match a request for “MMMMEd” to the same pattern.
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-rule-4"></a> **For Hebrew calendar**: For Hebrew calendar date formats in the Hebrew locale, only the full month names should be used, even if abbreviated months are requested. Hence the `dateFormatItem` maps a request for abbreviated months to a pattern with full months. The same `dateFormatItem` can be expanded to expanded to match a request for “MMMMEd” to the same pattern.
+
 
 ---
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-p-11"></a>
-Finally: If the requested skeleton included both seconds and fractional seconds and the dateFormatItem skeleton included seconds but not fractional seconds, then the seconds field of the corresponding pattern should be adjusted by appending the locale’s decimal separator, followed by the sequence of ‘S’ characters from the requested skeleton.
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-rule-5"></a> **Finally: If the**: Finally: If the requested skeleton included both seconds and fractional seconds and the dateFormatItem skeleton included seconds but not fractional seconds, then the seconds field of the corresponding pattern should be adjusted by appending the locale’s decimal separator, followed by the sequence of ‘S’ characters from the requested skeleton.
 
-##### <a name="Missing_Skeleton_Fields" id="Missing_Skeleton_Fields" href="#Missing_Skeleton_Fields">Missing Skeleton Fields</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields"></a>
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-1"></a>
-If a client-requested set of fields includes both date and time fields, and if the `availableFormats` data does not include a `dateFormatItem` whose skeleton matches the same set of fields, then the request should be handled as follows:
+##### <a name="Missing_Skeleton_Fields" href="#Missing_Skeleton_Fields">Missing Skeleton Fields</a>
+
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-rule-1"></a> **If a client-requested**: If a client-requested set of fields includes both date and time fields, and if the `availableFormats` data does not include a `dateFormatItem` whose skeleton matches the same set of fields, then the request should be handled as follows:
+
 
 1. Divide the request into a date fields part and a time fields part.
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-2"></a>
-* Date fields are: [year](#dfst-year), [month](#dfst-month), [day](#dfst-day), [era](#dfst-era), [week](#dfst-week), [quarter](#dfst-quarter), and [week day](#dfst-weekday).
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-3"></a>
-* Time fields are: [hour](#dfst-hour), [minute](#dfst-minute), [second](#dfst-second), [period](#dfst-period), and [zone](#dfst-zone).
+    * Date fields are: [year](#dfst-year), [month](#dfst-month), [day](#dfst-day), [era](#dfst-era), [week](#dfst-week), [quarter](#dfst-quarter), and [week day](#dfst-weekday).
+    * Time fields are: [hour](#dfst-hour), [minute](#dfst-minute), [second](#dfst-second), [period](#dfst-period), and [zone](#dfst-zone).
 2. For each part, find the matching `dateFormatItem`, and expand the pattern as above.
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-4"></a>
-* If there is still no `dateFormatItem` whose skeleton matches the same set of fields, select the one with the greatest number of matching fields (but no extra fields), then use `appendItems` to append any missing fields (see below).
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-5"></a>
-* If multiple `dateFormatItem`s with missing fields have the same distance, rank them by their matching fields in the order listed in step 1. For example, if the request is for "HBv", and the locale has `dateFormatItem`s for only "HB" and "Hv", select the "HB" pattern, because "B" has a higher weight than "v", and then use the `appendItem` for "v" (time zone).
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-rule-2"></a> *** If there**: * If there is still no `dateFormatItem` whose skeleton matches the same set of fields, select the one with the greatest number of matching fields (but no extra fields), then use `appendItems` to append any missing fields (see below).
+
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-rule-3"></a> *** If multiple**: * If multiple `dateFormatItem`s with missing fields have the same distance, rank them by their matching fields in the order listed in step 1. For example, if the request is for "HBv", and the locale has `dateFormatItem`s for only "HB" and "Hv", select the "HB" pattern, because "B" has a higher weight than "v", and then use the `appendItem` for "v" (time zone).
+
 3. Combine the patterns for the two `dateFormatItem`s using the appropriate glue pattern, determined as follows from the requested date fields:
    * If the date fields part contains *only* a weekday, use `<appendItem request="Time-Day-Of-Week">`.
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-6"></a>
-* Otherwise, if the time fields part contains *only* a time zone, use `<appendItem request="Date-Timezone">`.
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-7"></a>
-* Otherwise, if the requested date fields include wide month (MMMM, LLLL) and weekday name of any length (e.g. E, EEEE, c, cccc), use `<dateTimeFormatLength type="full">`
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-8"></a>
-* Otherwise, if the requested date fields include wide month, use `<dateTimeFormatLength type="long">`
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-9"></a>
-* Otherwise, if the requested date fields include abbreviated month (MMM, LLL), use `<dateTimeFormatLength type="medium">`
+   * Otherwise, if the time fields part contains *only* a time zone, use `<appendItem request="Date-Timezone">`.
+   * Otherwise, if the requested date fields include wide month (MMMM, LLLL) and weekday name of any length (e.g. E, EEEE, c, cccc), use `<dateTimeFormatLength type="full">`
+   * Otherwise, if the requested date fields include wide month, use `<dateTimeFormatLength type="long">`
+   * Otherwise, if the requested date fields include abbreviated month (MMM, LLL), use `<dateTimeFormatLength type="medium">`
    * Otherwise use `<dateTimeFormatLength type="short">`
 
 ```xml
@@ -925,13 +897,13 @@ If a client-requested set of fields includes both date and time fields, and if t
 <!ATTLIST appendItem request CDATA >
 ```
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-10"></a>
-In case the best match does not include all the requested calendar fields, the `appendItems` element describes how to append needed fields to one of the existing formats. Each `appendItem` element covers a single calendar field. In the pattern, {0} represents the format string, {1} the data content of the field, and {2} the display name of the field (see [Calendar Fields](#Calendar_Fields)).
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-rule-4"></a> **In case the**: In case the best match does not include all the requested calendar fields, the `appendItems` element describes how to append needed fields to one of the existing formats. Each `appendItem` element covers a single calendar field. In the pattern, {0} represents the format string, {1} the data content of the field, and {2} the display name of the field (see [Calendar Fields](#Calendar_Fields)).
 
-<a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-p-11"></a>
-Note: as described above `appendItems` for date fields should be appended to the date, and `appendItems` for time fields should be appended to the time, _before_ combining them with the `dateTimeFormat`.
 
-#### <a name="intervalFormats" id="intervalFormats" href="#intervalFormats">Element intervalFormats</a> <a id="dates-calendar-elements-element-datetimeformats-element-intervalformats"></a>
+* <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-rule-5"></a> **Note: as described**: Note: as described above `appendItems` for date fields should be appended to the date, and `appendItems` for time fields should be appended to the time, _before_ combining them with the `dateTimeFormat`.
+
+
+#### <a name="intervalFormats" href="#intervalFormats">Element intervalFormats</a>
 
 ```xml
 <!ELEMENT intervalFormats (alias | (intervalFormatFallback*, intervalFormatItem*, special*)) >
@@ -945,28 +917,27 @@ Note: as described above `appendItems` for date fields should be appended to the
 <!ATTLIST greatestDifference id NMTOKEN #REQUIRED >
 ```
 
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-1"></a>
-Interval formats allow for software to format intervals like "Jan 10-12, 2008" as a shorter and more natural format than "Jan 10, 2008 - Jan 12, 2008". They are designed to take a "skeleton" pattern (like the one used in availableFormats) plus start and end datetime, and use that information to produce a localized format.
+* <a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-rule-1"></a> **Interval formats allow**: Interval formats allow for software to format intervals like "Jan 10-12, 2008" as a shorter and more natural format than "Jan 10, 2008 - Jan 12, 2008". They are designed to take a "skeleton" pattern (like the one used in availableFormats) plus start and end datetime, and use that information to produce a localized format.
 
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-2"></a>
-The data supplied in CLDR requires the software to determine the calendar field with the greatest difference before using the format pattern. For example, the greatest difference in "Jan 10-12, 2008" is the day field, while the greatest difference in "Jan 10 - Feb 12, 2008" is the month field. This is used to pick the exact pattern.
 
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-3"></a>
-The pattern is then designed to be broken up into two pieces by determining the first repeating field. For example, "MMM d-d, y" would be broken up into "MMM d-" and "d, y". The two parts are formatted with the first and second datetime, as described in more detail below.
+* <a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-rule-2"></a> **The data supplied**: The data supplied in CLDR requires the software to determine the calendar field with the greatest difference before using the format pattern. For example, the greatest difference in "Jan 10-12, 2008" is the day field, while the greatest difference in "Jan 10 - Feb 12, 2008" is the month field. This is used to pick the exact pattern.
 
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-4"></a>
-For the purposes of determining a repeating field, standalone fields and format fields are considered equivalent. For example, given the pattern "LLL d - MMM d, Y", the repeating field would be "M" since standalone month field "L" is considered equivalent to format field "M" when determining the repeating field. Therefore the pattern would be broken up into "LLL d - " and "MMM d, Y".
 
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-5"></a>
-In case there is no matching pattern, the intervalFormatFallback defines the fallback pattern. The fallback pattern is of the form "{0} - {1}" or "{1} - {0}", where {0} is replaced by the start datetime, and {1} is replaced by the end datetime. The fallback pattern determines the default order of the interval pattern. "{0} - {1}" means the first part of the interval patterns in current local are formatted with the start datetime, while "{1} - {0}" means the first part of the interval patterns in current locale are formatted with the end datetime.
+* <a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-rule-3"></a> **The pattern is**: The pattern is then designed to be broken up into two pieces by determining the first repeating field. For example, "MMM d-d, y" would be broken up into "MMM d-" and "d, y". The two parts are formatted with the first and second datetime, as described in more detail below.
 
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-6"></a>
-The `id` attribute of intervalFormatItem is the "skeleton" pattern (like the one used in availableFormats) on which the format pattern is based. The `id` attribute of `greatestDifference` is the calendar field letter, for example 'M', which is the greatest difference between start and end datetime.
 
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-7"></a>
-The greatest difference defines a specific interval pattern of start and end datetime on a "skeleton" and a greatestDifference. As stated above, the interval pattern is designed to be broken up into two pieces. Each piece is similar to the pattern defined in date format. Also, each interval pattern could override the default order defined in fallback pattern. If an interval pattern starts with "latestFirst:", the first part of this particular interval pattern is formatted with the end datetime. If an interval pattern starts with "earliestFirst:", the first part of this particular interval pattern is formatted with the start datetime. Otherwise, the order is the same as the order defined in `intervalFormatFallback`.
+* <a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-rule-4"></a> **For the purposes**: For the purposes of determining a repeating field, standalone fields and format fields are considered equivalent. For example, given the pattern "LLL d - MMM d, Y", the repeating field would be "M" since standalone month field "L" is considered equivalent to format field "M" when determining the repeating field. Therefore the pattern would be broken up into "LLL d - " and "MMM d, Y".
 
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-8"></a>
+
+* <a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-rule-5"></a> **In case there**: In case there is no matching pattern, the intervalFormatFallback defines the fallback pattern. The fallback pattern is of the form "{0} - {1}" or "{1} - {0}", where {0} is replaced by the start datetime, and {1} is replaced by the end datetime. The fallback pattern determines the default order of the interval pattern. "{0} - {1}" means the first part of the interval patterns in current local are formatted with the start datetime, while "{1} - {0}" means the first part of the interval patterns in current locale are formatted with the end datetime.
+
+
+* <a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-rule-6"></a> **The `id` attribute**: The `id` attribute of intervalFormatItem is the "skeleton" pattern (like the one used in availableFormats) on which the format pattern is based. The `id` attribute of `greatestDifference` is the calendar field letter, for example 'M', which is the greatest difference between start and end datetime.
+
+
+* <a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-rule-7"></a> **The greatest difference**: The greatest difference defines a specific interval pattern of start and end datetime on a "skeleton" and a greatestDifference. As stated above, the interval pattern is designed to be broken up into two pieces. Each piece is similar to the pattern defined in date format. Also, each interval pattern could override the default order defined in fallback pattern. If an interval pattern starts with "latestFirst:", the first part of this particular interval pattern is formatted with the end datetime. If an interval pattern starts with "earliestFirst:", the first part of this particular interval pattern is formatted with the start datetime. Otherwise, the order is the same as the order defined in `intervalFormatFallback`.
+
+
 For example, the English rules that produce "Jan 10–12, 2008", "Jan 10 – Feb 12, 2008", and "Jan 10, 2008 – Feb. 12, 2009" are as follows:
 
 ```xml
@@ -982,19 +953,16 @@ To format a start and end datetime, given a particular "skeleton":
 1. Look for the `intervalFormatItem` element that matches the "skeleton", starting in the current locale and then following the locale fallback chain up to, but not including root (better results are obtained by following steps 2-6 below with locale- or language-specific data than by using matching intervalFormats from root).
 2. If no match was found from the previous step, check what the closest match is in the fallback locale chain, as in `availableFormats`. That is, this allows for adjusting the string value field's width, including adjusting between "MMM" and "MMMM", and using different variants of the same field, such as 'v' and 'z'.
 3. If no match was found from the previous steps and the skeleton combines date fields such as y,M,d with time fields such as H,h,m,s, then an `intervalFormatItem` can be synthesized as follows:
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-9"></a>
-1. For `greatestDifference` values corresponding to the date fields in the skeleton, use the mechanisms described under [availableFormats](#availableFormats_appendItems) to generate the complete date-time pattern corresponding to the skeleton, and then combine two such patterns using the `intervalFormatFallback` pattern (the result will be the same for each `greatestDifference` of a day or longer). For example:
+   1. For `greatestDifference` values corresponding to the date fields in the skeleton, use the mechanisms described under [availableFormats](#availableFormats_appendItems) to generate the complete date-time pattern corresponding to the skeleton, and then combine two such patterns using the `intervalFormatFallback` pattern (the result will be the same for each `greatestDifference` of a day or longer). For example:
       MMMdHm/d → "MMM d 'at' H:mm – MMM d 'at' H:mm" → "Jan 3 at 9:00 – Jan 6 at 11:00"
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-10"></a>
-2. For `greatestDifference` values corresponding to the time fields in the skeleton, separate the skeleton into a date fields part and a time fields part. Use the mechanisms described under availableFormats to generate a date pattern corresponding to the date fields part. Use the time fields part to look up an `intervalFormatItem`. For each `greatestDifference` in the `intervalFormatItem`, generate a pattern by using the [dateTimeFormat](#dateTimeFormat) to combine the date pattern with the `intervalFormatItem`’s `greatestDifference` element value. For example:
+   2. For `greatestDifference` values corresponding to the time fields in the skeleton, separate the skeleton into a date fields part and a time fields part. Use the mechanisms described under availableFormats to generate a date pattern corresponding to the date fields part. Use the time fields part to look up an `intervalFormatItem`. For each `greatestDifference` in the `intervalFormatItem`, generate a pattern by using the [dateTimeFormat](#dateTimeFormat) to combine the date pattern with the `intervalFormatItem`’s `greatestDifference` element value. For example:
       MMMdHm/H → "MMM d 'at' H:mm – H:mm" → "Jan 3 at 9:00 – 11:00"
 4. If a match is found from previous steps, compute the calendar field with the greatest difference between start and end datetime. If there is no difference among any of the fields in the pattern, format as a single date using `availableFormats`, and return.
 5. Otherwise, look for `greatestDifference` element that matches this particular greatest difference.
-<a id="dates-calendar-elements-element-datetimeformats-element-intervalformats-p-11"></a>
 6. If there is a match, use the pieces of the corresponding pattern to format the start and end datetime, as above.
 7. Otherwise, format the start and end datetime using the fallback pattern.
 
-## <a name="Calendar_Fields" id="Calendar_Fields" href="#Calendar_Fields">Calendar Fields</a> <a id="dates-calendar-fields"></a>
+## <a name="Calendar_Fields" href="#Calendar_Fields">Calendar Fields</a>
 
 ```xml
 <!ELEMENT fields ( alias | (field*, special*)) >
@@ -1013,15 +981,14 @@ To format a start and end datetime, given a particular "skeleton":
 <!ELEMENT relativePeriod (#PCDATA) >
 ```
 
-<a id="dates-calendar-fields-p-1"></a>
-Translations may be supplied for names of calendar fields (elements of a calendar, such as Day, Month, Year, Hour, and so on), and for relative values for those fields (for example, the day with relative value -1 is "Yesterday"). There are four types of translations; some are only relevant or useful for certain types of fields:
+* <a id="dates-calendar-fields-rule-1"></a> **Translations may be**: Translations may be supplied for names of calendar fields (elements of a calendar, such as Day, Month, Year, Hour, and so on), and for relative values for those fields (for example, the day with relative value -1 is "Yesterday"). There are four types of translations; some are only relevant or useful for certain types of fields:
+
 
 * `<displayName>` General display name for the field type. This should be relevant for all elements, including those like era and zone that might not have useful forms for the other name types. These are typically presented in titlecase (eg “Day”) since they are intended as labels in a UI.
 * `<relative>` Display names for the current instance of the field, and one or two past and future instances. In English, data is provided for year, quarter, month, week, day, specific days of the week (sun, mon, tue, …), and—with offset 0 only—for hour, minute, and second.
 * `<relativeTime>` Display names for an instance of the field that is a counted number of units in the past or the future relative to the current instance; this needs plural forms. In English, data is provided for year, quarter, month, week, day, specific days of the week, hour, minute, and second.
 * `<relativePeriod>` Pattern for designating an instance of the specified field in relation to some other date reference. This is currently only used for weeks, and provides a pattern such as “the week of {0}” which can be used to generate designations such as “the week of April 11, 2016” or “the week of April 11–15”.
 
-<a id="dates-calendar-fields-p-2"></a>
 Where there is not a convenient, customary word or phrase in a particular language for a particular type of relative value, it should be omitted.
 
 Examples, first for English:
@@ -1102,7 +1069,6 @@ Second, for German; includes relative type="-2"/"2", present in the English exam
 </fields>
 ```
 
-<a id="dates-calendar-fields-p-3"></a>
 A special name for “now” is indicated using `<relative type="0">` for the "second" field. For example, in English:
 
 ```xml
@@ -1134,9 +1100,9 @@ Different widths can be supplied for certain fields, such as:
 
 As in other cases, **narrow** may be ambiguous out of context.
 
-## <a name="Supplemental_Calendar_Data" id="Supplemental_Calendar_Data" href="#Supplemental_Calendar_Data">Supplemental Calendar Data</a> <a id="dates-supplemental-calendar-data"></a>
+## <a name="Supplemental_Calendar_Data" href="#Supplemental_Calendar_Data">Supplemental Calendar Data</a>
 
-### <a name="Calendar_Data" id="Calendar_Data" href="#Calendar_Data">Calendar Data</a> <a id="dates-supplemental-calendar-data-calendar-data"></a>
+### <a name="Calendar_Data" href="#Calendar_Data">Calendar Data</a>
 
 ```xml
 <!ELEMENT calendarData ( calendar* )>
@@ -1160,9 +1126,7 @@ As in other cases, **narrow** may be ambiguous out of context.
 <!ATTLIST era aliases NMTOKENS #IMPLIED >
 ```
 
-<a id="dates-supplemental-calendar-data-calendar-data-p-1"></a>
 The `<calendarData>` element provides locale-independent data about calendar behaviors via its `<calendar>` subelements,
-<a id="dates-supplemental-calendar-data-calendar-data-p-2"></a>
 which for each calendar can specify the astronomical basis of the calendar (solar, lunar, etc.) and the date ranges for its eras.
 For example:
 
@@ -1176,9 +1140,7 @@ For example:
 </calendar>
 ```
 
-<a id="dates-supplemental-calendar-data-calendar-data-p-3"></a>
 If a `<calendar>` contains an `<inheritEras/>` element, all eras from the specified calendar should be inserted in order into the sequence of eras for the current calendar, as described below.
-<a id="dates-supplemental-calendar-data-calendar-data-p-4"></a>
 For example, the following means that the two eras from calendar "gregorian" should be inserted into the era list for "japanese" for calculations and formatting.
 
 ```xml
@@ -1194,16 +1156,11 @@ For example, the following means that the two eras from calendar "gregorian" sho
 </calendar>
 ```
 
-<a id="dates-supplemental-calendar-data-calendar-data-p-5"></a>
 Each `era` element has a `code` attribute and optional `aliases` attributes that define stable strings for identifying the eras. These are more mnemonic than the `type` identifiers (see below).
-<a id="dates-supplemental-calendar-data-calendar-data-p-6"></a>
-The `code` defines the primary identifier for the era, and `aliases` are space-separated additional identifiers.
-<a id="dates-supplemental-calendar-data-calendar-data-p-7"></a>
-Each identifier consists of a sequence of subtags consisting of ASCII letters and digits ([a-zA-Z0-9]) separated by ASCII hyphens.
-<a id="dates-supplemental-calendar-data-calendar-data-p-8"></a>
+The `code` defines the primary identifier for the era, and `aliases` are space-separated additional identifiers. 
+Each identifier consists of a sequence of subtags consisting of ASCII letters and digits ([a-zA-Z0-9]) separated by ASCII hyphens. 
 Each identifier is also limited to be at most 8 characters long, thus `abcdefg` and `abc-defg` would be well-formed, but `abcdefghi` and `abc-defgh` would not be.
 
-<a id="dates-supplemental-calendar-data-calendar-data-p-9"></a>
 The `start` date is specified in terms of the equivalent _proleptic_ Gregorian date in the format "yyyy-MM-dd", such as 1842-01-01.
 An omitted start date behaves as if start=-∞.
 
@@ -1213,12 +1170,9 @@ The order for the eras is given by the following algorithm:
 - All elements are ordered by their start dates.
 - No two elements can have the same start date (otherwise the data is invalid).
 
-<a id="dates-supplemental-calendar-data-calendar-data-p-10"></a>
 Note that the order of the eras is _not_ necessarily the order in the XML file, nor is it based on the numeric value of the `type`s.
 
-<a id="dates-supplemental-calendar-data-calendar-data-p-11"></a>
 For a given _proleptic_ Gregorian date D and calendar C, the era code for D is in the `era` element in C with the greatest start date ≤ the given date.
-<a id="dates-supplemental-calendar-data-calendar-data-p-12"></a>
 It is also the _first_ `era` element with start date ≤ the given date in C, given the above ordering for `era` elements.
 
 The `type` has an integer value.
@@ -1238,7 +1192,7 @@ The `end` attribute is unused, and is slated for deprecation in the future.
 
 **Note:** The `territories` attribute in the `calendar` element is deprecated. It was formerly used to indicate calendar preference by territory, but this is now given by the _[Calendar Preference Data](#Calendar_Preference_Data)_ below.
 
-### Calendar Preference Data <a id="dates-supplemental-calendar-data-calendar-preference-data"></a>
+### Calendar Preference Data
 
 ```xml
 <!ELEMENT calendarPreferenceData ( calendarPreference* ) >
@@ -1247,8 +1201,8 @@ The `end` attribute is unused, and is slated for deprecation in the future.
 <!ATTLIST calendarPreference ordering NMTOKENS #REQUIRED >
 ```
 
-<a id="dates-supplemental-calendar-data-calendar-preference-data-p-1"></a>
-The `calendarPreference` element provides a list of commonly used calendar types in a territory. The `ordering` attribute indicates the list of calendar types in preferred order. The first calendar type in the list is the default calendar type for the territory. For example:
+* <a id="dates-supplemental-calendar-data-calendar-preference-data-rule-1"></a> **The `calendarPreference` element**: The `calendarPreference` element provides a list of commonly used calendar types in a territory. The `ordering` attribute indicates the list of calendar types in preferred order. The first calendar type in the list is the default calendar type for the territory. For example:
+
 
 ```xml
 <calendarPreference territories="001" ordering="gregorian"/>
@@ -1262,10 +1216,9 @@ The `calendarPreference` elements above indicate:
 * For Japan, the Gregorian and Japanese calendars are both used, with Gregorian preferred (the default).
 * For Thailand, the Buddhist and Gregorian calendars are both used, and Buddhist is preferred (the default).
 
-<a id="dates-supplemental-calendar-data-calendar-preference-data-p-2"></a>
 The calendars in common use for a locale should typically be shown in UIs that provide a choice of calendars. (An 'Other...' button could give access to the other available calendars.)
 
-### <a name="Week_Data" id="Week_Data" href="#Week_Data">Week Data</a> <a id="dates-supplemental-calendar-data-week-data"></a>
+### <a name="Week_Data" href="#Week_Data">Week Data</a>
 
 ```xml
 <!ELEMENT weekData ( minDays*, firstDay*, weekendStart*, weekendEnd*, weekOfPreference* )>
@@ -1291,8 +1244,8 @@ The calendars in common use for a locale should typically be shown in UIs that p
 <!ATTLIST weekOfPreference ordering NMTOKENS #REQUIRED>
 ```
 
-<a id="dates-supplemental-calendar-data-week-data-p-1"></a>
-These values provide territory-specific information needed for week-of-year and week-of-month calculations, as well as information on conventions for first day of the week, for weekends, and for week designations. For most elements, the default is provided by the element with `territories="001"`; for `weekOfPreference` elements the default is provided by the element with `locales="und"`.
+* <a id="dates-supplemental-calendar-data-week-data-rule-1"></a> **These values provide**: These values provide territory-specific information needed for week-of-year and week-of-month calculations, as well as information on conventions for first day of the week, for weekends, and for week designations. For most elements, the default is provided by the element with `territories="001"`; for `weekOfPreference` elements the default is provided by the element with `locales="und"`.
+
 
 ```xml
 <weekData>
@@ -1314,21 +1267,21 @@ These values provide territory-specific information needed for week-of-year and 
     …
 ```
 
-<a id="dates-supplemental-calendar-data-week-data-p-2"></a>
-In order for a week to count as the first week of a new year for week-of-year calculations, the week beginning with `firstDay` must include at least the number of days in the new year specified by the `minDays` value; otherwise the week will count as the last week of the previous year (and for week-of-month calculations, `minDays` also specifies the minimum number of days in the new month for a week to count as part of that month).
+* <a id="dates-supplemental-calendar-data-week-data-rule-2"></a> **In order for**: In order for a week to count as the first week of a new year for week-of-year calculations, the week beginning with `firstDay` must include at least the number of days in the new year specified by the `minDays` value; otherwise the week will count as the last week of the previous year (and for week-of-month calculations, `minDays` also specifies the minimum number of days in the new month for a week to count as part of that month).
 
-> <a id="dates-supplemental-calendar-data-week-data-note-1"></a> **Note 1**: For week-of-year calculations, Gregorian years may have 52 or 53 weeks. Changes in the value of `minDays` or `firstDay` can affect the year to which a date is assigned as well as the number of weeks in a given year; implementations that parse dates using week-of-year formats should be prepared to handle such cases. For example when parsing a date in week 53 of a year for which current values of `minDays` and `firstDay` no longer result in a 53-week year, that date should be treated as in the first week of the following year.
 
-<a id="dates-supplemental-calendar-data-week-data-p-3"></a>
-The day indicated by `firstDay` is the one that should be shown as the first day of the week in a calendar view. This is not necessarily the same as the first day after the weekend (or the first work day of the week), which should be determined from the weekend information. Currently, day-of-week numbering is based on `firstDay` (that is, day 1 is the day specified by `firstDay`), but in the future we may add a way to specify this separately. The `firstDay` value determined from the region can be overridden by the locale keyword "fw", see [Unicode First Day Identifier](tr35.md#UnicodeFirstDayIdentifier).
+> **Note:** For week-of-year calculations, Gregorian years may have 52 or 53 weeks. Changes in the value of `minDays` or `firstDay` can affect the year to which a date is assigned as well as the number of weeks in a given year; implementations that parse dates using week-of-year formats should be prepared to handle such cases. For example when parsing a date in week 53 of a year for which current values of `minDays` and `firstDay` no longer result in a 53-week year, that date should be treated as in the first week of the following year.
 
-<a id="dates-supplemental-calendar-data-week-data-p-4"></a>
-What is meant by the weekend varies from country to country. It is typically when most non-retail businesses are closed. The time should not be specified unless it is a well-recognized part of the day. The `weekendStart` day defaults to "sat", and `weekendEnd` day defaults to "sun". For more information, see _[Dates and Date Ranges](tr35.md#Date_Ranges)_.
+* <a id="dates-supplemental-calendar-data-week-data-rule-3"></a> **The day indicated**: The day indicated by `firstDay` is the one that should be shown as the first day of the week in a calendar view. This is not necessarily the same as the first day after the weekend (or the first work day of the week), which should be determined from the weekend information. Currently, day-of-week numbering is based on `firstDay` (that is, day 1 is the day specified by `firstDay`), but in the future we may add a way to specify this separately. The `firstDay` value determined from the region can be overridden by the locale keyword "fw", see [Unicode First Day Identifier](tr35.md#UnicodeFirstDayIdentifier).
 
-<a id="dates-supplemental-calendar-data-week-data-p-5"></a>
-Each `weekOfPreference` element provides, for its specified locales, an ordered list of the preferred types of week designations for that set of locales. There are four types of week designations, each of which makes use of date patterns available in the locale, as follows:
 
-###### Table: Week Designation Types <a id="dates-supplemental-calendar-data-week-data-table-week-designation-types"></a>
+* <a id="dates-supplemental-calendar-data-week-data-rule-4"></a> **What is meant**: What is meant by the weekend varies from country to country. It is typically when most non-retail businesses are closed. The time should not be specified unless it is a well-recognized part of the day. The `weekendStart` day defaults to "sat", and `weekendEnd` day defaults to "sun". For more information, see _[Dates and Date Ranges](tr35.md#Date_Ranges)_.
+
+
+* <a id="dates-supplemental-calendar-data-week-data-rule-5"></a> **Each `weekOfPreference` element**: Each `weekOfPreference` element provides, for its specified locales, an ordered list of the preferred types of week designations for that set of locales. There are four types of week designations, each of which makes use of date patterns available in the locale, as follows:
+
+
+###### Table: <a name="Week_Designation_Types" href="#Week_Designation_Types">Week Designation Types</a>
 
 | Type           | Examples                          | Date Pattern                                                | Comments    |
 |----------------|-----------------------------------|-------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1337,17 +1290,16 @@ Each `weekOfPreference` element provides, for its specified locales, an ordered 
 | weekOfDate     | the week of April 11, 2016        | \<field type="week"\>\<relativePeriod>the week of {0}\<…        | The date pattern that replaces {0} is determined separately and may use the first day or workday of the week, the range of the full week or work week, etc.   |
 | weekOfInterval | the week of April 11–15           | \<field type="week"\>\<relativePeriod>the week of {0}\<…    |  (same comment as above) |
 
-#### First Day Overrides <a id="dates-supplemental-calendar-data-week-data-first-day-overrides"></a>
+#### First Day Overrides
 
-<a id="dates-supplemental-calendar-data-week-data-first-day-overrides-p-1"></a>
-The calculation of the first day of the week depends on various fields in a locale_identifier, according to the following algorithm. The data in the `firstDay` elements is treated as a map from region to day, with any missing value using the value for 001.
+* <a id="dates-supplemental-calendar-data-week-data-first-day-overrides-rule-1"></a> **The calculation of**: The calculation of the first day of the week depends on various fields in a locale_identifier, according to the following algorithm. The data in the `firstDay` elements is treated as a map from region to day, with any missing value using the value for 001.
+
 
 1. If there is a valid `-u-fw-` day value, return that day.
 2. Else if there is a valid `-u-rg-` region value, return that region's firstDay map value.
 3. Else if there is a valid `-u-ca-` calendar value, where that calendar specifies the first day, then return that first day. (Most calendars do not specify the first day.)
 4. Else if there is an explicit region subtag, then return that region's firstDay map value.
 5. Else if there is a valid `-u-sd-` subdivision value, return that region's firstDay map value.
-<a id="dates-supplemental-calendar-data-week-data-first-day-overrides-p-2"></a>
 6. Else if the [Add Likely Subtags](tr35.md#Likely_Subtags) algorithm produces a region, return that region's firstDay map value.
 7. Else return the firstDay map value for 001.
 
@@ -1363,7 +1315,7 @@ The calculation of the first day of the week depends on various fields in a loca
 |en | | US (from likely subtags) |
 |zxx | 001 | (fallback) |
 
-### <a name="Time_Data" id="Time_Data" href="#Time_Data">Time Data</a> <a id="dates-supplemental-calendar-data-time-data"></a>
+### <a name="Time_Data" href="#Time_Data">Time Data</a>
 
 ```xml
 <!ELEMENT timeData ( hours* ) >
@@ -1373,13 +1325,12 @@ The calculation of the first day of the week depends on various fields in a loca
 <!ATTLIST hours regions NMTOKENS #REQUIRED >
 ```
 
-<a id="dates-supplemental-calendar-data-time-data-p-1"></a>
-This element is for data that indicates, for various regions, the preferred time cycle in the region, as well as all time cycles that are considered acceptable in the region. The defaults are those specified for region 001.
+* <a id="dates-supplemental-calendar-data-time-data-rule-1"></a> **This element is**: This element is for data that indicates, for various regions, the preferred time cycle in the region, as well as all time cycles that are considered acceptable in the region. The defaults are those specified for region 001.
 
-<a id="dates-supplemental-calendar-data-time-data-p-2"></a>
-There is a single `preferred` value, and multiple `allowed` values. The meanings of the values H, h, K, k, b and B are defined in [Date Field Symbol Table](#Date_Field_Symbol_Table). The `allowed` values are in preference order; they are used with the 'C' hour skeleton pattern symbol and the `c12` and `c24` values for the [Unicode Hour Cycle Identifier](tr35.md#UnicodeHourCycleIdentifier).
 
-<a id="dates-supplemental-calendar-data-time-data-p-3"></a>
+* <a id="dates-supplemental-calendar-data-time-data-rule-2"></a> **There is a**: There is a single `preferred` value, and multiple `allowed` values. The meanings of the values H, h, K, k, b and B are defined in [Date Field Symbol Table](#Date_Field_Symbol_Table). The `allowed` values are in preference order; they are used with the 'C' hour skeleton pattern symbol and the `c12` and `c24` values for the [Unicode Hour Cycle Identifier](tr35.md#UnicodeHourCycleIdentifier).
+
+
 For example, in the following, RU (Russia) is marked as using only 24 hour time, and in particular the 24 hour time that goes from 0..23 (H), rather than from 1..24 (k).
 
 Also note that the `regions` allows either region codes (`001`, `JP`) or
@@ -1396,21 +1347,20 @@ locale IDs (`gu_IN`).
     …
 ```
 
-<a id="dates-supplemental-calendar-data-time-data-p-4"></a>
-The B and b date symbols provide for formats like “3:00 at night”. When the ‘C’ option is used, the values in `allowed` are traversed from first to last, picking the first available format. For example, in the following a system that supports hB should choose that as the most preferred format for the C (not the `preferred` value H).
+* <a id="dates-supplemental-calendar-data-time-data-rule-3"></a> **The B and**: The B and b date symbols provide for formats like “3:00 at night”. When the ‘C’ option is used, the values in `allowed` are traversed from first to last, picking the first available format. For example, in the following a system that supports hB should choose that as the most preferred format for the C (not the `preferred` value H).
+
 
 ```xml
 <hours preferred="H" allowed="hB H" regions="CD" />
 <hours preferred="H" allowed="hB hb h H" regions="KE MM TZ UG" />
 ```
 
-<a id="dates-supplemental-calendar-data-time-data-p-5"></a>
-Some systems may not want to use B and b, even if preferred for the locale, so for compatibility the `preferred` value is limited to {H, h, K, k}, and is the option selected by the ‘j’ date symbol. Thus the `preferred` value may not be the same as the first `allowed` value.
+* <a id="dates-supplemental-calendar-data-time-data-rule-4"></a> **Some systems may**: Some systems may not want to use B and b, even if preferred for the locale, so for compatibility the `preferred` value is limited to {H, h, K, k}, and is the option selected by the ‘j’ date symbol. Thus the `preferred` value may not be the same as the first `allowed` value.
 
-<a id="dates-supplemental-calendar-data-time-data-p-6"></a>
+
 The preferred value for the locale can be overridden by the locale keyword "hc", see [Unicode Hour Cycle Identifier ](tr35.md#UnicodeHourCycleIdentifier).
 
-### <a name="Day_Period_Rule_Sets" id="Day_Period_Rule_Sets" href="#Day_Period_Rule_Sets">Day Period Rule Sets</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets"></a>
+### <a name="Day_Period_Rule_Sets" href="#Day_Period_Rule_Sets">Day Period Rule Sets</a>
 
 ```xml
 <!ELEMENT dayPeriodRuleSet ( dayPeriodRules* ) >
@@ -1426,15 +1376,14 @@ The preferred value for the locale can be overridden by the locale keyword "hc",
 <!ATTLIST dayPeriodRule before NMTOKEN #IMPLIED >
 ```
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-p-1"></a>
-Each locale can have a set of day period rules, which determine the periods during a day for use in time formats like "10:00 at night", or to select statements like "Your email arrived last night." If locales do not have dayPeriodRules, the computation of dayPeriods falls back to AM/PM.
+* <a id="dates-supplemental-calendar-data-day-period-rule-sets-rule-1"></a> **Each locale can**: Each locale can have a set of day period rules, which determine the periods during a day for use in time formats like "10:00 at night", or to select statements like "Your email arrived last night." If locales do not have dayPeriodRules, the computation of dayPeriods falls back to AM/PM.
+
 
 There are two kinds of dayPeriodRuleSets, based on the type:
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-p-2"></a>
-The **_format_** type is used in conjunction with times, such as to express "3:00 in the afternoon", or "12:00 noon". Many languages do not normally use terms that match AM/PM for such times, instead breaking up the day into more periods.
+* <a id="dates-supplemental-calendar-data-day-period-rule-sets-rule-2"></a> **The **_format_** type**: The **_format_** type is used in conjunction with times, such as to express "3:00 in the afternoon", or "12:00 noon". Many languages do not normally use terms that match AM/PM for such times, instead breaking up the day into more periods.
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-p-3"></a>
+
 The **stand-alone** type is used for selecting a period of the day for a general time associated with an event. For example, it can be used to select a message like:
 
 ```
@@ -1450,23 +1399,21 @@ other {Your email arrived yesterday.}
 </msg>
 ```
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-p-4"></a>
 The translated values for the selection (**stand-alone**) day periods are intended for use in designating a time of day, without an hour value.
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-p-5"></a>
 These are relative times within a single day. If the event can occur on multiple days, then that needs to be handled at a higher level.
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-p-6"></a>
-As with plurals, the exact set of periods used for any language may be different. It is the responsibility of any translation software to pick the relevant day periods for the locale for display to the translator (and end user).
+* <a id="dates-supplemental-calendar-data-day-period-rule-sets-rule-3"></a> **As with plurals**: As with plurals, the exact set of periods used for any language may be different. It is the responsibility of any translation software to pick the relevant day periods for the locale for display to the translator (and end user).
 
-#### <a name="Day_Period_Rules" id="Day_Period_Rules" href="#Day_Period_Rules">Day Period Rules</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules"></a>
+
+#### <a name="Day_Period_Rules" href="#Day_Period_Rules">Day Period Rules</a>
 
 Here are the requirements for a rule set.
 
-##### <a name="Fixed_periods" id="Fixed_periods" href="#Fixed_periods">Fixed periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods"></a>
+##### <a name="Fixed_periods" href="#Fixed_periods">Fixed periods</a>
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-p-1"></a>
-There are 4 dayPeriods that are fixed; am/pm are always defined, and always have the same meaning and definition for every locale. Midnight and noon are optional, however if they are defined, they have the same meaning and definition as in all other locales where they are defined.
+* <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-rule-1"></a> **There are 4**: There are 4 dayPeriods that are fixed; am/pm are always defined, and always have the same meaning and definition for every locale. Midnight and noon are optional, however if they are defined, they have the same meaning and definition as in all other locales where they are defined.
+
 
 ```xml
 <dayPeriodRule type="midnight" at="00:00" />
@@ -1477,29 +1424,25 @@ There are 4 dayPeriods that are fixed; am/pm are always defined, and always have
 
 Note that midnight and am can overlap, as can noon and pm.
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-p-2"></a>
-All locales must support am/pm, but not all support **noon** or **midnight**; they are only supported if they meet the above definitions. For example, German has no unique term that means exactly 12:00 noon; the closest is Mittag, but that can extend before or after 12 noon.
+* <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-rule-2"></a> **All locales must**: All locales must support am/pm, but not all support **noon** or **midnight**; they are only supported if they meet the above definitions. For example, German has no unique term that means exactly 12:00 noon; the closest is Mittag, but that can extend before or after 12 noon.
+
 
 **Midnight** is also special, since it can refer to either 00:00 or 24:00 — either at the start or end of the day. That means that Tuesday 24:00 = Wednesday 00:00. “Midnight Tuesday" is thus ambiguous: it means 24:00 in “the party is Tuesday from 10pm to 12 midnight”, while it means 00:00 in “I was awake from 12 midnight to 3 in the morning”.
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-p-3"></a>
-It is strongly recommended that implementations provide for the ability to specify whether **midnight** is supported or not (and for either 00:00 or 24:00 or both), since only the caller knows enough of the context to determine what to use. In the absence of such information, 24:00 may be the best choice.
+* <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-rule-3"></a> **It is strongly**: It is strongly recommended that implementations provide for the ability to specify whether **midnight** is supported or not (and for either 00:00 or 24:00 or both), since only the caller knows enough of the context to determine what to use. In the absence of such information, 24:00 may be the best choice.
 
-##### <a name="Variable_periods" id="Variable_periods" href="#Variable_periods">Variable periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-variable-periods"></a>
+
+##### <a name="Variable_periods" href="#Variable_periods">Variable periods</a>
 
 1. If a locale has a set of dayPeriodRules for variable periods, it needs to completely cover the 24 hours in a day (from 0:00 before 24:00), with **no** overlaps between any dayPeriodRules. They may overlap with the **Fixed Periods**.
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-variable-periods-p-1"></a>
-If it does not have a rule set for variable periods, behavior should fall back to using the fixed periods (am, pm).
+   If it does not have a rule set for variable periods, behavior should fall back to using the fixed periods (am, pm).
 2. "from" is a closed interval (inclusive). _(as is the deprecated "to")_
 3. "before" is an open interval (exclusive). _(as is the deprecated "after")_
 4. "at" means starting time and end time are the same. _("at" is deprecated except when used for the fixed periods)_
 5. There must be exactly one of {at, from, after} and exactly one of {at, to, before} for each dayPeriodRule.
 6. Use of non-zero minutes or seconds is deprecated.
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-variable-periods-p-2"></a>
 7. The dayPeriodRules for format must allow that hh:mm [period name] and hh [period name] can be parsed uniquely to HH:mm [period name].
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-variable-periods-p-3"></a>
-* For example, you can't have `<dayPeriod type = "morning1" from="00:00" to="13:00"/>` because "12:30 {morning}" would be ambiguous.
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-variable-periods-p-4"></a>
+   * For example, you can't have `<dayPeriod type = "morning1" from="00:00" to="13:00"/>` because "12:30 {morning}" would be ambiguous.
 8. There must not be two rules with the same type. A day period rule may, however, span 24:00 / 00:00. Example:
    * _Valid:_
      * `<dayPeriod type = "night1" from="21:00" to="05:00"/>`
@@ -1508,24 +1451,22 @@ If it does not have a rule set for variable periods, behavior should fall back t
      * `<dayPeriod type = "night1" from="21:00" to="24:00"/>`
 9. 24:00 is _only_ allowed in _before_="24:00".
 
-##### <a name="Parsing_Day_Periods" id="Parsing_Day_Periods" href="#Parsing_Day_Periods">Parsing Day Periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods"></a>
+##### <a name="Parsing_Day_Periods" href="#Parsing_Day_Periods">Parsing Day Periods</a>
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-p-1"></a>
-When parsing, if the hour is present with a strict parse the dayperiod is checked for consistency with the hour. If there is no hour, the center of the first matching dayPeriodRule can be chosen (starting from 0:00). However, if there is other information available when parsing, a different point within the interval may be chosen.
+* <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-rule-1"></a> **When parsing, if**: When parsing, if the hour is present with a strict parse the dayperiod is checked for consistency with the hour. If there is no hour, the center of the first matching dayPeriodRule can be chosen (starting from 0:00). However, if there is other information available when parsing, a different point within the interval may be chosen.
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-p-2"></a>
-The dayPeriodRule may span two days, such as where **night1** is [21:00, 06:00). In that case, the midpoint is 01:30, so when parsing “Nov 12, at night”, the midpoint result would be Nov 12, 01:30. “Nov 12, am”, “Nov 12, pm”, “Nov 12, noon” can be parsed similarly, resulting in Nov 12, 06:00; Nov 12, 18:00; and Nov 12, 12:00; respectively.
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-p-3"></a>
-“Nov 12, midnight” is special, because midnight may mean either 00:00 or 24:00. Extra information may be needed to disambiguate which is meant, such as whether the time is at the start or end of an interval. In the absence of such information, 24:00 may be the best choice. See the discussion of **midnight** above.
+* <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-rule-2"></a> **The dayPeriodRule may**: The dayPeriodRule may span two days, such as where **night1** is [21:00, 06:00). In that case, the midpoint is 01:30, so when parsing “Nov 12, at night”, the midpoint result would be Nov 12, 01:30. “Nov 12, am”, “Nov 12, pm”, “Nov 12, noon” can be parsed similarly, resulting in Nov 12, 06:00; Nov 12, 18:00; and Nov 12, 12:00; respectively.
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-p-4"></a>
+
+* <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-rule-3"></a> **“Nov 12, midnight”**: “Nov 12, midnight” is special, because midnight may mean either 00:00 or 24:00. Extra information may be needed to disambiguate which is meant, such as whether the time is at the start or end of an interval. In the absence of such information, 24:00 may be the best choice. See the discussion of **midnight** above.
+
+
 If rounding is done—including the rounding done by the time format—then it needs to be done before the dayperiod is computed, so that the correct format is shown.
 
-<a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-p-5"></a>
 For examples, see [Day Periods Chart](https://www.unicode.org/cldr/charts/latest/supplemental/day_periods.html).
 
-## <a name="Time_Zone_Names" id="Time_Zone_Names" href="#Time_Zone_Names">Time Zone Names</a> <a id="dates-time-zone-names"></a>
+## <a name="Time_Zone_Names" href="#Time_Zone_Names">Time Zone Names</a>
 
 ```xml
 <!ELEMENT timeZoneNames (alias | (hourFormat*, gmtFormat*, gmtUnknownFormat*, regionFormat*, fallbackFormat*, zone*, metazone*, special*)) >
@@ -1555,30 +1496,28 @@ For examples, see [Day Periods Chart](https://www.unicode.org/cldr/charts/latest
 <!ELEMENT exemplarCity ( #PCDATA ) >
 ```
 
-<a id="dates-time-zone-names-p-1"></a>
-The time zone IDs (TZID) are language-independent, and follow the _TZ time zone database_ [[Olson](tr35.md#Olson)] and naming conventions. However, the display names for those IDs can vary by locale. The generic time is so-called _wall-time_; what clocks use when they are correctly switched from standard to daylight time at the mandated time of the year.
+* <a id="dates-time-zone-names-rule-1"></a> **The time zone**: The time zone IDs (TZID) are language-independent, and follow the _TZ time zone database_ [[Olson](tr35.md#Olson)] and naming conventions. However, the display names for those IDs can vary by locale. The generic time is so-called _wall-time_; what clocks use when they are correctly switched from standard to daylight time at the mandated time of the year.
 
-<a id="dates-time-zone-names-p-2"></a>
-Unfortunately, the canonical TZIDs (those in zone.tab) are not stable: they may change in each release of the _TZ_ Time Zone database. In CLDR, however, stability of identifiers is very important. So the canonical IDs in CLDR are kept stable as described in [Canonical Form](tr35.md#Canonical_Form).
 
-<a id="dates-time-zone-names-p-3"></a>
-The _TZ time zone database_ can have multiple IDs that refer to the same entity. It does contain information on equivalence relationships between these IDs, such as "Asia/Calcutta" and "Asia/Kolkata". It does not remove IDs (with a few known exceptions), but it may change the "canonical" ID which is in the file zone.tab.
+* <a id="dates-time-zone-names-rule-2"></a> **Unfortunately, the canonical**: Unfortunately, the canonical TZIDs (those in zone.tab) are not stable: they may change in each release of the _TZ_ Time Zone database. In CLDR, however, stability of identifiers is very important. So the canonical IDs in CLDR are kept stable as described in [Canonical Form](tr35.md#Canonical_Form).
 
-<a id="dates-time-zone-names-p-4"></a>
-For lookup purposes specifications such as CLDR need a stable canonical ID, one that does not change from release to release. The stable ID is maintained as the first alias item _type_ element in the file bcp47/timezone.xml, such as:
+
+* <a id="dates-time-zone-names-rule-3"></a> **The _TZ time**: The _TZ time zone database_ can have multiple IDs that refer to the same entity. It does contain information on equivalence relationships between these IDs, such as "Asia/Calcutta" and "Asia/Kolkata". It does not remove IDs (with a few known exceptions), but it may change the "canonical" ID which is in the file zone.tab.
+
+
+* <a id="dates-time-zone-names-rule-4"></a> **For lookup purposes**: For lookup purposes specifications such as CLDR need a stable canonical ID, one that does not change from release to release. The stable ID is maintained as the first alias item _type_ element in the file bcp47/timezone.xml, such as:
+
 
     <type name="inccu" alias="Asia/Calcutta Asia/Kolkata"/>
 
-<a id="dates-time-zone-names-p-5"></a>
 That file also contains the short ID used in keywords. In versions of CLDR previous to 1.8, the alias information (but not the short ID) was in Supplemental Data under the zoneItem, such as:
 
     <zoneItem type="Asia/Calcutta" territory="IN" aliases="Asia/Kolkata"/>
 
-<a id="dates-time-zone-names-p-6"></a>
 This element was deprecated after the introduction of bcp47/timezone.xml, because the information became redundant (or was contained in the _TZ time zone database_).
 
-<a id="dates-time-zone-names-p-7"></a>
-The following is an example of time zone data. Although this is an example of possible data, in most cases only the exemplarCity needs translation. And that does not even need to be present, if a country only has a single time one. As always, the _type_ field for each zone is the identification of that zone. It is not to be translated.
+* <a id="dates-time-zone-names-rule-5"></a> **The following is**: The following is an example of time zone data. Although this is an example of possible data, in most cases only the exemplarCity needs translation. And that does not even need to be present, if a country only has a single time one. As always, the _type_ field for each zone is the identification of that zone. It is not to be translated.
+
 
 ```xml
 <zone type="America/Los_Angeles">
@@ -1625,32 +1564,31 @@ In a few cases, some time zone IDs do not designate a city, as in:
 </zone>
 ```
 
-<a id="dates-time-zone-names-p-8"></a>
 They may designate countries or territories; their actual capital city may be a name that is too common, or too uncommon. CLDR time zone IDs follow the [Olson](tr35.md#Olson) naming conventions.
 
-> <a id="dates-time-zone-names-note-1"></a> **Note 1**: CLDR does not allow "GMT", "UT", or "UTC" as translations (short or long) of time zones other than UTC/GMT itself.
+> **Note:** CLDR does not allow "GMT", "UT", or "UTC" as translations (short or long) of time zones other than UTC/GMT itself.
 
-> <a id="dates-time-zone-names-note-2"></a> **Note 2**: Transmitting "14:30" with no other context is incomplete unless it contains information about the time zone. Ideally one would transmit neutral-format date/time information, commonly in UTC (GMT), and localize as close to the user as possible. (For more about UTC, see [[UTCInfo](tr35.md#UTCInfo)].)
+> **Note:** Transmitting "14:30" with no other context is incomplete unless it contains information about the time zone. Ideally one would transmit neutral-format date/time information, commonly in UTC (GMT), and localize as close to the user as possible. (For more about UTC, see [[UTCInfo](tr35.md#UTCInfo)].)
 
-<a id="dates-time-zone-names-p-9"></a>
-The conversion from local time into UTC depends on the particular time zone rules, which will vary by location. The standard data used for converting local time (sometimes called _wall time_) to UTC and back is the _TZ Data_ [[Olson](tr35.md#Olson)], used by Linux, UNIX, Java, ICU, and others. The data includes rules for matching the laws for time changes in different countries. For example, for the US it is:
+* <a id="dates-time-zone-names-rule-6"></a> **The conversion from**: The conversion from local time into UTC depends on the particular time zone rules, which will vary by location. The standard data used for converting local time (sometimes called _wall time_) to UTC and back is the _TZ Data_ [[Olson](tr35.md#Olson)], used by Linux, UNIX, Java, ICU, and others. The data includes rules for matching the laws for time changes in different countries. For example, for the US it is:
+
 
 > "During the period commencing at 2 o'clock antemeridian on the second Sunday of March of each year and ending at 2 o'clock antemeridian on the first Sunday of November of each year, the standard time of each zone established by sections 261 to 264 of this title, as modified by of this title, shall be advanced one hour..." (United States Law - 15 U.S.C. §6(IX)(260-7), as amended by Energy Policy Act of 2005).
 
-<a id="dates-time-zone-names-p-10"></a>
-Each region that has a different time zone or daylight savings time rules, either now or at any time back to 1970, is given a unique internal ID, such as `Europe/Paris` . (Some IDs are also distinguished on the basis of differences before 1970.) As with currency codes, these are internal codes. A localized string associated with these is provided for users (such as in the Windows _Control Panels>Date/Time>Time Zone_).
+* <a id="dates-time-zone-names-rule-7"></a> **Each region that**: Each region that has a different time zone or daylight savings time rules, either now or at any time back to 1970, is given a unique internal ID, such as `Europe/Paris` . (Some IDs are also distinguished on the basis of differences before 1970.) As with currency codes, these are internal codes. A localized string associated with these is provided for users (such as in the Windows _Control Panels>Date/Time>Time Zone_).
 
-<a id="dates-time-zone-names-p-11"></a>
-Unfortunately, laws change over time, and will continue to change in the future, both for the boundaries of time zone regions and the rules for daylight savings. Thus the _TZ_ data is continually being augmented. Any two implementations using the same version of the _TZ_ data will get the same results for the same IDs (assuming a correct implementation). However, if implementations use different versions of the data they may get different results. So if precise results are required then both the _TZ_ ID and the _TZ_ data version must be transmitted between the different implementations.
+
+* <a id="dates-time-zone-names-rule-8"></a> **Unfortunately, laws change**: Unfortunately, laws change over time, and will continue to change in the future, both for the boundaries of time zone regions and the rules for daylight savings. Thus the _TZ_ data is continually being augmented. Any two implementations using the same version of the _TZ_ data will get the same results for the same IDs (assuming a correct implementation). However, if implementations use different versions of the data they may get different results. So if precise results are required then both the _TZ_ ID and the _TZ_ data version must be transmitted between the different implementations.
+
 
 For more information, see [[Data Formats](tr35.md#DataFormats)].
 
-<a id="dates-time-zone-names-p-12"></a>
 The following subelements of `<timeZoneNames>` are used to control the fallback process described in [Using Time Zone Names](#Using_Time_Zone_Names).
 
-###### Table: timeZoneNames Elements Used for Fallback <a id="dates-time-zone-names-table-timezonenames-elements-used-for-fallback"></a>
+###### Table: <a name="timeZoneNames_Elements_Used_for_Fallback" href="#timeZoneNames_Elements_Used_for_Fallback">timeZoneNames Elements Used for Fallback</a>
 
 <table><tbody>
+```xml
 <tr><th>Element Name</th><th>Data Examples</th><th>Results/Comment</th></tr>
 <tr><td rowspan="2">hourFormat</td><td rowspan="2">"+HHmm;-HHmm"</td><td>"+1200"</td></tr>
     <tr><td>"-1200"</td></tr>
@@ -1662,19 +1600,20 @@ The following subelements of `<timeZoneNames>` are used to control the fallback 
 <tr><td rowspan="2">regionFormat type="daylight"<br>(or "standard")</td><td>"{0} Daylight Time"</td><td>"France Daylight Time"</td></tr><tr><td>"horario de verano de {0}"</td><td>"horario de verano de Francia"</td></tr>
     <tr><td>fallbackFormat</td><td>"{1} ({0})"</td><td>"Pacific Time (Canada)"</td></tr>
 </tbody></table>
+```
 
-<a id="dates-time-zone-names-table-timezonenames-elements-used-for-fallback-p-1"></a>
-When referring to the abbreviated (short) form of the time zone name, there are often situations where the location-based (city or country) time zone designation for a particular language may not be in common usage in a particular territory.
+* <a id="dates-time-zone-names-table-timezonenames-elements-used-for-fallback-rule-1"></a> **When referring to**: When referring to the abbreviated (short) form of the time zone name, there are often situations where the location-based (city or country) time zone designation for a particular language may not be in common usage in a particular territory.
 
-> <a id="dates-time-zone-names-table-timezonenames-elements-used-for-fallback-note-1"></a> **Note 1**: User interfaces for time zone selection can use the "generic location format" for time zone names to obtain the most useful ordering of names in a menu or list; see _[Using Time Zone Names](#Using_Time_Zone_Names)_ and the zone section of the _[Date Field Symbol Table](#Date_Field_Symbol_Table)._
 
-### <a name="Metazone_Names" id="Metazone_Names" href="#Metazone_Names">Metazone Names</a> <a id="dates-time-zone-names-metazone-names"></a>
+> **Note:** User interfaces for time zone selection can use the "generic location format" for time zone names to obtain the most useful ordering of names in a menu or list; see _[Using Time Zone Names](#Using_Time_Zone_Names)_ and the zone section of the _[Date Field Symbol Table](#Date_Field_Symbol_Table)._
 
-<a id="dates-time-zone-names-metazone-names-p-1"></a>
-A metazone is a grouping of one or more internal TZIDs that share a common display name in current customary usage, or that have shared a common display name during some particular time period. For example, the zones _Europe/Paris, Europe/Andorra, Europe/Tirane, Europe/Vienna, Europe/Sarajevo, Europe/Brussels, Europe/Zurich, Europe/Prague, Europe/Berlin_, and so on are often simply designated _Central European Time_ (or translated equivalent).
+### <a name="Metazone_Names" href="#Metazone_Names">Metazone Names</a>
 
-<a id="dates-time-zone-names-metazone-names-p-2"></a>
-A metazone's display fields become a secondary fallback if an appropriate data field cannot be found in the explicit time zone data. The _usesMetazone_ field indicates that the target metazone is active for a particular time. This also provides a mechanism to effectively deal with situations where the time zone in use has changed for some reason. For example, consider the TZID "America/Indiana/Knox", which observed Central time (GMT-6:00) prior to October 27, 1991, and has currently observed Central time since April 2, 2006, but has observed Eastern time (GMT-5:00) between these two dates. This is denoted as follows
+* <a id="dates-time-zone-names-metazone-names-rule-1"></a> **A metazone is**: A metazone is a grouping of one or more internal TZIDs that share a common display name in current customary usage, or that have shared a common display name during some particular time period. For example, the zones _Europe/Paris, Europe/Andorra, Europe/Tirane, Europe/Vienna, Europe/Sarajevo, Europe/Brussels, Europe/Zurich, Europe/Prague, Europe/Berlin_, and so on are often simply designated _Central European Time_ (or translated equivalent).
+
+
+* <a id="dates-time-zone-names-metazone-names-rule-2"></a> **A metazone's display**: A metazone's display fields become a secondary fallback if an appropriate data field cannot be found in the explicit time zone data. The _usesMetazone_ field indicates that the target metazone is active for a particular time. This also provides a mechanism to effectively deal with situations where the time zone in use has changed for some reason. For example, consider the TZID "America/Indiana/Knox", which observed Central time (GMT-6:00) prior to October 27, 1991, and has currently observed Central time since April 2, 2006, but has observed Eastern time (GMT-5:00) between these two dates. This is denoted as follows
+
 
 ```xml
 <timezone type="America/Indiana/Knox">
@@ -1686,8 +1625,8 @@ A metazone's display fields become a secondary fallback if an appropriate data f
 
 Note that the dates and times are specified in UTC, not local time.
 
-<a id="dates-time-zone-names-metazone-names-p-3"></a>
-_usesMetazone_ can also optionally specify which offset is considered standard time, and which offset is considered daylight time. This is required for some zone such as `Europe/Dublin` where TZDB returns inconsistent results depending on platform/build mode etc.:
+* <a id="dates-time-zone-names-metazone-names-rule-3"></a> **usesMetazone_ can also**: _usesMetazone_ can also optionally specify which offset is considered standard time, and which offset is considered daylight time. This is required for some zone such as `Europe/Dublin` where TZDB returns inconsistent results depending on platform/build mode etc.:
+
 
 ```xml
 <timezone type="Europe/Dublin">
@@ -1737,25 +1676,23 @@ The metazones can then have translations in different locale files, such as the 
 </metazone>
 ```
 
-<a id="dates-time-zone-names-metazone-names-p-4"></a>
-When formatting a date and time value using this data, an application can properly be able to display "Eastern Time" for dates between 1991-10-27 and 2006-04-02, but display "Central Time" for current dates. (See also _[Dates and Date Ranges](tr35.md#Date_Ranges)_.)
+* <a id="dates-time-zone-names-metazone-names-rule-4"></a> **When formatting a**: When formatting a date and time value using this data, an application can properly be able to display "Eastern Time" for dates between 1991-10-27 and 2006-04-02, but display "Central Time" for current dates. (See also _[Dates and Date Ranges](tr35.md#Date_Ranges)_.)
 
-<a id="dates-time-zone-names-metazone-names-p-5"></a>
-Metazones are used with the 'z', 'zzzz', 'v', and 'vvvv' date time pattern characters, and not with the 'Z', 'ZZZZ', 'VVVV' and other pattern characters for time zone formatting. For more information, see [Date Format Patterns](#Date_Format_Patterns).
 
-<a id="dates-time-zone-names-metazone-names-p-6"></a>
+* <a id="dates-time-zone-names-metazone-names-rule-5"></a> **Metazones are used**: Metazones are used with the 'z', 'zzzz', 'v', and 'vvvv' date time pattern characters, and not with the 'Z', 'ZZZZ', 'VVVV' and other pattern characters for time zone formatting. For more information, see [Date Format Patterns](#Date_Format_Patterns).
+
+
 Note that several of the CLDR metazone IDs are the same as TZID aliases provided by the _TZ time zone database_ and also included in ICU data. For example:
 * “Japan” is a CLDR metazone ID (which has short ID “japa”), but also an alias to the TZID “Asia/Tokyo” (which has BCP 47 ID “jptyo”).
 * “GMT” is a CLDR metazone ID (which has short ID “mgmt”), but also an alias to the TZID “Etc/GMT” (which has BCP 47 ID “gmt”).
-<a id="dates-time-zone-names-metazone-names-p-7"></a>
 In practice this is not an issue, since metazone IDs and TZIDs are never used in the same way in any data structure, or in the same APIs in a library such as ICU.
 
-<a id="dates-time-zone-names-metazone-names-p-8"></a>
-The `commonlyUsed` element is now deprecated. The CLDR committee has found it nearly impossible to obtain accurate and reliable data regarding which time zone abbreviations may be understood in a given territory, and therefore has changed to a simpler approach. Thus, if the short metazone form is available in a given locale, it is to be used for formatting regardless of the value of commonlyUsed. If a given short metazone form is known NOT to be understood in a given locale and the parent locale has this value such that it would normally be inherited, the inheritance of this value can be explicitly disabled by use of the 'no inheritance marker' as the value, which is 3 simultaneous empty set characters (U+2205).
+* <a id="dates-time-zone-names-metazone-names-rule-6"></a> **The `commonlyUsed` element**: The `commonlyUsed` element is now deprecated. The CLDR committee has found it nearly impossible to obtain accurate and reliable data regarding which time zone abbreviations may be understood in a given territory, and therefore has changed to a simpler approach. Thus, if the short metazone form is available in a given locale, it is to be used for formatting regardless of the value of commonlyUsed. If a given short metazone form is known NOT to be understood in a given locale and the parent locale has this value such that it would normally be inherited, the inheritance of this value can be explicitly disabled by use of the 'no inheritance marker' as the value, which is 3 simultaneous empty set characters (U+2205).
 
-## <a name="Supplemental_Time_Zone_Data" id="Supplemental_Time_Zone_Data" href="#Supplemental_Time_Zone_Data">Supplemental Time Zone Data</a> <a id="dates-supplemental-time-zone-data"></a>
 
-### <a name="Metazones" id="Metazones" href="#Metazones">Metazones</a> <a id="dates-supplemental-time-zone-data-metazones"></a>
+## <a name="Supplemental_Time_Zone_Data" href="#Supplemental_Time_Zone_Data">Supplemental Time Zone Data</a>
+
+### <a name="Metazones" href="#Metazones">Metazones</a>
 
 ```xml
 <!ELEMENT metaZones (metazoneInfo?, mapTimezones?) >
@@ -1785,8 +1722,8 @@ The `commonlyUsed` element is now deprecated. The CLDR committee has found it ne
 <!ATTLIST mapZone references CDATA #IMPLIED >
 ```
 
-<a id="dates-supplemental-time-zone-data-metazones-p-1"></a>
-The following subelement of `<metaZones>` provides a mapping from a single Unicode time zone id to metazones. For more information about metazones, see _[Time Zone Names](tr35-dates.md#Time_Zone_Names)_.
+* <a id="dates-supplemental-time-zone-data-metazones-rule-1"></a> **The following subelement**: The following subelement of `<metaZones>` provides a mapping from a single Unicode time zone id to metazones. For more information about metazones, see _[Time Zone Names](tr35-dates.md#Time_Zone_Names)_.
+
 
 ```xml
 <metazoneInfo>
@@ -1801,8 +1738,8 @@ The following subelement of `<metaZones>` provides a mapping from a single Unico
     ....
 ```
 
-<a id="dates-supplemental-time-zone-data-metazones-p-2"></a>
-The following subelement of `<metaZones>` specifies a mapping from a metazone to golden zones for each territory. For more information about golden zones, see _[Using Time Zone Names](tr35-dates.md#Using_Time_Zone_Names)_.
+* <a id="dates-supplemental-time-zone-data-metazones-rule-2"></a> **The following subelement**: The following subelement of `<metaZones>` specifies a mapping from a metazone to golden zones for each territory. For more information about golden zones, see _[Using Time Zone Names](tr35-dates.md#Using_Time_Zone_Names)_.
+
 
 ```xml
 <mapTimezones type="metazones">
@@ -1814,13 +1751,12 @@ The following subelement of `<metaZones>` specifies a mapping from a metazone to
     ....
 ```
 
-### <a name="Windows_Zones" id="Windows_Zones" href="#Windows_Zones">Windows Zones</a> <a id="dates-supplemental-time-zone-data-windows-zones"></a>
+### <a name="Windows_Zones" href="#Windows_Zones">Windows Zones</a>
 
 ```xml
 <!ELEMENT windowsZones (mapTimezones?) >
 ```
 
-<a id="dates-supplemental-time-zone-data-windows-zones-p-1"></a>
 The `<mapTimezones>` element can be also used to provide mappings between Unicode time zone IDs and other time zone IDs. This example specifies a mapping from Windows TZIDs to Unicode time zone IDs.
 
 ```xml
@@ -1839,14 +1775,14 @@ The `<mapTimezones>` element can be also used to provide mappings between Unicod
     ....
 ```
 
-<a id="dates-supplemental-time-zone-data-windows-zones-p-2"></a>
-The attributes otherVersion and typeVersion in `<mapTimezones>` specify the versions of two systems. In the example above, otherVersion="07dc0000" specifies the version of Windows time zone and typeVersion="2011n" specifies the version of Unicode time zone IDs. The attribute `territory="001"` in `<mapZone>` element indicates the long canonical Unicode time zone ID specified by the `type` attribute is used as the default mapping for the Windows TZID. For each unique Windows TZID, there must be exactly one `<mapZone>` element with `territory="001"`. `<mapZone>` elements other than `territory="001"` specify territory specific mappings. When multiple Unicode time zone IDs are available for a single territory, the value of the `type` attribute will be a list of Unicode time zone IDs delimited by space. In this case, the first entry represents the default mapping for the territory. The territory "ZZ" is used when a Unicode time zone ID is not associated with a specific territory.
+* <a id="dates-supplemental-time-zone-data-windows-zones-rule-1"></a> **The attributes otherVersion**: The attributes otherVersion and typeVersion in `<mapTimezones>` specify the versions of two systems. In the example above, otherVersion="07dc0000" specifies the version of Windows time zone and typeVersion="2011n" specifies the version of Unicode time zone IDs. The attribute `territory="001"` in `<mapZone>` element indicates the long canonical Unicode time zone ID specified by the `type` attribute is used as the default mapping for the Windows TZID. For each unique Windows TZID, there must be exactly one `<mapZone>` element with `territory="001"`. `<mapZone>` elements other than `territory="001"` specify territory specific mappings. When multiple Unicode time zone IDs are available for a single territory, the value of the `type` attribute will be a list of Unicode time zone IDs delimited by space. In this case, the first entry represents the default mapping for the territory. The territory "ZZ" is used when a Unicode time zone ID is not associated with a specific territory.
+
 
 **Note:** The long canonical Unicode time zone ID might be deprecated in the tz database [[Olson](tr35.md#Olson)]. For example, CLDR uses "Asia/Calcutta" as the long canonical time zone ID for Kolkata, India. The same ID was moved to 'backward' file and replaced with a new ID "Asia/Kolkata" in the tz database. Therefore, if you want to get an equivalent Windows TZID for a zone ID in the tz database, you have to resolve the long canonical Unicode time zone ID (e.g. "Asia/Calcutta") for the zone ID (e.g. "Asia/Kolkata"). For more details, see [Time Zone Identifiers](tr35.md#Time_Zone_Identifiers).
 
 **Note:** Not all Unicode time zones have equivalent Windows TZID mappings. Also, not all Windows TZIDs have equivalent Unicode time zones. For example, there is no equivalent Windows zone for Unicode time zone "Australia/Lord_Howe", and there is no equivalent Unicode time zone for Windows zone "E. Europe Standard Time" (as of CLDR 25 release).
 
-### <a name="Primary_Zones" id="Primary_Zones" href="#Primary_Zones">Primary Zones</a> <a id="dates-supplemental-time-zone-data-primary-zones"></a>
+### <a name="Primary_Zones" href="#Primary_Zones">Primary Zones</a>
 
 ```xml
 <!ELEMENT primaryZones ( primaryZone* ) >
@@ -1854,8 +1790,8 @@ The attributes otherVersion and typeVersion in `<mapTimezones>` specify the vers
 <!ATTLIST primaryZone iso3166 NMTOKEN #REQUIRED >
 ```
 
-<a id="dates-supplemental-time-zone-data-primary-zones-p-1"></a>
-This element is for data that is used to format a time zone’s generic location name. Each `<primaryZone>` element specifies the dominant zone for a region; this zone should use the region name for its generic location name even though there are other canonical zones available in the same region. For example, Asia/Shanghai is displayed as "China Time", instead of "Shanghai Time". Sample data:
+* <a id="dates-supplemental-time-zone-data-primary-zones-rule-1"></a> **This element is**: This element is for data that is used to format a time zone’s generic location name. Each `<primaryZone>` element specifies the dominant zone for a region; this zone should use the region name for its generic location name even though there are other canonical zones available in the same region. For example, Asia/Shanghai is displayed as "China Time", instead of "Shanghai Time". Sample data:
+
 
 ```xml
 <primaryZones>
@@ -1865,15 +1801,15 @@ This element is for data that is used to format a time zone’s generic location
     …
 ```
 
-<a id="dates-supplemental-time-zone-data-primary-zones-p-2"></a>
-This information was previously specified by the LDML `<singleCountries>` element under each locale’s `<timeZoneNames>` element. However, that approach had inheritance issues, and the data is not really locale-specific anyway.
+* <a id="dates-supplemental-time-zone-data-primary-zones-rule-2"></a> **This information was**: This information was previously specified by the LDML `<singleCountries>` element under each locale’s `<timeZoneNames>` element. However, that approach had inheritance issues, and the data is not really locale-specific anyway.
 
-## <a name="Using_Time_Zone_Names" id="Using_Time_Zone_Names" href="#Using_Time_Zone_Names">Using Time Zone Names</a> <a id="dates-using-time-zone-names"></a>
 
-<a id="dates-using-time-zone-names-p-1"></a>
-There are three main types of formats for zone identifiers: GMT, generic (wall time), and standard/daylight. Standard and daylight are equivalent to a particular offset from GMT, and can be represented by a GMT offset as a fallback. In general, this is not true for the generic format, which is used for picking timezones or for conveying a timezone for specifying a recurring time (such as a meeting in a calendar). For either purpose, a GMT offset would lose information.
+## <a name="Using_Time_Zone_Names" href="#Using_Time_Zone_Names">Using Time Zone Names</a>
 
-### <a name="Time_Zone_Format_Terminology" id="Time_Zone_Format_Terminology" href="#Time_Zone_Format_Terminology">Time Zone Format Terminology</a> <a id="dates-using-time-zone-names-time-zone-format-terminology"></a>
+* <a id="dates-using-time-zone-names-rule-1"></a> **There are three**: There are three main types of formats for zone identifiers: GMT, generic (wall time), and standard/daylight. Standard and daylight are equivalent to a particular offset from GMT, and can be represented by a GMT offset as a fallback. In general, this is not true for the generic format, which is used for picking timezones or for conveying a timezone for specifying a recurring time (such as a meeting in a calendar). For either purpose, a GMT offset would lose information.
+
+
+### <a name="Time_Zone_Format_Terminology" href="#Time_Zone_Format_Terminology">Time Zone Format Terminology</a>
 
 The following terminology defines more precisely the formats that are used.
 
@@ -1899,8 +1835,8 @@ The following terminology defines more precisely the formats that are used.
   + New York Time
 + United Kingdom Time
 
-<a id="dates-using-time-zone-names-time-zone-format-terminology-p-1"></a>
-Note: A generic location format is constructed by a part of time zone ID representing an exemplar city name or its country as the final fallback. However, there are Unicode time zones which are not associated with any locations, such as "Etc/GMT+5" and "PST8PDT". Although the date format pattern "VVVV" specifies the generic location format, but it displays localized GMT format for these. Some of these time zones observe daylight saving time, so the result (localized GMT format) may change depending on input date. For generating a list for user selection of time zone with format "VVVV", these non-location zones should be excluded.
+* <a id="dates-using-time-zone-names-time-zone-format-terminology-rule-1"></a> **Note: A generic**: Note: A generic location format is constructed by a part of time zone ID representing an exemplar city name or its country as the final fallback. However, there are Unicode time zones which are not associated with any locations, such as "Etc/GMT+5" and "PST8PDT". Although the date format pattern "VVVV" specifies the generic location format, but it displays localized GMT format for these. Some of these time zones observe daylight saving time, so the result (localized GMT format) may change depending on input date. For generating a list for user selection of time zone with format "VVVV", these non-location zones should be excluded.
+
 
 **Specific non-location format:** Reflects a specific standard or daylight time, which may or may not be the wall time. For example, "10 am Pacific Standard Time" will be GMT-8 in the winter and in the summer.
 
@@ -1911,8 +1847,8 @@ Note: A generic location format is constructed by a part of time zone ID represe
 
 **Localized GMT format:** A constant, specific offset from GMT (or UTC), which may be in a translated form. There are two styles for this:
 
-<a id="dates-using-time-zone-names-time-zone-format-terminology-p-2"></a>
-The first is used when there is an explicit offset from GMT; this style is specified by the `<gmtFormat>` element and `<hourFormat>` element. The long format always uses 2-digit hours field and minutes field, with optional 2-digit seconds field. The short format is intended for the shortest representation and uses hour fields without leading zero, with optional 2-digit minutes and seconds fields. The digits used for hours, minutes and seconds fields in this format are the locale's default decimal digits:
+* <a id="dates-using-time-zone-names-time-zone-format-terminology-rule-2"></a> **The first is**: The first is used when there is an explicit offset from GMT; this style is specified by the `<gmtFormat>` element and `<hourFormat>` element. The long format always uses 2-digit hours field and minutes field, with optional 2-digit seconds field. The short format is intended for the shortest representation and uses hour fields without leading zero, with optional 2-digit minutes and seconds fields. The digits used for hours, minutes and seconds fields in this format are the locale's default decimal digits:
+
 
 * "GMT+03:30" (long)
 * "GMT+3:30" (short)
@@ -1922,7 +1858,6 @@ The first is used when there is an explicit offset from GMT; this style is speci
 * "GMT+00:00" (long)
 * "UTC+0" (short)
 
-<a id="dates-using-time-zone-names-time-zone-format-terminology-p-3"></a>
 The second is used when the offset from GMT is unknown. It is specified by the `<gmtUnknownFormat>` element:
 
 * "GMT+?"
@@ -1936,7 +1871,7 @@ The second is used when the offset from GMT is unknown. It is specified by the `
 * "-08:00" (extended)
 * "Z" (UTC)
 
-> <a id="dates-using-time-zone-names-time-zone-format-terminology-note-1"></a> **Note 1**: This specification extends the original ISO 8601 formats and some format specifiers append seconds field when necessary.
+> Note: This specification extends the original ISO 8601 formats and some format specifiers append seconds field when necessary.
 
 **Raw Offset** - an offset from GMT that does not include any daylight savings behavior. For example, the raw offset for Pacific Time is -8, even though the _observed offset_ may be -8 or -7.
 
@@ -1954,7 +1889,6 @@ For example, the TZID America/Cambridge_Bay is in the following metazones during
 </timezone>
 ```
 
-<a id="dates-using-time-zone-names-time-zone-format-terminology-p-4"></a>
 Zones may join or leave a metazone over time. The data relating between zones and metazones is in the supplemental information; the locale data is restricted to translations of metazones and zones.
 
 > **Invariants:**
@@ -1989,8 +1923,8 @@ Zones may join or leave a metazone over time. The data relating between zones an
 > * The preferred zone for a given metazone and territory XX is in a metazone M during any time when any other zone in XX is also in M
 > * A preferred zone in mapTimezones must have reverse mapping in metazoneInfo
 
-<a id="dates-using-time-zone-names-time-zone-format-terminology-p-5"></a>
-For example, for America_Pacific the preferred zone for Canada is America/Vancouver, and the preferred zone for Mexico is America/Tijuana. The golden zone is America/Los_Angeles, which is also the preferred zone for any other country.
+* <a id="dates-using-time-zone-names-time-zone-format-terminology-rule-3"></a> **For example, for**: For example, for America_Pacific the preferred zone for Canada is America/Vancouver, and the preferred zone for Mexico is America/Tijuana. The golden zone is America/Los_Angeles, which is also the preferred zone for any other country.
+
 
 ```xml
 <mapZone other="America_Pacific" territory="001" type="America/Los_Angeles" />
@@ -2002,7 +1936,7 @@ For example, for America_Pacific the preferred zone for Canada is America/Vancou
 
 **regionFormat:** a formatting string such as "{0} Time", where {0} is the country or city.
 
-### <a name="Time_Zone_Goals" id="Time_Zone_Goals" href="#Time_Zone_Goals">Goals</a> <a id="dates-using-time-zone-names-goals"></a>
+### <a name="Time_Zone_Goals" href="#Time_Zone_Goals">Goals</a>
 
 The timezones are designed so that:
 
@@ -2021,7 +1955,6 @@ The timezones are designed so that:
 >
 > The V/VV/VVV/VVVV format will roundtrip not only the time, but the canonical timezone.
 
-<a id="dates-using-time-zone-names-goals-p-1"></a>
 When the data for a given format is not available, a fallback format is used. The fallback order is given in the following by a list.
 
 1. **Specifics**
@@ -2045,19 +1978,17 @@ When the data for a given format is not available, a fallback format is used. Th
      * falling back to the special ID "unk" (Unknown)
    * VV - long time zone ID (no fallback necessary, because this is the input)
    * VVV - exemplar city
-<a id="dates-using-time-zone-names-goals-p-2"></a>
-* falling back to the localized exemplar city for the unknown zone (Etc/Unknown), for example "Unknown Location" for English
+     * falling back to the localized exemplar city for the unknown zone (Etc/Unknown), for example "Unknown Location" for English
    * VVVV - generic location
      * falling back to long localized GMT
 
 The following process is used for the particular formats, with the fallback rules as above.
 
-<a id="dates-using-time-zone-names-goals-p-3"></a>
-Some of the examples are drawn from real data, while others are for illustration. For illustration the region format is "Hora de {0}". The fallback format in the examples is "{1} ({0})", which is what is in root.
+* <a id="dates-using-time-zone-names-goals-rule-1"></a> **Some of the**: Some of the examples are drawn from real data, while others are for illustration. For illustration the region format is "Hora de {0}". The fallback format in the examples is "{1} ({0})", which is what is in root.
+
 
 1. In **all** cases, first canonicalize the _TZ_ ID according to the Unicode Locale Extension _type_ mapping data (see [Time Zone Identifiers](tr35.md#Time_Zone_Identifiers) for more details). Use that canonical TZID in each of the following steps.
-<a id="dates-using-time-zone-names-goals-p-4"></a>
-1. If the canonicalization fails (i.e. `Etc/Unknown` is returned), skip non-location and location formats and fall back to localized offset format
+    1. If the canonicalization fails (i.e. `Etc/Unknown` is returned), skip non-location and location formats and fall back to localized offset format
         * America/Atka → America/Adak
         * Australia/ACT → Australia/Sydney
         * Australia/Ulladulla -> Etc/Unknown // format as localized offset
@@ -2069,8 +2000,7 @@ Some of the examples are drawn from real data, while others are for illustration
    * Etc/Unknown → "GMT+07:00" // if the offset is known
    * Etc/Unknown → "GMT+?" // if the offset is not known
 
-<a id="dates-using-time-zone-names-goals-p-5"></a>
-**Note:** The digits should be whatever are appropriate for the locale used to format the time zone, not necessarily from the western digits, 0..9. For example, they might be from ०..९.
+    **Note:** The digits should be whatever are appropriate for the locale used to format the time zone, not necessarily from the western digits, 0..9. For example, they might be from ०..९.
 
 3.  For ISO 8601 time zone format return the results according to the ISO 8601 specification.
     * America/Los_Angeles →
@@ -2086,30 +2016,22 @@ Some of the examples are drawn from real data, while others are for illustration
     **Note:** The digits in this case are always from the western digits, 0..9.
 
 4. For the non-location formats (generic or specific):
-<a id="dates-using-time-zone-names-goals-p-6"></a>
-1. if there is an explicit translation for the TZID in `<timeZoneNames>` according to type (generic, standard, or daylight) in the resolved locale, return it.
-<a id="dates-using-time-zone-names-goals-p-7"></a>
-1. If the requested type is not available, but another type is, and there is a **Type Fallback** then return that other type.
+   1. if there is an explicit translation for the TZID in `<timeZoneNames>` according to type (generic, standard, or daylight) in the resolved locale, return it.
+      1. If the requested type is not available, but another type is, and there is a **Type Fallback** then return that other type.
          * Examples:
            * America/Los_Angeles → // generic
            * America/Los_Angeles → "アメリカ太平洋標準時" // standard
            * America/Los_Angeles → "Yhdysvaltain Tyynenmeren kesäaika" // daylight
            * Europe/Dublin  → "Am Samhraidh na hÉireann" // daylight
-<a id="dates-using-time-zone-names-goals-p-8"></a>
-* Note: This translation may not at all be literal: it would be what is most recognizable for people using the target language.
+           * Note: This translation may not at all be literal: it would be what is most recognizable for people using the target language.
    2. Otherwise, get the requested metazone format according to type (generic, standard, daylight).
-<a id="dates-using-time-zone-names-goals-p-9"></a>
-1. If the requested type is not available, but another type is, get the format according to **Type Fallback**.
+      1. If the requested type is not available, but another type is, get the format according to **Type Fallback**.
       2. If there is no format for the type, fall back.
    3. Otherwise do the following:
-<a id="dates-using-time-zone-names-goals-p-10"></a>
-1. Get the country for the current locale. If there is none, use the most likely country based on the likelySubtags data. If there is none, use “001”.
-<a id="dates-using-time-zone-names-goals-p-11"></a>
-2. Get the preferred zone for the metazone for the country; if there is none for the country, use the preferred zone for the metazone for “001”.
-<a id="dates-using-time-zone-names-goals-p-12"></a>
-3. If that preferred zone is the same as the requested zone, use the metazone format. For example, "Pacific Time" for Vancouver if the locale is en_CA, or for Los Angeles if locale is en_US.
-<a id="dates-using-time-zone-names-goals-p-13"></a>
-4. Otherwise, if the zone is the preferred zone for its country but not for the country of the locale, use the metazone format + country in the _fallbackFormat_.
+      1. Get the country for the current locale. If there is none, use the most likely country based on the likelySubtags data. If there is none, use “001”.
+      2. Get the preferred zone for the metazone for the country; if there is none for the country, use the preferred zone for the metazone for “001”.
+      3. If that preferred zone is the same as the requested zone, use the metazone format. For example, "Pacific Time" for Vancouver if the locale is en_CA, or for Los Angeles if locale is en_US.
+      4. Otherwise, if the zone is the preferred zone for its country but not for the country of the locale, use the metazone format + country in the _fallbackFormat_.
       5. Otherwise, use the metazone format + city in the _fallbackFormat_.
          * Examples:
            * "Pacific Time (Canada)" // for the zone Vancouver in the locale en_MX.
@@ -2117,10 +2039,8 @@ Some of the examples are drawn from real data, while others are for illustration
            * "Pacific Time (Whitehorse)"
 5. For the location formats (generic or specific):
    1. Get the _regionFormat_ format according to type (generic, standard, or daylight).
-<a id="dates-using-time-zone-names-goals-p-14"></a>
-2. Determine whether there is only one timezone in the region associated with the timezone (see [Time Zone Identifiers](tr35.md#Time_Zone_Identifiers)).
-<a id="dates-using-time-zone-names-goals-p-15"></a>
-1. If there is only one timezone or if the zone id is in the `<primaryZones>` list, continue with short country name, if it exists, otherwise the country name.
+   2. Determine whether there is only one timezone in the region associated with the timezone (see [Time Zone Identifiers](tr35.md#Time_Zone_Identifiers)).
+      1. If there is only one timezone or if the zone id is in the `<primaryZones>` list, continue with short country name, if it exists, otherwise the country name.
       2. Otherwise, continue with the localized name of the exemplar city for the zone.
    3. Format the region format obtained in step 1 with the location obtained in step 2.
       * Examples:
@@ -2130,7 +2050,7 @@ Some of the examples are drawn from real data, while others are for illustration
         * Africa/Monrovia, generic → "Hora de Liberja"
         * America/Havana, generic → "Hora de CU" // if CU is not localized
 
-> <a id="dates-using-time-zone-names-goals-note-1"></a> **Note 1**: If a language does require grammatical changes when composing strings, then the _regionFormat_ should either use a neutral format such as "Heure: {0}", or put all exceptional cases in explicitly translated strings.
+> **Note:** If a language does require grammatical changes when composing strings, then the _regionFormat_ should either use a neutral format such as "Heure: {0}", or put all exceptional cases in explicitly translated strings.
 
 **Type Fallback**
 
@@ -2141,8 +2061,7 @@ When a specified type (generic, standard, daylight) does not exist:
    2. Otherwise if the standard type exists, use it.
 2. Otherwise if the generic type is needed, but not available, and the offset and daylight offset do not change within 184 day +/- interval around the exact formatted time, use the standard type.
    1. Example: "Mountain Standard Time" for Phoenix
-<a id="dates-using-time-zone-names-goals-p-16"></a>
-2. Note: 184 is the smallest number that is at least 6 months AND the smallest number that is more than 1/2 year (Gregorian).
+   2. Note: 184 is the smallest number that is at least 6 months AND the smallest number that is more than 1/2 year (Gregorian).
 
 **Composition**
 
@@ -2162,31 +2081,27 @@ In composing the metazone + city or country:
 
 **Note:** As with the _regionFormat_, exceptional cases need to be explicitly translated.
 
-### <a name="Time_Zone_Parsing" id="Time_Zone_Parsing" href="#Time_Zone_Parsing">Parsing</a> <a id="dates-using-time-zone-names-parsing"></a>
+### <a name="Time_Zone_Parsing" href="#Time_Zone_Parsing">Parsing</a>
 
-<a id="dates-using-time-zone-names-parsing-p-1"></a>
 In parsing, an implementation will be able to either determine the zone id, or a simple offset from GMT for anything formatting according to the above process.
 
-<a id="dates-using-time-zone-names-parsing-p-2"></a>
 The following is a sample process for how this might be done. It is only a sample; implementations may use different methods for parsing.
 
-<a id="dates-using-time-zone-names-parsing-p-3"></a>
-The sample describes the parsing of a zone as if it were an isolated string. In implementations, the zone may be mixed in with other data (like the time), so the parsing actually has to look for the longest match, and then allow the remaining text to be parsed for other content. That requires certain adaptions to the following process.
+* <a id="dates-using-time-zone-names-parsing-rule-1"></a> **The sample describes**: The sample describes the parsing of a zone as if it were an isolated string. In implementations, the zone may be mixed in with other data (like the time), so the parsing actually has to look for the longest match, and then allow the remaining text to be parsed for other content. That requires certain adaptions to the following process.
+
 
 1. Start with a string S.
 2. If S matches ISO 8601 time zone format, return it.
    * For example, "-0800" (RFC 822), "-08:00" (ISO 8601) => Etc/GMT+8
 3. If S matches the English or localized GMT format, return the corresponding TZID
-<a id="dates-using-time-zone-names-parsing-p-4"></a>
-* Matching should be lenient. Thus allow for the number formats like: 03, 3, 330, 3:30, 33045 or 3:30:45. Allow +, -, or nothing. Allow spaces after GMT, +/-, and before number. Allow non-Latin numbers. Allow UTC or UT (per RFC 788) as synonyms for GMT ("GMT", "UT", "UTC" are global formats, always allowed in parsing regardless of locale).
+* <a id="dates-using-time-zone-names-parsing-rule-2"></a> *** Matching should**: * Matching should be lenient. Thus allow for the number formats like: 03, 3, 330, 3:30, 33045 or 3:30:45. Allow +, -, or nothing. Allow spaces after GMT, +/-, and before number. Allow non-Latin numbers. Allow UTC or UT (per RFC 788) as synonyms for GMT ("GMT", "UT", "UTC" are global formats, always allowed in parsing regardless of locale).
+
    * For example, "GMT+3" or "UT+3" or "HPG+3" => Etc/GMT-3
-<a id="dates-using-time-zone-names-parsing-p-5"></a>
-* When parsing, the absence of a numeric offset should be interpreted as offset 0, whether in localized or global formats. For example, "GMT" or "UT" or "UTC+0" or "HPG" => Etc/GMT
+   * When parsing, the absence of a numeric offset should be interpreted as offset 0, whether in localized or global formats. For example, "GMT" or "UT" or "UTC+0" or "HPG" => Etc/GMT
 4. If S matches the fallback format, extract P = {0} [ie, the part in parens in the root format] and N = {1}.
    If S does not match, set P = "" and N = S.
    If N matches the region format, then M = {0} from that format, otherwise M = N.
-<a id="dates-using-time-zone-names-parsing-p-6"></a>
-* For example, "United States (Los Angeles) Time" => N = "United States Time", M = "United States", P = "Los Angeles".
+   * For example, "United States (Los Angeles) Time" => N = "United States Time", M = "United States", P = "Los Angeles".
    * For example, "United States Time" => N = "United States Time", M = "United States", P = "".
    * For example, "United States" => N = M = "United States", P = "".
 5. If P, N, or M is a localized country, set C to that value. If C has only one zone, return it.
@@ -2195,39 +2110,35 @@ The sample describes the parsing of a zone as if it were an isolated string. In 
 6. If P is a localized exemplar city name (and not metazone), return it.
    * For example, "xxxx (Phoenix)" or "Phoenix (xxx)" => America/Phoenix
 7. If N, or M is a localized time zone name (and not metazone), return it.
-<a id="dates-using-time-zone-names-parsing-p-7"></a>
-* For example, "Pacific Standard Time (xxx)" => "America/Los_Angeles" // this is only if "Pacific Standard Time" is not a metazone localization.
+   * For example, "Pacific Standard Time (xxx)" => "America/Los_Angeles" // this is only if "Pacific Standard Time" is not a metazone localization.
 8. If N or M is a localized metazone
    * If it corresponds to only one TZID, return it.
    * If C is set, look up the Metazone + Country => TZID mapping, and return that value if it exists
-<a id="dates-using-time-zone-names-parsing-p-8"></a>
-* Get the locale's language, and get the default country from that. Look up the Metazone + DefaultCountry => TZID mapping, and return that value if it exists.
+   * Get the locale's language, and get the default country from that. Look up the Metazone + DefaultCountry => TZID mapping, and return that value if it exists.
    * Otherwise, look up Metazone + 001 => TZID and return it (that will always exist)
 9. If you get this far, return an error.
 
-> <a id="dates-using-time-zone-names-parsing-note-1"></a> **Note 1**: This CLDR date parsing recommendation does not fully handle all RFC 788 date/time formats, nor is it intended to.
+> **Note:** This CLDR date parsing recommendation does not fully handle all RFC 788 date/time formats, nor is it intended to.
 
-<a id="dates-using-time-zone-names-parsing-p-9"></a>
-Parsing can be more lenient than the above, allowing for different spacing, punctuation, or other variation. A stricter parse would check for consistency between the xxx portions above and the rest, so "Pacific Standard Time (India)" would give an error.
+* <a id="dates-using-time-zone-names-parsing-rule-3"></a> **Parsing can be**: Parsing can be more lenient than the above, allowing for different spacing, punctuation, or other variation. A stricter parse would check for consistency between the xxx portions above and the rest, so "Pacific Standard Time (India)" would give an error.
 
-<a id="dates-using-time-zone-names-parsing-p-10"></a>
+
 Using this process, a correct parse will roundtrip the location format (VVVV) back to the canonical zoneid.
 
   * Australia/ACT → Australia/Sydney → “Sydney (Australia)” → Australia/Sydney
 
-<a id="dates-using-time-zone-names-parsing-p-11"></a>
 The GMT formats (Z and ZZZZ) will return back an offset, and thus lose the original canonical zone id.
 
   * Australia/ACT → Australia/Sydney → "GMT+11:00" → GMT+11
 
-<a id="dates-using-time-zone-names-parsing-p-12"></a>
-The daylight and standard time formats, and the non-location formats (z, zzzz, v, and vvvv) may either roundtrip back to the original canonical zone id, to a zone in the same metazone that time, or to just an offset, depending on the available translation data. Thus:
+* <a id="dates-using-time-zone-names-parsing-rule-4"></a> **The daylight and**: The daylight and standard time formats, and the non-location formats (z, zzzz, v, and vvvv) may either roundtrip back to the original canonical zone id, to a zone in the same metazone that time, or to just an offset, depending on the available translation data. Thus:
+
 
   * Australia/ACT → Australia/Sydney → "GMT+11:00" → GMT+11
   * PST8PDT → America/Los_Angeles → “PST” → America/Los_Angeles
   * America/Vancouver → “Pacific Time (Canada)” → America/Vancouver
 
-## <a name="Date_Format_Patterns" id="Date_Format_Patterns" href="#Date_Format_Patterns">Date Format Patterns</a> <a id="dates-date-format-patterns"></a>
+## <a name="Date_Format_Patterns" href="#Date_Format_Patterns">Date Format Patterns</a>
 
 A date pattern is a character string consisting of two types of elements:
 
@@ -2235,12 +2146,11 @@ A date pattern is a character string consisting of two types of elements:
 * Literal text, which is output as-is when formatting, and must closely match when parsing. Literal text can include:
   * Any characters other than A..Z and a..z, including spaces and punctuation.
   * Any text between single vertical quotes ('xxxx'), which may include A..Z and a..z as literal text.
-<a id="dates-date-format-patterns-p-1"></a>
-* Two adjacent single vertical quotes (''), which represent a literal single quote, either inside or outside quoted text.
+  * Two adjacent single vertical quotes (''), which represent a literal single quote, either inside or outside quoted text.
 
 The following are examples:
 
-###### Table: Date Format Pattern Examples <a id="dates-date-format-patterns-table-date-format-pattern-examples"></a>
+###### Table: <a name="Date_Format_Pattern_Examples" href="#Date_Format_Pattern_Examples">Date Format Pattern Examples</a>
 
 | Pattern | Result (in a particular locale) |
 | ------- | ------------------------------- |
@@ -2251,15 +2161,14 @@ The following are examples:
 | K:mm a, z | 0:00 PM, PST |
 | yyyyy.MMMM.dd GGG hh:mm aaa | 01996.July.10 AD 12:08 PM |
 
-<a id="dates-date-format-patterns-table-date-format-pattern-examples-p-1"></a>
 _When parsing using a pattern, a lenient parse should be used; see [Parsing Dates and Times](#Parsing_Dates_Times)._
 
 ```xml
 <!ATTLIST pattern numbers CDATA #IMPLIED >
 ```
 
-<a id="dates-date-format-patterns-table-date-format-pattern-examples-p-2"></a>
-The `numbers` attribute is used to indicate that numeric quantities in the pattern are to be rendered using a numbering system other than the default numbering system defined for the given locale. The attribute can be in one of two forms. If the alternate numbering system is intended to apply to ALL numeric quantities in the pattern, then simply use the numbering system ID as found in [Numbering Systems](tr35-numbers.md#Numbering_Systems). To apply the alternate numbering system only to a single field, the syntax `<letter>=<numberingSystem>` can be used one or more times, separated by semicolons.
+* <a id="dates-date-format-patterns-table-date-format-pattern-examples-rule-1"></a> **The `numbers` attribute**: The `numbers` attribute is used to indicate that numeric quantities in the pattern are to be rendered using a numbering system other than the default numbering system defined for the given locale. The attribute can be in one of two forms. If the alternate numbering system is intended to apply to ALL numeric quantities in the pattern, then simply use the numbering system ID as found in [Numbering Systems](tr35-numbers.md#Numbering_Systems). To apply the alternate numbering system only to a single field, the syntax `<letter>=<numberingSystem>` can be used one or more times, separated by semicolons.
+
 
 Examples:
 
@@ -2276,11 +2185,12 @@ Examples:
 
 **Pattern fields and the Date Field Symbol Table**
 
-<a id="dates-date-format-patterns-table-date-format-pattern-examples-p-3"></a>
-The Date Field Symbol Table below shows the pattern characters (Sym.) and associated fields used in date patterns. The length of the pattern field is related to the length and style used to format the data item. For numeric-only fields, the field length typically indicates the minimum number of digits that should be used to display the value (zero-padding as necessary). As an example using pattern character ‘H’ for hour (24-hour cycle) and values 5 and 11, a field “H” should produce formatted results “5” and “11” while a field “HH” should produce formatted results “05” and “11”. For alphanumeric fields (such as months) and alphabetic-only fields (such as era names), the relationship between field length and formatted result may be more complex. Typically this is as follows:
+* <a id="dates-date-format-patterns-table-date-format-pattern-examples-rule-2"></a> **The Date Field**: The Date Field Symbol Table below shows the pattern characters (Sym.) and associated fields used in date patterns. The length of the pattern field is related to the length and style used to format the data item. For numeric-only fields, the field length typically indicates the minimum number of digits that should be used to display the value (zero-padding as necessary). As an example using pattern character ‘H’ for hour (24-hour cycle) and values 5 and 11, a field “H” should produce formatted results “5” and “11” while a field “HH” should produce formatted results “05” and “11”. For alphanumeric fields (such as months) and alphabetic-only fields (such as era names), the relationship between field length and formatted result may be more complex. Typically this is as follows:
+
 
 <!-- HTML: spanned rows, spanned columns -->
  <table>
+```xml
     <tr><th>Pattern field length</th><th>Typical style, alphanumeric item</th><th>Typical style, alpha-only item</th></tr>
     <tr><td>1</td><td>Numeric, 1-2 digits (e.g. M)</td><td rowspan="3">Abbreviated (e.g. E, EE, EEE)</td></tr>
     <tr><td>2</td><td>Numeric, 2 digits (e.g. MM)</td></tr>
@@ -2289,24 +2199,28 @@ The Date Field Symbol Table below shows the pattern characters (Sym.) and associ
     <tr><td>5</td><td colspan="2">Narrow (e.g. MMMMM, EEEEE)<br/>(The counter-intuitive use of 5 letters for this is forced by backwards compatibility)</td></tr>
     <tr><td>&gt;16</td><td colspan="2">Private Use<br/>(Reserved for use by implementations using CLDR; will never be otherwise used by CLDR.)</td></tr>
 </table>
+```
 
 Notes for the table below:
 
 * Any sequence of pattern characters other than those listed below is invalid. Invalid pattern fields should be handled for formatting and parsing as described in [Handling Invalid Patterns](tr35.md#Invalid_Patterns).
 * The examples in the table below are merely illustrative and may not reflect current actual data.
 
-###### Table: Date Field Symbol Table <a id="dates-date-format-patterns-table-date-field-symbol-table"></a>
+###### Table: <a name="Date_Field_Symbol_Table" href="#Date_Field_Symbol_Table">Date Field Symbol Table</a>
 
 <!-- HTML: spanned rows, spanned columns, vertical header cells -->
 <table><tbody>
 <tr><th>Field<br/>Type</th><th>Sym.</th><th>Field<br/>Patterns</th><th>Examples</th><th colspan="2">Description</th></tr>
 
 <!-- == == == ERA == == == -->
+```xml
 <tr><th rowspan="3"><a name="dfst-era" href="#dfst-era">era</a></th><td rowspan="3">G</td><td>G..GGG</td><td>AD<br/>[variant: CE]</td><td>Abbreviated</td><td rowspan="3">Era name. Era string for the current date.</td></tr>
     <tr><td>GGGG</td><td>Anno Domini<br/>[variant: Common Era]</td><td>Wide</td></tr>
     <tr><td>GGGGG</td><td>A</td><td>Narrow</td></tr>
+```
 
 <!-- == == == YEAR == == == -->
+```xml
 <tr><th rowspan="15"><a name="dfst-year" href="#dfst-year">year</a><a name="Year_Length_Examples"></a></th><td rowspan="5">y</td><td>y</td><td>2, 20, 201, 2017, 20173</td>
         <td rowspan="5" colspan="2">Calendar year (numeric). In most cases the length of the y field specifies the minimum number of digits to display, zero-padded as necessary; more digits will be displayed if needed to show the full year.
                                     However, “yy” requests just the two low-order digits of the year, zero-padded as necessary. For most use cases, “y” or “yy” should be adequate.</td></tr>
@@ -2343,8 +2257,10 @@ Notes for the table below:
                         The related Gregorian year is usually displayed using the "latn" numbering system, regardless of what numbering systems may be used for other parts of the formatted date.
                         If the calendar’s year is linked to the solar year (perhaps using leap months), then for that calendar the ‘r’ year will always be at a fixed offset from the ‘u’ year.
                         For the Gregorian calendar, the ‘r’ year is the same as the ‘u’ year. For ‘r’, all field lengths specify a minimum number of digits; there is no special interpretation for “rr”.</td></tr>
+```
 
 <!-- == == == QUARTER == == == -->
+```xml
 <tr><th rowspan="10"><a name="dfst-quarter" id="dfst-quarter" href="#dfst-quarter">quarter</a></th><td rowspan="5">Q</td><td>Q</td><td>2</td><td>Numeric: 1 digit</td><td rowspan="5">Quarter number/name.</td></tr>
     <tr><td>QQ</td><td>02</td><td>Numeric: 2 digits + zero pad</td></tr>
     <tr><td>QQQ</td><td>Q2</td><td>Abbreviated</td></tr>
@@ -2356,8 +2272,10 @@ Notes for the table below:
     <tr><td>qqq</td><td>Q2</td><td>Abbreviated</td></tr>
     <tr><td>qqqq</td><td>2nd quarter</td><td>Wide</td></tr>
     <tr><td>qqqqq</td><td>2</td><td>Narrow</td></tr>
+```
 
 <!-- == == == MONTH == == == -->
+```xml
 <tr><th rowspan="11"><a name="dfst-month" id="dfst-month" href="#dfst-month">month</a></th><td rowspan="5">M</td><td>M</td><td>9, 12</td><td>Numeric: minimum digits</td><td rowspan="5"><b>Format</b> style month number/name: The format style name is an additional form of the month name (besides the stand-alone style) that can be used in contexts where it is different than the stand-alone form. For example, depending on the language, patterns that combine month with day-of month (e.g. "d MMMM") may require the month to be in genitive form. See discussion of <a href="#months_days_quarters_eras">month element</a>. If a separate form is not needed, the format and stand-alone forms can be the same.</td></tr>
     <tr><td>MM</td><td>09, 12</td><td>Numeric: 2 digits, zero pad if needed</td></tr>
     <tr><td>MMM</td><td>Sep</td><td>Abbreviated</td></tr>
@@ -2374,14 +2292,18 @@ Notes for the table below:
         <td colspan="2">This pattern character is deprecated, and should be ignored in patterns.
                         It was originally intended to be used in combination with M to indicate placement of the symbol for leap month in the Chinese calendar.
                         Placement of that marker is now specified using locale-specific &lt;monthPatterns&gt; data, and formatting and parsing of that marker should be handled as part of supporting the regular M and L pattern characters.</td></tr>
+```
 
 <!-- == == == WEEK == == == -->
+```xml
 <tr><th rowspan="3"><a name="dfst-week" id="dfst-week" href="#dfst-week">week</a></th><td rowspan="2">w</td><td>w</td><td>8, 27</td><td>Numeric: minimum digits</td><td rowspan="2">Week of Year (numeric). When used in a pattern with year, use ‘Y’ for the year field instead of ‘y’.</td></tr>
     <tr><td>ww</td><td>08, 27</td><td>Numeric: 2 digits, zero pad if needed</td></tr>
     <!--  W  -->
     <tr><td>W</td><td>W</td><td>3</td><td>Numeric: 1 digit</td><td>Week of Month (numeric)</td></tr>
+```
 
 <!-- == == == DAY == == == -->
+```xml
 <tr><th rowspan="5"><a name="dfst-day" id="dfst-day" href="#dfst-day">day</a></th><td rowspan="2">d</td><td>d</td><td>1</td><td>Numeric: minimum digits</td><td rowspan="2">Day of month (numeric).</td></tr>
     <tr><td>dd</td><td>01</td><td>Numeric: 2 digits, zero pad if needed</td></tr>
     <tr><td>D</td><td>D...DDD</td><td>345</td><td colspan="2">Day of year (numeric). The field length specifies the minimum number of digits, with zero-padding as necessary.</td></tr>
@@ -2393,8 +2315,10 @@ Notes for the table below:
                         Second, it is a local number; that is, it depends on the local time zone.
                         It can be thought of as a single number that encompasses all the date-related fields.
                         The field length specifies the minimum number of digits, with zero-padding as necessary.</td></tr>
+```
 
 <!-- == == == WEEKDAY == == == -->
+```xml
 <tr><th rowspan="15"><a name="dfst-weekday" id="dfst-weekday" href="#dfst-weekday">week<br/>day</a></th><td rowspan="4">E</td><td>E..EEE</td><td>Tue</td><td>Abbreviated</td><td rowspan="4">Day of week name, format style.</td></tr>
     <tr><td>EEEE</td><td>Tuesday</td><td>Wide</td></tr>
     <tr><td>EEEEE</td><td>T</td><td>Narrow</td></tr>
@@ -2415,8 +2339,10 @@ Notes for the table below:
     <tr><td>cccc</td><td>Tuesday</td><td>Wide</td></tr>
     <tr><td>ccccc</td><td>T</td><td>Narrow</td></tr>
     <tr><td>cccccc</td><td>Tu</td><td>Short</td></tr>
+```
 
 <!-- == == == PERIOD == == == -->
+```xml
 <tr><th rowspan="9"><a name="dfst-period" id="dfst-period" href="#dfst-period">period</a></th><td rowspan="3">a</td><td>a..aaa</td><td>am. [e.g. 12 am.]</td><td>Abbreviated</td>
         <td rowspan="3"><strong>AM, PM<br/></strong>May be upper or lowercase depending on the locale and other options.
                                                     The wide form may be the same as the short form if the “real” long form (eg <em>ante meridiem</em>) is not customarily used.
@@ -2439,8 +2365,10 @@ Notes for the table below:
                         Often there is only one width that is customarily used.</td></tr>
     <tr><td>BBBB</td><td>at night<br/>[e.g. 3:00 at night]</td><td>Wide</td></tr>
     <tr><td>BBBBB</td><td>at night<br/>[e.g. 3:00 at night]</td><td>Narrow</td></tr>
+```
 
 <!-- == == == HOUR == == == -->
+```xml
 <tr><th rowspan="22"><a name="dfst-hour" id="dfst-hour" href="#dfst-hour">hour</a></th><td rowspan="2">h</td><td>h</td><td>1, 12</td><td>Numeric: minimum digits</td>
         <td rowspan="2">Hour [1-12]. When used in skeleton data or in a skeleton passed in an API for flexible date pattern generation, it should match the 12-hour-cycle format preferred by the locale (h or K); it should not match a 24-hour-cycle format (H or k).</td></tr>
 <tr><td>hh</td><td>01, 12</td><td>Numeric: 2 digits, zero pad if needed</td></tr>
@@ -2489,13 +2417,17 @@ Notes for the table below:
     <tr><td>CCCC</td><td>08<br/>08 in the morning</td><td>Numeric hour (2 digits, zero pad if needed), wide dayPeriod if used</td></tr>
     <tr><td>CCCCC</td><td>8<br/>8 (morn.)</td><td>Numeric hour (minimum digits), narrow dayPeriod if used</td></tr>
     <tr><td>CCCCCC</td><td>08<br/>08 (morn.)</td><td>Numeric hour (2 digits, zero pad if needed), narrow dayPeriod if used</td></tr>
+```
 
 <!-- == == == MINUTE == == == -->
+```xml
 <tr><th rowspan="2"><a name="dfst-minute" id="dfst-minute" href="#dfst-minute">minute</a></th><td rowspan="2">m</td><td>m</td><td>8, 59</td><td>Numeric: minimum digits</td>
         <td rowspan="2">Minute (numeric). Truncated, not rounded.<br/></td></tr>
     <tr><td>mm</td><td>08, 59</td><td>Numeric: 2 digits, zero pad if needed</td></tr>
+```
 
 <!-- == == == SECOND == == == -->
+```xml
 <tr><th rowspan="4"><a name="dfst-second" id="dfst-second" href="#dfst-second">second</a></th><td rowspan="2">s</td><td>s</td><td>8, 12</td><td>Numeric: minimum digits</td>
         <td rowspan="2">Second (numeric). Truncated, not rounded.<br/></td></tr>
     <tr><td>ss</td><td>08, 12</td><td>Numeric: 2 digits, zero pad if needed</td></tr>
@@ -2510,16 +2442,20 @@ Notes for the table below:
                         On a day of DST cessation, it will jump backward.
                         This reflects the fact that it must be combined with the offset field to obtain a unique local time value.
                         The field length specifies the minimum number of digits, with zero-padding as necessary.</td></tr>
+```
 
 <!-- == == == SEPARATOR == == == -->
+```xml
 <tr><th><a name="dfst-sep" id="dfst-sep" href="#dfst-sep">sep.</a></th><td>(none def., see note)</td><td></td><td></td>
         <td colspan="2">Time separator.<br/><br/><span class="note"><b>Note:</b>
                         In CLDR 26 the time separator pattern character was specified to be COLON.
                         This was withdrawn in CLDR 28 due to backward compatibility issues, and no time separator pattern character is currently defined.</span><br/><br/>
                         Like the use of "," in number formats, this character in a date pattern is replaced with the corresponding number symbol which may depend on the numbering system.
                         For more information, see <em><strong>Part 3: <a href="tr35-numbers.md#Contents">Numbers</a></strong>, <a href="tr35-numbers.md#Number_Symbols">Number Symbols</a></em>.</td></tr>
+```
 
 <!-- == == == ZONE == == == -->
+```xml
 <tr><th rowspan="23"><a name="dfst-zone" id="dfst-zone" href="#dfst-zone">zone</a></th><td rowspan="2">z</td><td>z..zzz</td><td>PDT</td>
         <td colspan="2">The <i>short specific non-location format</i>. Where that is unavailable, falls back to the <i>short localized GMT format</i> ("O").</td></tr>
     <tr><td>zzzz</td><td>Pacific Daylight Time</td>
@@ -2592,107 +2528,102 @@ Notes for the table below:
         <td colspan="2">The <i>ISO8601 extended format</i> with hours, minutes and optional seconds fields. (The same as XXXXX, minus "Z".)<br/>
                         <i><b>Note</b>: The seconds field is not supported by the ISO8601 specification.</i></td></tr>
 </tbody></table>
+```
 
-### <a name="Localized_Pattern_Characters" id="Localized_Pattern_Characters" href="#Localized_Pattern_Characters">Localized Pattern Characters (deprecated)</a> <a id="dates-date-format-patterns-localized-pattern-characters-deprecated"></a>
+### <a name="Localized_Pattern_Characters" href="#Localized_Pattern_Characters">Localized Pattern Characters (deprecated)</a>
 
-<a id="dates-date-format-patterns-localized-pattern-characters-deprecated-p-1"></a>
-These are characters that can be used when displaying a date pattern to an end user. This can occur, for example, when a spreadsheet allows users to specify date patterns. Whatever is in the string is substituted one-for-one with the characters "GyMdkHmsSEDFwWahKzYeugAZvcLQqVUOXxr", with the above meanings. Thus, for example, if 'J' is to be used instead of 'Y' to mean Year (for Week of Year), then the string would be: "GyMdkHmsSEDFwWahKzJeugAZvcLQqVUOXxr".
+* <a id="dates-date-format-patterns-localized-pattern-characters-deprecated-rule-1"></a> **These are characters**: These are characters that can be used when displaying a date pattern to an end user. This can occur, for example, when a spreadsheet allows users to specify date patterns. Whatever is in the string is substituted one-for-one with the characters "GyMdkHmsSEDFwWahKzYeugAZvcLQqVUOXxr", with the above meanings. Thus, for example, if 'J' is to be used instead of 'Y' to mean Year (for Week of Year), then the string would be: "GyMdkHmsSEDFwWahKzJeugAZvcLQqVUOXxr".
 
-<a id="dates-date-format-patterns-localized-pattern-characters-deprecated-p-2"></a>
-This element is deprecated. It is recommended instead that a more sophisticated UI be used for localization, such as using icons to represent the different formats (and lengths) in the [Date Field Symbol Table](#Date_Field_Symbol_Table).
 
-### <a name="Date_Patterns_AM_PM" id="Date_Patterns_AM_PM" href="#Date_Patterns_AM_PM">AM / PM</a> <a id="dates-date-format-patterns-am-pm"></a>
+* <a id="dates-date-format-patterns-localized-pattern-characters-deprecated-rule-2"></a> **This element is**: This element is deprecated. It is recommended instead that a more sophisticated UI be used for localization, such as using icons to represent the different formats (and lengths) in the [Date Field Symbol Table](#Date_Field_Symbol_Table).
 
-<a id="dates-date-format-patterns-am-pm-p-1"></a>
-Even for countries where the customary date format only has a 24 hour format, both the am and pm localized strings must be present and must be distinct from one another. Note that as long as the 24 hour format is used, these strings will normally never be used, but for testing and unusual circumstances they must be present.
 
-### <a name="Date_Patterns_Eras" id="Date_Patterns_Eras" href="#Date_Patterns_Eras">Eras</a> <a id="dates-date-format-patterns-eras"></a>
+### <a name="Date_Patterns_AM_PM" href="#Date_Patterns_AM_PM">AM / PM</a>
 
-<a id="dates-date-format-patterns-eras-p-1"></a>
-There are only two values for era in the Gregorian calendar, with two common naming conventions (here in abbreviated form for English): "BC" and "AD", or "BCE" and "CE". These values can be translated into other languages, like "a.C." and "d.C." for Spanish, but there are no other eras in the Gregorian calendar. Other calendars have different numbers of eras. Care should be taken when translating the era names for a specific calendar.
+* <a id="dates-date-format-patterns-am-pm-rule-1"></a> **Even for countries**: Even for countries where the customary date format only has a 24 hour format, both the am and pm localized strings must be present and must be distinct from one another. Note that as long as the 24 hour format is used, these strings will normally never be used, but for testing and unusual circumstances they must be present.
 
-### <a name="Date_Patterns_Week_Of_Year" id="Date_Patterns_Week_Of_Year" href="#Date_Patterns_Week_Of_Year">Week of Year</a> <a id="dates-date-format-patterns-week-of-year"></a>
 
-<a id="dates-date-format-patterns-week-of-year-p-1"></a>
-Values calculated for the Week of Year field range from 1 to 53 for the Gregorian calendar (they may have different ranges for other calendars). Week 1 for a year is the first week that contains at least the specified minimum number of days from that year. Weeks between week 1 of one year and week 1 of the following year are numbered sequentially from 2 to 52 or 53 (if needed). For example, January 1, 1998 was a Thursday. If the first day of the week is MONDAY and the minimum days in a week is 4 (these are the values reflecting ISO 8601 and many national standards), then week 1 of 1998 starts on December 29, 1997, and ends on January 4, 1998. However, if the first day of the week is SUNDAY, then week 1 of 1998 starts on January 4, 1998, and ends on January 10, 1998. The first three days of 1998 are then part of week 53 of 1997.
+### <a name="Date_Patterns_Eras" href="#Date_Patterns_Eras">Eras</a>
+
+* <a id="dates-date-format-patterns-eras-rule-1"></a> **There are only**: There are only two values for era in the Gregorian calendar, with two common naming conventions (here in abbreviated form for English): "BC" and "AD", or "BCE" and "CE". These values can be translated into other languages, like "a.C." and "d.C." for Spanish, but there are no other eras in the Gregorian calendar. Other calendars have different numbers of eras. Care should be taken when translating the era names for a specific calendar.
+
+
+### <a name="Date_Patterns_Week_Of_Year" href="#Date_Patterns_Week_Of_Year">Week of Year</a>
+
+* <a id="dates-date-format-patterns-week-of-year-rule-1"></a> **Values calculated for**: Values calculated for the Week of Year field range from 1 to 53 for the Gregorian calendar (they may have different ranges for other calendars). Week 1 for a year is the first week that contains at least the specified minimum number of days from that year. Weeks between week 1 of one year and week 1 of the following year are numbered sequentially from 2 to 52 or 53 (if needed). For example, January 1, 1998 was a Thursday. If the first day of the week is MONDAY and the minimum days in a week is 4 (these are the values reflecting ISO 8601 and many national standards), then week 1 of 1998 starts on December 29, 1997, and ends on January 4, 1998. However, if the first day of the week is SUNDAY, then week 1 of 1998 starts on January 4, 1998, and ends on January 10, 1998. The first three days of 1998 are then part of week 53 of 1997.
+
 
 Values are similarly calculated for the Week of Month.
 
-### <a name="Date_Patterns_Week_Elements" id="Date_Patterns_Week_Elements" href="#Date_Patterns_Week_Elements">Week Elements</a> <a id="dates-date-format-patterns-week-elements"></a>
+### <a name="Date_Patterns_Week_Elements" href="#Date_Patterns_Week_Elements">Week Elements</a>
 
 **firstDay**
 
-<a id="dates-date-format-patterns-week-elements-p-1"></a>
-A number indicating which day of the week is considered the 'first' day, for calendar purposes. Because the ordering of days may vary between calendar, keywords are used for this value, such as sun, mon, …. These values will be replaced by the localized name when they are actually used.
+* <a id="dates-date-format-patterns-week-elements-rule-1"></a> **A number indicating**: A number indicating which day of the week is considered the 'first' day, for calendar purposes. Because the ordering of days may vary between calendar, keywords are used for this value, such as sun, mon, …. These values will be replaced by the localized name when they are actually used.
+
 
 **minDays (Minimal Days in First Week)**
 
-<a id="dates-date-format-patterns-week-elements-p-2"></a>
-Minimal days required in the first week of a month or year. For example, if the first week is defined as one that contains at least one day, this value will be 1. If it must contain a full seven days before it counts as the first week, then the value would be 7.
+* <a id="dates-date-format-patterns-week-elements-rule-2"></a> **Minimal days required**: Minimal days required in the first week of a month or year. For example, if the first week is defined as one that contains at least one day, this value will be 1. If it must contain a full seven days before it counts as the first week, then the value would be 7.
+
 
 **weekendStart, weekendEnd**
 
-<a id="dates-date-format-patterns-week-elements-p-3"></a>
 Indicates the day and time that the weekend starts or ends. As with firstDay, keywords are used instead of numbers.
 
-## <a name="Parsing_Dates_Times" id="Parsing_Dates_Times" href="#Parsing_Dates_Times">Parsing Dates and Times</a> <a id="dates-parsing-dates-and-times"></a>
+## <a name="Parsing_Dates_Times" href="#Parsing_Dates_Times">Parsing Dates and Times</a>
 
-<a id="dates-parsing-dates-and-times-p-1"></a>
-For general information on lenient parsing, see [Lenient Parsing](tr35.md#Lenient_Parsing) in the core specification. This section provides additional information specific to parsing of dates and times.
+* <a id="dates-parsing-dates-and-times-rule-1"></a> **For general information**: For general information on lenient parsing, see [Lenient Parsing](tr35.md#Lenient_Parsing) in the core specification. This section provides additional information specific to parsing of dates and times.
 
-<a id="dates-parsing-dates-and-times-p-2"></a>
-Lenient parsing of date and time strings is especially complicated, due to the large number of possible fields and formats. The fields fall into two categories: numeric fields (hour, day of month, year, numeric month, and so on) and symbolic fields (era, quarter, month, weekday, AM/PM, time zone). In addition, the user may type in a date or time in a form that is significantly different from the normal format for the locale, and the application must use the locale information to figure out what the user meant. Input may well consist of nothing but a string of numbers with separators, for example, "09/05/02 09:57:33".
 
-<a id="dates-parsing-dates-and-times-p-3"></a>
-The input can be separated into tokens: numbers, symbols, and literal strings. Some care must be taken due to ambiguity, for example, in the Japanese locale the symbol for March is "3 月", which looks like a number followed by a literal. To avoid these problems, symbols should be checked first, and spaces should be ignored (except to delimit the tokens of the input string).
+* <a id="dates-parsing-dates-and-times-rule-2"></a> **Lenient parsing of**: Lenient parsing of date and time strings is especially complicated, due to the large number of possible fields and formats. The fields fall into two categories: numeric fields (hour, day of month, year, numeric month, and so on) and symbolic fields (era, quarter, month, weekday, AM/PM, time zone). In addition, the user may type in a date or time in a form that is significantly different from the normal format for the locale, and the application must use the locale information to figure out what the user meant. Input may well consist of nothing but a string of numbers with separators, for example, "09/05/02 09:57:33".
 
-<a id="dates-parsing-dates-and-times-p-4"></a>
-The meaning of symbol fields should be easy to determine; the problem is determining the meaning of the numeric fields. Disambiguation will likely be most successful if it is based on heuristics. Here are some rules that can help:
+
+* <a id="dates-parsing-dates-and-times-rule-3"></a> **The input can**: The input can be separated into tokens: numbers, symbols, and literal strings. Some care must be taken due to ambiguity, for example, in the Japanese locale the symbol for March is "3 月", which looks like a number followed by a literal. To avoid these problems, symbols should be checked first, and spaces should be ignored (except to delimit the tokens of the input string).
+
+
+* <a id="dates-parsing-dates-and-times-rule-4"></a> **The meaning of**: The meaning of symbol fields should be easy to determine; the problem is determining the meaning of the numeric fields. Disambiguation will likely be most successful if it is based on heuristics. Here are some rules that can help:
+
 
 * Always try the format string expected for the input text first. This is the only way to disambiguate 03/07 (March 2007, a credit card expiration date) from 03/07 (March 7, a birthday).
 * Attempt to match fields and literals against those in the format string, using loose matching of the tokens. In particular, Unicode normalization and case variants should be accepted. Alternate symbols can also be accepted where unambiguous: for example, “11.30 am”.
 * When matching symbols, try the narrow, abbreviated, and full-width forms, including standalone forms if they are unique. You may want to allow prefix matches too, or diacritic-insensitive, again, as long as they are unique. For example, for a month, accept 9, 09, S, Se, Sep, Sept, Sept., and so on. For abbreviated symbols (e.g. names of eras, months, weekdays), allow matches both with and without an abbreviation marker such as period (or whatever else may be customary in the locale); abbreviated forms in the CLDR data may or may not have such a marker.
-<a id="dates-parsing-dates-and-times-p-5"></a>
-* Note: While parsing of narrow date values (e.g. month or day names) may be required in order to obtain minimum information from a formatted date (for instance, the only month information may be in a narrow form), the results are not guaranteed; parsing of an ambiguous formatted date string may produce a result that differs from the date originally used to create the formatted string.
-<a id="dates-parsing-dates-and-times-p-6"></a>
-* For day periods, ASCII variants for AM/PM such as “am”, “a.m.”, “am.” (and their case variants) should be accepted, since they are widely used as alternates to native formats.
+* <a id="dates-parsing-dates-and-times-rule-5"></a> *** Note: While**: * Note: While parsing of narrow date values (e.g. month or day names) may be required in order to obtain minimum information from a formatted date (for instance, the only month information may be in a narrow form), the results are not guaranteed; parsing of an ambiguous formatted date string may produce a result that differs from the date originally used to create the formatted string.
+
+  * For day periods, ASCII variants for AM/PM such as “am”, “a.m.”, “am.” (and their case variants) should be accepted, since they are widely used as alternates to native formats.
 * When a field or literal is encountered that is not compatible with the pattern:
-<a id="dates-parsing-dates-and-times-p-7"></a>
-* Synchronization is not necessary for symbolic fields, since they are self-identifying. Wait until a numeric field or literal is encountered before attempting to resynchronize.
-<a id="dates-parsing-dates-and-times-p-8"></a>
-* Ignore whether the input token is symbolic or numeric, if it is compatible with the current field in the pattern.
-<a id="dates-parsing-dates-and-times-p-9"></a>
-* Look forward or backward in the current format string for a literal that matches the one most recently encountered. See if you can resynchronize from that point. Use the value of the numeric field to resynchronize as well, if possible (for example, a number larger than the largest month cannot be a month).
-<a id="dates-parsing-dates-and-times-p-10"></a>
-* If that fails, use other format strings from the locale (including those in `<availableFormats>`) to try to match the previous or next symbol or literal (again, using a loose match).
+  * Synchronization is not necessary for symbolic fields, since they are self-identifying. Wait until a numeric field or literal is encountered before attempting to resynchronize.
+  * Ignore whether the input token is symbolic or numeric, if it is compatible with the current field in the pattern.
+* <a id="dates-parsing-dates-and-times-rule-6"></a> *** Look forward**: * Look forward or backward in the current format string for a literal that matches the one most recently encountered. See if you can resynchronize from that point. Use the value of the numeric field to resynchronize as well, if possible (for example, a number larger than the largest month cannot be a month).
 
-## <a name="Semantic_Skeletons" id="Semantic_Skeletons" href="#Semantic_Skeletons">Semantic Skeletons</a> <a id="dates-semantic-skeletons"></a>
+  * If that fails, use other format strings from the locale (including those in `<availableFormats>`) to try to match the previous or next symbol or literal (again, using a loose match).
 
-<a id="dates-semantic-skeletons-p-1"></a>
-When speaking about dates and times, not all combinations of fields are semantically valid. For example, it does not make sense to talk about a particular minute without knowing the hour, or a day-of-month and year without knowing the month. This section defines _semantic skeletons_, a mechanism for expressing the subset of date and time skeletons that are sufficient for almost all use cases.
+## <a name="Semantic_Skeletons" href="#Semantic_Skeletons">Semantic Skeletons</a>
 
-<a id="dates-semantic-skeletons-p-2"></a>
-Libraries implementing UTS 35 may benefit from the use of semantic skeletons in their APIs. Software can optimize for the bounded set of datetime formats defined by semantic skeletons, delivering better performance to users.
+* <a id="dates-semantic-skeletons-rule-1"></a> **When speaking about**: When speaking about dates and times, not all combinations of fields are semantically valid. For example, it does not make sense to talk about a particular minute without knowing the hour, or a day-of-month and year without knowing the month. This section defines _semantic skeletons_, a mechanism for expressing the subset of date and time skeletons that are sufficient for almost all use cases.
 
-<a id="dates-semantic-skeletons-p-3"></a>
-This section describes only the structures and enumerations for expressing a semantic skeleton. The section [Generating Patterns for Semantic Skeletons](#Generating_Patterns_for_Semantic_Skeletons) describes a mechanism to extract the actual pattern backing a semantic skeleton from CLDR data.
+
+* <a id="dates-semantic-skeletons-rule-2"></a> **Libraries implementing UTS**: Libraries implementing UTS 35 may benefit from the use of semantic skeletons in their APIs. Software can optimize for the bounded set of datetime formats defined by semantic skeletons, delivering better performance to users.
+
+
+* <a id="dates-semantic-skeletons-rule-3"></a> **This section describes**: This section describes only the structures and enumerations for expressing a semantic skeleton. The section [Generating Patterns for Semantic Skeletons](#Generating_Patterns_for_Semantic_Skeletons) describes a mechanism to extract the actual pattern backing a semantic skeleton from CLDR data.
+
 
 Note: This document does not currently define a string form, but we may need one for MessageFormat.
 
 > [!IMPORTANT]
 > Semantic skeletons (this section) are a technical preview and should not be considered stable.
 
-### <a name="Parts_of_a_Semantic_Skeleton" id="Parts_of_a_Semantic_Skeleton" href="#Parts_of_a_Semantic_Skeleton">Parts of a Semantic Skeleton</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton"></a>
+### <a name="Parts_of_a_Semantic_Skeleton" href="#Parts_of_a_Semantic_Skeleton">Parts of a Semantic Skeleton</a>
 
 A semantic skeleton is composed of two parts:
 
 1. The _field set_: the minimal set of fields to be displayed. For example, "month and day."
 2. The _options_: configurations that impact the choice and style of fields. For example, "render the fields in a long format." Not all options modify the same fields.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-p-1"></a>
 As a general rule, the field set determines _what is being displayed_, and the options determine _how to display it_.
 
-#### <a name="Semantic_Field_Sets" id="Semantic_Field_Sets" href="#Semantic_Field_Sets">Semantic Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets"></a>
+#### <a name="Semantic_Field_Sets" href="#Semantic_Field_Sets">Semantic Field Sets</a>
 
 This section defines four disjoint categories of field sets:
 
@@ -2703,9 +2634,8 @@ This section defines four disjoint categories of field sets:
 
 Certain combinations of categories form [Composite Field Sets](#Semantic_Composite_Field_Sets).
 
-##### <a name="Semantic_Date_Field_Sets" id="Semantic_Date_Field_Sets" href="#Semantic_Date_Field_Sets">Date Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-date-field-sets"></a>
+##### <a name="Semantic_Date_Field_Sets" href="#Semantic_Date_Field_Sets">Date Field Sets</a>
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-date-field-sets-p-1"></a>
 A _date field set_ refers to a particular day in time. Higher-order fields, such as the month or year, could be omitted, but there must always be a reference to a particular day.
 
 The fields that may be included in a date field set are:
@@ -2727,18 +2657,14 @@ The valid date field sets are in the following table:
 | { Year, Month, Day }              | January 1, 2000           |
 | { Year, Month, Day, Weekday }     | Saturday, January 1, 2000 |
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-date-field-sets-p-2"></a>
 Note: Month and Year are not valid date field sets on their own because they do not refer to a specific day. Instead, they are considered calendar period field sets.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-date-field-sets-p-3"></a>
 Note: This table may be extended in the future to include additional fields, such as week and quarter.
 
-##### <a name="Semantic_Calendar_Period_Field_Sets" id="Semantic_Calendar_Period_Field_Sets" href="#Semantic_Calendar_Period_Field_Sets">Calendar Period Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-calendar-period-field-sets"></a>
+##### <a name="Semantic_Calendar_Period_Field_Sets" href="#Semantic_Calendar_Period_Field_Sets">Calendar Period Field Sets</a>
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-calendar-period-field-sets-p-1"></a>
 A _calendar period field set_ refers to a span of time in a calendar system, _above_ the order of a day.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-calendar-period-field-sets-p-2"></a>
 The fields that are permissible in date field sets are also the ones permissible in calendar period field sets.
 
 The valid calendar period field sets are in the following table:
@@ -2749,30 +2675,25 @@ The valid calendar period field sets are in the following table:
 | { Year }            | 2000         |
 | { Year, Month }     | January 2000 |
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-calendar-period-field-sets-p-3"></a>
 Note: This table may be extended in the future to include additional fields, such as week, quarter, or standalone era.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-calendar-period-field-sets-p-4"></a>
 Note: A _calendar period_ is distinct from a _date_ because it cannot be paired with time to form a composite field set.
 
-##### <a name="Semantic_Time_Field_Sets" id="Semantic_Time_Field_Sets" href="#Semantic_Time_Field_Sets">Time Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-field-sets"></a>
+##### <a name="Semantic_Time_Field_Sets" href="#Semantic_Time_Field_Sets">Time Field Sets</a>
 
 The **Time** field signifies the time of day.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-field-sets-p-1"></a>
 Whether to include the Hour, Minute, Second, or Fractional Second is configured with the [Time Precision](#Semantic_Skeleton_Time_Precision) option.
 
 | Field Set | Example         |
 |-----------|-----------------|
 | { Time }  | 4:03 pm	/ 16:03 |
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-field-sets-p-2"></a>
 Note: A day period (AM/PM) may be implied by the time field, depending on factors such as the length, locale, and hour cycle locale keyword.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-field-sets-p-3"></a>
 Note: Durations, such as "3 minutes and 12 seconds" (or 3:12), are not handled through the skeleton mechanisms.
 
-##### <a name="Semantic_Time_Zone_Field_Sets" id="Semantic_Time_Zone_Field_Sets" href="#Semantic_Time_Zone_Field_Sets">Time Zone Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-zone-field-sets"></a>
+##### <a name="Semantic_Time_Zone_Field_Sets" href="#Semantic_Time_Zone_Field_Sets">Time Zone Field Sets</a>
 
 The **Zone** field signifies the time zone.
 
@@ -2782,9 +2703,8 @@ The rendering can be configured with the [Zone Style](#Semantic_Skeleton_Time_Zo
 |-----------|-------------------------------------|
 | { Zone }  | PST / PT / Los Angeles Time / GMT-8 |
 
-##### <a name="Semantic_Composite_Field_Sets" id="Semantic_Composite_Field_Sets" href="#Semantic_Composite_Field_Sets">Composite Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-composite-field-sets"></a>
+##### <a name="Semantic_Composite_Field_Sets" href="#Semantic_Composite_Field_Sets">Composite Field Sets</a>
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-composite-field-sets-p-1"></a>
 Date, calendar period, and time field sets can be combined in certain ways shown in the following table:
 
 | Categories              | Example Field Set          | Example Output       |
@@ -2794,17 +2714,17 @@ Date, calendar period, and time field sets can be combined in certain ways shown
 | Date + Time + Time Zone | { Month, Day, Time, Zone } | January 1 at 4 pm PT |
 | Time + Time Zone        | { Time, Zone }             | 4 pm PT              |
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-composite-field-sets-p-2"></a>
-Note: "Date + Time Zone" is a valid combination because it refers to a specific span of time. "January 1, PST" refers to the span of time starting at `01-01T00:00-0800` and ending before `01-02T00:00-0800` (with an implied year).
+* <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-composite-field-sets-rule-1"></a> **Note: "Date +**: Note: "Date + Time Zone" is a valid combination because it refers to a specific span of time. "January 1, PST" refers to the span of time starting at `01-01T00:00-0800` and ending before `01-02T00:00-0800` (with an implied year).
+
 
 Note: This table may be extended in the future to include additional combinations.
 
-#### <a name="Semantic_Skeleton_Options" id="Semantic_Skeleton_Options" href="#Semantic_Skeleton_Options">Semantic Skeleton Options</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options"></a>
+#### <a name="Semantic_Skeleton_Options" href="#Semantic_Skeleton_Options">Semantic Skeleton Options</a>
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-p-1"></a>
-A semantic skeleton associates fields with zero or more options, listed in this section. Options apply to specific fields, and they should not be specified if their respective fields are not in the field set. Some options have a default value.
+* <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-rule-1"></a> **A semantic skeleton**: A semantic skeleton associates fields with zero or more options, listed in this section. Options apply to specific fields, and they should not be specified if their respective fields are not in the field set. Some options have a default value.
 
-##### <a name="Semantic_Skeleton_Length" id="Semantic_Skeleton_Length" href="#Semantic_Skeleton_Length">Length</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-length"></a>
+
+##### <a name="Semantic_Skeleton_Length" href="#Semantic_Skeleton_Length">Length</a>
 
 **Required Fields: Year, Month, Day, Weekday, Hour, or Zone**
 
@@ -2822,44 +2742,42 @@ The _length_ determines how wide the fields should be rendered. There are three 
     - 1/1/00
     - 3/7/1446 AH
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-length-p-1"></a>
-Note: Unlike standard CLDR pattern and skeleton strings, there is only one length option for the whole semantic skeleton. This is based on the principle that developers ought to inform the library how much space is available and the context in which the date/time is being displayed, and translators ought to decide how to use that space. For example, it is possible for long month names and abbreviated weekday names to coexist, but that should be a translator decision, not a developer decision. However, this option may be extended in the future to allow hinting at lengths for individual fields.
+* <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-length-rule-1"></a> **Note: Unlike standard**: Note: Unlike standard CLDR pattern and skeleton strings, there is only one length option for the whole semantic skeleton. This is based on the principle that developers ought to inform the library how much space is available and the context in which the date/time is being displayed, and translators ought to decide how to use that space. For example, it is possible for long month names and abbreviated weekday names to coexist, but that should be a translator decision, not a developer decision. However, this option may be extended in the future to allow hinting at lengths for individual fields.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-length-p-2"></a>
-Note: The locale or calendar may coerce the month length to be different than the skeleton length. For example, there is no numeric representation of months in the Hebrew calendar in English, so spelled-out month names will be used in "en-u-ca-hebrew" even if the length is Short.
+
+* <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-length-rule-2"></a> **Note: The locale**: Note: The locale or calendar may coerce the month length to be different than the skeleton length. For example, there is no numeric representation of months in the Hebrew calendar in English, so spelled-out month names will be used in "en-u-ca-hebrew" even if the length is Short.
+
 
 Note: Additional lengths could be added in the future, such as "narrow" or "conversational".
 
-##### <a name="Semantic_Skeleton_Alignment" id="Semantic_Skeleton_Alignment" href="#Semantic_Skeleton_Alignment">Alignment</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-alignment"></a>
+##### <a name="Semantic_Skeleton_Alignment" href="#Semantic_Skeleton_Alignment">Alignment</a>
 
 **Required Fields: Year, Month, Day, or Hour**
 
 **Default Value: Inline**
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-alignment-p-1"></a>
 The _alignment_ provides additional context that can be used for determining how to display certain fields, particularly numeric ones. There are two choices:
 
 1. **Inline:** The text will be displayed in a paragraph, label, heading, or similar context.
 2. **Column:** The text will be displayed vertically in a column-like layout or similar context where similar rendered widths are preferred.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-alignment-p-2"></a>
-Note: The most common behavior with "column" alignment is for implementations to render a minimum of two digits on impacted fields. For example, an implementation might render "01/01/2000" instead of "1/1/2000" in US English.
+* <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-alignment-rule-1"></a> **Note: The most**: Note: The most common behavior with "column" alignment is for implementations to render a minimum of two digits on impacted fields. For example, an implementation might render "01/01/2000" instead of "1/1/2000" in US English.
 
-##### <a name="Semantic_Skeleton_Year_Style" id="Semantic_Skeleton_Year_Style" href="#Semantic_Skeleton_Year_Style">Year Style</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-year-style"></a>
+
+##### <a name="Semantic_Skeleton_Year_Style" href="#Semantic_Skeleton_Year_Style">Year Style</a>
 
 **Required Field: Year**
 
 **Default Value: Auto**
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-year-style-p-1"></a>
 The _year style_ defines the level of precision to use when displaying the year. There are three choices:
 
 1. **Auto:** Display the year with full or partial precision, and display the era if needed to disambiguate the year, depending on locale, calendar, and length.
 2. **Full:** Display the year with full precision, and display the era if needed to disambiguate the year, depending on locale and calendar.
 3. **WithEra:** Display the year with full precision, and always display the era.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-year-style-p-2"></a>
-Going down the list, the three options can be seen as requiring additional context. "Auto" gives translators the most flexibility; "Full" requires that the year be displayed with full precision; and "WithEra" additionally requires that the era field be displayed.
+* <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-year-style-rule-1"></a> **Going down the**: Going down the list, the three options can be seen as requiring additional context. "Auto" gives translators the most flexibility; "Full" requires that the year be displayed with full precision; and "WithEra" additionally requires that the era field be displayed.
+
 
 Implementations could choose to use heuristics such as the following:
 
@@ -2876,17 +2794,16 @@ Examples in Gregorian:
 | Full       | 2020    | 1500    | 750 AD | 500 BC  |
 | WithEra    | 2020 AD | 1500 AD | 750 AD | 500 BC  |
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-year-style-p-3"></a>
 Note: This algorithm and the list of choices is likely to evolve as CLDR learns more about era display customs in different regions and calendar systems, and it may become normative.
 
-##### <a name="Semantic_Skeleton_Hour_Cycle" id="Semantic_Skeleton_Hour_Cycle" href="#Semantic_Skeleton_Hour_Cycle">Hour Cycle</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-hour-cycle"></a>
+##### <a name="Semantic_Skeleton_Hour_Cycle" href="#Semantic_Skeleton_Hour_Cycle">Hour Cycle</a>
 
 **Required Field: Hour**
 
 **Default Value: Auto**
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-hour-cycle-p-1"></a>
-The _hour cycle_, which corresponds directly to the `-u-hc` Unicode Locale extension keyword, determines how hours should be numbered. It is always left up to the locale to determine how and whether day periods should be displayed.
+* <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-hour-cycle-rule-1"></a> **The _hour cycle**: The _hour cycle_, which corresponds directly to the `-u-hc` Unicode Locale extension keyword, determines how hours should be numbered. It is always left up to the locale to determine how and whether day periods should be displayed.
+
 
 The choices are:
 
@@ -2898,19 +2815,17 @@ The choices are:
 6. **Clock12:** Display hours using a 12-hour clock preferred by the locale
 7. **Clock24:** Display hours using a 24-hour clock preferred by the locale
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-hour-cycle-p-2"></a>
-Typically, locales will display a day period on H11, H12, and Clock12, but the day period could be any of those allowed by CLDR, such as AM/PM (field "a"), noon/midnight (field "b"), or flexible day periods such as "in the afternoon" (field "B"). The choice could depend on locale, length, and calendar system.
+* <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-hour-cycle-rule-2"></a> **Typically, locales will**: Typically, locales will display a day period on H11, H12, and Clock12, but the day period could be any of those allowed by CLDR, such as AM/PM (field "a"), noon/midnight (field "b"), or flexible day periods such as "in the afternoon" (field "B"). The choice could depend on locale, length, and calendar system.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-hour-cycle-p-3"></a>
+
 Note: An option could be added in the future to give the developer more control over how day periods are displayed or to disable day periods when there is sufficient context.
 
-##### <a name="Semantic_Skeleton_Time_Precision" id="Semantic_Skeleton_Time_Precision" href="#Semantic_Skeleton_Time_Precision">Time Precision</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-precision"></a>
+##### <a name="Semantic_Skeleton_Time_Precision" href="#Semantic_Skeleton_Time_Precision">Time Precision</a>
 
 **Required Field: Time**
 
 **Default Value: Second**
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-precision-p-1"></a>
 The _time precision_ option defines how precisely the time of day should be displayed. The choices are:
 
 1. **Hour:** Display the time to the hour. Drop minutes and seconds.
@@ -2919,15 +2834,14 @@ The _time precision_ option defines how precisely the time of day should be disp
 4. **Second:** Display the time to the second. Drop fractional seconds.
 5. **FractionalSecond** paired with an integer from 1 to 9: Display the time to the second, and include the specified number of fractional digits.
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-precision-p-2"></a>
-If the input contains more precision than the specified _time precision_ option, extra precision is truncated. For example, "11:59:59" can be displayed as one of "11h", "11:59", or "11:59:59", but never "12h" or "noon".
+* <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-precision-rule-1"></a> **If the input**: If the input contains more precision than the specified _time precision_ option, extra precision is truncated. For example, "11:59:59" can be displayed as one of "11h", "11:59", or "11:59:59", but never "12h" or "noon".
 
-<a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-precision-p-3"></a>
+
 Note: The finest level of precision is currently specified as nanoseconds, consistent with the requirements of many popular datetime libraries.
 
 Note: The default value of time precision may change as more options are added.
 
-##### <a name="Semantic_Skeleton_Time_Zone_Style" id="Semantic_Skeleton_Time_Zone_Style" href="#Semantic_Skeleton_Time_Zone_Style">Time Zone Style</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-zone-style"></a>
+##### <a name="Semantic_Skeleton_Time_Zone_Style" href="#Semantic_Skeleton_Time_Zone_Style">Time Zone Style</a>
 
 **Required Field: Zone**
 
@@ -2950,12 +2864,11 @@ Examples:
 | Location  | Los Angeles Time      |
 | Offset    | GMT-8                 |
 
-### <a name="Generating_Patterns_for_Semantic_Skeletons" id="Generating_Patterns_for_Semantic_Skeletons" href="#Generating_Patterns_for_Semantic_Skeletons">Generating Patterns for Semantic Skeletons</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons"></a>
+### <a name="Generating_Patterns_for_Semantic_Skeletons" href="#Generating_Patterns_for_Semantic_Skeletons">Generating Patterns for Semantic Skeletons</a>
 
-<a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-p-1"></a>
 A semantic skeleton can be mapped to a standard skeleton, which in turn can be mapped to a pattern according to the procedure described in  [Matching Skeletons](#Matching_Skeletons).
 
-#### Mapping to Standard Skeletons <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons"></a>
+#### Mapping to Standard Skeletons
 
 To convert from a semantic skeleton to a standard skeleton, use the following procedure:
 
@@ -2963,7 +2876,6 @@ To convert from a semantic skeleton to a standard skeleton, use the following pr
 2. Apply the [time precision adjustment](#Semantic_Time_Precision_Skeleton_Variations), which may depend on the value being formatted.
 3. Apply the [year style adjustment](#Semantic_Year_Style_Skeleton_Variations), which may depend on the value being formatted.
 
-<a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-p-1"></a>
 The following table contains the basic mapping from a semantic field to a standard field. The special columns indicate:
 
 - Standalone: whether the specified field is the only field in the semantic skeleton. "N/A" means to use the same standard field for both standalone and non-standalone.
@@ -2987,8 +2899,8 @@ The following table contains the basic mapping from a semantic field to a standa
 | Zone           | N/A         | Location          | VVVV   | VVVV   | VVVV   |
 | Zone           | N/A         | Offset            | O      | O      | O      |
 
-<a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-p-2"></a>
-\* Lengths for Year, Month, and Day are taken from the [datetimeSkeleton](#dateFormats) in the Long, Medium, and Short variants. The era field, if present, should be included with the Year. For example, in en-US, CLDR 46, the datetimeSkeletons are:
+* <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-rule-1"></a> **\* Lengths for**: \* Lengths for Year, Month, and Day are taken from the [datetimeSkeleton](#dateFormats) in the Long, Medium, and Short variants. The era field, if present, should be included with the Year. For example, in en-US, CLDR 46, the datetimeSkeletons are:
+
 
 | Length | Calendar  | datetimeSkeleton |
 |--------|-----------|------------------|
@@ -3010,9 +2922,8 @@ This means that the Year, Month, and Day semantic field mapping in en-US should 
 | Month          | Japanese  | MMMM   | MMM    | M      |
 | Day            | Japanese  | d      | d      | d      |
 
-##### <a name="Semantic_Time_Precision_Skeleton_Variations" id="Semantic_Time_Precision_Skeleton_Variations" href="#Semantic_Time_Precision_Skeleton_Variations">Time Precision Skeleton Variations</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-time-precision-skeleton-variations"></a>
+##### <a name="Semantic_Time_Precision_Skeleton_Variations" href="#Semantic_Time_Precision_Skeleton_Variations">Time Precision Skeleton Variations</a>
 
-<a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-time-precision-skeleton-variations-p-1"></a>
 The [time precision](#Semantic_Skeleton_Time_Precision) should change the skeleton for all lengths as follows:
 
 - Hour: No change.
@@ -3021,18 +2932,16 @@ The [time precision](#Semantic_Skeleton_Time_Precision) should change the skelet
 - Second: Add "m" and "s"
 - FractionalSecond: Add "m", "s", and a number of "S" characters equal to the integer option
 
-##### <a name="Semantic_Year_Style_Skeleton_Variations" id="Semantic_Year_Style_Skeleton_Variations" href="#Semantic_Year_Style_Skeleton_Variations">Year Style Skeleton Variations</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-year-style-skeleton-variations"></a>
+##### <a name="Semantic_Year_Style_Skeleton_Variations" href="#Semantic_Year_Style_Skeleton_Variations">Year Style Skeleton Variations</a>
 
-<a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-year-style-skeleton-variations-p-1"></a>
 The [year style](#Semantic_Skeleton_Year_Style) should change the skeleton for all lengths as follows:
 
 - Auto: No change from datetimeSkeleton (note: could be "y", "yy", "yG", or another combination of year and era fields)
 - Full or Auto resolving to Full: Replace "yy" with "y"
 - WithEra or Auto/Full resolving to WithEra: Replace "yy" with "y" and add "G" if there is not already an era field
 
-### <a name="Semantic_Skeleton_Conformance" id="Semantic_Skeleton_Conformance" href="#Semantic_Skeleton_Conformance">Semantic Skeleton Conformance</a> <a id="dates-semantic-skeletons-semantic-skeleton-conformance"></a>
+### <a name="Semantic_Skeleton_Conformance" href="#Semantic_Skeleton_Conformance">Semantic Skeleton Conformance</a>
 
-<a id="dates-semantic-skeletons-semantic-skeleton-conformance-p-1"></a>
 This specification describes at a high level the space of legal configurations for a semantic skeleton. The exact shape of the API or syntax is left to the implementation.
 
 Requirements for an implementation of semantic skeletons to be conformant with this specification:
@@ -3052,21 +2961,16 @@ For example, a conformant specification must reject the following inputs:
 
 © 2001–2026 Unicode, Inc.
 This publication is protected by copyright, and permission must be obtained from Unicode, Inc.
-<a id="dates-semantic-skeletons-semantic-skeleton-conformance-p-2"></a>
 prior to any reproduction, modification, or other use not permitted by the [Terms of Use](https://www.unicode.org/copyright.html).
-<a id="dates-semantic-skeletons-semantic-skeleton-conformance-p-3"></a>
 Specifically, you may make copies of this publication and may annotate and translate it solely for personal or internal business purposes and not for public distribution,
-<a id="dates-semantic-skeletons-semantic-skeleton-conformance-p-4"></a>
 provided that any such permitted copies and modifications fully reproduce all copyright and other legal notices contained in the original.
-<a id="dates-semantic-skeletons-semantic-skeleton-conformance-p-5"></a>
-You may not make copies of or modifications to this publication for public distribution, or incorporate it in whole or in part into any product or publication without the express written permission of Unicode.
+* <a id="dates-semantic-skeletons-semantic-skeleton-conformance-rule-1"></a> **You may not**: You may not make copies of or modifications to this publication for public distribution, or incorporate it in whole or in part into any product or publication without the express written permission of Unicode.
 
-<a id="dates-semantic-skeletons-semantic-skeleton-conformance-p-6"></a>
+
 Use of all Unicode Products, including this publication, is governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html).
 The authors, contributors, and publishers have taken care in the preparation of this publication,
-<a id="dates-semantic-skeletons-semantic-skeleton-conformance-p-7"></a>
-but make no express or implied representation or warranty of any kind and assume no responsibility or liability for errors or omissions or for consequential or incidental damages that may arise therefrom.
+* <a id="dates-semantic-skeletons-semantic-skeleton-conformance-rule-2"></a> **but make no**: but make no express or implied representation or warranty of any kind and assume no responsibility or liability for errors or omissions or for consequential or incidental damages that may arise therefrom.
+
 This publication is provided “AS-IS” without charge as a convenience to users.
 
-<a id="dates-semantic-skeletons-semantic-skeleton-conformance-p-8"></a>
 Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the United States and other countries.

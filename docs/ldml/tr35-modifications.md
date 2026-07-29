@@ -10,6 +10,7 @@ For the full header, table of contents, and status, see [Part 1: Core](tr35.md).
 
 ### _Summary_ <a id="modifications-unicode-technical-standard-35-summary"></a>
 
+<a id="modifications-unicode-technical-standard-35-summary-p-1"></a>
 This is a partial document, describing only the changes to the LDML since the previous release. For the other parts of the LDML see the [main LDML document](tr35.md).
 
 ## <a name="Contents" id="Contents" href="#Contents">Contents of Appendix A, Modifications</a> <a id="modifications-contents-of-appendix-a-modifications"></a>
@@ -32,12 +33,8 @@ This is a partial document, describing only the changes to the LDML since the pr
 ## Modifications <a id="modifications-modifications"></a>
 
 <!--
-* <a id="modifications-modifications-item-1"></a> **Note: As of**: Note: As of CLDR-18209, ALL changes to the spec require this file, tr35-modifications.md to be modified as well.
-
-* <a id="modifications-modifications-item-2"></a> **If you are**: If you are making a change that doesn't need to be noted, or is already noted, please simply add an HTML comment (such as this one) to the appropriate section.
-
-* <a id="modifications-modifications-item-3"></a> **The comment will**: The comment will not be visible to viewers of the HTML page.
-
+<a id="modifications-modifications-p-1"></a>
+Note: As of CLDR-18209, ALL changes to the spec require this file, tr35-modifications.md to be modified as well. If you are making a change that doesn't need to be noted, or is already noted, please simply add an HTML comment (such as this one) to the appropriate section.  The comment will not be visible to viewers of the HTML page.
 
       - regenerated ToC
       - bump spec date
@@ -64,7 +61,8 @@ This is a partial document, describing only the changes to the LDML since the pr
 
 * New section [Nested Bracket Replacement](tr35-general.md#Character_Nested_Bracket_Replacement)
 * [Locale Display Name Algorithm](tr35-general.md#locale_display_name_algorithm) updated to use the nested bracket replacement data and avoid nested parentheses by flattening `-t-` (transform) language names.
-    * As part of this, the display name order is changed so that any names for `-u-` items appear _before_ (instead of after) any names for `-t-` items.
+<a id="modifications-modifications-p-2"></a>
+* As part of this, the display name order is changed so that any names for `-u-` items appear _before_ (instead of after) any names for `-t-` items.
 * Specify that missing `<keys>` translations should fall back to the key identifier
 * The section "Enhanced Language Matching" is retitled as [Language Matching Variables](tr35.md#enhanced-language-matching) and clarified.
 
@@ -99,6 +97,7 @@ CLDR does not closely monitor all ISO 3166-2 changes.
 * [DTD Annotations](tr35.md#DTD_Annotations) Added the @CDATA annotation, to indicate which elements are generated with @CDATA format
 * [Person Name Validation](tr35-personNames.md#person-name-validation) Added guidance for validating person names.
 * [Supplemental Language Data](tr35-info.md#Supplemental_Language_Data) For the `language` subelement of `languageData`, the `territory`
+<a id="modifications-modifications-misc-p-1"></a>
 attribute has been deprecated (and data using it has been removed). A better source for such information is the more detailed data
 in [Supplemental Territory Information](tr35-info.md#Supplemental_Territory_Information).
 
@@ -111,6 +110,7 @@ and updated the guidelines for using the different `dateTimeFormat` types.
 * [Metazone Names](tr35-dates.md#metazone-names) Added `usesMetazone`, to specify which offset is considered standard time, and which offset is considered daylight.
 * [Time Zone Format Terminology](tr35-dates.md#time-zone-format-terminology) Added the **Localized GMT format** (replacing the **Specific location format**).
 This affects the behavior of the `z` timezone format symbol.
+<a id="modifications-modifications-datetime-formats-p-1"></a>
 There is also now a mechanism for finding the region code from short timezone identifier, which is used for the _non-location formats (generic or specific)_
 * [Calendar Data](tr35-dates.md#calendar-data) Specified more precisely the meaning of the `era` attributes in supplemental data, and how to determine the transition point in time between eras.
 
@@ -119,6 +119,7 @@ There is also now a mechanism for finding the region code from short timezone id
 The order of execution is also clearly specified.
 * [Compact Number Formats](tr35-numbers.md#compact-number-formats) Specified the mechanism for formatting compact numbers more precisely.
 * [Rule-Based Number Formatting](tr35-numbers.md#) Added a full specification.
+<a id="modifications-modifications-numbers-p-1"></a>
 The rules have been converted to a “flat” format, which is easier for clients to handle (the old format will be retained for one more release).
 * [Rational Numbers](tr35-numbers.md#rational-numbers) Added support for formatting fractions like 5½ in technical preview.
 
@@ -162,15 +163,22 @@ Click on **Previous Version** in the header until you get to the desired version
 
 © 2001–2026 Unicode, Inc.
 This publication is protected by copyright, and permission must be obtained from Unicode, Inc.
+<a id="modifications-modifications-acknowledgments-section-p-1"></a>
 prior to any reproduction, modification, or other use not permitted by the [Terms of Use](https://www.unicode.org/copyright.html).
+<a id="modifications-modifications-acknowledgments-section-p-2"></a>
 Specifically, you may make copies of this publication and may annotate and translate it solely for personal or internal business purposes and not for public distribution,
+<a id="modifications-modifications-acknowledgments-section-p-3"></a>
 provided that any such permitted copies and modifications fully reproduce all copyright and other legal notices contained in the original.
+<a id="modifications-modifications-acknowledgments-section-p-4"></a>
 You may not make copies of or modifications to this publication for public distribution, or incorporate it in whole or in part into any product or publication without the express written permission of Unicode.
 
+<a id="modifications-modifications-acknowledgments-section-p-5"></a>
 Use of all Unicode Products, including this publication, is governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html).
 The authors, contributors, and publishers have taken care in the preparation of this publication,
+<a id="modifications-modifications-acknowledgments-section-p-6"></a>
 but make no express or implied representation or warranty of any kind and assume no responsibility or liability for errors or omissions or for consequential or incidental damages that may arise therefrom.
 This publication is provided “AS-IS” without charge as a convenience to users.
 
+<a id="modifications-modifications-acknowledgments-section-p-7"></a>
 Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the United States and other countries.
 <!-- Auto SpecFix Wed Apr 29 15:28:28 UTC 2026 -->

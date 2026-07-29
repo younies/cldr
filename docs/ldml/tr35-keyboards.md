@@ -12,8 +12,10 @@ editors:
 
 ### _Summary_ <a id="keyboards-unicode-technical-standard-35-summary"></a>
 
+<a id="keyboards-unicode-technical-standard-35-summary-p-1"></a>
 This document describes parts of an XML format (_vocabulary_) for the exchange of structured locale data. This format is used in the [Unicode Common Locale Data Repository](https://www.unicode.org/cldr/).
 
+<a id="keyboards-unicode-technical-standard-35-summary-p-2"></a>
 This is a partial document, describing keyboards. For the other parts of the LDML see the [main LDML document](tr35.md) and the links above.
 
 ### _Status_ <a id="keyboards-unicode-technical-standard-35-status"></a>
@@ -22,10 +24,15 @@ This is a partial document, describing keyboards. For the other parts of the LDM
 
 > _**A Unicode Technical Standard (UTS)** is an independent specification. Conformance to the Unicode Standard does not imply conformance to any UTS._
 
+<a id="keyboards-unicode-technical-standard-35-status-p-1"></a>
 _Please submit corrigenda and other comments with the CLDR bug reporting form [[Bugs](https://cldr.unicode.org/index/bug-reports)].
+<a id="keyboards-unicode-technical-standard-35-status-p-2"></a>
 Related information that is useful in understanding this document is found in the [References](tr35.md#References).
+<a id="keyboards-unicode-technical-standard-35-status-p-3"></a>
 For the latest version of the Unicode Standard see [[Unicode](https://www.unicode.org/versions/latest/)].
+<a id="keyboards-unicode-technical-standard-35-status-p-4"></a>
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
+<a id="keyboards-unicode-technical-standard-35-status-p-5"></a>
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
 See also [Compatibility Notice](#compatibility-notice).
@@ -141,35 +148,29 @@ The LDML specification is divided into the following parts:
 
 ## Keyboards <a id="keyboards-keyboards"></a>
 
+<a id="keyboards-keyboards-p-1"></a>
 The Unicode Standard and related technologies such as CLDR have dramatically improved the path to language support. However, keyboard support remains platform and vendor specific, causing inconsistencies in implementation as well as timeline.
 
-* <a id="keyboards-keyboards-item-1"></a> **More and more**: More and more language communities are determining that digitization is vital to their approach to language preservation and that engagement with Unicode is essential to becoming fully digitized.
+<a id="keyboards-keyboards-p-2"></a>
+More and more language communities are determining that digitization is vital to their approach to language preservation and that engagement with Unicode is essential to becoming fully digitized. For many of these communities, however, getting new characters or a new script added to The Unicode Standard is not the end of their journey. The next, often more challenging stage is to get device makers, operating systems, apps and services to implement the script requirements that Unicode has just added to support their language.
 
-* <a id="keyboards-keyboards-item-2"></a> **For many of**: For many of these communities, however, getting new characters or a new script added to The Unicode Standard is not the end of their journey.
-
-* <a id="keyboards-keyboards-item-3"></a> **The next, often**: The next, often more challenging stage is to get device makers, operating systems, apps and services to implement the script requirements that Unicode has just added to support their language.
-
-
+<a id="keyboards-keyboards-p-3"></a>
 However, commensurate improvements to streamline new language support on the input side have been lacking. CLDR’s Keyboard specification has been updated in an attempt to address this gap.
 
-* <a id="keyboards-keyboards-item-4"></a> **This document specifies**: This document specifies an interchange format for the communication of keyboard mapping data independent of vendors and platforms.
+<a id="keyboards-keyboards-p-4"></a>
+This document specifies an interchange format for the communication of keyboard mapping data independent of vendors and platforms. Keyboard authors can then create a single mapping file for their language, which implementations can use to provide that language’s keyboard mapping on their own platform.
 
-* <a id="keyboards-keyboards-item-5"></a> **Keyboard authors can**: Keyboard authors can then create a single mapping file for their language, which implementations can use to provide that language’s keyboard mapping on their own platform.
+<a id="keyboards-keyboards-p-5"></a>
+Additionally, the standardized identifier for keyboards can be used to communicate, internally or externally, a request for a particular keyboard mapping that is to be used to transform either text or keystrokes. The corresponding data can then be used to perform the requested actions.  For example, a remote screen-access application (such as used for customer service or server management) would be able to communicate and choose the same keyboard layout on the remote device as is used in front of the user, even if the two systems used different platforms.
 
-
-* <a id="keyboards-keyboards-item-6"></a> **Additionally, the standardized**: Additionally, the standardized identifier for keyboards can be used to communicate, internally or externally, a request for a particular keyboard mapping that is to be used to transform either text or keystrokes.
-
-* <a id="keyboards-keyboards-item-7"></a> **The corresponding data**: The corresponding data can then be used to perform the requested actions.
-
-* <a id="keyboards-keyboards-item-8"></a> **For example, a**: For example, a remote screen-access application (such as used for customer service or server management) would be able to communicate and choose the same keyboard layout on the remote device as is used in front of the user, even if the two systems used different platforms.
-
-
+<a id="keyboards-keyboards-p-6"></a>
 The data can also be used in analysis of the capabilities of different keyboards. It also allows better interoperability by making it easier for keyboard designers to see which characters are generally supported on keyboards for given languages.
 
 <!-- To illustrate this specification, here is an abridged layout representing the English US 101 keyboard on the macOS operating system (with an inserted long-press example). -->
 
 For complete examples, see the XML files in the CLDR source repository.
 
+<a id="keyboards-keyboards-p-7"></a>
 Attribute values should be evaluated considering the DTD and [DTD Annotations](tr35.md#dtd-annotations).
 
 * * *
@@ -180,7 +181,8 @@ Some goals of this format are:
 
 1. Physical and virtual keyboard layouts defined in a single file.
 2. Provide definitive platform-independent definitions for new keyboard layouts.
-    * For example, a new French standard keyboard layout would have a single definition which would be usable across all implementations.
+<a id="keyboards-goals-and-non-goals-p-1"></a>
+* For example, a new French standard keyboard layout would have a single definition which would be usable across all implementations.
 3. Allow platforms to be able to use CLDR keyboard data for the character-emitting keys (non-frame) aspects of keyboard layouts.
 4. Deprecate & archive existing LDML platform-specific layouts so they are not part of future releases.
 
@@ -197,16 +199,12 @@ Some non-goals (outside the scope of the format) currently are:
 4. Support for prior (pre 3.0) CLDR keyboard files. See [Compatibility Notice](#compatibility-notice).
 5. Run-time efficiency. [LDML is explicitly an interchange format](tr35.md#Introduction), and so it is expected that data will be transformed to a more compact format for use by a keystroke processing engine.
 6. Platform-specific frame keys such as Fn, Numpad, IME swap keys, and cursor keys are out of scope.
-   (This also means that in this specification, modifier (frame) keys cannot generate output, such as capslock producing backslash.)
+<a id="keyboards-goals-and-non-goals-p-2"></a>
+(This also means that in this specification, modifier (frame) keys cannot generate output, such as capslock producing backslash.)
 
 <!-- 1. Display names or symbols for keycaps (eg, the German name for "Return"). If that were added to LDML, it would be in a different structure, outside the scope of this section.
 2. Advanced IME features, handwriting recognition, etc.
-* <a id="keyboards-goals-and-non-goals-item-1"></a> **3**: 3.
-
-* <a id="keyboards-goals-and-non-goals-item-2"></a> **Roundtrip mappings—the ability**: Roundtrip mappings—the ability to recover precisely the same format as an original platform's representation.
-
-* <a id="keyboards-goals-and-non-goals-item-3"></a> **In particular, the**: In particular, the internal structure may have no relation to the internal structure of external keyboard source data, the only goal is functional equivalence. -->
-
+3. Roundtrip mappings—the ability to recover precisely the same format as an original platform's representation. In particular, the internal structure may have no relation to the internal structure of external keyboard source data, the only goal is functional equivalence. -->
 
 <!-- Note: During development of this section, it was considered whether the modifier RAlt (= AltGr) should be merged with Option. In the end, they were kept separate, but for comparison across platforms implementers may choose to unify them. -->
 
@@ -223,6 +221,7 @@ Note that in parts of this document, the format `@x` is used to indicate the _at
 
 ### Accessibility <a id="keyboards-goals-and-non-goals-accessibility"></a>
 
+<a id="keyboards-goals-and-non-goals-accessibility-p-1"></a>
 Keyboard use can be challenging for individuals with various types of disabilities. For this revision, features or architectural designs specifically for the purpose of improving accessibility are not yet included. However:
 
 1. Having an industry-wide standard format for keyboards will enable accessibility software to make use of keyboard data with a reduced dependence on platform-specific knowledge.
@@ -285,19 +284,20 @@ Keyboard implementations will typically consist of two parts:
 
 - Ellipses (`…`) in syntax examples are used to denote substituted parts.
 
-* <a id="keyboards-notation-item-1"></a> **For example, `id="…keyId**: For example, `id="…keyId"` denotes that `…keyId` (the part between double quotes) is to be replaced with something, in this case a key identifier.
-
-* <a id="keyboards-notation-item-2"></a> **As another example**: As another example, `\u{…usv}` denotes that the `…usv` is to be replaced with something, in this case a Unicode scalar value in hex.
-
+<a id="keyboards-notation-p-1"></a>
+For example, `id="…keyId"` denotes that `…keyId` (the part between double quotes) is to be replaced with something, in this case a key identifier. As another example, `\u{…usv}` denotes that the `…usv` is to be replaced with something, in this case a Unicode scalar value in hex.
 
 ### Escaping <a id="keyboards-notation-escaping"></a>
 
+<a id="keyboards-notation-escaping-p-1"></a>
 When explicitly specified, attribute values can contain escaped characters. This specification uses two methods of escaping, the _UnicodeSet_ notation and the `\u{…usv}` notation.
 
 ### UnicodeSet Escaping <a id="keyboards-notation-unicodeset-escaping"></a>
 
+<a id="keyboards-notation-unicodeset-escaping-p-1"></a>
 The _UnicodeSet_ notation is described in [UTS #35 section 5.3.3](tr35.md#Unicode_Sets) and allows for comprehensive character matching, including by character range, properties, names, or codepoints.
 
+<a id="keyboards-notation-unicodeset-escaping-p-2"></a>
 Note that the `\u1234` and `\x{C1}` format escaping is not supported, only the `\u{…}` format (using `bracketedHex`).
 
 Currently, the following attribute values allow _UnicodeSet_ notation:
@@ -307,12 +307,8 @@ Currently, the following attribute values allow _UnicodeSet_ notation:
 
 ### UTS18 Escaping <a id="keyboards-notation-uts18-escaping"></a>
 
-* <a id="keyboards-notation-uts18-escaping-item-1"></a> **The `\u{…usv}` notation**: The `\u{…usv}` notation, a subset of hex notation, is described in [UTS #18 section 1.1](https://www.unicode.org/reports/tr18/#Hex_notation).
-
-* <a id="keyboards-notation-uts18-escaping-item-2"></a> **It can refer**: It can refer to one or multiple individual codepoints.
-
-* <a id="keyboards-notation-uts18-escaping-item-3"></a> **Currently, the following**: Currently, the following attribute values allow the `\u{…}` notation:
-
+<a id="keyboards-notation-uts18-escaping-p-1"></a>
+The `\u{…usv}` notation, a subset of hex notation, is described in [UTS #18 section 1.1](https://www.unicode.org/reports/tr18/#Hex_notation). It can refer to one or multiple individual codepoints. Currently, the following attribute values allow the `\u{…}` notation:
 
 * `output` on the `<key>` element
 * `from` or `to` on the `<transform>` element
@@ -320,8 +316,10 @@ Currently, the following attribute values allow _UnicodeSet_ notation:
 * `output` and `display` on the `<display>` element
 * `baseCharacter` on the `<displayOptions>` element
 
+<a id="keyboards-notation-uts18-escaping-p-2"></a>
 Characters of general category of Mark (M), Control characters (Cc), Format characters (Cf), and whitespace other than space should be encoded using one of the notation above as appropriate.
 
+<a id="keyboards-notation-uts18-escaping-p-3"></a>
 Attribute values escaped in this manner are annotated with the `<!--@ALLOWS_UESC-->` DTD annotation, see [DTD Annotations](tr35.md#dtd-annotations)
 
 * * *
@@ -350,16 +348,20 @@ See [Element special](tr35.md#special) in Part 1.
 
 ## Normalization <a id="keyboards-normalization"></a>
 
+<a id="keyboards-normalization-p-1"></a>
 Unicode Normalization, as described in [The Unicode Standard](https://www.unicode.org/reports/tr41/#Unicode/), is a process by which Unicode text is processed to eliminate unwanted distinctions.
 
+<a id="keyboards-normalization-p-2"></a>
 This section discusses how conformant keyboards are affected by normalization, and the impact of normalization on keyboard authors and keyboard implmentations.
 
+<a id="keyboards-normalization-p-3"></a>
 Keyboard implementations will usually apply normalization as appropriate when matching transform rules and `<display>` value matching.
+<a id="keyboards-normalization-p-4"></a>
 Output from the keyboard, following application of all transform rules, will be normalized to the appropriate form by the keyboard implementation.
 
-* <a id="keyboards-normalization-note-1"></a> **Note**: There are many existing software libraries which perform Unicode Normalization, including [ICU](https://icu.unicode.org), [ICU4X](https://icu4x.unicode.org), and JavaScript's [String.prototype.normalize()](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/normalize).
+> <a id="keyboards-normalization-note-1"></a> **Note 1**: There are many existing software libraries which perform Unicode Normalization, including [ICU](https://icu.unicode.org), [ICU4X](https://icu4x.unicode.org), and JavaScript's [String.prototype.normalize()](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/normalize).
 
-
+<a id="keyboards-normalization-p-5"></a>
 Keyboard authors will not typically need to perform normalization as part of the keyboard layout.  However, authors should be aware of areas where normalization affects keyboard operation so that they may achieve their desired results.
 
 ### Where Normalization Occurs <a id="keyboards-normalization-where-normalization-occurs"></a>
@@ -384,41 +386,38 @@ There are four stages where normalization must be performed by keyboard implemen
     - From any form to NFD: full normalization (decompose+reorder)
     - Markers in the cached context must be preserved.
 
-    Example: The input context contains U+00E8 (`è`).  The user clicks the cursor after the character, then presses a key which produces U+0320 (`<key output="\u{0320}"/>`).
+<a id="keyboards-normalization-where-normalization-occurs-p-1"></a>
+Example: The input context contains U+00E8 (`è`).  The user clicks the cursor after the character, then presses a key which produces U+0320 (`<key output="\u{0320}"/>`).
     The implementation must normalize the context buffer to `e\u{0320}\u{0300}` (`è̠`) before matching.
 
 3. **Before each `transformGroup`**
 
     Text must be normalized before processing by the next `transformGroup`.
 
-    - To NFD: no decomposition should be needed, because all of the input text (including transform rules) was already in NFD form.
+<a id="keyboards-normalization-where-normalization-occurs-p-2"></a>
+- To NFD: no decomposition should be needed, because all of the input text (including transform rules) was already in NFD form.
     However, marker reordering may be needed if transforms insert segments out of order.
     - Markers must be preserved.
 
-* <a id="keyboards-normalization-where-normalization-occurs-item-1"></a> **Example: The input**: Example: The input context contains U+00E8 (`è`).
-
-* <a id="keyboards-normalization-where-normalization-occurs-item-2"></a> **The user clicks**: The user clicks the cursor after this character, then presses a key producing `x`.
-
-* <a id="keyboards-normalization-where-normalization-occurs-item-3"></a> **A transform rule**: A transform rule `<transform from='x' to='\u{0320}'/>` matches.
-
-* <a id="keyboards-normalization-where-normalization-occurs-item-4"></a> **The implementation must**: The implementation must normalize the intermediate buffer to `e\u{0320}\u{0300}` (`è̠`) before proceeding to the next `transformGroup`.
-
+<a id="keyboards-normalization-where-normalization-occurs-p-3"></a>
+Example: The input context contains U+00E8 (`è`).  The user clicks the cursor after this character, then presses a key producing `x`. A transform rule `<transform from='x' to='\u{0320}'/>` matches. The implementation must normalize the intermediate buffer to `e\u{0320}\u{0300}` (`è̠`) before proceeding to the next `transformGroup`.
 
 4. **Before output to the platform/application**
 
-    Text must be normalized into the output form requested by the platform or application. This will typically be NFC, but may not be.
+<a id="keyboards-normalization-where-normalization-occurs-p-4"></a>
+Text must be normalized into the output form requested by the platform or application. This will typically be NFC, but may not be.
 
     - If normalizing to NFC, full normalization (reorder+composition) will be required.
-    - No markers are present in this text, they are removed prior to output but retained in the implementation's input context for subsequent keystrokes. See [markers](#markers).
+<a id="keyboards-normalization-where-normalization-occurs-p-5"></a>
+- No markers are present in this text, they are removed prior to output but retained in the implementation's input context for subsequent keystrokes. See [markers](#markers).
 
-    Example: The result of keystrokes and transform processing produces the string `e\u{0300}`. The keyboard implementation normalizes this to a single NFC codepoint U+00E8 (`è`), which is returned to the application.
+<a id="keyboards-normalization-where-normalization-occurs-p-6"></a>
+Example: The result of keystrokes and transform processing produces the string `e\u{0300}`. The keyboard implementation normalizes this to a single NFC codepoint U+00E8 (`è`), which is returned to the application.
 
 ### Normalization and Transform Matching <a id="keyboards-normalization-normalization-and-transform-matching"></a>
 
-* <a id="keyboards-normalization-normalization-and-transform-matching-item-1"></a> **Regardless of the**: Regardless of the normalization form in the keyboard source file or in the edit buffer context, transform matching will be performed using **NFD**.
-
-* <a id="keyboards-normalization-normalization-and-transform-matching-item-2"></a> **For example, all**: For example, all of the following transforms will match the input strings è̠, whether the input is U+00E8 U+0320, U+0065 U+0320 U+0300, or U+0065 U+0300 U+0320.
-
+<a id="keyboards-normalization-normalization-and-transform-matching-p-1"></a>
+Regardless of the normalization form in the keyboard source file or in the edit buffer context, transform matching will be performed using **NFD**. For example, all of the following transforms will match the input strings è̠, whether the input is U+00E8 U+0320, U+0065 U+0320 U+0300, or U+0065 U+0300 U+0320.
 
 ```xml
 <transform from="e\u{0320}\u{0300}" /> <!-- NFD -->
@@ -429,51 +428,59 @@ There are four stages where normalization must be performed by keyboard implemen
 ### Normalization and Markers <a id="keyboards-normalization-normalization-and-markers"></a>
 
 A special issue occurs when markers are involved.
+<a id="keyboards-normalization-normalization-and-markers-p-1"></a>
 [Markers](#markers) are not text, and so not themselves modified or reordered by the Unicode Normalization Algorithm.
+<a id="keyboards-normalization-normalization-and-markers-p-2"></a>
 Existing Normalization APIs typically operate on plain text, and so those APIs can not be used with content containing markers.
 
+<a id="keyboards-normalization-normalization-and-markers-p-3"></a>
 However, the markers must be retained and processed by keyboard implementations in a manner which will be both consistent across implementations and predictable to keyboard authors.
+<a id="keyboards-normalization-normalization-and-markers-p-4"></a>
 Inconsistencies would result in different user experiences — specifically, different or incorrect text output — on some implementations and not another.
+<a id="keyboards-normalization-normalization-and-markers-p-5"></a>
 Unpredictability would make it challenging for the keyboard author to create a keyboard with expected behavior.
 
 This section gives an algorithm for implementing normalization on a text stream including markers.
 
+<a id="keyboards-normalization-normalization-and-markers-p-6"></a>
 _Note:_ When the algorithm is performed on a plain text stream that doesn't include markers, implementations may skip the removing/re-adding steps 1 and 3 because no markers are involved.
 
 #### Rationale for 'gluing' markers <a id="keyboards-normalization-normalization-and-markers-rationale-for-gluing-markers"></a>
 
+<a id="keyboards-normalization-normalization-and-markers-rationale-for-gluing-markers-p-1"></a>
 The processing described here describes an extension to Unicode normalization to account for the desired behavior of markers.
 
-* <a id="keyboards-normalization-normalization-and-markers-rationale-for-gluing-markers-item-1"></a> **The algorithm described**: The algorithm described considers markers 'glued' (remaining with) the following character.
-
-* <a id="keyboards-normalization-normalization-and-markers-rationale-for-gluing-markers-item-2"></a> **If a context**: If a context ends with a marker, that marker would be guaranteed to remain at the end after processing, consistently located with respect to the next keystroke to be input.
-
+<a id="keyboards-normalization-normalization-and-markers-rationale-for-gluing-markers-p-2"></a>
+The algorithm described considers markers 'glued' (remaining with) the following character. If a context ends with a marker, that marker would be guaranteed to remain at the end after processing, consistently located with respect to the next keystroke to be input.
 
 1. Keyboard authors can keep a marker together with a character of interest by emitting the marker just previous to that character.
 
+<a id="keyboards-normalization-normalization-and-markers-rationale-for-gluing-markers-p-3"></a>
 For example, given a key `output="\m{marker}X"`, the marker will proceed `X` regardless of any normalization. (If `output="X\m{marker}"` were used, and `X` were to reorder with other characters, the marker would no longer be adjacent to the X.)
 
 2. Markers which are at the end of the input remain at the end of input during normalization.
 
+<a id="keyboards-normalization-normalization-and-markers-rationale-for-gluing-markers-p-4"></a>
 For example, given input context which ends with a marker, such as `...ABCDX\m{marker}`, the marker will remain at the end of the input context regardless of any normalization.
 
+<a id="keyboards-normalization-normalization-and-markers-rationale-for-gluing-markers-p-5"></a>
 The 'gluing' is only applicable during one particular processing step. It does not persist or affect further processing steps or future keystrokes.
 
 #### Data Model: `Marker` <a id="keyboards-normalization-normalization-and-markers-data-model-marker"></a>
 
+<a id="keyboards-normalization-normalization-and-markers-data-model-marker-p-1"></a>
 For purposes of this algorithm, a `Marker` is an opaque data type which has one property, its ID. See [Markers](#markers) for a discussion of the marker ID.
 
 #### Data Model: string <a id="keyboards-normalization-normalization-and-markers-data-model-string"></a>
 
-* <a id="keyboards-normalization-normalization-and-markers-data-model-string-item-1"></a> **For purposes of**: For purposes of this algorithm, a string is an array of elements, where each element is either a codepoint or a `Marker`.
-
-* <a id="keyboards-normalization-normalization-and-markers-data-model-string-item-2"></a> **For example, a**: For example, a [`key`](#element-key) in the XML such as `<key id="sha" output="𐓯\m{mymarker}x" />` would produce a string with three elements:
-
+<a id="keyboards-normalization-normalization-and-markers-data-model-string-p-1"></a>
+For purposes of this algorithm, a string is an array of elements, where each element is either a codepoint or a `Marker`. For example, a [`key`](#element-key) in the XML such as `<key id="sha" output="𐓯\m{mymarker}x" />` would produce a string with three elements:
 
 1. The codepoint U+104EF
 2. The `Marker` named `mymarker`
 3. The codepoint U+0078
 
+<a id="keyboards-normalization-normalization-and-markers-data-model-string-p-2"></a>
 If this string were output to an application, it would be converted to _plain text_ by removing all markers, which would yield the plain text string with only two codepoints: `𐓯x`.
 
 #### Data Model: `MarkerEntry` <a id="keyboards-normalization-normalization-and-markers-data-model-markerentry"></a>
@@ -492,7 +499,8 @@ This algorithm has three main phases to it.
 
 1. **Parsing/Removing Markers**
 
-    In this phase, the input string is analyzed to locate all markers. Metadata about each marker is stored in a temporary `MarkerArray` data structure.
+<a id="keyboards-normalization-normalization-and-markers-marker-algorithm-overview-p-1"></a>
+In this phase, the input string is analyzed to locate all markers. Metadata about each marker is stored in a temporary `MarkerArray` data structure.
     Markers are removed from the input string, leaving only plain text.
 
 2. **Plain Text Processing**
@@ -516,7 +524,8 @@ Given an input string _s_
         2. remove the marker from the input string _s_
     2. else if _i_ is a codepoint:
         1. Decompose _i_ into NFD form into a plain text string array of codepoints _d_
-        2. Add an element with `glue=d[0]` (the first codepoint of _d_) and `divider? = true` to the end of _e_
+<a id="keyboards-normalization-normalization-and-markers-phase-1-parsingremoving-markers-p-1"></a>
+2. Add an element with `glue=d[0]` (the first codepoint of _d_) and `divider? = true` to the end of _e_
         3. For every marker _m_ in _pending_:
             1. Add an element with `glue=d[0]` and `marker=m` and `divider? = false` to the end of _e_
         4. Clear the _pending_ array.
@@ -533,6 +542,7 @@ The array _e_ will be used in Phase 3.
 
 #### Phase 2: Plain Text Processing <a id="keyboards-normalization-normalization-and-markers-phase-2-plain-text-processing"></a>
 
+<a id="keyboards-normalization-normalization-and-markers-phase-2-plain-text-processing-p-1"></a>
 See [UAX #15](https://www.unicode.org/reports/tr15/#Description_Norm) for an overview of the process.  An existing Unicode-compliant API can be used here.
 
 #### Phase 3: Adding Markers <a id="keyboards-normalization-normalization-and-markers-phase-3-adding-markers"></a>
@@ -575,6 +585,7 @@ If we add markers:
 - `e\u{0300}\m{marker}\u{0320}` (input)
 - `e\m{marker}\u{0320}\u{0300}` (NFD)
 
+<a id="keyboards-normalization-normalization-and-markers-example-normalization-with-markers-p-1"></a>
 Note that the marker is 'glued' to the _following_ character. In the above example, `\m{marker}` was 'glued' to the `\u{0320}`.
 
 **Example 2**
@@ -584,6 +595,7 @@ A second example:
 - `e\m{marker0}\u{0300}\m{marker1}\u{0320}\m{marker2}` (input)
 - `e\m{marker1}\u{0320}\m{marker0}\u{0300}\m{marker2}` (NFD)
 
+<a id="keyboards-normalization-normalization-and-markers-example-normalization-with-markers-p-2"></a>
 Here `\m{marker2}` is 'glued' to the end of the string. However, if additional text is added such as by a subsequent keystroke (which may add an additional combining character, for example), this marker may be 'glued' to that following text.
 
 Markers remain in the same normalization-safe segment during normalization. Consider:
@@ -598,19 +610,21 @@ There are two normalization-safe segments here:
 1. `e\u{0300}\m{marker1}\u{0320}`
 2. `a\u{0300}\m{marker2}\u{0320}`
 
+<a id="keyboards-normalization-normalization-and-markers-example-normalization-with-markers-p-3"></a>
 Normalization (and marker rearranging) effectively occurs within each segment.  While `\m{marker1}` is 'glued' to the `\u{0320}`, it is glued within the first segment and has no effect on the second segment.
 
 ### Normalization and Character Classes <a id="keyboards-normalization-normalization-and-character-classes"></a>
 
-* <a id="keyboards-normalization-normalization-and-character-classes-item-1"></a> **If pre-composed (non-NFD**: If pre-composed (non-NFD) characters are used in [character classes](#regex-like-syntax), such as `[á-é]`, these may not match as keyboard authors expect, as the U+00E1 character (á) will not occur in NFD form.
+<a id="keyboards-normalization-normalization-and-character-classes-p-1"></a>
+If pre-composed (non-NFD) characters are used in [character classes](#regex-like-syntax), such as `[á-é]`, these may not match as keyboard authors expect, as the U+00E1 character (á) will not occur in NFD form. Thus this may be masking serious errors in the data.
 
-* <a id="keyboards-normalization-normalization-and-character-classes-item-2"></a> **Thus this may**: Thus this may be masking serious errors in the data.
-
-
+<a id="keyboards-normalization-normalization-and-character-classes-p-2"></a>
 Tools that process keyboard data must reject the data when character classes include non-NFD characters.
 
+<a id="keyboards-normalization-normalization-and-character-classes-p-3"></a>
 The above should be written instead as a regex `(á|â|ã|ä|å|æ|ç|è|é)`. Alternatively, it could be written as a set variable `<set id="Example" value="á â ã ä å æ ç è é"/>` and matched as `$[Example]`.
 
+<a id="keyboards-normalization-normalization-and-character-classes-p-4"></a>
 There is another case where there is no explicit mention of a non-NFD character, but the character class could include non-NFD characters, such as the range `[\u{0020}-\u{01FF}]`. For these, the tools should raise a warning by default.
 
 ### Normalization and Reorder elements <a id="keyboards-normalization-normalization-and-reorder-elements"></a>
@@ -619,25 +633,32 @@ There is another case where there is no explicit mention of a non-NFD character,
 
 ### Normalization-safe Segments <a id="keyboards-normalization-normalization-safe-segments"></a>
 
+<a id="keyboards-normalization-normalization-safe-segments-p-1"></a>
 For purposes of this algorithm, "normalization-safe segments" are defined as a string of codepoints which are
 
 1. already in [NFD](https://www.unicode.org/reports/tr15/#Norm_Forms), and
 2. begin with a character with [Canonical Combining Class](https://www.unicode.org/reports/tr44/#Canonical_Combining_Class_Values) of `0`.
 
+<a id="keyboards-normalization-normalization-safe-segments-p-2"></a>
 See [UAX #15 Section 9.1: Stable Code Points](https://www.unicode.org/reports/tr15/#Stable_Code_Points) for related discussion.
 Text under consideration can be segmented by locating such characters.
 
 ### Normalization and Output <a id="keyboards-normalization-normalization-and-output"></a>
 
+<a id="keyboards-normalization-normalization-and-output-p-1"></a>
 On output, text will be normalized into a specified normalization form. That form will typically be NFC, but an implementation may allow a calling application to override the choice of normalization form.
+<a id="keyboards-normalization-normalization-and-output-p-2"></a>
 For example, many platforms may request NFC as the output format. In such a case, all text emitted via the keyboard will be transformed into NFC.
 
+<a id="keyboards-normalization-normalization-and-output-p-3"></a>
 Existing text in a document will only have normalization applied within a single normalization-safe segment from the caret.  The output will not contain any markers, thus any normalization is unaffected by any markers embedded within the segment.
 
+<a id="keyboards-normalization-normalization-and-output-p-4"></a>
 For example, the sequence `e\m{marker}\u{300}` would be output in NFC as `è`. The marker is removed and has no effect on the output.
 
 ### Disabling Normalization <a id="keyboards-normalization-disabling-normalization"></a>
 
+<a id="keyboards-normalization-disabling-normalization-p-1"></a>
 The attribute value `normalization="disabled"` can be used to indicate that no automatic normalization is to be applied in input, matching, or output. Using this setting should be done with caution:
 
 - When this attribute value is used, all matching and output uses only the exact codepoints provided by the keyboard author.
@@ -650,6 +671,7 @@ The majority of the above section only applies when `normalization="disabled"` i
 
 ## Element Hierarchy <a id="keyboards-element-hierarchy"></a>
 
+<a id="keyboards-element-hierarchy-p-1"></a>
 This section describes the XML elements in a keyboard layout file, beginning with the top level element `<keyboard3>`.
 
 ### Element: keyboard3 <a id="keyboards-element-hierarchy-element-keyboard3"></a>
@@ -676,15 +698,16 @@ This is the top level element. All other elements defined below are under this e
 
 _Attribute:_ `conformsTo` (required)
 
+<a id="keyboards-element-hierarchy-element-keyboard3-p-1"></a>
 This attribute value specifies the minimum supported CLDR major version required to properly interpret this keyboard.
 
+<a id="keyboards-element-hierarchy-element-keyboard3-p-2"></a>
 The value must be a whole number of `45` or greater. See [`cldrVersion`](tr35-info.md#version-information)
 
-* <a id="keyboards-element-hierarchy-element-keyboard3-item-1"></a> **CLDR's stability policy**: CLDR's stability policy is such that keyboards which conform to a CLDR version automatically are conformant to all future versions.
+<a id="keyboards-element-hierarchy-element-keyboard3-p-3"></a>
+CLDR's stability policy is such that keyboards which conform to a CLDR version automatically are conformant to all future versions. In other words, a layout with `conformsTo="45"` could be changed to `conformsTo="46"` with no other changes and the layout would remain conformant.
 
-* <a id="keyboards-element-hierarchy-element-keyboard3-item-2"></a> **In other words**: In other words, a layout with `conformsTo="45"` could be changed to `conformsTo="46"` with no other changes and the layout would remain conformant.
-
-
+<a id="keyboards-element-hierarchy-element-keyboard3-p-4"></a>
 To promote wider interchange, authors and tooling should use the minimum `conformsTo` value necessary to support the keyboard.
 
 ```xml
@@ -693,14 +716,8 @@ To promote wider interchange, authors and tooling should use the minimum `confor
 
 _Attribute:_ `locale` (required)
 
-* <a id="keyboards-element-hierarchy-element-keyboard3-item-3"></a> **This attribute value**: This attribute value contains the primary locale of the keyboard using BCP 47 [Unicode locale identifiers](tr35.md#Canonical_Unicode_Locale_Identifiers) - for example `"el"` for Greek.
-
-* <a id="keyboards-element-hierarchy-element-keyboard3-item-4"></a> **Sometimes, the locale**: Sometimes, the locale may not specify the base language.
-
-* <a id="keyboards-element-hierarchy-element-keyboard3-item-5"></a> **For example, a**: For example, a Devanagari keyboard for many languages could be specified by BCP-47 code: `"und-Deva"`.
-
-* <a id="keyboards-element-hierarchy-element-keyboard3-item-6"></a> **However, it is**: However, it is better to list out the languages explicitly using the [`locales`](#element-locales) element.
-
+<a id="keyboards-element-hierarchy-element-keyboard3-p-5"></a>
+This attribute value contains the primary locale of the keyboard using BCP 47 [Unicode locale identifiers](tr35.md#Canonical_Unicode_Locale_Identifiers) - for example `"el"` for Greek. Sometimes, the locale may not specify the base language. For example, a Devanagari keyboard for many languages could be specified by BCP-47 code: `"und-Deva"`. However, it is better to list out the languages explicitly using the [`locales`](#element-locales) element.
 
 For further details about the choice of locale ID, see [Keyboard IDs](#keyboard-ids).
 
@@ -720,6 +737,7 @@ For further details about the choice of locale ID, see [Keyboard IDs](#keyboard-
 
 _Attribute:_ `draft`
 
+<a id="keyboards-element-hierarchy-element-keyboard3-p-6"></a>
 If this attribute is present, it indicates the status of all the data in this keyboard layout. See [draft attribute](tr35.md#attribute-draft) for further details.
 
 * * *
@@ -728,11 +746,15 @@ If this attribute is present, it indicates the status of all the data in this ke
 
 The `import` element is used to reference another xml file so that elements are imported from
 another file. The use case is to be able to import a standard set of `transform`s and similar
+<a id="keyboards-element-hierarchy-element-import-p-1"></a>
 from the CLDR repository, especially to be able to share common information relevant to a particular script.
+<a id="keyboards-element-hierarchy-element-import-p-2"></a>
 The intent is for each single XML file to contain all that is needed for a keyboard layout, other than required standard import data from the CLDR repository.
 
+<a id="keyboards-element-hierarchy-element-import-p-3"></a>
 `<import>` can be used as a child of a number of elements (see the _Parents_ section immediately below). Multiple `<import>` elements may be used, however, `<import>` elements must come before any other sibling elements.
 If two identical elements are defined, the later element will take precedence, that is, override.
+<a id="keyboards-element-hierarchy-element-import-p-4"></a>
 Imported elements may contain other `<import>` statements. Implementations must prevent recursion, that is, each imported file may only be included once.
 
 **Note:** imported files do not have any indication of their normalization mode. For this reason, the keyboard author must verify that the imported file is of a compatible normalization mode. See the [`settings` element](#element-settings) for further details.
@@ -839,6 +861,7 @@ The optional `<locales>` element allows specifying additional or alternate local
 
 ### Element: locale <a id="keyboards-element-hierarchy-element-locale"></a>
 
+<a id="keyboards-element-hierarchy-element-locale-p-1"></a>
 The `<locale>` element specifies an additional or alternate locale. Denotes intentional support for an extra language, not just that a keyboard incidentally supports a language’s orthography.
 
 **Syntax**
@@ -1001,14 +1024,8 @@ _Attribute:_ `attribution`
 
 ### Element: settings <a id="keyboards-element-hierarchy-element-settings"></a>
 
-* <a id="keyboards-element-hierarchy-element-settings-item-1"></a> **An element used**: An element used to keep track of layout-specific settings by implementations.
-
-* <a id="keyboards-element-hierarchy-element-settings-item-2"></a> **This element may**: This element may or may not show up on a layout.
-
-* <a id="keyboards-element-hierarchy-element-settings-item-3"></a> **These settings reflect**: These settings reflect the normal practice by the implementation.
-
-* <a id="keyboards-element-hierarchy-element-settings-item-4"></a> **However, an implementation**: However, an implementation using the data may customize the behavior.
-
+<a id="keyboards-element-hierarchy-element-settings-p-1"></a>
+An element used to keep track of layout-specific settings by implementations. This element may or may not show up on a layout. These settings reflect the normal practice by the implementation. However, an implementation using the data may customize the behavior.
 
 **Syntax**
 
@@ -1074,17 +1091,18 @@ The `displays` element consists of a list of [`display`](#element-display) subel
 
 ### Element: display <a id="keyboards-element-hierarchy-element-display"></a>
 
+<a id="keyboards-element-hierarchy-element-display-p-1"></a>
 The `display` elements can be used to describe what is to be displayed on the keytops for various keys. For the most part, such explicit information is unnecessary since the `@to` element from the `keys/key` element will be used for keytop display.
 
 - Some characters, such as diacritics, do not display well on their own.
 - Another useful scenario is where there are doubled diacritics, or multiple characters with spacing issues.
 - Finally, the `display` element provides a way to specify the keytop for keys which do not otherwise produce output. Keys which switch layers using the `@layerId` attribute typically do not produce output.
 
-* <a id="keyboards-element-hierarchy-element-display-note-1"></a> **Note**: `displays` elements are designed to be shared across many different keyboard layout descriptions, and imported with `<import>` where needed.
-
+> <a id="keyboards-element-hierarchy-element-display-note-1"></a> **Note 1**: `displays` elements are designed to be shared across many different keyboard layout descriptions, and imported with `<import>` where needed.
 
 #### Non-spacing marks on keytops <a id="keyboards-element-hierarchy-element-display-non-spacing-marks-on-keytops"></a>
 
+<a id="keyboards-element-hierarchy-element-display-non-spacing-marks-on-keytops-p-1"></a>
 For non-spacing marks, U+25CC `◌` is used as a base. It is an error to use a nonspacing character without a base in the `display` attribute. For example, `display="\u{0303}"` would produce an error.
 
 A key which outputs a combining tilde (U+0303) could be represented as either of the following:
@@ -1094,8 +1112,10 @@ A key which outputs a combining tilde (U+0303) could be represented as either of
     <display output="\u{0303}" display="\u{25cc}\u{0303}" />  <!-- also acceptable -->
 ```
 
+<a id="keyboards-element-hierarchy-element-display-non-spacing-marks-on-keytops-p-2"></a>
 This way, a key which outputs a combining tilde (U+0303) will be represented as `◌̃` (a tilde on a dotted circle).
 
+<a id="keyboards-element-hierarchy-element-display-non-spacing-marks-on-keytops-p-3"></a>
 Users of some scripts/languages may prefer a different base than U+25CC. See  [`<displayOptions baseCharacter=…/>`](#element-displayoptions).
 
 
@@ -1157,12 +1177,14 @@ This attribute may be escaped with `\u` notation, see [Escaping](#escaping).
 </keyboard3>
 ```
 
+<a id="keyboards-element-hierarchy-element-display-non-spacing-marks-on-keytops-p-4"></a>
 To allow `displays` elements to be shared across keyboards, there is no requirement that `@output` in a `display` element matches any `@output`/`@id` in any `keys/key` element in the keyboard description.
 
 * * *
 
 ### Element: displayOptions <a id="keyboards-element-hierarchy-element-displayoptions"></a>
 
+<a id="keyboards-element-hierarchy-element-displayoptions-p-1"></a>
 The `displayOptions` is an optional singleton element providing additional settings on this `displays`.  It is structured so as to provide for future flexibility in such options.
 
 **Syntax**
@@ -1202,6 +1224,7 @@ This attribute may be escaped with `\u` notation, see [Escaping](#escaping).
 
 ### Element: keys <a id="keyboards-element-hierarchy-element-keys"></a>
 
+<a id="keyboards-element-hierarchy-element-keys-p-1"></a>
 This element defines the properties of all possible keys via [`<key>` elements](#element-key) used in all layouts.
 It is a “bag of keys” without specifying any ordering or relation between the keys.
 There is only a single `<keys>` element in each layout.
@@ -1230,6 +1253,7 @@ There is only a single `<keys>` element in each layout.
 
 ### Element: key <a id="keyboards-element-hierarchy-element-key"></a>
 
+<a id="keyboards-element-hierarchy-element-key-p-1"></a>
 This element defines a mapping between an abstract key and its output. This element must have the `keys` element as its parent. The `key` element is referenced by the `keys=` attribute of the [`row` element](#element-row).
 
 **Syntax**
@@ -1283,12 +1307,7 @@ _Attribute:_ `gap="true"` (optional)
 
 _Attribute:_ `output`
 
-* <a id="keyboards-element-hierarchy-element-key-item-1"></a> **> The `output**: > The `output` attribute value contains the sequence of characters that is emitted when pressing this particular key.
-
-* <a id="keyboards-element-hierarchy-element-key-item-2"></a> **Control characters, whitespace**: Control characters, whitespace (other than the regular space character) and combining marks in this attribute are escaped using the `\u{…}` notation.
-
-* <a id="keyboards-element-hierarchy-element-key-item-3"></a> **More than one**: More than one key may output the same output.
-
+> The `output` attribute value contains the sequence of characters that is emitted when pressing this particular key. Control characters, whitespace (other than the regular space character) and combining marks in this attribute are escaped using the `\u{…}` notation. More than one key may output the same output.
 >
 > The `output` attribute may also contain the `\m{…markerId}` syntax to insert a marker. See the definition of [markers](#markers).
 
@@ -1296,10 +1315,7 @@ _Attribute:_ `longPressKeyIds="…list of keyIds"` (optional)
 
 > A space-separated ordered list of `key` element ids, which keys which can be emitted by "long-pressing" this key. This feature is prominent in mobile devices.
 >
-* <a id="keyboards-element-hierarchy-element-key-item-4"></a> **> In a**: > In a list of keys specified by `longPressKeyIds`, the key matching `longPressDefaultKeyId` attribute (if present) specifies the default long-press target, which could be different than the first element.
-
-* <a id="keyboards-element-hierarchy-element-key-item-5"></a> **It is an**: It is an error if the `longPressDefaultKeyId` key is not in the `longPressKeyIds` list.
-
+> In a list of keys specified by `longPressKeyIds`, the key matching `longPressDefaultKeyId` attribute (if present) specifies the default long-press target, which could be different than the first element. It is an error if the `longPressDefaultKeyId` key is not in the `longPressKeyIds` list.
 >
 > Implementations shall ignore any gestures (such as flick, multiTap, longPress) defined on keys in the `longPressKeyIds` list.
 >
@@ -1387,6 +1403,7 @@ Not all keys need to be listed explicitly.  The following two can be assumed to 
 <key id="space" output=" " stretch="true" width="1"/>
 ```
 
+<a id="keyboards-element-hierarchy-element-key-implied-keys-p-1"></a>
 In addition, these 62 keys, comprising 10 digit keys, 26 Latin lower-case keys, and 26 Latin upper-case keys, where the `id` is the same as the `to`, are assumed to exist:
 
 ```xml
@@ -1404,6 +1421,7 @@ In addition, these 62 keys, comprising 10 digit keys, 26 Latin lower-case keys, 
 …
 ```
 
+<a id="keyboards-element-hierarchy-element-key-implied-keys-p-2"></a>
 These implied keys are available in a data file named `keyboards/import/keys-Latn-implied.xml` in the CLDR distribution for the convenience of implementations.
 
 Thus, the implied keys behave as if the following import were present.
@@ -1521,6 +1539,7 @@ where a flick to the Northeast then South produces `Å`.
 
 ### Element: forms <a id="keyboards-element-hierarchy-element-forms"></a>
 
+<a id="keyboards-element-hierarchy-element-forms-p-1"></a>
 This element contains a set of `form` elements which define the layout of a particular hardware form.
 
 
@@ -1551,6 +1570,7 @@ This element contains a set of `form` elements which define the layout of a part
 
 ### Element: form <a id="keyboards-element-hierarchy-element-form"></a>
 
+<a id="keyboards-element-hierarchy-element-form-p-1"></a>
 This element contains a specific `form` element which defines the layout of a particular hardware form.
 
 > *Note:* Most keyboards will not need to use this element directly, and the CLDR repository will not accept keyboards which define a custom `form` element.  This element is provided for two reasons:
@@ -1589,6 +1609,7 @@ _Attribute:_ `id` (required)
 
 ##### Implied Form Values <a id="keyboards-element-hierarchy-element-form-implied-form-values"></a>
 
+<a id="keyboards-element-hierarchy-element-form-implied-form-values-p-1"></a>
 There is an implied set of `<form>` elements corresponding to the default forms, thus implementations must behave as if there was the following import statement:
 
 ```xml
@@ -1599,6 +1620,7 @@ There is an implied set of `<form>` elements corresponding to the default forms,
 </keyboard3>
 ```
 
+<a id="keyboards-element-hierarchy-element-form-implied-form-values-p-2"></a>
 Here is a summary of the implied form elements. Keyboards included in the CLDR Repository must only use these `formId=` values and may not override the scanCodes.
 
 > - `touch` - Touch (non-hardware) layout.
@@ -1671,36 +1693,22 @@ _Attribute:_ `formId` (required)
 > Multiple `<layers formId="touch">` elements are allowed with distinct `minDeviceWidth` values.
 > At most one hardware (non-`formId="touch"`) `<layers>` element is allowed. If a different key arrangement is desired between, for example, `us` and `iso` formats, these should be separated into two different keyboards.
 >
-* <a id="keyboards-element-hierarchy-element-layers-item-1"></a> **> The typical**: > The typical keyboard author will be designing a keyboard based on their circumstances and the hardware that they are using.
-
-* <a id="keyboards-element-hierarchy-element-layers-item-2"></a> **So, for example**: So, for example, if they are in South East Asia, they will almost certainly be using an 101 key hardware keyboard with US key caps.
-
-* <a id="keyboards-element-hierarchy-element-layers-item-3"></a> **So we want**: So we want them to be able to reference that (`<layers formId="us">`) in their design, rather than having to work with an unfamiliar form.
-
+> The typical keyboard author will be designing a keyboard based on their circumstances and the hardware that they are using. So, for example, if they are in South East Asia, they will almost certainly be using an 101 key hardware keyboard with US key caps. So we want them to be able to reference that (`<layers formId="us">`) in their design, rather than having to work with an unfamiliar form.
 >
-* <a id="keyboards-element-hierarchy-element-layers-item-4"></a> **> A mismatch**: > A mismatch between the hardware layout in the keyboard file, and the actual hardware used by the user could result in some keys being inaccessible to the user if their hardware cannot generate the scancodes corresponding to the layout specified by the `formId=` attribute.
-
-* <a id="keyboards-element-hierarchy-element-layers-item-5"></a> **Such keys could**: Such keys could be accessed only via an on-screen keyboard utility.
-
-* <a id="keyboards-element-hierarchy-element-layers-item-6"></a> **Conversely, a user**: Conversely, a user with hardware keys that are not present in the specified `formId=` will result in some hardware keys which have no function when pressed.
-
+> A mismatch between the hardware layout in the keyboard file, and the actual hardware used by the user could result in some keys being inaccessible to the user if their hardware cannot generate the scancodes corresponding to the layout specified by the `formId=` attribute. Such keys could be accessed only via an on-screen keyboard utility. Conversely, a user with hardware keys that are not present in the specified `formId=` will result in some hardware keys which have no function when pressed.
 >
 > The value of the `formId=` attribute may be `touch`, or correspond to a `form` element. See [`form`](#element-form).
 >
 
 _Attribute:_ `minDeviceWidth`
 
-* <a id="keyboards-element-hierarchy-element-layers-item-7"></a> **> This attribute**: > This attribute specifies the minimum required width, in millimeters (mm), of the touch surface.
-
-* <a id="keyboards-element-hierarchy-element-layers-item-8"></a> **The `layers` entry**: The `layers` entry with the greatest matching width will be selected.
-
-* <a id="keyboards-element-hierarchy-element-layers-item-9"></a> **This attribute is**: This attribute is intended for `formId="touch"`, but is supported for hardware forms.
-
+> This attribute specifies the minimum required width, in millimeters (mm), of the touch surface.  The `layers` entry with the greatest matching width will be selected. This attribute is intended for `formId="touch"`, but is supported for hardware forms.
 >
 > This must be a whole number between 1 and 999, inclusive.
 
 ### Element: layer <a id="keyboards-element-hierarchy-element-layer"></a>
 
+<a id="keyboards-element-hierarchy-element-layer-p-1"></a>
 A `layer` element describes the configuration of keys on a particular layer of a keyboard. It contains one or more `row` elements to describe which keys exist in each row.
 
 **Syntax**
@@ -1767,15 +1775,14 @@ _Attribute:_ `modifiers` (required for `hardware`)
 #### Layer Modifier Sets <a id="keyboards-element-hierarchy-element-layer-layer-modifier-sets"></a>
 
 The `@modifiers` attribute value contains one or more Layer Modifier Sets, separated by commas.
+<a id="keyboards-element-hierarchy-element-layer-layer-modifier-sets-p-1"></a>
 For example, in the element `<layer … modifiers="ctrlL altL, altR" …` the attribute value consists of two sets:
 
 - `ctrlL altL` (two components)
 - `altR` (one component)
 
-* <a id="keyboards-element-hierarchy-element-layer-layer-modifier-sets-item-1"></a> **The order of**: The order of the sets and the order of the components within each set is not significant.
-
-* <a id="keyboards-element-hierarchy-element-layer-layer-modifier-sets-item-2"></a> **However, for clarity**: However, for clarity in reading, the canonical order within a set is in the order listed in Layout Modifier Components; the canonical order for the sets should be first by the cardinality of the sets (least first), then alphabetical.
-
+<a id="keyboards-element-hierarchy-element-layer-layer-modifier-sets-p-2"></a>
+The order of the sets and the order of the components within each set is not significant. However, for clarity in reading, the canonical order within a set is in the order listed in Layout Modifier Components; the canonical order for the sets should be first by the cardinality of the sets (least first), then alphabetical.
 
 #### Layer Modifier Components <a id="keyboards-element-hierarchy-element-layer-layer-modifier-components"></a>
 
@@ -1799,7 +1806,8 @@ Within a Layer Modifier Set, the following modifier components can be used, sepa
 #### Modifier Left- and Right- keys <a id="keyboards-element-hierarchy-element-layer-modifier-left--and-right--keys"></a>
 
 1. `L` or `R` indicates a left- or right- side modifier only (such as `altL`)
- whereas `alt` indicates _either_ left or right alt key (that is, `altL` or `altR`). `ctrl` indicates either left or right ctrl key (that is, `ctrlL` or `ctrlR`).
+<a id="keyboards-element-hierarchy-element-layer-modifier-left--and-right--keys-p-1"></a>
+whereas `alt` indicates _either_ left or right alt key (that is, `altL` or `altR`). `ctrl` indicates either left or right ctrl key (that is, `ctrlL` or `ctrlR`).
 
 2. Keyboard implementations must warn if a keyboard mixes `alt` with `altL`/`altR`, or `ctrl` with `ctrlL`/`ctrlR`.
 
@@ -1819,18 +1827,22 @@ Layers are matched exactly based on the modifier keys which are down. For exampl
 
 - `other` as a modifier will match if no other layers match.
 
+<a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-p-1"></a>
 Multiple modifier sets are separated by commas.  For example, `none, shift caps` will match either no modifiers *or* shift and caps.  `ctrlL altL, altR` will match either  left-control and left-alt, *or* right-alt.
 
+<a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-p-2"></a>
 Keystrokes must be ignored where there isn’t a layer that explicitly matches nor a layer with `other`. Example: If there is a `ctrl` and `shift` layer, but no `ctrl shift` nor `other` layer, no output will result from `ctrl shift X`.
 
+<a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-p-3"></a>
 Layers are not allowed to overlap in their matching.  For example, the keyboard author will receive an error if one layer specifies `alt shift` and another layer specifies `altR shift`.
 
+<a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-p-4"></a>
 There is one special case:  the `other` layer matches if and only if no other layer matches. Thus logically the `other` layer is matched after all other layers have been checked.
 
+<a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-p-5"></a>
 Because there is no overlap allowed between layers, the order of `<layer>` elements is not significant.
 
-* <a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-note-1"></a> **Note**: The modifier syntax may be enhanced in the future, but will remain backwards compatible with the syntax described here.
-
+> <a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-note-1"></a> **Note 1**: The modifier syntax may be enhanced in the future, but will remain backwards compatible with the syntax described here.
 
 * * *
 
@@ -1881,6 +1893,7 @@ Here is an example of a `row` element:
 > Occurrence: optional, single
 > </small>
 
+<a id="keyboards-element-hierarchy-element-variables-p-1"></a>
 This is a container for variables to be used with [transform](#element-transform), [display](#element-display) and [key](#element-key) elements.
 
 Note that the `id=` attribute value must be unique across all children of the `variables` element.
@@ -2044,12 +2057,7 @@ _Attribute:_ `value` (required)
 - Multi-character strings (`{}`) are not supported, such as `[żġħ{ie}{għ}]`.
 - UnicodeSet property notation (`\p{…}` or `[:…:]`) may **NOT** be used.
 
-* <a id="keyboards-element-hierarchy-element-uset-item-1"></a> **> **Rationale**: allowing**: > **Rationale**: allowing property notation would make keyboard implementations dependent on a particular version of Unicode.
-
-* <a id="keyboards-element-hierarchy-element-uset-item-2"></a> **However, implementations and**: However, implementations and tools may wish to pre-calculate the value of a particular uset, and "freeze" it as explicit code points.
-
-* <a id="keyboards-element-hierarchy-element-uset-item-3"></a> **The example below**: The example below of `$[KhmrMn]` matches nonspacing marks in the `Khmr` script.
-
+> **Rationale**: allowing property notation would make keyboard implementations dependent on a particular version of Unicode. However, implementations and tools may wish to pre-calculate the value of a particular uset, and "freeze" it as explicit code points.  The example below of `$[KhmrMn]` matches nonspacing marks in the `Khmr` script.
 
 - `uset` elements may represent a very large number of codepoints. Keyboard implementations may set a limit on how many unique range entries may be matched.
 - The `uset` element may not be used as the source or target for mapping operations (`$[1:variable]` syntax).
@@ -2070,10 +2078,8 @@ _Attribute:_ `value` (required)
 
 ### Element: transforms <a id="keyboards-element-hierarchy-element-transforms"></a>
 
-* <a id="keyboards-element-hierarchy-element-transforms-item-1"></a> **This element defines**: This element defines a group of one or more `transform` elements associated with this keyboard layout.
-
-* <a id="keyboards-element-hierarchy-element-transforms-item-2"></a> **This is used**: This is used to support features such as dead-keys, character reordering, backspace behavior, etc. using a straightforward structure that works for all the keyboards tested, and that results in readable source data.
-
+<a id="keyboards-element-hierarchy-element-transforms-p-1"></a>
+This element defines a group of one or more `transform` elements associated with this keyboard layout. This is used to support features such as dead-keys, character reordering, backspace behavior, etc. using a straightforward structure that works for all the keyboards tested, and that results in readable source data.
 
 There can be multiple `<transforms>` elements, but only one for each `type`.
 
@@ -2101,6 +2107,7 @@ _Attribute:_ `type` (required)
 
 > Values: `simple`, `backspace`
 
+<a id="keyboards-element-hierarchy-element-transforms-p-2"></a>
 There are other keying behaviors that are needed particularly in handing complex orthographies from various parts of the world. The behaviors intended to be covered by the transforms are:
 
 * Reordering combining marks. The order required for underlying storage may differ considerably from the desired typing order. In addition, a keyboard may want to allow for different typing orders.
@@ -2109,6 +2116,7 @@ There are other keying behaviors that are needed particularly in handing complex
 
 #### Markers <a id="keyboards-element-hierarchy-element-transforms-markers"></a>
 
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-1"></a>
 Markers are placeholders which record some state, but without producing normal visible text output.  They were designed particularly to support dead-keys.
 
 The marker ID is any valid `NMTOKEN`.
@@ -2153,8 +2161,10 @@ Consider the following abbreviated example:
 **Using markers to inhibit other transforms**
 
 Sometimes it is desirable to prevent transforms from having an effect.
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-2"></a>
 Perhaps two different keys output the same characters, with different key or modifier combinations, but only one of them is intended to participate in a transform.
 
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-3"></a>
 Consider the following case, where pressing the keys `X`, `e` results in `^e`, which is transformed into `ê`.
 
 ```xml
@@ -2168,6 +2178,7 @@ Consider the following case, where pressing the keys `X`, `e` results in `^e`, w
 ```
 
 However, what if the user wanted to produce `^e` without the transform taking effect?
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-4"></a>
 One strategy would be to use a marker, which won’t be visible in the output, but will inhibit the transform.
 
 ```xml
@@ -2183,8 +2194,10 @@ One strategy would be to use a marker, which won’t be visible in the output, b
 </transforms>
 ```
 
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-5"></a>
 Pressing `caret` `e` will result in `^e` (with an invisible _no_transform_ marker — note that any name could be used). The `^e` won’t have the transform applied, at least while the marker’s context remains valid.
 
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-6"></a>
 Another strategy might be to use a marker to indicate where transforms are desired, instead of where they aren't desired.
 
 ```xml
@@ -2200,36 +2213,27 @@ Another strategy might be to use a marker to indicate where transforms are desir
 </transforms>
 ```
 
-* <a id="keyboards-element-hierarchy-element-transforms-markers-item-1"></a> **In this way**: In this way, only the `X`, `e` keys will produce `^e` with a _transform_ marker (again, any name could be used) which will cause the transform to be applied.
-
-* <a id="keyboards-element-hierarchy-element-transforms-markers-item-2"></a> **One benefit is**: One benefit is that navigating to an existing `^` in a document and adding an `e` will result in `^e`, and this output will not be affected by the transform, because there will be no marker present there (remember that markers are not stored with the document but only recorded in memory temporarily during text input).
-
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-7"></a>
+In this way, only the `X`, `e` keys will produce `^e` with a _transform_ marker (again, any name could be used) which will cause the transform to be applied. One benefit is that navigating to an existing `^` in a document and adding an `e` will result in `^e`, and this output will not be affected by the transform, because there will be no marker present there (remember that markers are not stored with the document but only recorded in memory temporarily during text input).
 
 Please note important considerations for [Normalization and Markers](#normalization-and-markers).
 
 **Effect of markers on final text**
 
 All markers must be removed before text is returned to the application from the input context.
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-8"></a>
 If the input context changes, such as if the cursor or mouse moves the insertion point somewhere else, all markers in the input context are removed.
 
 **Implementation Notes**
 
-* <a id="keyboards-element-hierarchy-element-transforms-markers-item-3"></a> **Ideally, markers are**: Ideally, markers are implemented entirely out-of-band from the normal text stream.
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-9"></a>
+Ideally, markers are implemented entirely out-of-band from the normal text stream. However, implementations _may_ choose to map each marker to a [Unicode private-use character](https://www.unicode.org/glossary/#private_use_character) for use only within the implementation’s processing and temporary storage in the input context.
 
-* <a id="keyboards-element-hierarchy-element-transforms-markers-item-4"></a> **However, implementations _may**: However, implementations _may_ choose to map each marker to a [Unicode private-use character](https://www.unicode.org/glossary/#private_use_character) for use only within the implementation’s processing and temporary storage in the input context.
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-10"></a>
+For example, the first marker encountered could be represented as U+E000, the second by U+E001 and so on.  If a regex processing engine were used, then those PUA characters could be processed through the existing regex processing engine.  `[^\u{E000}-\u{E009}]` could be used as an expression to match a character that is not a marker, and `[Ee]\u{E000}` could match `E` or `e` followed by the first marker.
 
-
-* <a id="keyboards-element-hierarchy-element-transforms-markers-item-5"></a> **For example, the**: For example, the first marker encountered could be represented as U+E000, the second by U+E001 and so on.
-
-* <a id="keyboards-element-hierarchy-element-transforms-markers-item-6"></a> **If a regex**: If a regex processing engine were used, then those PUA characters could be processed through the existing regex processing engine.
-
-* <a id="keyboards-element-hierarchy-element-transforms-markers-item-7"></a> **^\u{E000}-\u{E009}]` could be**: `[^\u{E000}-\u{E009}]` could be used as an expression to match a character that is not a marker, and `[Ee]\u{E000}` could match `E` or `e` followed by the first marker.
-
-
-* <a id="keyboards-element-hierarchy-element-transforms-markers-item-8"></a> **Such implementations must**: Such implementations must take care to remove all such markers (see prior section) from the resultant text.
-
-* <a id="keyboards-element-hierarchy-element-transforms-markers-item-9"></a> **As well, implementations**: As well, implementations must take care to avoid conflicts if applications themselves are using PUA characters, such as is often done with not-yet-encoded scripts or characters.
-
+<a id="keyboards-element-hierarchy-element-transforms-markers-p-11"></a>
+Such implementations must take care to remove all such markers (see prior section) from the resultant text. As well, implementations must take care to avoid conflicts if applications themselves are using PUA characters, such as is often done with not-yet-encoded scripts or characters.
 
 * * *
 
@@ -2249,6 +2253,7 @@ A `transformGroup` contains a set of transform elements or reorder elements.
 Each `transformGroup` is processed entirely before proceeding to the next one.
 
 
+<a id="keyboards-element-hierarchy-element-transformgroup-p-1"></a>
 Each `transformGroup` element, after imports are processed, must have either [reorder](#element-reorder) elements or [transform](#element-transform) elements, but not both. The `<transformGroup>` element may not be empty.
 
 **Examples**
@@ -2256,12 +2261,8 @@ Each `transformGroup` element, after imports are processed, must have either [re
 
 #### Example: `transformGroup` with `transform` elements <a id="keyboards-element-hierarchy-element-transformgroup-example-transformgroup-with-transform-elements"></a>
 
-* <a id="keyboards-element-hierarchy-element-transformgroup-example-transformgroup-with-transform-elements-item-1"></a> **This is a**: This is a `transformGroup` that consists of one or more [`transform`](#element-transform) elements, prefaced by one or more `import` elements.
-
-* <a id="keyboards-element-hierarchy-element-transformgroup-example-transformgroup-with-transform-elements-item-2"></a> **See the discussion**: See the discussion of those elements for details.
-
-* <a id="keyboards-element-hierarchy-element-transformgroup-example-transformgroup-with-transform-elements-item-3"></a> **import` elements in**: `import` elements in this group may not import `reorder` elements.
-
+<a id="keyboards-element-hierarchy-element-transformgroup-example-transformgroup-with-transform-elements-p-1"></a>
+This is a `transformGroup` that consists of one or more [`transform`](#element-transform) elements, prefaced by one or more `import` elements. See the discussion of those elements for details. `import` elements in this group may not import `reorder` elements.
 
 
 ```xml
@@ -2275,6 +2276,7 @@ Each `transformGroup` element, after imports are processed, must have either [re
 
 #### Example: `transformGroup` with `reorder` elements <a id="keyboards-element-hierarchy-element-transformgroup-example-transformgroup-with-reorder-elements"></a>
 
+<a id="keyboards-element-hierarchy-element-transformgroup-example-transformgroup-with-reorder-elements-p-1"></a>
 This is a `transformGroup` that consists of one or more [`transform`](#element-transform) elements, optionally prefaced by one or more `import` elements that import `transform` elements. See the discussion of those elements for details.
 
 `import` elements in this group may not import `transform` elements.
@@ -2291,33 +2293,20 @@ This is a `transformGroup` that consists of one or more [`transform`](#element-t
 
 ### Element: transform <a id="keyboards-element-hierarchy-element-transform"></a>
 
-* <a id="keyboards-element-hierarchy-element-transform-item-1"></a> **This element contains**: This element contains a single transform that may be performed using the keyboard layout.
+<a id="keyboards-element-hierarchy-element-transform-p-1"></a>
+This element contains a single transform that may be performed using the keyboard layout. A transform is an element that specifies a set of conversions from sequences of code points into (one or more) other code points. For example, in most French keyboards hitting the `^` dead-key followed by the `e` key produces `ê`.
 
-* <a id="keyboards-element-hierarchy-element-transform-item-2"></a> **A transform is**: A transform is an element that specifies a set of conversions from sequences of code points into (one or more) other code points.
+<a id="keyboards-element-hierarchy-element-transform-p-2"></a>
+Matches are processed against the "input context", a temporary buffer containing all relevant text up to the insertion point. If the user moves the insertion point, the input context is discarded and recreated from the application’s text buffer.  Implementations may discard the input context at any time.
 
-* <a id="keyboards-element-hierarchy-element-transform-item-3"></a> **For example, in**: For example, in most French keyboards hitting the `^` dead-key followed by the `e` key produces `ê`.
-
-
-* <a id="keyboards-element-hierarchy-element-transform-item-4"></a> **Matches are processed**: Matches are processed against the "input context", a temporary buffer containing all relevant text up to the insertion point.
-
-* <a id="keyboards-element-hierarchy-element-transform-item-5"></a> **If the user**: If the user moves the insertion point, the input context is discarded and recreated from the application’s text buffer.
-
-* <a id="keyboards-element-hierarchy-element-transform-item-6"></a> **Implementations may discard**: Implementations may discard the input context at any time.
-
-
+<a id="keyboards-element-hierarchy-element-transform-p-3"></a>
 The input context may contain, besides regular text, any [Markers](#markers) as a result of keys or transforms, since the insertion point was moved.
 
-* <a id="keyboards-element-hierarchy-element-transform-item-7"></a> **Using regular expression**: Using regular expression terminology, matches are done as if there was an implicit `$` (match end of buffer) at the end of each pattern.
+<a id="keyboards-element-hierarchy-element-transform-p-4"></a>
+Using regular expression terminology, matches are done as if there was an implicit `$` (match end of buffer) at the end of each pattern. In other words, `<transform from="ke" …>` will not match an input context ending with `…keyboard`, but it will match the last two codepoints of an input context ending with `…awake`.
 
-* <a id="keyboards-element-hierarchy-element-transform-item-8"></a> **In other words**: In other words, `<transform from="ke" …>` will not match an input context ending with `…keyboard`, but it will match the last two codepoints of an input context ending with `…awake`.
-
-
-* <a id="keyboards-element-hierarchy-element-transform-item-9"></a> **All of the**: All of the `transform` elements in a `transformGroup` are tested for a match, in order, until a match is found.
-
-* <a id="keyboards-element-hierarchy-element-transform-item-10"></a> **Then, the matching**: Then, the matching element is processed, and then processing proceeds to the **next** `transformGroup`.
-
-* <a id="keyboards-element-hierarchy-element-transform-item-11"></a> **If none of**: If none of the `transform` elements match, processing proceeds without modification to the buffer to the **next** `transformGroup`.
-
+<a id="keyboards-element-hierarchy-element-transform-p-5"></a>
+All of the `transform` elements in a `transformGroup` are tested for a match, in order, until a match is found. Then, the matching element is processed, and then processing proceeds to the **next** `transformGroup`. If none of the `transform` elements match, processing proceeds without modification to the buffer to the **next** `transformGroup`.
 
 **Syntax**
 
@@ -2338,10 +2327,7 @@ _Attribute:_ `from` (required)
 
 > The `from` attribute value consists of an input rule for matching the input context.
 >
-* <a id="keyboards-element-hierarchy-element-transform-item-12"></a> **> The `transform**: > The `transform` rule and output pattern uses a modified, mostly subsetted, regular expression syntax, with EcmaScript syntax (with the `u` Unicode flag) as its baseline reference (see [MDN-REGEX](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions)).
-
-* <a id="keyboards-element-hierarchy-element-transform-item-13"></a> **Differences from regex**: Differences from regex implementations will be noted.
-
+> The `transform` rule and output pattern uses a modified, mostly subsetted, regular expression syntax, with EcmaScript syntax (with the `u` Unicode flag) as its baseline reference (see [MDN-REGEX](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions)). Differences from regex implementations will be noted.
 
 #### Regex-like Syntax <a id="keyboards-element-hierarchy-element-transform-regex-like-syntax"></a>
 
@@ -2354,7 +2340,8 @@ _Attribute:_ `from` (required)
     `\u{1234} \u{012A}`
     `\u{22} \u{012a} \u{1234A}`
 
-    The hex escaping is case insensitive. The value may not match a surrogate or illegal character, nor a marker character.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-1"></a>
+The hex escaping is case insensitive. The value may not match a surrogate or illegal character, nor a marker character.
     The form `\u{…}` is preferred as it is the same regardless of codepoint length.
 
 - **Fixed character classes**
@@ -2363,7 +2350,8 @@ _Attribute:_ `from` (required)
 
     The value of these classes do not change with Unicode versions.
 
-    `\s` for example is exactly `[\f\n\r\t\v\u{00a0}\u{1680}\u{2000}-\u{200a}\u{2028}\u{2029}\u{202f}\u{205f}\u{3000}\u{feff}]`
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-2"></a>
+`\s` for example is exactly `[\f\n\r\t\v\u{00a0}\u{1680}\u{2000}-\u{200a}\u{2028}\u{2029}\u{202f}\u{205f}\u{3000}\u{feff}]`
 
 - **Escapes**
 
@@ -2371,8 +2359,10 @@ _Attribute:_ `from` (required)
 
     For example, `\\`, `\*`, and `\$` match `\`, `*`, and `$`, respectively.
 
-    Some of these characters (such as `*`) aren't actually used as syntax in the keyboard transform syntax.
-    However, they are required to be escaped in keyboard transforms, to avoid confusion or problems with characters which are syntax in regular expressions.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-3"></a>
+Some of these characters (such as `*`) aren't actually used as syntax in the keyboard transform syntax.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-4"></a>
+However, they are required to be escaped in keyboard transforms, to avoid confusion or problems with characters which are syntax in regular expressions.
 
     Sequences not listed here as **Fixed Character Classes** nor as **Escapes** are disallowed.
     For example:
@@ -2383,19 +2373,23 @@ _Attribute:_ `from` (required)
 
     `[abc]` `[^def]` `[a-z]` `[ॲऄ-आइ-ऋ]` `[\u{093F}-\u{0944}\u{0962}\u{0963}]`
 
-    If the character class begins with a caret (`^`) then it is a negation, matching all characters except for those listed.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-5"></a>
+If the character class begins with a caret (`^`) then it is a negation, matching all characters except for those listed.
 
     Unicode properties such as `\p{…}` are not allowed.
 
-    One additional escape is allowed within character classes besides those listed above: `\-`, for escaping the hyphen character.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-6"></a>
+One additional escape is allowed within character classes besides those listed above: `\-`, for escaping the hyphen character.
 
-    **Note**: Character classes look superficially similar to [`uset`](#element-uset) elements, but they are distinct and referenced with the `$[...usetId]` notation in transforms. The `uset` notation cannot be embedded directly in a transform.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-7"></a>
+**Note**: Character classes look superficially similar to [`uset`](#element-uset) elements, but they are distinct and referenced with the `$[...usetId]` notation in transforms. The `uset` notation cannot be embedded directly in a transform.
 
 - **Bounded quantifier**
 
     `{x,y}`
 
-    `x` and `y` are required single digits (`0` to `9`) representing the minimum and maximum number of occurrences.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-8"></a>
+`x` and `y` are required single digits (`0` to `9`) representing the minimum and maximum number of occurrences.
 
     `x` must be ≥ 0, `y` must be ≥ x and ≥ 1.
 
@@ -2409,7 +2403,8 @@ _Attribute:_ `from` (required)
 
     `([abc])([def])` (up to 9 groups)
 
-    These refer to groups captured as a set, and can be referenced with the `$1` through `$9` operators in the `to=` pattern. May not be nested.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-9"></a>
+These refer to groups captured as a set, and can be referenced with the `$1` through `$9` operators in the `to=` pattern. May not be nested.
 
 - **Non-capturing groups**
 
@@ -2419,7 +2414,8 @@ _Attribute:_ `from` (required)
 
     `(?:[abc]([def]))|(?:[ghi])`
 
-    Capture groups may be nested, however only the innermost group is allowed to be a capture group. The outer group must be a non-capturing group.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-10"></a>
+Capture groups may be nested, however only the innermost group is allowed to be a capture group. The outer group must be a non-capturing group.
 
 - **Disjunctions**
 
@@ -2439,7 +2435,8 @@ _Attribute:_ `from` (required)
 
     `^`
 
-    The start of the context could be the start of a line, a grid cell, or some other formatting boundary.
+<a id="keyboards-element-hierarchy-element-transform-regex-like-syntax-p-11"></a>
+The start of the context could be the start of a line, a grid cell, or some other formatting boundary.
     See description at the top of [`transforms`](#element-transform).
 
 #### Additional Features <a id="keyboards-element-hierarchy-element-transform-additional-features"></a>
@@ -2464,25 +2461,15 @@ The following are additions to standard Regex syntax.
 
     `${zwnj}`
 
-* <a id="keyboards-element-hierarchy-element-transform-additional-features-item-1"></a> **In this usage**: In this usage, the variable with `id="zwnj"` will be substituted in at this point in the expression.
-
-* <a id="keyboards-element-hierarchy-element-transform-additional-features-item-2"></a> **The variable can**: The variable can contain a range, a character, or any other portion of a pattern.
-
-* <a id="keyboards-element-hierarchy-element-transform-additional-features-item-3"></a> **If `zwnj` is**: If `zwnj` is a simple string, the pattern will match that string at this point.
-
+<a id="keyboards-element-hierarchy-element-transform-additional-features-p-1"></a>
+In this usage, the variable with `id="zwnj"` will be substituted in at this point in the expression. The variable can contain a range, a character, or any other portion of a pattern. If `zwnj` is a simple string, the pattern will match that string at this point.
 
 - **`set` or `uset` variables**
 
     `$[upper]`
 
-* <a id="keyboards-element-hierarchy-element-transform-additional-features-item-4"></a> **Given a space-separated**: Given a space-separated `set` or `uset` variable, this syntax will match _any_ of the substrings.
-
-* <a id="keyboards-element-hierarchy-element-transform-additional-features-item-5"></a> **This expression may**: This expression may be thought of  (and implemented) as if it were a _non-capturing group_.
-
-* <a id="keyboards-element-hierarchy-element-transform-additional-features-item-6"></a> **It may, however**: It may, however, be enclosed within a capturing group.
-
-* <a id="keyboards-element-hierarchy-element-transform-additional-features-item-7"></a> **For example, the**: For example, the following definition of `$[upper]` will match as if it were written `(?:A|B|CC|D|E|FF)`.
-
+<a id="keyboards-element-hierarchy-element-transform-additional-features-p-2"></a>
+Given a space-separated `set` or `uset` variable, this syntax will match _any_ of the substrings. This expression may be thought of  (and implemented) as if it were a _non-capturing group_. It may, however, be enclosed within a capturing group. For example, the following definition of `$[upper]` will match as if it were written `(?:A|B|CC|D|E|FF)`.
 
     ```xml
     <variables>
@@ -2490,24 +2477,25 @@ The following are additions to standard Regex syntax.
     </variables>
     ```
 
-    This expression in a `from=` may be used to **insert a mapped variable**, see below under [Replacement syntax](#replacement-syntax).
+<a id="keyboards-element-hierarchy-element-transform-additional-features-p-3"></a>
+This expression in a `from=` may be used to **insert a mapped variable**, see below under [Replacement syntax](#replacement-syntax).
 
 #### Disallowed Regex Features <a id="keyboards-element-hierarchy-element-transform-disallowed-regex-features"></a>
 
 - **Matching an empty string**
 
-    Transforms may not match an empty string. For example, `<transform from=""/>` or `<transform from="X{0,1}"/>` are not allowed and must be flagged as an error to keyboard authors.
+<a id="keyboards-element-hierarchy-element-transform-disallowed-regex-features-p-1"></a>
+Transforms may not match an empty string. For example, `<transform from=""/>` or `<transform from="X{0,1}"/>` are not allowed and must be flagged as an error to keyboard authors.
 
 - **Unicode properties**
 
     `\p{property}` `\P{property}`
 
-    **Rationale:** The behavior of this feature varies by Unicode version, and so would not have predictable results.
+<a id="keyboards-element-hierarchy-element-transform-disallowed-regex-features-p-2"></a>
+**Rationale:** The behavior of this feature varies by Unicode version, and so would not have predictable results.
 
-* <a id="keyboards-element-hierarchy-element-transform-disallowed-regex-features-item-1"></a> **Tooling may choose**: Tooling may choose to suggest an expansion of properties, such as `\p{Mn}` to all non spacing marks for a certain Unicode version.
-
-* <a id="keyboards-element-hierarchy-element-transform-disallowed-regex-features-item-2"></a> **As well, a**: As well, a set of variables could be constructed in an `import`-able file matching particularly useful Unicode properties.
-
+<a id="keyboards-element-hierarchy-element-transform-disallowed-regex-features-p-3"></a>
+Tooling may choose to suggest an expansion of properties, such as `\p{Mn}` to all non spacing marks for a certain Unicode version.  As well, a set of variables could be constructed in an `import`-able file matching particularly useful Unicode properties.
 
     ```xml
     <uset id="Mn" value="[\u{034F}\u{0591}-\u{05AF}\u{05BD}\u{05C4}\u{05C5}\…]" /> <!-- 1,985 code points -->
@@ -2547,7 +2535,8 @@ The following are additions to standard Regex syntax.
 
     `$`
 
-    The end marker can be thought of as being implicitly at the end of every `from=` pattern, matching the insertion point. Transforms do not match past the insertion point.
+<a id="keyboards-element-hierarchy-element-transform-disallowed-regex-features-p-4"></a>
+The end marker can be thought of as being implicitly at the end of every `from=` pattern, matching the insertion point. Transforms do not match past the insertion point.
 
 _Attribute:_ `to`
 
@@ -2583,7 +2572,8 @@ Used in the `to=`
 
     `$[1:variable]` (Where "1" is any numbered capture group from 1 to 9)
 
-    Maps capture group 1 to variable `variable`. The `from=` side must also contain a grouped variable. This expression may appear anywhere or multiple times in the `to=` pattern.
+<a id="keyboards-element-hierarchy-element-transform-replacement-syntax-p-1"></a>
+Maps capture group 1 to variable `variable`. The `from=` side must also contain a grouped variable. This expression may appear anywhere or multiple times in the `to=` pattern.
 
     **Example**
 
@@ -2595,32 +2585,27 @@ Used in the `to=`
     <transform from="($[upper])" to="$[1:lower]" />
     ```
 
-* <a id="keyboards-element-hierarchy-element-transform-replacement-syntax-item-1"></a> **- The capture**: - The capture group on the `from=` side **must** contain exactly one set variable.
+<a id="keyboards-element-hierarchy-element-transform-replacement-syntax-p-2"></a>
+- The capture group on the `from=` side **must** contain exactly one set variable.  `from="Q($[upper])X"` can be used (other context before or after the capture group), but `from="(Q$[upper])"` may not be used with a mapped variable and is flagged as an error.
 
-* <a id="keyboards-element-hierarchy-element-transform-replacement-syntax-item-2"></a> **from="Q($[upper])X"` can be**: `from="Q($[upper])X"` can be used (other context before or after the capture group), but `from="(Q$[upper])"` may not be used with a mapped variable and is flagged as an error.
+<a id="keyboards-element-hierarchy-element-transform-replacement-syntax-p-3"></a>
+- The `from=` and `to=` sides of the pattern must both be using `set` variables. There is no way to insert a set literal on either side and avoid using a variable.
 
+<a id="keyboards-element-hierarchy-element-transform-replacement-syntax-p-4"></a>
+- The two variables (here `upper` and `lower`) must have exactly the same number of whitespace-separated items. Leading and trailing space is ignored. A variable without any spaces is considered to be a set variable of exactly one item.
 
-    - The `from=` and `to=` sides of the pattern must both be using `set` variables. There is no way to insert a set literal on either side and avoid using a variable.
-
-    - The two variables (here `upper` and `lower`) must have exactly the same number of whitespace-separated items. Leading and trailing space is ignored. A variable without any spaces is considered to be a set variable of exactly one item.
-
-* <a id="keyboards-element-hierarchy-element-transform-replacement-syntax-item-3"></a> **- As described**: - As described in [Additional Features](#additional-features), the `upper` set variable as used here matches as if it is `((?:A|B|CC|D|E|FF|G))`, showing the enclosing capturing group.
-
-* <a id="keyboards-element-hierarchy-element-transform-replacement-syntax-item-4"></a> **When text from**: When text from the input context matches this expression, and all above conditions are met, the mapping proceeds as follows:
-
+<a id="keyboards-element-hierarchy-element-transform-replacement-syntax-p-5"></a>
+- As described in [Additional Features](#additional-features), the `upper` set variable as used here matches as if it is `((?:A|B|CC|D|E|FF|G))`, showing the enclosing capturing group. When text from the input context matches this expression, and all above conditions are met, the mapping proceeds as follows:
 
     1. The portion of the input context, such as `CC`, is matched against the above calculated pattern.
 
-* <a id="keyboards-element-hierarchy-element-transform-replacement-syntax-item-5"></a> **2**: 2.
-
-* <a id="keyboards-element-hierarchy-element-transform-replacement-syntax-item-6"></a> **The position within**: The position within the `from=` variable (`upper`) is calculated.
-
-* <a id="keyboards-element-hierarchy-element-transform-replacement-syntax-item-7"></a> **The regex match**: The regex match may not have this information, but the matched substring `CC` can be compared against the tokenized input variable: `A`, `B`, `CC`, `D`, … to find that the 3rd item matches exactly.
-
+<a id="keyboards-element-hierarchy-element-transform-replacement-syntax-p-6"></a>
+2. The position within the `from=` variable (`upper`) is calculated. The regex match may not have this information, but the matched substring `CC` can be compared against the tokenized input variable: `A`, `B`, `CC`, `D`, … to find that the 3rd item matches exactly.
 
     3. The same position within the `to=` variable (`lower`) is calculated. The 3rd item is `c`.
 
-    4. `CC` in the input context is replaced with `c`, and processing proceeds to the next `transformGroup`.
+<a id="keyboards-element-hierarchy-element-transform-replacement-syntax-p-7"></a>
+4. `CC` in the input context is replaced with `c`, and processing proceeds to the next `transformGroup`.
 
 - **Emit a marker**
 
@@ -2632,6 +2617,7 @@ Used in the `to=`
 
 ##### Transform From Grammar <a id="keyboards-element-hierarchy-element-transform-transform-grammar-transform-from-grammar"></a>
 
+<a id="keyboards-element-hierarchy-element-transform-transform-grammar-transform-from-grammar-p-1"></a>
 The `from=` attribute MUST match the `from-match` rule in this grammar. Not all strings which match this grammar are valid, specifically
 
 The following is the [LDML EBNF](tr35.md#ebnf) format for the grammar:
@@ -2806,6 +2792,7 @@ NMTOKEN  ::= NAMECHAR+
 
 ##### Transform To Grammar <a id="keyboards-element-hierarchy-element-transform-transform-grammar-transform-to-grammar"></a>
 
+<a id="keyboards-element-hierarchy-element-transform-transform-grammar-transform-to-grammar-p-1"></a>
 This is the grammar for the `<transform to="…"/>` attribute.  The `to=` attribute MUST match the `to-replacement` rule in this grammar. Not all strings which match this grammar are valid:
 
 The following is the [LDML EBNF](tr35.md#ebnf) format for the grammar:
@@ -2908,6 +2895,7 @@ NMTOKEN  ::= NAMECHAR+
 
 ##### ABNF <a id="keyboards-element-hierarchy-element-transform-transform-grammar-abnf"></a>
 
+<a id="keyboards-element-hierarchy-element-transform-transform-grammar-abnf-p-1"></a>
 The grammar for the transform rules is also available in ABNF notation [[STD68](https://www.rfc-editor.org/info/std68)],
 including the modifications found in [RFC 7405](https://www.rfc-editor.org/rfc/rfc7405).
 
@@ -2915,6 +2903,7 @@ RFC7405 defines a variation of ABNF that is case-sensitive.
 Some ABNF tools are only compatible with the specification found in
 [RFC 5234](https://www.rfc-editor.org/rfc/rfc5234).
 
+<a id="keyboards-element-hierarchy-element-transform-transform-grammar-abnf-p-2"></a>
 The ABNF files are located in the `keyboards/abnf` directory in the CLDR source directory.  (The EBNF above was converted from the ABNF files.)
 
  * `transform-from-required.abnf`
@@ -2924,60 +2913,36 @@ The ABNF files are located in the `keyboards/abnf` directory in the CLDR source 
 
 ### Element: reorder <a id="keyboards-element-hierarchy-element-reorder"></a>
 
+<a id="keyboards-element-hierarchy-element-reorder-p-1"></a>
 The reorder transform consists of a [`<transformGroup>`](#element-transformgroup) element containing `<reorder>` elements.  Multiple such `<transformGroup>` elements may be contained in an enclosing `<transforms>` element.
 
 One or more [`<import>`](#element-import) elements are allowed to precede the `<reorder>` elements.
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-1"></a> **This transform has**: This transform has the job of reordering sequences of characters that have been typed, from their typed order to the desired output order.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-2"></a> **The primary concern**: The primary concern in this transform is to sort combining marks into their correct relative order after a base, as described in this section.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-3"></a> **The reorder transforms**: The reorder transforms can be quite complex, keyboard layouts will almost always import them.
-
+<a id="keyboards-element-hierarchy-element-reorder-p-2"></a>
+This transform has the job of reordering sequences of characters that have been typed, from their typed order to the desired output order. The primary concern in this transform is to sort combining marks into their correct relative order after a base, as described in this section. The reorder transforms can be quite complex, keyboard layouts will almost always import them.
 
 The reordering algorithm consists of four parts:
 
 1. Create a sort key for each character in the input string. A sort key has 4 parts (primary, index, tertiary, quaternary):
    * The **primary weight** is the primary order value.
-   * The **secondary weight** is the index, a position in the input string, usually of the character itself, but it may be of a character earlier in the string.
+<a id="keyboards-element-hierarchy-element-reorder-p-3"></a>
+* The **secondary weight** is the index, a position in the input string, usually of the character itself, but it may be of a character earlier in the string.
    * The **tertiary weight** is a tertiary order value (defaulting to 0).
-   * The **quaternary weight** is the index of the character in the string. This is solely to ensure a stable sort for sequences of characters with the same tertiary weight.
+<a id="keyboards-element-hierarchy-element-reorder-p-4"></a>
+* The **quaternary weight** is the index of the character in the string. This is solely to ensure a stable sort for sequences of characters with the same tertiary weight.
 2. Mark each character as to whether it is a prebase character, one that is typed before the base and logically stored after. Thus it will have a primary order > 0.
-* <a id="keyboards-element-hierarchy-element-reorder-item-4"></a> **3**: 3.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-5"></a> **Use the sort**: Use the sort key and the prebase mark to identify runs.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-6"></a> **A run starts**: A run starts with a prefix that contains any prebase characters and a single base character whose primary and tertiary key is 0.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-7"></a> **The run extends**: The run extends until, but not including, the start of the prefix of the next run or end of the string.
-
+3. Use the sort key and the prebase mark to identify runs. A run starts with a prefix that contains any prebase characters and a single base character whose primary and tertiary key is 0. The run extends until, but not including, the start of the prefix of the next run or end of the string.
    * `run := preBase* (primary=0 && tertiary=0) ((primary≠0 || tertiary≠0) && !preBase)*`
 4. Sort the character order of each character in the run based on its sort key.
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-8"></a> **The primary order**: The primary order of a character with the Unicode property `Canonical_Combining_Class` (ccc) of 0 may well not be 0.
+<a id="keyboards-element-hierarchy-element-reorder-p-5"></a>
+The primary order of a character with the Unicode property `Canonical_Combining_Class` (ccc) of 0 may well not be 0. In addition, a character may receive a different primary order dependent on context. For example, in the Devanagari sequence ka halant ka, the first ka would have a primary order 0 while the halant ka sequence would give both halant and the second ka a primary order > 0, for example 2. Note that “base” character in this discussion is not a Unicode base character. It is instead a character with primary=0.
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-9"></a> **In addition, a**: In addition, a character may receive a different primary order dependent on context.
+<a id="keyboards-element-hierarchy-element-reorder-p-6"></a>
+In order to get the characters into the correct relative order, it is necessary not only to order combining marks relative to the base character, but also to order some combining marks in a subsequence following another combining mark. For example in Devanagari, a nukta may follow a consonant character, but it may also follow a conjunct consisting of consonant, halant, consonant. Notice that the second consonant is not, in this model, the start of a new run because some characters may need to be reordered to before the first base, for example repha. The repha would get primary < 0, and be sorted before the character with order = 0, which is, in the case of Devanagari, the initial consonant of the orthographic syllable.
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-10"></a> **For example, in**: For example, in the Devanagari sequence ka halant ka, the first ka would have a primary order 0 while the halant ka sequence would give both halant and the second ka a primary order > 0, for example 2.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-11"></a> **Note that “base”**: Note that “base” character in this discussion is not a Unicode base character.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-12"></a> **It is instead**: It is instead a character with primary=0.
-
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-13"></a> **In order to**: In order to get the characters into the correct relative order, it is necessary not only to order combining marks relative to the base character, but also to order some combining marks in a subsequence following another combining mark.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-14"></a> **For example in**: For example in Devanagari, a nukta may follow a consonant character, but it may also follow a conjunct consisting of consonant, halant, consonant.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-15"></a> **Notice that the**: Notice that the second consonant is not, in this model, the start of a new run because some characters may need to be reordered to before the first base, for example repha.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-16"></a> **The repha would**: The repha would get primary < 0, and be sorted before the character with order = 0, which is, in the case of Devanagari, the initial consonant of the orthographic syllable.
-
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-17"></a> **The reorder transform**: The reorder transform consists of `<reorder>` elements encapsulated in a `<transformGroup>` element.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-18"></a> **Each element is**: Each element is a rule that matches against a string of characters with the action of setting the various ordering attributes (`primary`, `tertiary`, `tertiaryBase`, `preBase`) for the matched characters in the string.
-
+<a id="keyboards-element-hierarchy-element-reorder-p-7"></a>
+The reorder transform consists of `<reorder>` elements encapsulated in a `<transformGroup>` element. Each element is a rule that matches against a string of characters with the action of setting the various ordering attributes (`primary`, `tertiary`, `tertiaryBase`, `preBase`) for the matched characters in the string.
 
 The relative ordering of `<reorder>` elements is not significant.
 
@@ -3014,18 +2979,7 @@ _Attribute:_ `before`
 
 _Attribute:_ `order`
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-19"></a> **> This attribute**: > This attribute value gives the primary order for the elements in the matched string in the `@from` attribute.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-20"></a> **The value is**: The value is a simple integer between -128 and +127 inclusive, or a space separated list of such integers.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-21"></a> **For a single**: For a single integer, it is applied to all the elements in the matched string.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-22"></a> **Details of such**: Details of such list type attributes are given after all the attributes are described.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-23"></a> **If missing, the**: If missing, the order value of all the matched characters is 0.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-24"></a> **We consider the**: We consider the order value for a matched character in the string.
-
+> This attribute value gives the primary order for the elements in the matched string in the `@from` attribute. The value is a simple integer between -128 and +127 inclusive, or a space separated list of such integers. For a single integer, it is applied to all the elements in the matched string. Details of such list type attributes are given after all the attributes are described. If missing, the order value of all the matched characters is 0. We consider the order value for a matched character in the string.
 >
 > * If the value is 0 and its tertiary value is 0, then the character is the base of a new run.
 > * If the value is 0 and its tertiary value is non-zero, then it is a normal character in a run, with ordering semantics as described in the `@tertiary` attribute.
@@ -3041,14 +2995,7 @@ _Attribute:_ `order`
 
 _Attribute:_ `tertiary`
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-25"></a> **> This attribute**: > This attribute value gives the tertiary order value to the characters matched.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-26"></a> **The value is**: The value is a simple integer between -128 and +127 inclusive, or a space separated list of such integers.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-27"></a> **If missing, the**: If missing, the value for all the characters matched is 0.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-28"></a> **We consider the**: We consider the tertiary value for a matched character in the string.
-
+> This attribute value gives the tertiary order value to the characters matched. The value is a simple integer between -128 and +127 inclusive, or a space separated list of such integers. If missing, the value for all the characters matched is 0. We consider the tertiary value for a matched character in the string.
 >
 > * If the value is 0 then the character is considered to have a primary order as specified in its order value and is a primary character.
 > * If the value is non zero, then the order value must be zero otherwise it is an error. The character is considered as a tertiary character for the purposes of ordering.
@@ -3062,47 +3009,16 @@ _Attribute:_ `tertiary`
 
 _Attribute:_ `tertiaryBase`
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-29"></a> **> This attribute**: > This attribute value is a space separated list of `"true"` or `"false"` values corresponding to each character matched.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-30"></a> **It is illegal**: It is illegal for a tertiary character to have a true `tertiaryBase` value.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-31"></a> **For a primary**: For a primary character it marks that this character may have tertiary characters moved after it.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-32"></a> **When calculating the**: When calculating the secondary weight for a tertiary character, the most recently encountered primary character with a true `tertiaryBase` attribute value is used.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-33"></a> **Primary characters with**: Primary characters with an `@order` value of 0 automatically are treated as having `tertiaryBase` true regardless of what is specified for them.
-
+> This attribute value is a space separated list of `"true"` or `"false"` values corresponding to each character matched. It is illegal for a tertiary character to have a true `tertiaryBase` value. For a primary character it marks that this character may have tertiary characters moved after it. When calculating the secondary weight for a tertiary character, the most recently encountered primary character with a true `tertiaryBase` attribute value is used. Primary characters with an `@order` value of 0 automatically are treated as having `tertiaryBase` true regardless of what is specified for them.
 
 _Attribute:_ `preBase`
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-34"></a> **> This attribute**: > This attribute value gives the prebase attribute for each character matched.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-35"></a> **The value may**: The value may be `"true"` or `"false"` or a space separated list of such values.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-36"></a> **If missing the**: If missing the value for all the characters matched is false.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-37"></a> **It is illegal**: It is illegal for a tertiary character to have a true prebase value.
-
+> This attribute value gives the prebase attribute for each character matched. The value may be `"true"` or `"false"` or a space separated list of such values. If missing the value for all the characters matched is false. It is illegal for a tertiary character to have a true prebase value.
 >
-* <a id="keyboards-element-hierarchy-element-reorder-item-38"></a> **> If a**: > If a primary character has a true prebase value then the character is marked as being typed before the base character of a run, even though it is intended to be stored after it.
+> If a primary character has a true prebase value then the character is marked as being typed before the base character of a run, even though it is intended to be stored after it. The primary order gives the intended position in the order after the base character, that the prebase character will end up. Thus `@order` shall not be 0. These characters are part of the run prefix. If such characters are typed then, in order to give the run a base character after which characters can be sorted, an appropriate base character, such as a dotted circle, is inserted into the output run, until a real base character has been typed. A value of `"false"` indicates that the character is not a prebase.
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-39"></a> **The primary order**: The primary order gives the intended position in the order after the base character, that the prebase character will end up.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-40"></a> **Thus `@order` shall**: Thus `@order` shall not be 0.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-41"></a> **These characters are**: These characters are part of the run prefix.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-42"></a> **If such characters**: If such characters are typed then, in order to give the run a base character after which characters can be sorted, an appropriate base character, such as a dotted circle, is inserted into the output run, until a real base character has been typed.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-43"></a> **A value of**: A value of `"false"` indicates that the character is not a prebase.
-
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-44"></a> **For `@from` attribute**: For `@from` attribute values with a match string length greater than 1, the sort key information (`@order`, `@tertiary`, `@tertiaryBase`, `@preBase`) may consist of a space-separated list of values, one for each element matched.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-45"></a> **The last value**: The last value is repeated to fill out any missing values.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-46"></a> **Such a list**: Such a list may not contain more values than there are elements in the `@from` attribute:
-
+<a id="keyboards-element-hierarchy-element-reorder-p-8"></a>
+For `@from` attribute values with a match string length greater than 1, the sort key information (`@order`, `@tertiary`, `@tertiaryBase`, `@preBase`) may consist of a space-separated list of values, one for each element matched. The last value is repeated to fill out any missing values. Such a list may not contain more values than there are elements in the `@from` attribute:
 
 ```java
 if len(@from) < len(@list) then error
@@ -3115,6 +3031,7 @@ endif
 
 **Example**
 
+<a id="keyboards-element-hierarchy-element-reorder-p-9"></a>
 For example, consider the Northern Thai (`nod-Lana`, Tai Tham script) word: ᨡ᩠ᩅᩫ᩶ 'roasted'. This is ideally encoded as the following:
 
 | name | _kha_ | _sakot_ | _wa_ | _o_  | _t2_ |
@@ -3124,6 +3041,7 @@ For example, consider the Northern Thai (`nod-Lana`, Tai Tham script) word: ᨡ�
 
 (That sequence is already in NFC format.)
 
+<a id="keyboards-element-hierarchy-element-reorder-p-10"></a>
 Some users may type the upper component of the vowel first, and the tone before or after the lower component. Thus someone might type it as:
 
 | name | _kha_ | _o_  | _t2_ | _sakot_ | _wa_ |
@@ -3147,6 +3065,7 @@ Finally, the user might also type in the sequence with the tone _after_ the lowe
 
 (That sequence is already in NFC format.)
 
+<a id="keyboards-element-hierarchy-element-reorder-p-11"></a>
 We want all of these sequences to end up ordered as the first. To do this, we use the following rules:
 
 ```xml
@@ -3158,43 +3077,31 @@ We want all of these sequences to end up ordered as the first. To do this, we us
 <reorder before="\u{1A6B}" from="\u{1A60}[\u{1A75}-\u{1A79}]\u{1A45}" order="10 55 10" />
 ```
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-47"></a> **The first reorder**: The first reorder is the default ordering for the _sakot_ which allows for it to be placed anywhere in a sequence, but moves any non-consonants that may immediately follow it, back before it in the sequence.
+<a id="keyboards-element-hierarchy-element-reorder-p-12"></a>
+The first reorder is the default ordering for the _sakot_ which allows for it to be placed anywhere in a sequence, but moves any non-consonants that may immediately follow it, back before it in the sequence. The next two rules give the orders for the top vowel component and tone marks respectively. The next three rules give the _sakot_ and _wa_ characters a primary order that places them before the _o_. Notice particularly the final reorder rule where the _sakot_+_wa_ is split by the tone mark. This rule is necessary in case someone types into the middle of previously normalized text.
 
-* <a id="keyboards-element-hierarchy-element-reorder-item-48"></a> **The next two**: The next two rules give the orders for the top vowel component and tone marks respectively.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-49"></a> **The next three**: The next three rules give the _sakot_ and _wa_ characters a primary order that places them before the _o_.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-50"></a> **Notice particularly the**: Notice particularly the final reorder rule where the _sakot_+_wa_ is split by the tone mark.
-
-* <a id="keyboards-element-hierarchy-element-reorder-item-51"></a> **This rule is**: This rule is necessary in case someone types into the middle of previously normalized text.
-
-
+<a id="keyboards-element-hierarchy-element-reorder-p-13"></a>
 `<reorder>` elements are priority ordered based first on the length of string their `@from` attribute value matches and then the sum of the lengths of the strings their `@before` attribute value matches.
 
 #### Using `<import>` with `<reorder>` elements <a id="keyboards-element-hierarchy-element-reorder-using-with-elements"></a>
 
+<a id="keyboards-element-hierarchy-element-reorder-using-with-elements-p-1"></a>
 This section describes the impact of using [`import`](#element-import) elements with `<reorder>` elements.
 
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-1"></a> **The @from string**: The @from string in a `<reorder>` element describes a set of strings that it matches.
+<a id="keyboards-element-hierarchy-element-reorder-using-with-elements-p-2"></a>
+The @from string in a `<reorder>` element describes a set of strings that it matches. This also holds for the `@before` attribute. The **intersection** of any two `<reorder>` elements consists of the intersections of their `@from` and `@before` string sets. Tooling should warn users if the intersection between any two `<reorder>` elements in the same `<transformGroup>` element to be non empty prior to processing imports.
 
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-2"></a> **This also holds**: This also holds for the `@before` attribute.
-
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-3"></a> **The **intersection** of**: The **intersection** of any two `<reorder>` elements consists of the intersections of their `@from` and `@before` string sets.
-
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-4"></a> **Tooling should warn**: Tooling should warn users if the intersection between any two `<reorder>` elements in the same `<transformGroup>` element to be non empty prior to processing imports.
-
-
+<a id="keyboards-element-hierarchy-element-reorder-using-with-elements-p-3"></a>
 If two `<reorder>` elements have a non empty intersection, then they are split and merged. They are split such that where there were two `<reorder>` elements, there are, in effect (but not actuality), three elements consisting of:
 
 * `@from`, `@before` that match the intersection of the two rules. The other attribute values are merged, as described below.
 * `@from`, `@before` that match the set of strings in the first rule not in the intersection with the other attribute values from the first rule.
 * `@from`, `@before` that match the set of strings in the second rule not in the intersection, with the other attribute values from the second rule.
 
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-5"></a> **When merging the**: When merging the other attributes, the second rule is taken to have priority (being an override of the earlier element).
+<a id="keyboards-element-hierarchy-element-reorder-using-with-elements-p-4"></a>
+When merging the other attributes, the second rule is taken to have priority (being an override of the earlier element). Where the second rule does not define the value for a character but the first does, the value is taken from the first rule, otherwise it is taken from the second rule.
 
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-6"></a> **Where the second**: Where the second rule does not define the value for a character but the first does, the value is taken from the first rule, otherwise it is taken from the second rule.
-
-
+<a id="keyboards-element-hierarchy-element-reorder-using-with-elements-p-5"></a>
 Notice that it is possible for two rules to match the same string, but for them not to merge because the distribution of the string across `@before` and `@from` is different. For example, the following would not merge:
 
 ```xml
@@ -3202,6 +3109,7 @@ Notice that it is possible for two rules to match the same string, but for them 
 <reorder before="a" from="bcd" />
 ```
 
+<a id="keyboards-element-hierarchy-element-reorder-using-with-elements-p-6"></a>
 After `<reorder>` elements merge, the resulting `reorder` elements are sorted into priority order for matching.
 
 Consider this fragment from a shared reordering for the Myanmar script:
@@ -3244,19 +3152,12 @@ A particular Myanmar keyboard layout can have these `reorder` elements:
 </transformGroup>
 ```
 
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-7"></a> **The effect of**: The effect of this is that the _e-vowel_ will be identified as a prebase and will have an order of 30.
-
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-8"></a> **Likewise a _medial-r**: Likewise a _medial-r_ will be identified as a prebase and will have an order of 20.
-
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-9"></a> **Notice that a**: Notice that a _shan-e-vowel_ (`\u{1084}`) will not be identified as a prebase (even if it should be!).
-
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-10"></a> **The _kinzi_ is**: The _kinzi_ is described in the layout since it moves something across a run boundary.
-
-* <a id="keyboards-element-hierarchy-element-reorder-using-with-elements-item-11"></a> **By separating such**: By separating such movements (prebase or moving to in front of a base) from the shared ordering rules, the shared ordering rules become a self-contained combining order description that can be used in other keyboards or even in other contexts than keyboarding.
-
+<a id="keyboards-element-hierarchy-element-reorder-using-with-elements-p-7"></a>
+The effect of this is that the _e-vowel_ will be identified as a prebase and will have an order of 30. Likewise a _medial-r_ will be identified as a prebase and will have an order of 20. Notice that a _shan-e-vowel_ (`\u{1084}`) will not be identified as a prebase (even if it should be!). The _kinzi_ is described in the layout since it moves something across a run boundary. By separating such movements (prebase or moving to in front of a base) from the shared ordering rules, the shared ordering rules become a self-contained combining order description that can be used in other keyboards or even in other contexts than keyboarding.
 
 #### Example Post-reorder transforms <a id="keyboards-element-hierarchy-element-reorder-example-post-reorder-transforms"></a>
 
+<a id="keyboards-element-hierarchy-element-reorder-example-post-reorder-transforms-p-1"></a>
 It may be desired to perform additional processing following reorder operations.  This may be aaccomplished by adding an additional `<transformGroup>` element after the group containing `<reorder>` elements.
 
 First, a partial example from Khmer where split vowels are combined after reordering.
@@ -3275,6 +3176,7 @@ First, a partial example from Khmer where split vowels are combined after reorde
 </transformGroup>
 ```
 
+<a id="keyboards-element-hierarchy-element-reorder-example-post-reorder-transforms-p-2"></a>
 Another partial example allows a keyboard implementation to prevent people typing two lower vowels in a Burmese cluster:
 
 ```xml
@@ -3292,15 +3194,12 @@ Another partial example allows a keyboard implementation to prevent people typin
 
 #### Reorder and Markers <a id="keyboards-element-hierarchy-element-reorder-reorder-and-markers"></a>
 
-* <a id="keyboards-element-hierarchy-element-reorder-reorder-and-markers-item-1"></a> **Markers are not**: Markers are not matched by `reorder` elements.
-
-* <a id="keyboards-element-hierarchy-element-reorder-reorder-and-markers-item-2"></a> **However, if a**: However, if a character preceded by one or more markers is reordered due to a `reorder` element, those markers will be reordered with the characters, maintaining the same relative order.
-
-* <a id="keyboards-element-hierarchy-element-reorder-reorder-and-markers-item-3"></a> **This is a**: This is a similar process to the algorithm used to normalize strings processed by `transform` elements.
-
+<a id="keyboards-element-hierarchy-element-reorder-reorder-and-markers-p-1"></a>
+Markers are not matched by `reorder` elements. However, if a character preceded by one or more markers is reordered due to a `reorder` element, those markers will be reordered with the characters, maintaining the same relative order.  This is a similar process to the algorithm used to normalize strings processed by `transform` elements.
 
 Keyboard implementations must process `reorder` elements using the following algorithm.
 
+<a id="keyboards-element-hierarchy-element-reorder-reorder-and-markers-p-2"></a>
 Note that steps 1 and 3 are identical to the steps used for normalization using markers in the [Marker Algorithm Overview](#marker-algorithm-overview).
 
 Given an input string from context or from a previous `transformGroup`:
@@ -3315,8 +3214,10 @@ Given an input string from context or from a previous `transformGroup`:
 
 ### Backspace Transforms <a id="keyboards-element-hierarchy-backspace-transforms"></a>
 
+<a id="keyboards-element-hierarchy-backspace-transforms-p-1"></a>
 The `<transforms type="backspace">` describe an optional transform that is not applied on input of normal characters, but is only used to perform extra backspace modifications to previously committed text.
 
+<a id="keyboards-element-hierarchy-backspace-transforms-p-2"></a>
 When the backspace key is pressed, the `<transforms type="backspace">` element (if present) is processed, and then the `<transforms type="simple">` element (if processed) as with any other key.
 
 Keyboarding applications typically work, but are not required to, in one of two modes:
@@ -3327,21 +3228,10 @@ Keyboarding applications typically work, but are not required to, in one of two 
 
 **_text editing_**
 
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-1"></a> **> text editing**: > text editing happens when a user moves the cursor into some previously entered text which may have been entered by someone else.
+> text editing happens when a user moves the cursor into some previously entered text which may have been entered by someone else. As such, there is no way to know in which order things were typed, but a user will still want appropriate behavior when they press backspace. This may involve deleting more than one character or replacing a sequence of characters with a different sequence.
 
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-2"></a> **As such, there**: As such, there is no way to know in which order things were typed, but a user will still want appropriate behavior when they press backspace.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-3"></a> **This may involve**: This may involve deleting more than one character or replacing a sequence of characters with a different sequence.
-
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-4"></a> **In text editing**: In text editing mode, different keyboard layouts may behave differently in the same textual context.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-5"></a> **The backspace transform**: The backspace transform allows the keyboard layout to specify the effect of pressing backspace in a particular textual context.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-6"></a> **This is done**: This is done by specifying a set of backspace rules that match a string before the cursor and replace it with another string.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-7"></a> **The rules are**: The rules are expressed within a `transforms type="backspace"` element.
-
+<a id="keyboards-element-hierarchy-backspace-transforms-p-3"></a>
+In text editing mode, different keyboard layouts may behave differently in the same textual context. The backspace transform allows the keyboard layout to specify the effect of pressing backspace in a particular textual context. This is done by specifying a set of backspace rules that match a string before the cursor and replace it with another string. The rules are expressed within a `transforms type="backspace"` element.
 
 
 ```xml
@@ -3356,6 +3246,7 @@ Keyboarding applications typically work, but are not required to, in one of two 
 
 For example, consider deleting a Devanagari ksha क्श:
 
+<a id="keyboards-element-hierarchy-backspace-transforms-p-4"></a>
 While this character is made up of three codepoints, the following rule causes all three to be deleted by a single press of the backspace.
 
 
@@ -3367,6 +3258,7 @@ While this character is made up of three codepoints, the following rule causes a
 </transforms>
 ```
 
+<a id="keyboards-element-hierarchy-backspace-transforms-p-5"></a>
 Note that the optional attribute `@to` is omitted, since the whole string is being deleted. This is not uncommon in backspace transforms.
 
 A more complex example comes from a Burmese visually ordered keyboard:
@@ -3408,46 +3300,35 @@ A more complex example comes from a Burmese visually ordered keyboard:
 </transforms>
 ```
 
+<a id="keyboards-element-hierarchy-backspace-transforms-p-6"></a>
 The above example is simplified, and doesn't fully handle the interaction between medial-r and e-vowel.
 
 
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-8"></a> **> The character**: > The character `\m{prebase}` does not represent a literal character, but is instead a special marker, used as a "filler string".
+> The character `\m{prebase}` does not represent a literal character, but is instead a special marker, used as a "filler string". When a keyboard implementation handles a user pressing a key that inserts a prebase character, it also has to insert a special filler string before the prebase to ensure that the prebase character does not combine with the previous cluster. See the reorder transform for details. See [markers](#markers) for the `\m` syntax.
 
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-9"></a> **When a keyboard**: When a keyboard implementation handles a user pressing a key that inserts a prebase character, it also has to insert a special filler string before the prebase to ensure that the prebase character does not combine with the previous cluster.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-10"></a> **See the reorder**: See the reorder transform for details.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-11"></a> **See [markers](#markers) for**: See [markers](#markers) for the `\m` syntax.
-
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-12"></a> **The first three**: The first three transforms above delete various ligatures with a single keypress.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-13"></a> **The other transforms**: The other transforms handle prebase characters.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-14"></a> **There are two**: There are two in this Burmese keyboard.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-15"></a> **The transforms delete**: The transforms delete the characters preceding the prebase character up to base which gets replaced with the prebase filler string, which represents a null base.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-item-16"></a> **Finally the prebase**: Finally the prebase filler string + prebase is deleted as a unit.
-
+<a id="keyboards-element-hierarchy-backspace-transforms-p-7"></a>
+The first three transforms above delete various ligatures with a single keypress. The other transforms handle prebase characters. There are two in this Burmese keyboard. The transforms delete the characters preceding the prebase character up to base which gets replaced with the prebase filler string, which represents a null base. Finally the prebase filler string + prebase is deleted as a unit.
 
 #### Default Backspace Transform <a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform"></a>
 
+<a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-p-1"></a>
 If no specified transform among all `transformGroup`s under the `<transforms type="backspace">` element matches, a default will be used instead — an implied final transform that simply deletes a single codepoint at the end of the input context.
+<a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-p-2"></a>
 Because the context is in NFD, this default behavior may break apart what the user considers to be one character.
-* <a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-item-1"></a> **For example, if**: For example, if at the end of the context is the string `Dü`, in NFD form, this will be the codepoints `D` (U+0044), `u` (U+0075) followed by `¨` (U+0308).
+<a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-p-3"></a>
+For example, if at the end of the context is the string `Dü`, in NFD form, this will be the codepoints `D` (U+0044), `u` (U+0075) followed by `¨` (U+0308). Pressing backspace once will delete the U+0308 codepoint, leaving `Du` in the context. Pressing backspace again will leave only `D`.
 
-* <a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-item-2"></a> **Pressing backspace once**: Pressing backspace once will delete the U+0308 codepoint, leaving `Du` in the context.
-
-* <a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-item-3"></a> **Pressing backspace again**: Pressing backspace again will leave only `D`.
-
-
+<a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-p-4"></a>
 This implied transform is effectively similar to the following code sample, even though the `*` operator is not actually allowed in `from=`.
+<a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-p-5"></a>
 See the documentation for *Match a single Unicode codepoint* under [transform syntax](#regex-like-syntax) and [markers](#markers), above.
 
+<a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-p-6"></a>
 It is important that implementations do not by default delete more than one non-marker codepoint at a time, except in the case of emoji clusters.
+<a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-p-7"></a>
 Note that implementations will vary in the emoji handling due to the iterative nature of successive Unicode releases. See [UTS#51 §2.4.2: Emoji Modifiers in Text](https://www.unicode.org/reports/tr51/#Emoji_Modifiers_in_Text)
 
+<a id="keyboards-element-hierarchy-backspace-transforms-default-backspace-transform-p-8"></a>
 Keyboard authors should almost always include backspace transforms in their keyboards, to ensure that backspacing has intuitive and expected behavior for users.
 The default backspace transform described here may yield unexpected behavior for users.
 
@@ -3475,12 +3356,8 @@ DTD validation alone is not sufficient to verify a keyboard file.
 
 ## Keyboard IDs <a id="keyboards-keyboard-ids"></a>
 
-* <a id="keyboards-keyboard-ids-item-1"></a> **There is a**: There is a set of subtags that help identify the keyboards.
-
-* <a id="keyboards-keyboard-ids-item-2"></a> **Each of these**: Each of these are used after the `"t-k0"` subtags to help identify the keyboards.
-
-* <a id="keyboards-keyboard-ids-item-3"></a> **The first tag**: The first tag appended is a mandatory platform tag followed by zero or more tags that help differentiate the keyboard from others with the same locale code.
-
+<a id="keyboards-keyboard-ids-p-1"></a>
+There is a set of subtags that help identify the keyboards. Each of these are used after the `"t-k0"` subtags to help identify the keyboards. The first tag appended is a mandatory platform tag followed by zero or more tags that help differentiate the keyboard from others with the same locale code.
 
 ### Principles for Keyboard IDs <a id="keyboards-keyboard-ids-principles-for-keyboard-ids"></a>
 
@@ -3490,27 +3367,11 @@ The following are the design principles for the IDs.
    1. Eg, `en`, `sr-Cyrl`, or `en-t-k0-extended`.
 2. Use the minimal language id based on `likelySubtags` (see [Part 1: Likely Subtags](tr35.md#Likely_Subtags))
    1. Eg, instead of `fa-Arab`, use `fa`.
-   2. The data is in <https://github.com/unicode-org/cldr/blob/main/common/supplemental/likelySubtags.xml>
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-1"></a> **3**: 3.
-
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-2"></a> **Keyboard files should**: Keyboard files should be platform-independent, however, if included, a platform id is the first subtag after `-t-k0-`.
-
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-3"></a> **If a keyboard**: If a keyboard on the platform changes over time, both are dated, eg `bg-t-k0-chromeos-2011`.
-
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-4"></a> **When selecting, if**: When selecting, if there is no date, it means the latest one.
-
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-5"></a> **4**: 4.
-
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-6"></a> **Keyboards are only**: Keyboards are only tagged that differ from the "standard for each language".
-
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-7"></a> **That is, for**: That is, for each language on a platform, there will be a keyboard with no subtags.
-
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-8"></a> **Subtags with common**: Subtags with common semantics across languages and platforms are used, such as `-extended`, `-phonetic`, `-qwerty`, `-qwertz`, `-azerty`, …
-
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-9"></a> **5**: 5.
-
-* <a id="keyboards-keyboard-ids-principles-for-keyboard-ids-item-10"></a> **In order to**: In order to get to 8 letters, abbreviations are reused that are already in [bcp47](https://github.com/unicode-org/cldr/blob/main/common/bcp47/) -u/-t extensions and in [language-subtag-registry](https://www.iana.org/assignments/language-subtag-registry) variants, eg for Traditional use `-trad` or `-traditio` (both exist in [bcp47](https://github.com/unicode-org/cldr/blob/main/common/bcp47/)).
-
+<a id="keyboards-keyboard-ids-principles-for-keyboard-ids-p-1"></a>
+2. The data is in <https://github.com/unicode-org/cldr/blob/main/common/supplemental/likelySubtags.xml>
+3. Keyboard files should be platform-independent, however, if included, a platform id is the first subtag after `-t-k0-`. If a keyboard on the platform changes over time, both are dated, eg `bg-t-k0-chromeos-2011`. When selecting, if there is no date, it means the latest one.
+4. Keyboards are only tagged that differ from the "standard for each language". That is, for each language on a platform, there will be a keyboard with no subtags. Subtags with common semantics across languages and platforms are used, such as `-extended`, `-phonetic`, `-qwerty`, `-qwertz`, `-azerty`, …
+5. In order to get to 8 letters, abbreviations are reused that are already in [bcp47](https://github.com/unicode-org/cldr/blob/main/common/bcp47/) -u/-t extensions and in [language-subtag-registry](https://www.iana.org/assignments/language-subtag-registry) variants, eg for Traditional use `-trad` or `-traditio` (both exist in [bcp47](https://github.com/unicode-org/cldr/blob/main/common/bcp47/)).
 6. Multiple languages cannot be indicated in the locale id, so the predominant target is used.
    1. For Finnish + Sami, use `fi-t-k0-smi` or `extended-smi`
    2. The [`<locales>`](#element-locales) element may be used to identify additional languages.
@@ -3563,14 +3424,21 @@ The following are the design principles for the IDs.
 
 © 2001–2026 Unicode, Inc.
 This publication is protected by copyright, and permission must be obtained from Unicode, Inc.
+<a id="keyboards-platform-behaviors-in-edge-cases-p-1"></a>
 prior to any reproduction, modification, or other use not permitted by the [Terms of Use](https://www.unicode.org/copyright.html).
+<a id="keyboards-platform-behaviors-in-edge-cases-p-2"></a>
 Specifically, you may make copies of this publication and may annotate and translate it solely for personal or internal business purposes and not for public distribution,
+<a id="keyboards-platform-behaviors-in-edge-cases-p-3"></a>
 provided that any such permitted copies and modifications fully reproduce all copyright and other legal notices contained in the original.
+<a id="keyboards-platform-behaviors-in-edge-cases-p-4"></a>
 You may not make copies of or modifications to this publication for public distribution, or incorporate it in whole or in part into any product or publication without the express written permission of Unicode.
 
+<a id="keyboards-platform-behaviors-in-edge-cases-p-5"></a>
 Use of all Unicode Products, including this publication, is governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html).
 The authors, contributors, and publishers have taken care in the preparation of this publication,
+<a id="keyboards-platform-behaviors-in-edge-cases-p-6"></a>
 but make no express or implied representation or warranty of any kind and assume no responsibility or liability for errors or omissions or for consequential or incidental damages that may arise therefrom.
 This publication is provided “AS-IS” without charge as a convenience to users.
 
+<a id="keyboards-platform-behaviors-in-edge-cases-p-7"></a>
 Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the United States and other countries.

@@ -12,8 +12,10 @@ editors:
 
 ### _Summary_ <a id="messageFormat-unicode-technical-standard-35-summary"></a>
 
+<a id="messageFormat-unicode-technical-standard-35-summary-p-1"></a>
 This specification defines the data model, syntax, processing, and conformance requirements for the next generation of dynamic messages.
 
+<a id="messageFormat-unicode-technical-standard-35-summary-p-2"></a>
 This is a partial document, describing only those parts of the LDML that are relevant for message format. For the other parts of the LDML see the [main LDML document](tr35.md) and the links above.
 
 ### _Status_ <a id="messageFormat-unicode-technical-standard-35-status"></a>
@@ -22,10 +24,15 @@ This is a partial document, describing only those parts of the LDML that are rel
 
 > _**A Unicode Technical Standard (UTS)** is an independent specification. Conformance to the Unicode Standard does not imply conformance to any UTS._
 
+<a id="messageFormat-unicode-technical-standard-35-status-p-1"></a>
 _Please submit corrigenda and other comments with the CLDR bug reporting form [[Bugs](https://cldr.unicode.org/index/bug-reports)].
+<a id="messageFormat-unicode-technical-standard-35-status-p-2"></a>
 Related information that is useful in understanding this document is found in the [References](tr35.md#References).
+<a id="messageFormat-unicode-technical-standard-35-status-p-3"></a>
 For the latest version of the Unicode Standard see [[Unicode](https://www.unicode.org/versions/latest/)].
+<a id="messageFormat-unicode-technical-standard-35-status-p-4"></a>
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
+<a id="messageFormat-unicode-technical-standard-35-status-p-5"></a>
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
 ## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
@@ -523,6 +530,7 @@ complex-message = o *(declaration o) complex-body o
 
 #### Declarations <a id="messageFormat-syntax-the-message-declarations"></a>
 
+<a id="messageFormat-syntax-the-message-declarations-p-1"></a>
 A **_<dfn>declaration</dfn>_** binds a _variable_ identifier to a value within the scope of a _message_.
 This _variable_ can then be used in other _expressions_ within the same _message_.
 _Declarations_ are optional: many messages will not contain any _declarations_.
@@ -576,6 +584,7 @@ complex-body = quoted-pattern / matcher
 
 ### Pattern <a id="messageFormat-syntax-pattern"></a>
 
+<a id="messageFormat-syntax-pattern-p-1"></a>
 A **_<dfn>pattern</dfn>_** contains a sequence of _text_ and _placeholders_ to be formatted as a unit.
 Unless there is an error, resolving a _message_ always results in the formatting
 of a single _pattern_.
@@ -799,6 +808,7 @@ that matches all values for a given _selector_.
 
 The value of each _literal_ _key_ MUST be treated as if it were in
 [Unicode Normalization Form C](https://unicode.org/reports/tr15/) ("NFC").
+<a id="messageFormat-syntax-matcher-variant-key-p-1"></a>
 Two _literal_ _keys_ are considered equal if their _string values_ are canonically equivalent strings,
 that is, if they consist of the same sequence of Unicode code points after
 Unicode Normalization Form C has been applied to both.
@@ -1099,6 +1109,7 @@ or the value of an _unquoted literal_.
 
 A _name_ can be preceded or followed by bidirectional marks or isolating controls
 to aid in presenting names that contain right-to-left or neutral characters.
+<a id="messageFormat-syntax-other-syntax-elements-names-and-identifiers-p-1"></a>
 These characters are **not** part of the value of the _name_ and MUST be treated as if they were not present
 when matching _name_ or _identifier_ strings or _unquoted literal_ values.
 
@@ -1109,6 +1120,7 @@ that is, if they consist of the same sequence of Unicode code points after
 [Unicode Normalization Form C](https://unicode.org/reports/tr15/) ("NFC")
 has been applied to both.
 
+<a id="messageFormat-syntax-other-syntax-elements-names-and-identifiers-p-2"></a>
 The _names_ are [immutable identifiers](https://www.unicode.org/reports/tr31/#Immutable_Identifier_Syntax).
 
 > [!NOTE]
@@ -1605,6 +1617,7 @@ nor be made available to _function handlers_.
 
 ### Formatting Context <a id="messageFormat-formatting-formatting-context"></a>
 
+<a id="messageFormat-formatting-formatting-context-p-1"></a>
 A _message_'s **_<dfn>formatting context</dfn>_** represents the data and procedures that are required
 for the _message_'s _expression resolution_, _pattern selection_ and _formatting_.
 
@@ -1631,6 +1644,7 @@ Implementations MAY include additional fields in their _formatting context_.
 
 ### Resolved Values <a id="messageFormat-formatting-resolved-values"></a>
 
+<a id="messageFormat-formatting-resolved-values-p-1"></a>
 A **_<dfn>resolved value</dfn>_** is the result of resolving a _text_, _literal_, _variable_, _expression_, or _markup_.
 The _resolved value_ is determined using the _formatting context_.
 The form of the _resolved value_ is implementation-defined.
@@ -2743,7 +2757,9 @@ Implementations MAY also provide implementation-defined _Message Function Error_
 
 #### Bad Operand <a id="messageFormat-errors-message-function-errors-bad-operand"></a>
 
+<a id="messageFormat-errors-message-function-errors-bad-operand-p-1"></a>
 A **_<dfn>Bad Operand</dfn>_** error is any error that occurs due to the content or format of the _operand_,
+<a id="messageFormat-errors-message-function-errors-bad-operand-p-2"></a>
 such as when the _operand_ provided to a _function_ during _function resolution_ does not match one of the
 expected implementation-defined types for that function;
 or in which a literal _operand_ value does not have the required format
@@ -3061,6 +3077,7 @@ together with the resolved options' values.
 
 ##### Selection with `:number` <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-selection-with-number"></a>
 
+<a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-selection-with-number-p-1"></a>
 The _function_ `:number` performs selection as described in [Number Selection](#number-selection) below.
 
 #### The `:integer` function <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function"></a>
@@ -3126,6 +3143,7 @@ together with the resolved options' values.
 
 ##### Selection with `:integer` <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-selection-with-integer"></a>
 
+<a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-selection-with-integer-p-1"></a>
 The _function_ `:integer` performs selection as described in [Number Selection](#number-selection) below.
 
 #### The `:offset` function <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function"></a>
@@ -3203,6 +3221,7 @@ The `:offset` _options_ are not included in the resolved option values.
 
 ##### Selection with `:offset` <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-selection-with-offset"></a>
 
+<a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-selection-with-offset-p-1"></a>
 The _function_ `:offset` performs selection as described in [Number Selection](#number-selection) below.
 
 #### The `:currency` function <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-currency-function"></a>
@@ -3298,7 +3317,9 @@ automatically.
 > The special price is $5.01.
 > ```
 
+<a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-currency-function-currency-options-p-1"></a>
 Implementations MAY internally alias _option values_ that they do not have data or a backing implementation for.
+<a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-currency-function-currency-options-p-2"></a>
 Notably, the `currencyDisplay` option has a rich set of values that mirrors developments in CLDR data.
 Some implementations might not be able to produce all of these formats for every currency.
 
@@ -3476,6 +3497,7 @@ it is not multiplied by 100.
 
 ##### Selection with `:percent` <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-selection-with-percent"></a>
 
+<a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-selection-with-percent-p-1"></a>
 The _function_ `:percent` performs selection as described in [Number Selection](#number-selection) below.
 This selection always uses the `plural` selection mode,
 and is performed on the numerical value of the _operand_
@@ -3623,6 +3645,7 @@ together with the resolved options and their resolved values.
 Implementations MAY support conversion to the locale's preferred units via the `usage` _option_.
 Implementing this _option_ is optional.
 Not all `usage` _option values_ are compatible with a given unit.
+<a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-unit-function-unit-conversion-p-1"></a>
 Implementations SHOULD emit an _Unsupported Operation_ error if the requested conversion is not supported.
 
 > For example, trying to convert a `length` unit (such as "meters")
@@ -3690,6 +3713,7 @@ number-literal = ["-"] (%x30 / (%x31-39 *DIGIT)) ["." 1*DIGIT] [%i"e" ["-" / "+"
 #### Digit Size Options <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-digit-size-options"></a>
 
 Some _options_ of number _functions_ are defined to take a _digit size option_.
+<a id="messageFormat-default-functions-numeric-value-selection-and-formatting-digit-size-options-p-1"></a>
 The _function handlers_ for number _functions_ use these _options_ to control aspects of numeric display
 such as the number of fraction, integer, or significant digits.
 
@@ -3809,6 +3833,7 @@ Rule selection is intended to support the grammatical matching needs of differen
 languages/locales in order to support plural or ordinal numeric values.
 
 If the `select` _option value_ is `exact`, rule-based selection is not used.
+<a id="messageFormat-default-functions-numeric-value-selection-and-formatting-number-selection-rule-selection-p-1"></a>
 Otherwise rule selection matches the _operand_, as modified by function _options_, to exactly one of these keywords:
 `zero`, `one`, `two`, `few`, `many`, or `other`.
 The keyword `other` is the default.
@@ -3965,6 +3990,7 @@ the _option_ is ignored when formatting the _expression_.
 
 If the _operand_ of the _expression_ is an implementation-defined date/time type,
 it can include other option values.
+<a id="messageFormat-default-functions-date-and-time-value-formatting-the-datetime-function-datetime-options-p-1"></a>
 Any _date/time override options_ of the operand are included in the resolved option values of the _expression_,
 with _options_ on the _expression_ taking priority over any options of the _operand_.
 Any _operand_ options not matching the _date/time override options_ are ignored.
@@ -4015,6 +4041,7 @@ the _option_ is ignored when formatting the _expression_.
 
 If the _operand_ of the _expression_ is an implementation-defined date/time type,
 it can include other option values.
+<a id="messageFormat-default-functions-date-and-time-value-formatting-the-date-function-date-options-p-1"></a>
 Any _date/time override options_ of the operand are included in the resolved option values of the _expression_,
 with _options_ on the _expression_ taking priority over any options of the _operand_.
 Any _operand_ options not matching the _date/time override options_ are ignored.
@@ -4068,6 +4095,7 @@ the _option_ is ignored when formatting the _expression_.
 
 If the _operand_ of the _expression_ is an implementation-defined date/time type,
 it can include other option values.
+<a id="messageFormat-default-functions-date-and-time-value-formatting-the-time-function-time-options-p-1"></a>
 Any _date/time override options_ of the operand are included in the resolved option values of the _expression_,
 with _options_ on the _expression_ taking priority over any options of the _operand_.
 Any _operand_ options not matching the _date/time override options_ are ignored.
@@ -4091,6 +4119,7 @@ All other _operand_ values produce a _Bad Operand_ error.
 A **_<dfn>date/time literal value</dfn>_** is a non-empty string consisting of an ISO 8601 date,
 or an ISO 8601 datetime optionally followed by a timezone offset.
 As implementations differ slightly in their parsing of such strings,
+<a id="messageFormat-default-functions-date-and-time-value-formatting-date-and-time-operands-p-1"></a>
 ISO 8601 date and datetime values not matching the following regular expression MAY also be supported.
 Furthermore, matching this regular expression does not guarantee validity,
 given the variable number of days in each month.
@@ -4253,6 +4282,7 @@ and the `u:dir` _option_ and its _option value_ are ignored.
 
 This section defines a data model representation of Unicode MessageFormat _messages_.
 
+<a id="messageFormat-interchange-data-model-p-1"></a>
 Implementations are not required to use this data model for their internal representation of messages.
 Neither are they required to provide an interface that accepts or produces
 representations of this data model.
@@ -4367,8 +4397,10 @@ interface CatchallKey {
 
 ### Pattern Model <a id="messageFormat-interchange-data-model-pattern-model"></a>
 
+<a id="messageFormat-interchange-data-model-pattern-model-p-1"></a>
 Each `Pattern` contains a linear sequence of text and placeholders corresponding to potential output of a message.
 
+<a id="messageFormat-interchange-data-model-pattern-model-p-2"></a>
 Each element of the `Pattern` MUST either be a non-empty string, an `Expression`, or a `Markup` object.
 String values represent literal _text_.
 String values include all processing of the underlying _text_ values,
@@ -4915,6 +4947,7 @@ one {{Category match for {$count}}}
 
 ### Acknowledgments <a id="messageFormat-appendices-acknowledgments"></a>
 
+<a id="messageFormat-appendices-acknowledgments-p-1"></a>
 Special thanks to the following people for their contributions to making the Unicode MessageFormat Standard.
 The following people contributed to our github repo and are listed in order by contribution size:
 
@@ -4963,14 +4996,21 @@ Romulo Cintra chaired the chair group.
 
 © 2001–2026 Unicode, Inc.
 This publication is protected by copyright, and permission must be obtained from Unicode, Inc.
+<a id="messageFormat-appendices-acknowledgments-p-2"></a>
 prior to any reproduction, modification, or other use not permitted by the [Terms of Use](https://www.unicode.org/copyright.html).
+<a id="messageFormat-appendices-acknowledgments-p-3"></a>
 Specifically, you may make copies of this publication and may annotate and translate it solely for personal or internal business purposes and not for public distribution,
+<a id="messageFormat-appendices-acknowledgments-p-4"></a>
 provided that any such permitted copies and modifications fully reproduce all copyright and other legal notices contained in the original.
+<a id="messageFormat-appendices-acknowledgments-p-5"></a>
 You may not make copies of or modifications to this publication for public distribution, or incorporate it in whole or in part into any product or publication without the express written permission of Unicode.
 
+<a id="messageFormat-appendices-acknowledgments-p-6"></a>
 Use of all Unicode Products, including this publication, is governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html).
 The authors, contributors, and publishers have taken care in the preparation of this publication,
+<a id="messageFormat-appendices-acknowledgments-p-7"></a>
 but make no express or implied representation or warranty of any kind and assume no responsibility or liability for errors or omissions or for consequential or incidental damages that may arise therefrom.
 This publication is provided “AS-IS” without charge as a convenience to users.
 
+<a id="messageFormat-appendices-acknowledgments-p-8"></a>
 Unicode and the Unicode Logo are registered trademarks of Unicode, Inc. in the United States and other countries.

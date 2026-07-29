@@ -30,7 +30,7 @@ Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www
 
 See also [Compatibility Notice](#compatibility-notice).
 
-## Parts <a id="core-parts"></a>
+## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -64,7 +64,6 @@ The LDML specification is divided into the following parts:
 * [File and Directory Structure ](#file-and-directory-structure-)
   * [Extensibility ](#extensibility-)
 * [Normalization ](#normalization-)
-  * [Notes ](#notes-)
   * [Where Normalization Occurs ](#where-normalization-occurs-)
   * [Normalization and Transform Matching ](#normalization-and-transform-matching-)
   * [Normalization and Markers ](#normalization-and-markers-)
@@ -92,7 +91,6 @@ The LDML specification is divided into the following parts:
   * [Element: settings ](#element-settings-)
   * [Element: displays ](#element-displays-)
   * [Element: display ](#element-display-)
-    * [Notes ](#notes-)
     * [Non-spacing marks on keytops ](#non-spacing-marks-on-keytops-)
   * [Element: displayOptions ](#element-displayoptions-)
   * [Element: keys ](#element-keys-)
@@ -111,7 +109,6 @@ The LDML specification is divided into the following parts:
     * [Layer Modifier Components ](#layer-modifier-components-)
     * [Modifier Left- and Right- keys ](#modifier-left--and-right--keys-)
     * [Layer Modifier Matching ](#layer-modifier-matching-)
-      * [Notes ](#notes-)
   * [Element: row ](#element-row-)
   * [Element: variables ](#element-variables-)
   * [Element: string ](#element-string-)
@@ -360,10 +357,7 @@ This section discusses how conformant keyboards are affected by normalization, a
 Keyboard implementations will usually apply normalization as appropriate when matching transform rules and `<display>` value matching.
 Output from the keyboard, following application of all transform rules, will be normalized to the appropriate form by the keyboard implementation.
 
-
-### Notes <a id="keyboards-normalization-notes"></a>
-
-* <a id="keyboards-normalization-note-1"></a> **Note 1**: There are many existing software libraries which perform Unicode Normalization, including [ICU](https://icu.unicode.org), [ICU4X](https://icu4x.unicode.org), and JavaScript's [String.prototype.normalize()](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/normalize).
+* <a id="keyboards-normalization-note-1"></a> **Note**: There are many existing software libraries which perform Unicode Normalization, including [ICU](https://icu.unicode.org), [ICU4X](https://icu4x.unicode.org), and JavaScript's [String.prototype.normalize()](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String/normalize).
 
 
 Keyboard authors will not typically need to perform normalization as part of the keyboard layout.  However, authors should be aware of areas where normalization affects keyboard operation so that they may achieve their desired results.
@@ -1086,10 +1080,7 @@ The `display` elements can be used to describe what is to be displayed on the ke
 - Another useful scenario is where there are doubled diacritics, or multiple characters with spacing issues.
 - Finally, the `display` element provides a way to specify the keytop for keys which do not otherwise produce output. Keys which switch layers using the `@layerId` attribute typically do not produce output.
 
-
-#### Notes <a id="keyboards-element-hierarchy-element-display-notes"></a>
-
-* <a id="keyboards-element-hierarchy-element-display-note-1"></a> **Note 1**: `displays` elements are designed to be shared across many different keyboard layout descriptions, and imported with `<import>` where needed.
+* <a id="keyboards-element-hierarchy-element-display-note-1"></a> **Note**: `displays` elements are designed to be shared across many different keyboard layout descriptions, and imported with `<import>` where needed.
 
 
 #### Non-spacing marks on keytops <a id="keyboards-element-hierarchy-element-display-non-spacing-marks-on-keytops"></a>
@@ -1838,10 +1829,7 @@ There is one special case:  the `other` layer matches if and only if no other la
 
 Because there is no overlap allowed between layers, the order of `<layer>` elements is not significant.
 
-
-##### Notes <a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-notes"></a>
-
-* <a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-note-1"></a> **Note 1**: The modifier syntax may be enhanced in the future, but will remain backwards compatible with the syntax described here.
+* <a id="keyboards-element-hierarchy-element-layer-layer-modifier-matching-note-1"></a> **Note**: The modifier syntax may be enhanced in the future, but will remain backwards compatible with the syntax described here.
 
 
 * * *

@@ -27,7 +27,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts <a id="core-parts"></a>
+## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -69,8 +69,7 @@ The LDML specification is divided into the following parts:
   * [Calendar Data](#Calendar_Data) 
   * [Calendar Preference Data ](#calendar-preference-data-)
   * [Week Data](#Week_Data) 
-    * [Notes ](#notes-)
-      * [Table: Week Designation Types ](#table-week-designation-types-)
+    * [Table: Week Designation Types ](#table-week-designation-types-)
     * [First Day Overrides ](#first-day-overrides-)
   * [Time Data](#Time_Data) 
   * [Day Period Rule Sets](#Day_Period_Rule_Sets) 
@@ -79,9 +78,7 @@ The LDML specification is divided into the following parts:
       * [Variable periods](#Variable_periods) 
       * [Parsing Day Periods](#Parsing_Day_Periods) 
 * [Time Zone Names](#Time_Zone_Names) 
-  * [Notes ](#notes-)
-    * [Table: timeZoneNames Elements Used for Fallback ](#table-timezonenames-elements-used-for-fallback-)
-    * [Notes ](#notes-)
+  * [Table: timeZoneNames Elements Used for Fallback ](#table-timezonenames-elements-used-for-fallback-)
   * [Metazone Names](#Metazone_Names) 
 * [Supplemental Time Zone Data](#Supplemental_Time_Zone_Data) 
   * [Metazones](#Metazones) 
@@ -89,11 +86,8 @@ The LDML specification is divided into the following parts:
   * [Primary Zones](#Primary_Zones) 
 * [Using Time Zone Names](#Using_Time_Zone_Names) 
   * [Time Zone Format Terminology](#Time_Zone_Format_Terminology) 
-    * [Notes ](#notes-)
   * [Goals](#Time_Zone_Goals) 
-    * [Notes ](#notes-)
   * [Parsing](#Time_Zone_Parsing) 
-    * [Notes ](#notes-)
 * [Date Format Patterns](#Date_Format_Patterns) 
   * [Table: Date Format Pattern Examples ](#table-date-format-pattern-examples-)
   * [Table: Date Field Symbol Table ](#table-date-field-symbol-table-)
@@ -1480,38 +1474,35 @@ The calendars in common use for a locale should typically be shown in UIs that p
 
 In order for a week to count as the first week of a new year for week-of-year calculations, the week beginning with `firstDay` must include at least the number of days in the new year specified by the `minDays` value; otherwise the week will count as the last week of the previous year (and for week-of-month calculations, `minDays` also specifies the minimum number of days in the new month for a week to count as part of that month).
 
-
-#### Notes <a id="dates-supplemental-calendar-data-week-data-notes"></a>
-
-* <a id="dates-supplemental-calendar-data-week-data-note-1"></a> **Note 1**: For week-of-year calculations, Gregorian years may have 52 or 53 weeks. Changes in the value of `minDays` or `firstDay` can affect the year to which a date is assigned as well as the number of weeks in a given year; implementations that parse dates using week-of-year formats should be prepared to handle such cases. For example when parsing a date in week 53 of a year for which current values of `minDays` and `firstDay` no longer result in a 53-week year, that date should be treated as in the first week of the following year.
+* <a id="dates-supplemental-calendar-data-week-data-note-3"></a> **Note**: For week-of-year calculations, Gregorian years may have 52 or 53 weeks. Changes in the value of `minDays` or `firstDay` can affect the year to which a date is assigned as well as the number of weeks in a given year; implementations that parse dates using week-of-year formats should be prepared to handle such cases. For example when parsing a date in week 53 of a year for which current values of `minDays` and `firstDay` no longer result in a 53-week year, that date should be treated as in the first week of the following year.
 
 
-* <a id="dates-supplemental-calendar-data-week-data-item-3"></a> **The day indicated**: The day indicated by `firstDay` is the one that should be shown as the first day of the week in a calendar view.
+* <a id="dates-supplemental-calendar-data-week-data-item-4"></a> **The day indicated**: The day indicated by `firstDay` is the one that should be shown as the first day of the week in a calendar view.
 
-* <a id="dates-supplemental-calendar-data-week-data-item-4"></a> **This is not**: This is not necessarily the same as the first day after the weekend (or the first work day of the week), which should be determined from the weekend information.
+* <a id="dates-supplemental-calendar-data-week-data-item-5"></a> **This is not**: This is not necessarily the same as the first day after the weekend (or the first work day of the week), which should be determined from the weekend information.
 
-* <a id="dates-supplemental-calendar-data-week-data-item-5"></a> **Currently, day-of-week numbering**: Currently, day-of-week numbering is based on `firstDay` (that is, day 1 is the day specified by `firstDay`), but in the future we may add a way to specify this separately.
+* <a id="dates-supplemental-calendar-data-week-data-item-6"></a> **Currently, day-of-week numbering**: Currently, day-of-week numbering is based on `firstDay` (that is, day 1 is the day specified by `firstDay`), but in the future we may add a way to specify this separately.
 
-* <a id="dates-supplemental-calendar-data-week-data-item-6"></a> **The `firstDay` value**: The `firstDay` value determined from the region can be overridden by the locale keyword "fw", see [Unicode First Day Identifier](tr35.md#UnicodeFirstDayIdentifier).
-
-
-* <a id="dates-supplemental-calendar-data-week-data-item-7"></a> **What is meant**: What is meant by the weekend varies from country to country.
-
-* <a id="dates-supplemental-calendar-data-week-data-item-8"></a> **It is typically**: It is typically when most non-retail businesses are closed.
-
-* <a id="dates-supplemental-calendar-data-week-data-item-9"></a> **The time should**: The time should not be specified unless it is a well-recognized part of the day.
-
-* <a id="dates-supplemental-calendar-data-week-data-item-10"></a> **The `weekendStart` day**: The `weekendStart` day defaults to "sat", and `weekendEnd` day defaults to "sun".
-
-* <a id="dates-supplemental-calendar-data-week-data-item-11"></a> **For more information**: For more information, see _[Dates and Date Ranges](tr35.md#Date_Ranges)_.
+* <a id="dates-supplemental-calendar-data-week-data-item-7"></a> **The `firstDay` value**: The `firstDay` value determined from the region can be overridden by the locale keyword "fw", see [Unicode First Day Identifier](tr35.md#UnicodeFirstDayIdentifier).
 
 
-* <a id="dates-supplemental-calendar-data-week-data-item-12"></a> **Each `weekOfPreference` element**: Each `weekOfPreference` element provides, for its specified locales, an ordered list of the preferred types of week designations for that set of locales.
+* <a id="dates-supplemental-calendar-data-week-data-item-8"></a> **What is meant**: What is meant by the weekend varies from country to country.
 
-* <a id="dates-supplemental-calendar-data-week-data-item-13"></a> **There are four**: There are four types of week designations, each of which makes use of date patterns available in the locale, as follows:
+* <a id="dates-supplemental-calendar-data-week-data-item-9"></a> **It is typically**: It is typically when most non-retail businesses are closed.
+
+* <a id="dates-supplemental-calendar-data-week-data-item-10"></a> **The time should**: The time should not be specified unless it is a well-recognized part of the day.
+
+* <a id="dates-supplemental-calendar-data-week-data-item-11"></a> **The `weekendStart` day**: The `weekendStart` day defaults to "sat", and `weekendEnd` day defaults to "sun".
+
+* <a id="dates-supplemental-calendar-data-week-data-item-12"></a> **For more information**: For more information, see _[Dates and Date Ranges](tr35.md#Date_Ranges)_.
 
 
-###### Table: Week Designation Types <a id="dates-supplemental-calendar-data-week-data-notes-table-week-designation-types"></a>
+* <a id="dates-supplemental-calendar-data-week-data-item-13"></a> **Each `weekOfPreference` element**: Each `weekOfPreference` element provides, for its specified locales, an ordered list of the preferred types of week designations for that set of locales.
+
+* <a id="dates-supplemental-calendar-data-week-data-item-14"></a> **There are four**: There are four types of week designations, each of which makes use of date patterns available in the locale, as follows:
+
+
+###### Table: Week Designation Types <a id="dates-supplemental-calendar-data-week-data-table-week-designation-types"></a>
 
 | Type           | Examples                          | Date Pattern                                                | Comments    |
 |----------------|-----------------------------------|-------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -1841,47 +1832,44 @@ In a few cases, some time zone IDs do not designate a city, as in:
 
 They may designate countries or territories; their actual capital city may be a name that is too common, or too uncommon. CLDR time zone IDs follow the [Olson](tr35.md#Olson) naming conventions.
 
-
-### Notes <a id="dates-time-zone-names-notes"></a>
-
-* <a id="dates-time-zone-names-note-1"></a> **Note 1**: CLDR does not allow "GMT", "UT", or "UTC" as translations (short or long) of time zones other than UTC/GMT itself.
+* <a id="dates-time-zone-names-note-15"></a> **Note**: CLDR does not allow "GMT", "UT", or "UTC" as translations (short or long) of time zones other than UTC/GMT itself.
 
 
-* <a id="dates-time-zone-names-note-2"></a> **Note 2**: Transmitting "14:30" with no other context is incomplete unless it contains information about the time zone. Ideally one would transmit neutral-format date/time information, commonly in UTC (GMT), and localize as close to the user as possible. (For more about UTC, see [[UTCInfo](tr35.md#UTCInfo)].)
+* <a id="dates-time-zone-names-note-16"></a> **Note**: Transmitting "14:30" with no other context is incomplete unless it contains information about the time zone. Ideally one would transmit neutral-format date/time information, commonly in UTC (GMT), and localize as close to the user as possible. (For more about UTC, see [[UTCInfo](tr35.md#UTCInfo)].)
 
 
-* <a id="dates-time-zone-names-item-15"></a> **The conversion from**: The conversion from local time into UTC depends on the particular time zone rules, which will vary by location.
+* <a id="dates-time-zone-names-item-17"></a> **The conversion from**: The conversion from local time into UTC depends on the particular time zone rules, which will vary by location.
 
-* <a id="dates-time-zone-names-item-16"></a> **The standard data**: The standard data used for converting local time (sometimes called _wall time_) to UTC and back is the _TZ Data_ [[Olson](tr35.md#Olson)], used by Linux, UNIX, Java, ICU, and others.
+* <a id="dates-time-zone-names-item-18"></a> **The standard data**: The standard data used for converting local time (sometimes called _wall time_) to UTC and back is the _TZ Data_ [[Olson](tr35.md#Olson)], used by Linux, UNIX, Java, ICU, and others.
 
-* <a id="dates-time-zone-names-item-17"></a> **The data includes**: The data includes rules for matching the laws for time changes in different countries.
+* <a id="dates-time-zone-names-item-19"></a> **The data includes**: The data includes rules for matching the laws for time changes in different countries.
 
-* <a id="dates-time-zone-names-item-18"></a> **For example, for**: For example, for the US it is:
+* <a id="dates-time-zone-names-item-20"></a> **For example, for**: For example, for the US it is:
 
 
 > "During the period commencing at 2 o'clock antemeridian on the second Sunday of March of each year and ending at 2 o'clock antemeridian on the first Sunday of November of each year, the standard time of each zone established by sections 261 to 264 of this title, as modified by of this title, shall be advanced one hour..." (United States Law - 15 U.S.C. §6(IX)(260-7), as amended by Energy Policy Act of 2005).
 
-* <a id="dates-time-zone-names-item-19"></a> **Each region that**: Each region that has a different time zone or daylight savings time rules, either now or at any time back to 1970, is given a unique internal ID, such as `Europe/Paris` . (Some IDs are also distinguished on the basis of differences before 1970.) As with currency codes, these are internal codes.
+* <a id="dates-time-zone-names-item-21"></a> **Each region that**: Each region that has a different time zone or daylight savings time rules, either now or at any time back to 1970, is given a unique internal ID, such as `Europe/Paris` . (Some IDs are also distinguished on the basis of differences before 1970.) As with currency codes, these are internal codes.
 
-* <a id="dates-time-zone-names-item-20"></a> **A localized string**: A localized string associated with these is provided for users (such as in the Windows _Control Panels>Date/Time>Time Zone_).
+* <a id="dates-time-zone-names-item-22"></a> **A localized string**: A localized string associated with these is provided for users (such as in the Windows _Control Panels>Date/Time>Time Zone_).
 
 
-* <a id="dates-time-zone-names-item-21"></a> **Unfortunately, laws change**: Unfortunately, laws change over time, and will continue to change in the future, both for the boundaries of time zone regions and the rules for daylight savings.
+* <a id="dates-time-zone-names-item-23"></a> **Unfortunately, laws change**: Unfortunately, laws change over time, and will continue to change in the future, both for the boundaries of time zone regions and the rules for daylight savings.
 
-* <a id="dates-time-zone-names-item-22"></a> **Thus the _TZ**: Thus the _TZ_ data is continually being augmented.
+* <a id="dates-time-zone-names-item-24"></a> **Thus the _TZ**: Thus the _TZ_ data is continually being augmented.
 
-* <a id="dates-time-zone-names-item-23"></a> **Any two implementations**: Any two implementations using the same version of the _TZ_ data will get the same results for the same IDs (assuming a correct implementation).
+* <a id="dates-time-zone-names-item-25"></a> **Any two implementations**: Any two implementations using the same version of the _TZ_ data will get the same results for the same IDs (assuming a correct implementation).
 
-* <a id="dates-time-zone-names-item-24"></a> **However, if implementations**: However, if implementations use different versions of the data they may get different results.
+* <a id="dates-time-zone-names-item-26"></a> **However, if implementations**: However, if implementations use different versions of the data they may get different results.
 
-* <a id="dates-time-zone-names-item-25"></a> **So if precise**: So if precise results are required then both the _TZ_ ID and the _TZ_ data version must be transmitted between the different implementations.
+* <a id="dates-time-zone-names-item-27"></a> **So if precise**: So if precise results are required then both the _TZ_ ID and the _TZ_ data version must be transmitted between the different implementations.
 
 
 For more information, see [[Data Formats](tr35.md#DataFormats)].
 
 The following subelements of `<timeZoneNames>` are used to control the fallback process described in [Using Time Zone Names](#Using_Time_Zone_Names).
 
-###### Table: timeZoneNames Elements Used for Fallback <a id="dates-time-zone-names-notes-table-timezonenames-elements-used-for-fallback"></a>
+###### Table: timeZoneNames Elements Used for Fallback <a id="dates-time-zone-names-table-timezonenames-elements-used-for-fallback"></a>
 
 <table><tbody>
 <tr><th>Element Name</th><th>Data Examples</th><th>Results/Comment</th></tr>
@@ -1898,10 +1886,7 @@ The following subelements of `<timeZoneNames>` are used to control the fallback 
 
 When referring to the abbreviated (short) form of the time zone name, there are often situations where the location-based (city or country) time zone designation for a particular language may not be in common usage in a particular territory.
 
-
-###### Notes <a id="dates-time-zone-names-notes-notes"></a>
-
-* <a id="dates-time-zone-names-table-timezonenames-elements-used-for-fallback-note-1"></a> **Note 1**: User interfaces for time zone selection can use the "generic location format" for time zone names to obtain the most useful ordering of names in a menu or list; see _[Using Time Zone Names](#Using_Time_Zone_Names)_ and the zone section of the _[Date Field Symbol Table](#Date_Field_Symbol_Table)._
+* <a id="dates-time-zone-names-table-timezonenames-elements-used-for-fallback-note-1"></a> **Note**: User interfaces for time zone selection can use the "generic location format" for time zone names to obtain the most useful ordering of names in a menu or list; see _[Using Time Zone Names](#Using_Time_Zone_Names)_ and the zone section of the _[Date Field Symbol Table](#Date_Field_Symbol_Table)._
 
 
 ### <a name="Metazone_Names" id="Metazone_Names" href="#Metazone_Names">Metazone Names</a> <a id="dates-time-zone-names-metazone-names"></a>
@@ -2224,10 +2209,7 @@ The second is used when the offset from GMT is unknown. It is specified by the `
 * "-08:00" (extended)
 * "Z" (UTC)
 
-
-#### Notes <a id="dates-using-time-zone-names-time-zone-format-terminology-notes"></a>
-
-* <a id="dates-using-time-zone-names-time-zone-format-terminology-note-1"></a> **Note 1**: This specification extends the original ISO 8601 formats and some format specifiers append seconds field when necessary.
+* <a id="dates-using-time-zone-names-time-zone-format-terminology-note-10"></a> **Note**: This specification extends the original ISO 8601 formats and some format specifiers append seconds field when necessary.
 
 
 **Raw Offset** - an offset from GMT that does not include any daylight savings behavior. For example, the raw offset for Pacific Time is -8, even though the _observed offset_ may be -8 or -7.
@@ -2405,10 +2387,7 @@ Some of the examples are drawn from real data, while others are for illustration
         * Africa/Monrovia, generic → "Hora de Liberja"
         * America/Havana, generic → "Hora de CU" // if CU is not localized
 
-
-#### Notes <a id="dates-using-time-zone-names-goals-notes"></a>
-
-* <a id="dates-using-time-zone-names-goals-note-1"></a> **Note 1**: If a language does require grammatical changes when composing strings, then the _regionFormat_ should either use a neutral format such as "Heure: {0}", or put all exceptional cases in explicitly translated strings.
+* <a id="dates-using-time-zone-names-goals-note-1"></a> **Note**: If a language does require grammatical changes when composing strings, then the _regionFormat_ should either use a neutral format such as "Heure: {0}", or put all exceptional cases in explicitly translated strings.
 
 
 **Type Fallback**
@@ -2491,15 +2470,12 @@ The following is a sample process for how this might be done. It is only a sampl
    * Otherwise, look up Metazone + 001 => TZID and return it (that will always exist)
 9. If you get this far, return an error.
 
-
-#### Notes <a id="dates-using-time-zone-names-parsing-notes"></a>
-
-* <a id="dates-using-time-zone-names-parsing-note-1"></a> **Note 1**: This CLDR date parsing recommendation does not fully handle all RFC 788 date/time formats, nor is it intended to.
+* <a id="dates-using-time-zone-names-parsing-note-10"></a> **Note**: This CLDR date parsing recommendation does not fully handle all RFC 788 date/time formats, nor is it intended to.
 
 
-* <a id="dates-using-time-zone-names-parsing-item-10"></a> **Parsing can be**: Parsing can be more lenient than the above, allowing for different spacing, punctuation, or other variation.
+* <a id="dates-using-time-zone-names-parsing-item-11"></a> **Parsing can be**: Parsing can be more lenient than the above, allowing for different spacing, punctuation, or other variation.
 
-* <a id="dates-using-time-zone-names-parsing-item-11"></a> **A stricter parse**: A stricter parse would check for consistency between the xxx portions above and the rest, so "Pacific Standard Time (India)" would give an error.
+* <a id="dates-using-time-zone-names-parsing-item-12"></a> **A stricter parse**: A stricter parse would check for consistency between the xxx portions above and the rest, so "Pacific Standard Time (India)" would give an error.
 
 
 Using this process, a correct parse will roundtrip the location format (VVVV) back to the canonical zoneid.
@@ -2510,9 +2486,9 @@ The GMT formats (Z and ZZZZ) will return back an offset, and thus lose the origi
 
   * Australia/ACT → Australia/Sydney → "GMT+11:00" → GMT+11
 
-* <a id="dates-using-time-zone-names-parsing-item-12"></a> **The daylight and**: The daylight and standard time formats, and the non-location formats (z, zzzz, v, and vvvv) may either roundtrip back to the original canonical zone id, to a zone in the same metazone that time, or to just an offset, depending on the available translation data.
+* <a id="dates-using-time-zone-names-parsing-item-13"></a> **The daylight and**: The daylight and standard time formats, and the non-location formats (z, zzzz, v, and vvvv) may either roundtrip back to the original canonical zone id, to a zone in the same metazone that time, or to just an offset, depending on the available translation data.
 
-* <a id="dates-using-time-zone-names-parsing-item-13"></a> **Thus**: Thus:
+* <a id="dates-using-time-zone-names-parsing-item-14"></a> **Thus**: Thus:
 
 
   * Australia/ACT → Australia/Sydney → "GMT+11:00" → GMT+11

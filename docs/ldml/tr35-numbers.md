@@ -29,7 +29,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts <a id="core-parts"></a>
+## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -56,7 +56,6 @@ The LDML specification is divided into the following parts:
   * [Default Numbering System](#defaultNumberingSystem) 
   * [Other Numbering Systems](#otherNumberingSystems) 
   * [Number Symbols](#Number_Symbols) 
-    * [Notes ](#notes-)
   * [Number Formats](#Number_Formats) 
     * [Compact Number Formats](#Compact_Number_Formats) 
     * [Currency Formats](#Currency_Formats) 
@@ -67,7 +66,6 @@ The LDML specification is divided into the following parts:
     * [Table: Number Pattern Examples ](#table-number-pattern-examples-)
   * [Special Pattern Characters](#Special_Pattern_Characters) 
     * [Table: Number Pattern Character Definitions ](#table-number-pattern-character-definitions-)
-    * [Notes ](#notes-)
     * [Table: Sample Patterns and Results ](#table-sample-patterns-and-results-)
     * [Explicit Plus Signs](#Explicit_Plus) 
   * [Formatting](#Formatting) 
@@ -79,7 +77,6 @@ The LDML specification is divided into the following parts:
   * [Quoting Rules](#Quoting_Rules) 
 * [Rational Numbers ](#rational-numbers-)
 * [Currencies](#Currencies) 
-  * [Notes ](#notes-)
   * [Supplemental Currency Data](#Supplemental_Currency_Data) 
 * [Language Plural Rules](#Language_Plural_Rules) 
   * [Explicit 0 and 1 rules](#Explicit_0_1_rules) 
@@ -351,10 +348,7 @@ The available number symbols are as follows:
 * <a id="numbers-number-elements-number-symbols-item-23"></a> **For example, the**: For example, the time format for Arabic should be COLON when using the Latin numbering system (0, 1, 2, …), but when the Arabic numbering system is used (٠‎ - ١‎ - ٢‎ …), the traditional time separator in older print styles was often ARABIC COMMA.
 
 >
-
-#### Notes <a id="numbers-number-elements-number-symbols-notes"></a>
-
-* <a id="numbers-number-elements-number-symbols-note-1"></a> **Note 1**: In CLDR 26 the timeSeparator pattern character was specified to be COLON. This was withdrawn in CLDR 28 due to backward compatibility issues, and no timeSeparator pattern character is currently defined. No CLDR locales are known to have a need to specify timeSeparator symbols that depend on number system; if this changes in the future a different timeSeparator pattern character will be defined. In the meantime, since CLDR data consumers can still request the timeSeparator symbol, it should match the symbol actually used in the [timeFormats](tr35-dates.md#timeFormats) and [availableFormats](tr35-dates.md#availableFormats_appendItems) items.
+* <a id="numbers-number-elements-number-symbols-note-24"></a> **Note**: In CLDR 26 the timeSeparator pattern character was specified to be COLON. This was withdrawn in CLDR 28 due to backward compatibility issues, and no timeSeparator pattern character is currently defined. No CLDR locales are known to have a need to specify timeSeparator symbols that depend on number system; if this changes in the future a different timeSeparator pattern character will be defined. In the meantime, since CLDR data consumers can still request the timeSeparator symbol, it should match the symbol actually used in the [timeFormats](tr35-dates.md#timeFormats) and [availableFormats](tr35-dates.md#availableFormats_appendItems) items.
 
 
 Example:
@@ -381,17 +375,17 @@ Example:
 ```dtd
 <!ATTLIST symbols numberSystem CDATA #IMPLIED >
 ```
-* <a id="numbers-number-elements-number-symbols-item-24"></a> **The `numberSystem` attribute**: The `numberSystem` attribute is used to specify that the given number symbols are to be used when the given numbering system is active.
+* <a id="numbers-number-elements-number-symbols-item-25"></a> **The `numberSystem` attribute**: The `numberSystem` attribute is used to specify that the given number symbols are to be used when the given numbering system is active.
 
-* <a id="numbers-number-elements-number-symbols-item-25"></a> **Number symbols can**: Number symbols can only be defined for numbering systems of the "numeric" type, since any special symbols required for an algorithmic numbering system should be specified by the RBNF formatting rules used for that numbering system.
+* <a id="numbers-number-elements-number-symbols-item-26"></a> **Number symbols can**: Number symbols can only be defined for numbering systems of the "numeric" type, since any special symbols required for an algorithmic numbering system should be specified by the RBNF formatting rules used for that numbering system.
 
-* <a id="numbers-number-elements-number-symbols-item-26"></a> **The `numberSystem` attribute**: The `numberSystem` attribute will always be present in CLDR 49 and beyond.
+* <a id="numbers-number-elements-number-symbols-item-27"></a> **The `numberSystem` attribute**: The `numberSystem` attribute will always be present in CLDR 49 and beyond.
 
-* <a id="numbers-number-elements-number-symbols-item-27"></a> **The DTD does**: The DTD does not require it, so that older versions of CLDR can be read with as before.
+* <a id="numbers-number-elements-number-symbols-item-28"></a> **The DTD does**: The DTD does not require it, so that older versions of CLDR can be read with as before.
 
-* <a id="numbers-number-elements-number-symbols-item-28"></a> **Locales that specify**: Locales that specify a numbering system other than "latn" as the default should also specify number formatting symbols that are appropriate for use within the context of the given numbering system.
+* <a id="numbers-number-elements-number-symbols-item-29"></a> **Locales that specify**: Locales that specify a numbering system other than "latn" as the default should also specify number formatting symbols that are appropriate for use within the context of the given numbering system.
 
-* <a id="numbers-number-elements-number-symbols-item-29"></a> **For example, a**: For example, a locale that uses the Arabic-Indic digits as its default would likely use an Arabic comma for the grouping separator rather than the ASCII comma.
+* <a id="numbers-number-elements-number-symbols-item-30"></a> **For example, a**: For example, a locale that uses the Arabic-Indic digits as its default would likely use an Arabic comma for the grouping separator rather than the ASCII comma.
 
 For more information on numbering systems and their definitions, see _[Section 1: Numbering Systems](#Numbering_Systems)_.
 
@@ -890,15 +884,12 @@ Invalid sequences of special characters (such as “¤¤¤¤¤¤” in current C
 * <a id="numbers-number-format-patterns-special-pattern-characters-table-number-pattern-character-definitions-item-10"></a> **However in the**: However in the CLDR data, the format is normalized so that the other characteristics are preserved, just for readability.
 
 
-
-###### Notes <a id="numbers-number-format-patterns-special-pattern-characters-notes"></a>
-
-* <a id="numbers-number-format-patterns-special-pattern-characters-table-number-pattern-character-definitions-note-1"></a> **Note 1**: The thousands separator and decimal separator in patterns are always ASCII ',' and '.'. They are substituted by the code with the correct local values according to other fields in CLDR. The same is true of the - (ASCII minus sign) and other special characters listed above.
+* <a id="numbers-number-format-patterns-special-pattern-characters-table-number-pattern-character-definitions-note-11"></a> **Note**: The thousands separator and decimal separator in patterns are always ASCII ',' and '.'. They are substituted by the code with the correct local values according to other fields in CLDR. The same is true of the - (ASCII minus sign) and other special characters listed above.
 
 
-* <a id="numbers-number-format-patterns-special-pattern-characters-table-number-pattern-character-definitions-item-11"></a> **A currency decimal**: A currency decimal pattern normally contains a currency symbol placeholder (¤, ¤¤, ¤¤¤, or ¤¤¤¤¤).
+* <a id="numbers-number-format-patterns-special-pattern-characters-table-number-pattern-character-definitions-item-12"></a> **A currency decimal**: A currency decimal pattern normally contains a currency symbol placeholder (¤, ¤¤, ¤¤¤, or ¤¤¤¤¤).
 
-* <a id="numbers-number-format-patterns-special-pattern-characters-table-number-pattern-character-definitions-item-12"></a> **The currency symbol**: The currency symbol placeholder may occur before the first digit, after the last digit symbol, or where the decimal symbol would otherwise be placed (for formats such as "12€50", as in "12€50 pour une omelette").
+* <a id="numbers-number-format-patterns-special-pattern-characters-table-number-pattern-character-definitions-item-13"></a> **The currency symbol**: The currency symbol placeholder may occur before the first digit, after the last digit symbol, or where the decimal symbol would otherwise be placed (for formats such as "12€50", as in "12€50 pour une omelette").
 
 
 | Placement | Examples                                                                         |
@@ -1186,10 +1177,7 @@ In environments where the rendering system and font can't be trusted to handle U
 <!ATTLIST symbol choice ( true | false ) #IMPLIED > <!-- deprecated -->
 ```
 
-
-### Notes <a id="numbers-currencies-notes"></a>
-
-* <a id="numbers-currencies-note-1"></a> **Note 1**: The term "pattern" appears twice in the above. The first is for consistency with all other cases of pattern + displayName; the second is for backwards compatibility.
+* <a id="numbers-currencies-note-1"></a> **Note**: The term "pattern" appears twice in the above. The first is for consistency with all other cases of pattern + displayName; the second is for backwards compatibility.
 
 
 ```xml
@@ -1209,11 +1197,11 @@ In environments where the rendering system and font can't be trusted to handle U
 </currencies>
 ```
 
-* <a id="numbers-currencies-item-1"></a> **In formatting currencies**: In formatting currencies, the currency number format is used with the appropriate symbol from `<currencies>`, according to the currency code.
+* <a id="numbers-currencies-item-2"></a> **In formatting currencies**: In formatting currencies, the currency number format is used with the appropriate symbol from `<currencies>`, according to the currency code.
 
-* <a id="numbers-currencies-item-2"></a> **The `` list**: The `<currencies>` list can contain codes that are no longer in current use, such as PTE.
+* <a id="numbers-currencies-item-3"></a> **The `` list**: The `<currencies>` list can contain codes that are no longer in current use, such as PTE.
 
-* <a id="numbers-currencies-item-3"></a> **The `choice` attribute**: The `choice` attribute has been deprecated.
+* <a id="numbers-currencies-item-4"></a> **The `choice` attribute**: The `choice` attribute has been deprecated.
 
 
 The `count` attribute distinguishes the different plural forms, such as in the following:
@@ -1244,9 +1232,9 @@ To format a particular currency value "ZWD" for a particular numeric value _n_ u
 2. Otherwise, determine the `count` value that corresponds to _n_ using the rules in _[- Language Plural Rules](#Language_Plural_Rules)_
 3. Next, get the currency unitPattern.
    1. Look for a `unitPattern` element that matches the `count` value, starting in the current locale and then following the locale fallback chain up to, but not including root.
-* <a id="numbers-currencies-item-4"></a> **2**: 2.
+* <a id="numbers-currencies-item-5"></a> **2**: 2.
 
-* <a id="numbers-currencies-item-5"></a> **If no matching**: If no matching `unitPattern` element was found in the previous step, then look for a `unitPattern` element that matches `count="other"`, starting in the current locale and then following the locale fallback chain up to root (which has a `unitPattern` element with `count="other"` for every unit type).
+* <a id="numbers-currencies-item-6"></a> **If no matching**: If no matching `unitPattern` element was found in the previous step, then look for a `unitPattern` element that matches `count="other"`, starting in the current locale and then following the locale fallback chain up to root (which has a `unitPattern` element with `count="other"` for every unit type).
 
    3. The resulting unitPattern element indicates the appropriate positioning of the numeric value and the currency display name.
 4. Next, get the `displayName` element for the currency.
@@ -1254,35 +1242,35 @@ To format a particular currency value "ZWD" for a particular numeric value _n_ u
    2. If no matching `displayName` element was found in the previous step, then look for a `displayName` element that matches `count="other"`, starting in the current locale and then following the locale fallback chain up to, but not including root.
    3. If no matching `displayName` element was found in the previous step, then look for a `displayName` element with no count, starting in the current locale and then following the locale fallback chain up to root.
    4. If there is no `displayName` element, use the currency code itself (for example, "ZWD").
-* <a id="numbers-currencies-item-6"></a> **5**: 5.
+* <a id="numbers-currencies-item-7"></a> **5**: 5.
 
-* <a id="numbers-currencies-item-7"></a> **Format the numeric**: Format the numeric value according to the locale.
+* <a id="numbers-currencies-item-8"></a> **Format the numeric**: Format the numeric value according to the locale.
 
-* <a id="numbers-currencies-item-8"></a> **Use the locale’s**: Use the locale’s `<decimalFormats …>` pattern, not the `<currencyFormats>` pattern that is used with the symbol (eg, Z$).
+* <a id="numbers-currencies-item-9"></a> **Use the locale’s**: Use the locale’s `<decimalFormats …>` pattern, not the `<currencyFormats>` pattern that is used with the symbol (eg, Z$).
 
-* <a id="numbers-currencies-item-9"></a> **As when formatting**: As when formatting symbol currency values, reset the number of decimals according to the supplemental `<currencyData>` and use the currencyDecimal symbol if different from the decimal symbol.
+* <a id="numbers-currencies-item-10"></a> **As when formatting**: As when formatting symbol currency values, reset the number of decimals according to the supplemental `<currencyData>` and use the currencyDecimal symbol if different from the decimal symbol.
 
    1. The number of decimals should be overridable in an API, so that clients can choose between “2 US dollars” and “2.00 US dollars”.
 6. Substitute the formatted numeric value for the {0} in the `unitPattern`, and the currency display name for the {1}.
 
 While for English this may seem overly complex, for some other languages different plural forms are used for different unit types; the plural forms for certain unit types may not use all of the plural-form tags defined for the language.
 
-* <a id="numbers-currencies-item-10"></a> **For example, if**: For example, if the currency is ZWD and the number is 1234, then the latter maps to `count="other"` for English.
+* <a id="numbers-currencies-item-11"></a> **For example, if**: For example, if the currency is ZWD and the number is 1234, then the latter maps to `count="other"` for English.
 
-* <a id="numbers-currencies-item-11"></a> **The unit pattern**: The unit pattern for that is "{0} {1}", and the display name is "Zimbabwe dollars".
+* <a id="numbers-currencies-item-12"></a> **The unit pattern**: The unit pattern for that is "{0} {1}", and the display name is "Zimbabwe dollars".
 
-* <a id="numbers-currencies-item-12"></a> **The final formatted**: The final formatted number is then "1,234 Zimbabwe dollars".
+* <a id="numbers-currencies-item-13"></a> **The final formatted**: The final formatted number is then "1,234 Zimbabwe dollars".
 
 
 ---
 
-* <a id="numbers-currencies-item-13"></a> **When a currency**: When a currency symbol is substitited into a pattern, some spacing adjustments or other adjustments may be necessary depending on the nature of the symbol.
+* <a id="numbers-currencies-item-14"></a> **When a currency**: When a currency symbol is substitited into a pattern, some spacing adjustments or other adjustments may be necessary depending on the nature of the symbol.
 
-* <a id="numbers-currencies-item-14"></a> **In CLDR 42**: In CLDR 42 and later, the preferred way to handle this is via the `alt="alphaNextToNumber"` variant of the `currencyFormat` `pattern`, as described in _[Section 2.4.2: Currency Formats](#Currency_Formats)_.
+* <a id="numbers-currencies-item-15"></a> **In CLDR 42**: In CLDR 42 and later, the preferred way to handle this is via the `alt="alphaNextToNumber"` variant of the `currencyFormat` `pattern`, as described in _[Section 2.4.2: Currency Formats](#Currency_Formats)_.
 
-* <a id="numbers-currencies-item-15"></a> **In earlier versions**: In earlier versions of CLDR this was handled via the `currencySpacing` element as described below.
+* <a id="numbers-currencies-item-16"></a> **In earlier versions**: In earlier versions of CLDR this was handled via the `currencySpacing` element as described below.
 
-* <a id="numbers-currencies-item-16"></a> **This element is**: This element is still present in CLDR 42 and its use is described below for implementations that may not yet support the `alt="alphaNextToNumber"` variant of the `currencyFormat` `pattern`.
+* <a id="numbers-currencies-item-17"></a> **This element is**: This element is still present in CLDR 42 and its use is described below for implementations that may not yet support the `alt="alphaNextToNumber"` variant of the `currencyFormat` `pattern`.
 
 
 ```xml
@@ -1300,69 +1288,69 @@ While for English this may seem overly complex, for some other languages differe
 </currencySpacing>
 ```
 
-* <a id="numbers-currencies-item-17"></a> **This element controls**: This element controls whether additional characters are inserted on the boundary between the symbol and the pattern.
+* <a id="numbers-currencies-item-18"></a> **This element controls**: This element controls whether additional characters are inserted on the boundary between the symbol and the pattern.
 
-* <a id="numbers-currencies-item-18"></a> **For example, with**: For example, with the above `currencySpacing`, inserting the symbol "US\$" into the pattern "#,##0.00¤" would result in an extra _no-break space_ inserted before the symbol, for example, "#,##0.00 US\$".
+* <a id="numbers-currencies-item-19"></a> **For example, with**: For example, with the above `currencySpacing`, inserting the symbol "US\$" into the pattern "#,##0.00¤" would result in an extra _no-break space_ inserted before the symbol, for example, "#,##0.00 US\$".
 
-* <a id="numbers-currencies-item-19"></a> **The `beforeCurrency` element**: The `beforeCurrency` element governs this case, since we are looking _before_ the "¤" symbol.
+* <a id="numbers-currencies-item-20"></a> **The `beforeCurrency` element**: The `beforeCurrency` element governs this case, since we are looking _before_ the "¤" symbol.
 
-* <a id="numbers-currencies-item-20"></a> **The `currencyMatch` is**: The `currencyMatch` is positive, since the "U" in "US\$" is at the start of the currency symbol being substituted.
+* <a id="numbers-currencies-item-21"></a> **The `currencyMatch` is**: The `currencyMatch` is positive, since the "U" in "US\$" is at the start of the currency symbol being substituted.
 
-* <a id="numbers-currencies-item-21"></a> **The `surroundingMatch` is**: The `surroundingMatch` is positive, since the character just before the "¤" will be a digit.
+* <a id="numbers-currencies-item-22"></a> **The `surroundingMatch` is**: The `surroundingMatch` is positive, since the character just before the "¤" will be a digit.
 
-* <a id="numbers-currencies-item-22"></a> **Because these two**: Because these two conditions are true, the insertion is made.
+* <a id="numbers-currencies-item-23"></a> **Because these two**: Because these two conditions are true, the insertion is made.
 
 
-* <a id="numbers-currencies-item-23"></a> **Conversely, look at**: Conversely, look at the pattern "¤#,##0.00" with the symbol "US$".
+* <a id="numbers-currencies-item-24"></a> **Conversely, look at**: Conversely, look at the pattern "¤#,##0.00" with the symbol "US$".
 
-* <a id="numbers-currencies-item-24"></a> **In this case**: In this case, there is no insertion; the result is simply "US$#,##0.00".
+* <a id="numbers-currencies-item-25"></a> **In this case**: In this case, there is no insertion; the result is simply "US$#,##0.00".
 
-* <a id="numbers-currencies-item-25"></a> **The `afterCurrency` element**: The `afterCurrency` element governs this case, since we are looking _after_ the "¤" symbol.
+* <a id="numbers-currencies-item-26"></a> **The `afterCurrency` element**: The `afterCurrency` element governs this case, since we are looking _after_ the "¤" symbol.
 
-* <a id="numbers-currencies-item-26"></a> **The `surroundingMatch` is**: The `surroundingMatch` is positive, since the character just after the "¤" will be a digit.
+* <a id="numbers-currencies-item-27"></a> **The `surroundingMatch` is**: The `surroundingMatch` is positive, since the character just after the "¤" will be a digit.
 
-* <a id="numbers-currencies-item-27"></a> **However, the `currencyMatch**: However, the `currencyMatch` is **not** positive, since the "\$" in "US\$" is at the end of the currency symbol being substituted.
+* <a id="numbers-currencies-item-28"></a> **However, the `currencyMatch**: However, the `currencyMatch` is **not** positive, since the "\$" in "US\$" is at the end of the currency symbol being substituted.
 
-* <a id="numbers-currencies-item-28"></a> **So the insertion**: So the insertion is not made.
+* <a id="numbers-currencies-item-29"></a> **So the insertion**: So the insertion is not made.
 
 
 For more information on the matching used in the `currencyMatch` and `surroundingMatch` elements, see the main document _[Appendix E: Unicode Sets](tr35.md#Unicode_Sets)_.
 
 ---
 
-* <a id="numbers-currencies-item-29"></a> **Currencies can also**: Currencies can also contain optional grouping, decimal data, and pattern elements.
+* <a id="numbers-currencies-item-30"></a> **Currencies can also**: Currencies can also contain optional grouping, decimal data, and pattern elements.
 
-* <a id="numbers-currencies-item-30"></a> **This data is**: This data is inherited from the `<symbols>` in the same locale data (if not present in the chain up to root), so only the _differing_ data will be present.
+* <a id="numbers-currencies-item-31"></a> **This data is**: This data is inherited from the `<symbols>` in the same locale data (if not present in the chain up to root), so only the _differing_ data will be present.
 
-* <a id="numbers-currencies-item-31"></a> **See the main**: See the main document _[Multiple Inheritance](tr35.md#Multiple_Inheritance)_.
-
-
-* <a id="numbers-currencies-note-2"></a> **Note 2**: _Currency values should **never** be interchanged without a known currency code. You never want the number 3.5 interpreted as $3.50 by one user and €3.50 by another._ Locale data contains localization information for currencies, not a currency value for a country. A currency amount logically consists of a numeric value, plus an accompanying currency code (or equivalent). The currency code may be implicit in a protocol, such as where USD is implicit. But if the raw numeric value is transmitted without any context, then it has no definitive interpretation.
+* <a id="numbers-currencies-item-32"></a> **See the main**: See the main document _[Multiple Inheritance](tr35.md#Multiple_Inheritance)_.
 
 
-* <a id="numbers-currencies-item-32"></a> **Notice that the**: Notice that the currency code is completely independent of the end-user's language or locale.
-
-* <a id="numbers-currencies-item-33"></a> **For example, BGN**: For example, BGN is the code for Bulgarian Lev.
-
-* <a id="numbers-currencies-item-34"></a> **A currency amount**: A currency amount of <BGN, 1.23456×10³> would be localized for a Bulgarian user into "1 234,56 лв." (using Cyrillic letters).
-
-* <a id="numbers-currencies-item-35"></a> **For an English**: For an English user it would be localized into the string "BGN 1,234.56".
-
-* <a id="numbers-currencies-item-36"></a> **The end-user's language**: The end-user's language is needed for doing this last localization step; but that language is completely orthogonal to the currency code needed in the data.
-
-* <a id="numbers-currencies-item-37"></a> **After all, the**: After all, the same English user could be working with dozens of currencies.
-
-* <a id="numbers-currencies-item-38"></a> **Notice also that**: Notice also that the currency code is also independent of whether currency values are inter-converted, which requires more interesting financial processing: the rate of conversion may depend on a variety of factors.
+* <a id="numbers-currencies-note-33"></a> **Note**: _Currency values should **never** be interchanged without a known currency code. You never want the number 3.5 interpreted as $3.50 by one user and €3.50 by another._ Locale data contains localization information for currencies, not a currency value for a country. A currency amount logically consists of a numeric value, plus an accompanying currency code (or equivalent). The currency code may be implicit in a protocol, such as where USD is implicit. But if the raw numeric value is transmitted without any context, then it has no definitive interpretation.
 
 
-* <a id="numbers-currencies-item-39"></a> **Thus logically speaking**: Thus logically speaking, once a currency amount is entered into a system, it should be logically accompanied by a currency code in all processing.
+* <a id="numbers-currencies-item-34"></a> **Notice that the**: Notice that the currency code is completely independent of the end-user's language or locale.
 
-* <a id="numbers-currencies-item-40"></a> **This currency code**: This currency code is independent of whatever the user's original locale was.
+* <a id="numbers-currencies-item-35"></a> **For example, BGN**: For example, BGN is the code for Bulgarian Lev.
 
-* <a id="numbers-currencies-item-41"></a> **Only in badly-designed**: Only in badly-designed software is the currency code (or equivalent) not present, so that the software has to "guess" at the currency code based on the user's locale.
+* <a id="numbers-currencies-item-36"></a> **A currency amount**: A currency amount of <BGN, 1.23456×10³> would be localized for a Bulgarian user into "1 234,56 лв." (using Cyrillic letters).
+
+* <a id="numbers-currencies-item-37"></a> **For an English**: For an English user it would be localized into the string "BGN 1,234.56".
+
+* <a id="numbers-currencies-item-38"></a> **The end-user's language**: The end-user's language is needed for doing this last localization step; but that language is completely orthogonal to the currency code needed in the data.
+
+* <a id="numbers-currencies-item-39"></a> **After all, the**: After all, the same English user could be working with dozens of currencies.
+
+* <a id="numbers-currencies-item-40"></a> **Notice also that**: Notice also that the currency code is also independent of whether currency values are inter-converted, which requires more interesting financial processing: the rate of conversion may depend on a variety of factors.
 
 
-* <a id="numbers-currencies-note-3"></a> **Note 3**: The number of decimal places **and** the rounding for each currency is not locale-specific data, and is not contained in the Locale Data Markup Language format. Those values override whatever is given in the currency `numberFormat`. For more information, see _[Supplemental Currency Data](#Supplemental_Currency_Data)_.
+* <a id="numbers-currencies-item-41"></a> **Thus logically speaking**: Thus logically speaking, once a currency amount is entered into a system, it should be logically accompanied by a currency code in all processing.
+
+* <a id="numbers-currencies-item-42"></a> **This currency code**: This currency code is independent of whatever the user's original locale was.
+
+* <a id="numbers-currencies-item-43"></a> **Only in badly-designed**: Only in badly-designed software is the currency code (or equivalent) not present, so that the software has to "guess" at the currency code based on the user's locale.
+
+
+* <a id="numbers-currencies-note-44"></a> **Note**: The number of decimal places **and** the rounding for each currency is not locale-specific data, and is not contained in the Locale Data Markup Language format. Those values override whatever is given in the currency `numberFormat`. For more information, see _[Supplemental Currency Data](#Supplemental_Currency_Data)_.
 
 
 For background information on currency names, see [[CurrencyInfo](tr35.md#CurrencyInfo)].

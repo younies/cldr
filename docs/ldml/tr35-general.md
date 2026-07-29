@@ -28,7 +28,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts <a id="core-parts"></a>
+## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -51,7 +51,6 @@ The LDML specification is divided into the following parts:
 * [Parts ](#parts-)
 * [Contents of Part 2, General](#Contents) 
 * [Display Name Elements](#Display_Name_Elements) 
-  * [Notes ](#notes-)
   * [Locale Display Name Algorithm](#locale_display_name_algorithm) 
   * [Locale Display Name Fields](#locale_display_name_fields) 
   * [Type Values ](#type-values-)
@@ -151,10 +150,7 @@ The LDML specification is divided into the following parts:
 * <a id="general-display-name-elements-item-4"></a> **Examples are given**: Examples are given below.
 
 
-
-### Notes <a id="general-display-name-elements-notes"></a>
-
-* <a id="general-display-name-elements-note-1"></a> **Note 1**: The "en" locale may contain translated names for deprecated codes for debugging purposes. Translation of deprecated codes into other languages is discouraged.
+* <a id="general-display-name-elements-note-5"></a> **Note**: The "en" locale may contain translated names for deprecated codes for debugging purposes. Translation of deprecated codes into other languages is discouraged.
 
 
 Where present, the display names must be unique; that is, two distinct codes would not get the same display name. (There is one exception to this: in time zones, where parsing results would give the same GMT offset, the standard and daylight display names can be the same across different time zone IDs.)
@@ -176,9 +172,9 @@ It includes three sub-elements:
 *   The `<localeSeparator>` element specifies a pattern such as "{0}, {1}" used when appending a subtag display name to the list in the `<localePattern>` subpattern {1} above. If that list includes more than one display name, then `<localeSeparator>` subpattern {1} represents a new display name to be appended to the current list in {0}. _Note: Before CLDR 24, the `<localeSeparator>` element specified a separator string such as ", ", not a pattern._
 *   The `<localeKeyTypePattern>` element specifies the pattern used to display key-type pairs, such as "{0}: {1}"
 
-* <a id="general-display-name-elements-item-5"></a> **For example, for**: For example, for the locale identifier zh_Hant_CN_co_pinyin_cu_USD, the display would be "Chinese (Traditional, China, Pinyin Sort Order, Currency: USD)".
+* <a id="general-display-name-elements-item-6"></a> **For example, for**: For example, for the locale identifier zh_Hant_CN_co_pinyin_cu_USD, the display would be "Chinese (Traditional, China, Pinyin Sort Order, Currency: USD)".
 
-* <a id="general-display-name-elements-item-6"></a> **The key-type for**: The key-type for co_pinyin doesn't use the localeKeyTypePattern because there is a translation for the key-type in English:
+* <a id="general-display-name-elements-item-7"></a> **The key-type for**: The key-type for co_pinyin doesn't use the localeKeyTypePattern because there is a translation for the key-type in English:
 
 
 ```xml

@@ -28,7 +28,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
+## Parts <a id="core-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -44,67 +44,67 @@ The LDML specification is divided into the following parts:
 *   Appendix A: [Modifications](tr35-modifications.md#modifications)
 *   Appendix B: [Acknowledgments](tr35-acknowledgments.md#acknowledgments)
 
-## <a name="Contents" id="collation-contents-of-part-5-collation" href="#Contents">Contents of Part 5, Collation</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Part 5, Collation</a> <a id="collation-contents-of-part-5-collation"></a>
 
   * [_Summary_ ](#summary-)
   * [_Status_ ](#status-)
 * [Parts ](#parts-)
-* [Contents of Part 5, Collation](#Contents)
-* [CLDR Collation](#CLDR_Collation)
-  * [CLDR Collation Algorithm](#CLDR_Collation_Algorithm)
-    * [U+FFFE](#Algorithm_FFFE)
-    * [Context-Sensitive Mappings](#Context_Sensitive_Mappings)
-    * [Case Handling](#Algorithm_Case)
-    * [Reordering Groups](#Algorithm_Reordering_Groups)
-    * [Combining Rules](#Combining_Rules)
-* [Root Collation](#Root_Collation)
-  * [Grouping classes of characters](#grouping_classes_of_characters)
-  * [Non-variable symbols](#non_variable_symbols)
-  * [Additional contractions for Tibetan](#tibetan_contractions)
-  * [Tailored noncharacter weights](#tailored_noncharacter_weights)
-  * [Root Collation Data Files](#Root_Data_Files)
-  * [Root Collation Data File Formats](#Root_Data_File_Formats)
-    * [allkeys_CLDR.txt](#File_Format_allkeys_CLDR_txt)
-    * [FractionalUCA.txt](#File_Format_FractionalUCA_txt)
-    * [UCA_Rules.txt](#File_Format_UCA_Rules_txt)
-* [Collation Tailorings](#Collation_Tailorings)
-  * [Collation Types](#Collation_Types)
-    * [Collation Type Fallback](#Collation_Type_Fallback)
+* [Contents of Part 5, Collation](#Contents) 
+* [CLDR Collation](#CLDR_Collation) 
+  * [CLDR Collation Algorithm](#CLDR_Collation_Algorithm) 
+    * [U+FFFE](#Algorithm_FFFE) 
+    * [Context-Sensitive Mappings](#Context_Sensitive_Mappings) 
+    * [Case Handling](#Algorithm_Case) 
+    * [Reordering Groups](#Algorithm_Reordering_Groups) 
+    * [Combining Rules](#Combining_Rules) 
+* [Root Collation](#Root_Collation) 
+  * [Grouping classes of characters](#grouping_classes_of_characters) 
+  * [Non-variable symbols](#non_variable_symbols) 
+  * [Additional contractions for Tibetan](#tibetan_contractions) 
+  * [Tailored noncharacter weights](#tailored_noncharacter_weights) 
+  * [Root Collation Data Files](#Root_Data_Files) 
+  * [Root Collation Data File Formats](#Root_Data_File_Formats) 
+    * [allkeys_CLDR.txt](#File_Format_allkeys_CLDR_txt) 
+    * [FractionalUCA.txt](#File_Format_FractionalUCA_txt) 
+    * [UCA_Rules.txt](#File_Format_UCA_Rules_txt) 
+* [Collation Tailorings](#Collation_Tailorings) 
+  * [Collation Types](#Collation_Types) 
+    * [Collation Type Fallback](#Collation_Type_Fallback) 
       * [Table: Sample requested and actual collation locales and types ](#table-sample-requested-and-actual-collation-locales-and-types-)
-  * [Version](#Collation_Version)
-  * [Collation Element](#Collation_Element)
-  * [Setting Options](#Setting_Options)
+  * [Version](#Collation_Version) 
+  * [Collation Element](#Collation_Element) 
+  * [Setting Options](#Setting_Options) 
     * [Table: Collation Settings ](#table-collation-settings-)
-    * [Common settings combinations](#Common_Settings)
-    * [Notes on the normalization setting](#Normalization_Setting)
-    * [Notes on variable top settings](#Variable_Top_Settings)
-  * [Collation Rule Syntax](#Rules)
-  * [Orderings](#Orderings)
+    * [Common settings combinations](#Common_Settings) 
+    * [Notes on the normalization setting](#Normalization_Setting) 
+    * [Notes on variable top settings](#Variable_Top_Settings) 
+  * [Collation Rule Syntax](#Rules) 
+  * [Orderings](#Orderings) 
     * [Table: Specifying Collation Ordering ](#table-specifying-collation-ordering-)
     * [Table: Abbreviating Ordering Specifications ](#table-abbreviating-ordering-specifications-)
-  * [Contractions](#Contractions)
+  * [Contractions](#Contractions) 
     * [Table: Specifying Contractions ](#table-specifying-contractions-)
-  * [Expansions](#Expansions)
-  * [Context Before](#Context_Before)
+  * [Expansions](#Expansions) 
+  * [Context Before](#Context_Before) 
     * [Table: Specifying Previous Context ](#table-specifying-previous-context-)
-  * [Placing Characters Before Others](#Placing_Characters_Before_Others)
-  * [Logical Reset Positions](#Logical_Reset_Positions)
+  * [Placing Characters Before Others](#Placing_Characters_Before_Others) 
+  * [Logical Reset Positions](#Logical_Reset_Positions) 
     * [Table: Specifying Logical Positions ](#table-specifying-logical-positions-)
-  * [Special-Purpose Commands](#Special_Purpose_Commands)
+  * [Special-Purpose Commands](#Special_Purpose_Commands) 
     * [Table: Special-Purpose Elements ](#table-special-purpose-elements-)
-  * [Collation Reordering](#Script_Reordering)
-    * [Interpretation of a reordering list](#Interpretation_reordering)
-    * [Reordering Groups for allkeys.txt](#Reordering_Groups_allkeys)
-  * [Case Parameters](#Case_Parameters)
-    * [Untailored Characters](#Case_Untailored)
-    * [Compute Modified Collation Elements](#Case_Weights)
-    * [Tailored Strings](#Case_Tailored)
-  * [Visibility](#Visibility)
-  * [Collation Indexes](#Collation_Indexes)
-    * [Index Characters](#Index_Characters)
-    * [CJK Index Markers](#CJK_Index_Markers)
+  * [Collation Reordering](#Script_Reordering) 
+    * [Interpretation of a reordering list](#Interpretation_reordering) 
+    * [Reordering Groups for allkeys.txt](#Reordering_Groups_allkeys) 
+  * [Case Parameters](#Case_Parameters) 
+    * [Untailored Characters](#Case_Untailored) 
+    * [Compute Modified Collation Elements](#Case_Weights) 
+    * [Tailored Strings](#Case_Tailored) 
+  * [Visibility](#Visibility) 
+  * [Collation Indexes](#Collation_Indexes) 
+    * [Index Characters](#Index_Characters) 
+    * [CJK Index Markers](#CJK_Index_Markers) 
 
-## <a name="CLDR_Collation" id="collation-cldr-collation" href="#CLDR_Collation">CLDR Collation</a>
+## <a name="CLDR_Collation" id="CLDR_Collation" href="#CLDR_Collation">CLDR Collation</a> <a id="collation-cldr-collation"></a>
 
 Collation is the general term for the process and function of determining the sorting order of strings of characters, for example for lists of strings presented to users, or in databases for sorting and selecting records.
 
@@ -117,11 +117,11 @@ Collation varies by language, by application (some languages use special phonebo
 * <a id="collation-cldr-collation-item-3"></a> **All CLDR collations**: All CLDR collations are based on the [[UCA](https://www.unicode.org/reports/tr41/#UTS10)] default order, with common modifications applied in the CLDR root collation, and further tailored for language and style as needed.
 
 
-### <a name="CLDR_Collation_Algorithm" id="collation-cldr-collation-cldr-collation-algorithm" href="#CLDR_Collation_Algorithm">CLDR Collation Algorithm</a>
+### <a name="CLDR_Collation_Algorithm" id="CLDR_Collation_Algorithm" href="#CLDR_Collation_Algorithm">CLDR Collation Algorithm</a> <a id="collation-cldr-collation-cldr-collation-algorithm"></a>
 
 The CLDR collation algorithm is an extension of the [Unicode Collation Algorithm](https://www.unicode.org/reports/tr10/#Main_Algorithm).
 
-#### <a name="Algorithm_FFFE" id="collation-cldr-collation-cldr-collation-algorithm-ufffe" href="#Algorithm_FFFE">U+FFFE</a>
+#### <a name="Algorithm_FFFE" id="Algorithm_FFFE" href="#Algorithm_FFFE">U+FFFE</a> <a id="collation-cldr-collation-cldr-collation-algorithm-ufffe"></a>
 
 * <a id="collation-cldr-collation-cldr-collation-algorithm-ufffe-item-1"></a> **U+FFFE maps to**: U+FFFE maps to a CE with a minimal, unique primary weight.
 
@@ -147,7 +147,7 @@ The CLDR collation algorithm is an extension of the [Unicode Collation Algorithm
 * <a id="collation-cldr-collation-cldr-collation-algorithm-ufffe-item-10"></a> **When that is**: When that is not necessary, then code can be a little simpler (no special handling for U+FFFE except for backwards-secondary), sort keys can be a little shorter (when using compressible common non-primary weights for U+FFFE), and another low weight can be used in tailorings.
 
 
-#### <a name="Context_Sensitive_Mappings" id="collation-cldr-collation-cldr-collation-algorithm-context-sensitive-mappings" href="#Context_Sensitive_Mappings">Context-Sensitive Mappings</a>
+#### <a name="Context_Sensitive_Mappings" id="Context_Sensitive_Mappings" href="#Context_Sensitive_Mappings">Context-Sensitive Mappings</a> <a id="collation-cldr-collation-cldr-collation-algorithm-context-sensitive-mappings"></a>
 
 * <a id="collation-cldr-collation-cldr-collation-algorithm-context-sensitive-mappings-item-1"></a> **Contraction matching, as**: Contraction matching, as in the UCA, starts from the first character of the contraction string.
 
@@ -227,18 +227,18 @@ With these, text collates like this:
 
 However, if the mapping p|c → CE(u) is missing, then text "pch" maps to CE(p)CE(d), "opch" maps to CE(o)CE(p)CE(d), and "pĉ̣" maps to CE(p)CE(c)CE(U+0323)CE(U+0302) (because discontiguous contraction matching extends _an existing match_ by one non-starter at a time).
 
-#### <a name="Algorithm_Case" id="collation-cldr-collation-cldr-collation-algorithm-case-handling" href="#Algorithm_Case">Case Handling</a>
+#### <a name="Algorithm_Case" id="Algorithm_Case" href="#Algorithm_Case">Case Handling</a> <a id="collation-cldr-collation-cldr-collation-algorithm-case-handling"></a>
 
 * <a id="collation-cldr-collation-cldr-collation-algorithm-case-handling-item-1"></a> **CLDR specifies how**: CLDR specifies how to sort lowercase or uppercase first, as a stronger distinction than other tertiary variants (**caseFirst**) or while completely ignoring all other tertiary distinctions (**caseLevel**).
 
 * <a id="collation-cldr-collation-cldr-collation-algorithm-case-handling-item-2"></a> **See _[Setting Options](#Setting_Options**: See _[Setting Options](#Setting_Options)_ and _[Case Parameters](#Case_Parameters)_.
 
 
-#### <a name="Algorithm_Reordering_Groups" id="collation-cldr-collation-cldr-collation-algorithm-reordering-groups" href="#Algorithm_Reordering_Groups">Reordering Groups</a>
+#### <a name="Algorithm_Reordering_Groups" id="Algorithm_Reordering_Groups" href="#Algorithm_Reordering_Groups">Reordering Groups</a> <a id="collation-cldr-collation-cldr-collation-algorithm-reordering-groups"></a>
 
 CLDR specifies how to do parametric reordering of groups of scripts (e.g., “native script first”) as well as special groups (e.g., “digits after letters”), and provides data for the effective implementation of such reordering.
 
-#### <a name="Combining_Rules" id="collation-cldr-collation-cldr-collation-algorithm-combining-rules" href="#Combining_Rules">Combining Rules</a>
+#### <a name="Combining_Rules" id="Combining_Rules" href="#Combining_Rules">Combining Rules</a> <a id="collation-cldr-collation-cldr-collation-algorithm-combining-rules"></a>
 
 Rules from different sources can be combined, with the later rules overriding the earlier ones. The following is an example of how this can be useful.
 
@@ -283,7 +283,7 @@ The following table shows the differences. When emoji ordering is supported, the
 <tr><td>combined rules</td><td>,</td><td>😀</td><td>☹️</td><td>✈️️</td><td>a</td><td>y</td><td><strong><u>ü</u></strong></td><td>Z</td><td>글</td></tr>
 </tbody></table>
 
-## <a name="Root_Collation" id="collation-root-collation" href="#Root_Collation">Root Collation</a>
+## <a name="Root_Collation" id="Root_Collation" href="#Root_Collation">Root Collation</a> <a id="collation-root-collation"></a>
 
 * <a id="collation-root-collation-item-1"></a> **The CLDR root**: The CLDR root collation order is based on the [Default Unicode Collation Element Table (DUCET)](https://www.unicode.org/reports/tr10/#Default_Unicode_Collation_Element_Table) defined in _UTS #10: Unicode Collation Algorithm_ [[UCA](https://www.unicode.org/reports/tr41/#UTS10)].
 
@@ -292,7 +292,7 @@ The following table shows the differences. When emoji ordering is supported, the
 
 Starting with CLDR 1.9, CLDR uses modified tables for the root collation order. The root locale ordering is tailored in the following ways:
 
-### <a name="grouping_classes_of_characters" id="collation-root-collation-grouping-classes-of-characters" href="#grouping_classes_of_characters">Grouping classes of characters</a>
+### <a name="grouping_classes_of_characters" id="grouping_classes_of_characters" href="#grouping_classes_of_characters">Grouping classes of characters</a> <a id="collation-root-collation-grouping-classes-of-characters"></a>
 
 CLDR groups the characters that sort below letters like this: Whitespace, punctuation, general symbols, currency symbols, and numbers. Letters are grouped by script.
 
@@ -308,7 +308,7 @@ CLDR groups the characters that sort below letters like this: Whitespace, punctu
 * <a id="collation-root-collation-grouping-classes-of-characters-item-5"></a> **Both sort orders**: Both sort orders have been changed to now sort the same.
 
 
-### <a name="non_variable_symbols" id="collation-root-collation-non-variable-symbols" href="#non_variable_symbols">Non-variable symbols</a>
+### <a name="non_variable_symbols" id="non_variable_symbols" href="#non_variable_symbols">Non-variable symbols</a> <a id="collation-root-collation-non-variable-symbols"></a>
 
 * <a id="collation-root-collation-non-variable-symbols-item-1"></a> **There are multiple**: There are multiple [Variable-Weighting](https://www.unicode.org/reports/tr10/#Variable_Weighting) options in the UCA for symbols and punctuation, including _non-ignorable_ and _shifted_.
 
@@ -330,14 +330,14 @@ See also:
 * _[Setting Options](#Setting_Options)_
 * [https://www.unicode.org/charts/collation/](https://www.unicode.org/charts/collation/)
 
-### <a name="tibetan_contractions" id="collation-root-collation-additional-contractions-for-tibetan" href="#tibetan_contractions">Additional contractions for Tibetan</a>
+### <a name="tibetan_contractions" id="tibetan_contractions" href="#tibetan_contractions">Additional contractions for Tibetan</a> <a id="collation-root-collation-additional-contractions-for-tibetan"></a>
 
 * <a id="collation-root-collation-additional-contractions-for-tibetan-item-1"></a> **Ten contractions are**: Ten contractions are added for Tibetan: Two to fulfill [well-formedness condition 5](https://www.unicode.org/reports/tr10/#WF5), and eight more to preserve the default order for Tibetan.
 
 * <a id="collation-root-collation-additional-contractions-for-tibetan-item-2"></a> **For details see**: For details see _UTS #10, Section 3.8.2, [Well-Formedness of the DUCET](https://www.unicode.org/reports/tr10/#Well_Formed_DUCET)_.
 
 
-### <a name="tailored_noncharacter_weights" id="collation-root-collation-tailored-noncharacter-weights" href="#tailored_noncharacter_weights">Tailored noncharacter weights</a>
+### <a name="tailored_noncharacter_weights" id="tailored_noncharacter_weights" href="#tailored_noncharacter_weights">Tailored noncharacter weights</a> <a id="collation-root-collation-tailored-noncharacter-weights"></a>
 
 U+FFFE and U+FFFF have special tailorings:
 
@@ -358,7 +358,7 @@ In CLDR, so as to maintain the special collation elements, **U+FFFD..U+FFFF** ar
 
 > 👉 **Note**: Java uses an early version of this collation syntax, but has not been updated recently. It does not support any of the syntax marked with [...], and its default table is not the DUCET nor the CLDR root collation.
 
-### <a name="Root_Data_Files" id="collation-root-collation-root-collation-data-files" href="#Root_Data_Files">Root Collation Data Files</a>
+### <a name="Root_Data_Files" id="Root_Data_Files" href="#Root_Data_Files">Root Collation Data Files</a> <a id="collation-root-collation-root-collation-data-files"></a>
 
 The CLDR root collation data files are in the CLDR repository and release, under the path [common/uca/](https://github.com/unicode-org/cldr/blob/main/common/uca/).
 
@@ -383,17 +383,17 @@ Comments with DUCET-style weights in files other than allkeys_CLDR.txt and allke
   * CollationTest_CLDR_NON_IGNORABLE.txt
   * CollationTest_CLDR_SHIFTED.txt
 
-### <a name="Root_Data_File_Formats" id="collation-root-collation-root-collation-data-file-formats" href="#Root_Data_File_Formats">Root Collation Data File Formats</a>
+### <a name="Root_Data_File_Formats" id="Root_Data_File_Formats" href="#Root_Data_File_Formats">Root Collation Data File Formats</a> <a id="collation-root-collation-root-collation-data-file-formats"></a>
 
 The file formats may change between versions of CLDR. The formats for CLDR 23 and beyond are as follows. As usual, text after a # is a comment.
 
-#### <a name="File_Format_allkeys_CLDR_txt" id="collation-root-collation-root-collation-data-file-formats-allkeyscldrtxt" href="#File_Format_allkeys_CLDR_txt">allkeys_CLDR.txt</a>
+#### <a name="File_Format_allkeys_CLDR_txt" id="File_Format_allkeys_CLDR_txt" href="#File_Format_allkeys_CLDR_txt">allkeys_CLDR.txt</a> <a id="collation-root-collation-root-collation-data-file-formats-allkeyscldrtxt"></a>
 
 This file defines CLDR’s tailoring of the DUCET, as described in _[Root Collation](#Root_Collation)_ .
 
 The format is similar to that of [allkeys.txt](https://www.unicode.org/reports/tr10/#File_Format), although there may be some differences in whitespace.
 
-#### <a name="File_Format_FractionalUCA_txt" id="collation-root-collation-root-collation-data-file-formats-fractionalucatxt" href="#File_Format_FractionalUCA_txt">FractionalUCA.txt</a>
+#### <a name="File_Format_FractionalUCA_txt" id="File_Format_FractionalUCA_txt" href="#File_Format_FractionalUCA_txt">FractionalUCA.txt</a> <a id="collation-root-collation-root-collation-data-file-formats-fractionalucatxt"></a>
 
 The format is illustrated by the following sample lines, with commentary afterwards.
 
@@ -716,11 +716,11 @@ The final table gives certain hard-coded byte values. The "trail" area is provid
 * <a id="collation-root-collation-root-collation-data-file-formats-fractionalucatxt-item-67"></a> **It is not**: It is not useful as a _data_ file, but it is valuable for simple diffing between versions of the data, showing changes in the sort order and in the number of bytes in fractional weights.
 
 
-#### <a name="File_Format_UCA_Rules_txt" id="collation-root-collation-root-collation-data-file-formats-ucarulestxt" href="#File_Format_UCA_Rules_txt">UCA_Rules.txt</a>
+#### <a name="File_Format_UCA_Rules_txt" id="File_Format_UCA_Rules_txt" href="#File_Format_UCA_Rules_txt">UCA_Rules.txt</a> <a id="collation-root-collation-root-collation-data-file-formats-ucarulestxt"></a>
 
 The format for this file uses the CLDR collation syntax, see _[Collation Tailorings](#Collation_Tailorings)_.
 
-## <a name="Collation_Tailorings" id="collation-collation-tailorings" href="#Collation_Tailorings">Collation Tailorings</a>
+## <a name="Collation_Tailorings" id="Collation_Tailorings" href="#Collation_Tailorings">Collation Tailorings</a> <a id="collation-collation-tailorings"></a>
 
 ```xml
 <!ELEMENT collations (alias | (defaultCollation?, collation*, special*)) >
@@ -732,7 +732,7 @@ This element of the LDML format contains one or more `collation` elements, disti
 
 > 👉 **Note**: CLDR collation tailoring data should follow the [CLDR Collation Guidelines](https://cldr.unicode.org/index/cldr-spec/collation-guidelines).
 
-### <a name="Collation_Types" id="collation-collation-tailorings-collation-types" href="#Collation_Types">Collation Types</a>
+### <a name="Collation_Types" id="Collation_Types" href="#Collation_Types">Collation Types</a> <a id="collation-collation-tailorings-collation-types"></a>
 
 Each locale may have multiple sort orders (types). The `defaultCollation` element defines the default tailoring for a locale and its sublocales. For example:
 
@@ -758,7 +758,7 @@ To allow implementations in reduced memory environments to use CJK sorting, ther
 * <a id="collation-collation-tailorings-collation-types-item-6"></a> **See the _[CLDR**: See the _[CLDR 23 version of this document](tr35-collation.md#Collation_Tailorings)_ for details about the XML collation syntax.
 
 
-#### <a name="Collation_Type_Fallback" id="collation-collation-tailorings-collation-types-collation-type-fallback" href="#Collation_Type_Fallback">Collation Type Fallback</a>
+#### <a name="Collation_Type_Fallback" id="Collation_Type_Fallback" href="#Collation_Type_Fallback">Collation Type Fallback</a> <a id="collation-collation-tailorings-collation-types-collation-type-fallback"></a>
 
 When loading a requested tailoring from its data file and the parent file chain, use the following type fallback to find the tailoring.
 
@@ -802,7 +802,7 @@ For example, assume that we have collation data for the following tailorings. ("
 | el/searchjl       | root/search   | "search.+" falls back to "search", found in root |
 | ko/searchjl       | ko/searchjl   | requested data is actually available |
 
-### <a name="Collation_Version" id="collation-collation-tailorings-version" href="#Collation_Version">Version</a>
+### <a name="Collation_Version" id="Collation_Version" href="#Collation_Version">Version</a> <a id="collation-collation-tailorings-version"></a>
 
 * <a id="collation-collation-tailorings-version-item-1"></a> **The `version` attribute**: The `version` attribute is used in case a specific version of the UCA is to be specified.
 
@@ -818,7 +818,7 @@ For example, assume that we have collation data for the following tailorings. ("
 * <a id="collation-collation-tailorings-version-item-6"></a> **So for UCA**: So for UCA 4.0 and beyond, the version just has a single number.
 
 
-### <a name="Collation_Element" id="collation-collation-tailorings-collation-element" href="#Collation_Element">Collation Element</a>
+### <a name="Collation_Element" id="Collation_Element" href="#Collation_Element">Collation Element</a> <a id="collation-collation-tailorings-collation-element"></a>
 
 ```xml
 <!ELEMENT collation (alias | (cr*, special*)) >
@@ -840,7 +840,7 @@ For example, assume that we have collation data for the following tailorings. ("
 </collation>
 ```
 
-### <a name="Setting_Options" id="collation-collation-tailorings-setting-options" href="#Setting_Options">Setting Options</a>
+### <a name="Setting_Options" id="Setting_Options" href="#Setting_Options">Setting Options</a> <a id="collation-collation-tailorings-setting-options"></a>
 
 Parametric settings can be specified in language tags or in rule syntax (in the form `[keyword value]` ). For example, `-ks-level2` or `[strength 2]` will only compare strings based on their primary and secondary weights.
 
@@ -912,7 +912,7 @@ Parametric settings can be specified in language tags or in rule syntax (in the 
     <td>match-style: <i><b>minimal</b></i> | medial | maximal<br/>Defined by <i><a href="https://www.unicode.org/reports/tr10/#Searching">Searching and Matching</a></i> of [<a href="https://www.unicode.org/reports/tr41/#UTS10">UCA</a>].</td></tr>
 </tbody></table>
 
-#### <a name="Common_Settings" id="collation-collation-tailorings-setting-options-common-settings-combinations" href="#Common_Settings">Common settings combinations</a>
+#### <a name="Common_Settings" id="Common_Settings" href="#Common_Settings">Common settings combinations</a> <a id="collation-collation-tailorings-setting-options-common-settings-combinations"></a>
 
 Some commonly used parametric collation settings are available via combinations of LDML settings attributes:
 
@@ -922,7 +922,7 @@ Some commonly used parametric collation settings are available via combinations 
 * “Ignore punctuation” (completely): **strength=tertiary alternate=shifted**
 * “Ignore punctuation” but distinguish among punctuation marks: **strength=quaternary alternate=shifted**
 
-#### <a name="Normalization_Setting" id="collation-collation-tailorings-setting-options-notes-on-the-normalization-setting" href="#Normalization_Setting">Notes on the normalization setting</a>
+#### <a name="Normalization_Setting" id="Normalization_Setting" href="#Normalization_Setting">Notes on the normalization setting</a> <a id="collation-collation-tailorings-setting-options-notes-on-the-normalization-setting"></a>
 
 The UCA always normalizes input strings into NFD form before the rest of the algorithm. However, this results in poor performance.
 
@@ -942,7 +942,7 @@ The UCA always normalizes input strings into NFD form before the rest of the alg
 
 In order to handle strings with these characters (e.g., “aä” and “ӛ́” [which are in FCD]) exactly as with prior NFD normalization, an implementation needs to either add overlap contractions to its data (e.g., “a+ä” and “ә+◌̈́”), or it needs to decompose the relevant composites (e.g., ‘ä’ and ‘◌̈́’) as soon as they are encountered.
 
-#### <a name="Variable_Top_Settings" id="collation-collation-tailorings-setting-options-notes-on-variable-top-settings" href="#Variable_Top_Settings">Notes on variable top settings</a>
+#### <a name="Variable_Top_Settings" id="Variable_Top_Settings" href="#Variable_Top_Settings">Notes on variable top settings</a> <a id="collation-collation-tailorings-setting-options-notes-on-variable-top-settings"></a>
 
 * <a id="collation-collation-tailorings-setting-options-notes-on-variable-top-settings-item-1"></a> **Users may want**: Users may want to include more or fewer characters as Variable.
 
@@ -958,7 +958,7 @@ In order to handle strings with these characters (e.g., “aä” and “ӛ́”
 * <a id="collation-collation-tailorings-setting-options-notes-on-variable-top-settings-item-6"></a> **For example, the**: For example, the locale identifier "de-u-ka-shifted-kv-currency" is requesting settings appropriate for German, including German sorting conventions, and that currency symbols and characters sorting below them are ignored in sorting.
 
 
-### <a name="Rules" id="collation-collation-tailorings-collation-rule-syntax" href="#Rules">Collation Rule Syntax</a>
+### <a name="Rules" id="Rules" href="#Rules">Collation Rule Syntax</a> <a id="collation-collation-tailorings-collation-rule-syntax"></a>
 
 ```xml
 <!ELEMENT cr #PCDATA >
@@ -1005,7 +1005,7 @@ Comments are allowed at the beginning, and after any complete reset, relation, s
 
 The collation syntax is case-sensitive.
 
-### <a name="Orderings" id="collation-collation-tailorings-orderings" href="#Orderings">Orderings</a>
+### <a name="Orderings" id="Orderings" href="#Orderings">Orderings</a> <a id="collation-collation-tailorings-orderings"></a>
 
 * <a id="collation-collation-tailorings-orderings-item-1"></a> **The root collation**: The root collation mappings form the initial state.
 
@@ -1104,7 +1104,7 @@ In all cases, even for `=` , the case bits are recomputed according to _[Case Pa
 | `<<<<*`           | `& k`<br/>`<<<<* qQ`    | `& k`<br/>`<<<< q <<<< Q` |
 | `=*`              | `& v`<br/>`=* VwW`      | `& v`<br/>`= V = w = W` |
 
-### <a name="Contractions" id="collation-collation-tailorings-contractions" href="#Contractions">Contractions</a>
+### <a name="Contractions" id="Contractions" href="#Contractions">Contractions</a> <a id="collation-collation-tailorings-contractions"></a>
 
 A multi-character relation string defines a contraction.
 
@@ -1114,7 +1114,7 @@ A multi-character relation string defines a contraction.
 | ---------------- | ----------- |
 | `& k`<br/>`< ch` | Make the sequence 'ch' sort after 'k', as a primary (base-character) difference |
 
-### <a name="Expansions" id="collation-collation-tailorings-expansions" href="#Expansions">Expansions</a>
+### <a name="Expansions" id="Expansions" href="#Expansions">Expansions</a> <a id="collation-collation-tailorings-expansions"></a>
 
 A mapping to multiple collation elements defines an expansion. This is normally the result of a reset position (and/or preceding relation) that yields multiple collation elements, for example `&ae<x` or `&æ<y` .
 
@@ -1145,7 +1145,7 @@ For example, `&a<z/e` maps ‘z’ to an expansion similar to `&ae<x` . However,
 
 In summary, there are two ways of specifying expansions which produce subtly different mappings. The use of extension strings is unusual but sometimes necessary.
 
-### <a name="Context_Before" id="collation-collation-tailorings-context-before" href="#Context_Before">Context Before</a>
+### <a name="Context_Before" id="Context_Before" href="#Context_Before">Context Before</a> <a id="collation-collation-tailorings-context-before"></a>
 
 * <a id="collation-collation-tailorings-context-before-item-1"></a> **A relation string**: A relation string can have a prefix (context before) which makes the mapping from the relation string to its tailored position conditional on the string occurring after that prefix.
 
@@ -1173,7 +1173,7 @@ Both the prefix and extension strings can occur in a relation. For example, the 
 * `< def / ghi`
 * `< abc | def`
 
-### <a name="Placing_Characters_Before_Others" id="collation-collation-tailorings-placing-characters-before-others" href="#Placing_Characters_Before_Others">Placing Characters Before Others</a>
+### <a name="Placing_Characters_Before_Others" id="Placing_Characters_Before_Others" href="#Placing_Characters_Before_Others">Placing Characters Before Others</a> <a id="collation-collation-tailorings-placing-characters-before-others"></a>
 
 * <a id="collation-collation-tailorings-placing-characters-before-others-item-1"></a> **There are certain**: There are certain circumstances where characters need to be placed before a given character, rather than after.
 
@@ -1191,7 +1191,7 @@ It is an error if the strength of the reset-before differs from the strength of 
 *   `&[before 2] a < à # error`
 *   `&[before 2] a <<< à # error`
 
-### <a name="Logical_Reset_Positions" id="collation-collation-tailorings-logical-reset-positions" href="#Logical_Reset_Positions">Logical Reset Positions</a>
+### <a name="Logical_Reset_Positions" id="Logical_Reset_Positions" href="#Logical_Reset_Positions">Logical Reset Positions</a> <a id="collation-collation-tailorings-logical-reset-positions"></a>
 
 The CLDR table (based on UCA) has the following overall structure for weights, going from low to high.
 
@@ -1254,7 +1254,7 @@ The `[last variable]` indicates the "highest" character that is treated as punct
 
 (In CLDR 24 and earlier, the variable top could also be set by using a tailoring rule with `[variable top]` in the place of a relation string.)
 
-### <a name="Special_Purpose_Commands" id="collation-collation-tailorings-special-purpose-commands" href="#Special_Purpose_Commands">Special-Purpose Commands</a>
+### <a name="Special_Purpose_Commands" id="Special_Purpose_Commands" href="#Special_Purpose_Commands">Special-Purpose Commands</a> <a id="collation-collation-tailorings-special-purpose-commands"></a>
 
 * <a id="collation-collation-tailorings-special-purpose-commands-item-1"></a> **The import command**: The import command imports rules from another collation.
 
@@ -1323,7 +1323,7 @@ _Example:_
 </collation>
 ```
 
-### <a name="Script_Reordering" id="collation-collation-tailorings-collation-reordering" href="#Script_Reordering">Collation Reordering</a>
+### <a name="Script_Reordering" id="Script_Reordering" href="#Script_Reordering">Collation Reordering</a> <a id="collation-collation-tailorings-collation-reordering"></a>
 
 * <a id="collation-collation-tailorings-collation-reordering-item-1"></a> **Collation reordering allows**: Collation reordering allows scripts and certain other defined blocks of characters to be moved relative to each other parametrically, without changing the detailed rules for all the characters involved.
 
@@ -1359,7 +1359,7 @@ It is an error if a code occurs multiple times.
 * <a id="collation-collation-tailorings-collation-reordering-item-8"></a> **Once that is**: Once that is determined, script reordering is applied to the primary weight regardless of whether it is “regular” (used in the primary level) or “shifted” (used in the quaternary level).
 
 
-#### <a name="Interpretation_reordering" id="collation-collation-tailorings-collation-reordering-interpretation-of-a-reordering-list" href="#Interpretation_reordering">Interpretation of a reordering list</a>
+#### <a name="Interpretation_reordering" id="Interpretation_reordering" href="#Interpretation_reordering">Interpretation of a reordering list</a> <a id="collation-collation-tailorings-collation-reordering-interpretation-of-a-reordering-list"></a>
 
 The reordering list is interpreted as if it were processed in the following way.
 
@@ -1411,7 +1411,7 @@ Notes for implementations that write sort keys:
 * Primary weights from different original lead bytes can be reordered to a shared lead byte, as long as they do not overlap. Primary compression ends when the target lead byte differs or when the original lead byte of the next primary is not compressible.
 * Non-compressible groups and scripts begin or end on whole-primary-lead-byte boundaries (or both), so that reordering cannot surround a non-compressible script by two compressible ones within the same target lead byte. This is so that primary compression can be terminated reliably (choosing the low or high terminator byte) simply by comparing the previous and current primary weights. Otherwise it would have to also check for another condition (e.g., equal scripts).
 
-#### <a name="Reordering_Groups_allkeys" id="collation-collation-tailorings-collation-reordering-reordering-groups-for-allkeystxt" href="#Reordering_Groups_allkeys">Reordering Groups for allkeys.txt</a>
+#### <a name="Reordering_Groups_allkeys" id="Reordering_Groups_allkeys" href="#Reordering_Groups_allkeys">Reordering Groups for allkeys.txt</a> <a id="collation-collation-tailorings-collation-reordering-reordering-groups-for-allkeystxt"></a>
 
 * <a id="collation-collation-tailorings-collation-reordering-reordering-groups-for-allkeystxt-item-1"></a> **For allkeys_CLDR.txt, the**: For allkeys_CLDR.txt, the start of each reordering group can be determined from FractionalUCA.txt, by finding the first real mapping (after “xyz first primary”) of that group (e.g., `0060; [0D 07, 05, 05] # Zyyy Sk [0312.0020.0002] * GRAVE ACCENT` ), and looking for that mapping's character sequence ( `0060` ) in allkeys_CLDR.txt.
 
@@ -1441,7 +1441,7 @@ In the DUCET, some characters that sort below ‘a’ and have other General_Cat
 
 Each collation element of an expansion may be in a different reordering group, for example for parenthesized characters.
 
-### <a name="Case_Parameters" id="collation-collation-tailorings-case-parameters" href="#Case_Parameters">Case Parameters</a>
+### <a name="Case_Parameters" id="Case_Parameters" href="#Case_Parameters">Case Parameters</a> <a id="collation-collation-tailorings-case-parameters"></a>
 
 * <a id="collation-collation-tailorings-case-parameters-item-1"></a> **The **case level****: The **case level** is an _optional_ intermediate level ("2.5") between Level 2 and Level 3 (or after Level 1, if there is no Level 2 due to strength settings).
 
@@ -1464,7 +1464,7 @@ The **case first** parameter controls whether to swap the order of upper and low
 * <a id="collation-collation-tailorings-case-parameters-item-8"></a> **This derivation may**: This derivation may change in future versions of LDML, to track the case characteristics more closely.
 
 
-#### <a name="Case_Untailored" id="collation-collation-tailorings-case-parameters-untailored-characters" href="#Case_Untailored">Untailored Characters</a>
+#### <a name="Case_Untailored" id="Case_Untailored" href="#Case_Untailored">Untailored Characters</a> <a id="collation-collation-tailorings-case-parameters-untailored-characters"></a>
 
 For untailored characters and strings, that is, for mappings in the root collation, the case value for each collation element is computed from the tertiary weight listed in allkeys_CLDR.txt. This is used to modify the collation element.
 
@@ -1474,7 +1474,7 @@ Look up a case value for the tertiary weight x of each collation element:
 2. UNCASED otherwise
 3. FractionalUCA.txt encodes the case information in bits 6 and 7 of the first byte in each tertiary weight. The case bits are set to 00 for UNCASED and LOWERCASE, and 10 for UPPER. There is no MIXED case value (01) in the root collation.
 
-#### <a name="Case_Weights" id="collation-collation-tailorings-case-parameters-compute-modified-collation-elements" href="#Case_Weights">Compute Modified Collation Elements</a>
+#### <a name="Case_Weights" id="Case_Weights" href="#Case_Weights">Compute Modified Collation Elements</a> <a id="collation-collation-tailorings-case-parameters-compute-modified-collation-elements"></a>
 
 From a computed case value, set a weight **c** according to the following.
 
@@ -1520,7 +1520,7 @@ From a computed case value, set a weight **c** according to the following.
 
 The case weight of a tertiary-ignorable CE must be 0 so that [[UCA](https://www.unicode.org/reports/tr41/#UTS10)] [well-formedness condition 1](https://www.unicode.org/reports/tr10/#WF1) is fulfilled.
 
-#### <a name="Case_Tailored" id="collation-collation-tailorings-case-parameters-tailored-strings" href="#Case_Tailored">Tailored Strings</a>
+#### <a name="Case_Tailored" id="Case_Tailored" href="#Case_Tailored">Tailored Strings</a> <a id="collation-collation-tailorings-case-parameters-tailored-strings"></a>
 
 Characters and strings that are tailored have case values computed from their root collation case bits.
 
@@ -1538,7 +1538,7 @@ Characters and strings that are tailored have case values computed from their ro
 
 > 👉 **Note**: Almost all Cased characters have primary (non-ignorable) root collation CEs, except for U+0345 Combining Ypogegrammeni which is Lowercase. All Uppercase characters have primary root collation CEs.
 
-### <a name="Visibility" id="collation-collation-tailorings-visibility" href="#Visibility">Visibility</a>
+### <a name="Visibility" id="Visibility" href="#Visibility">Visibility</a> <a id="collation-collation-tailorings-visibility"></a>
 
 * <a id="collation-collation-tailorings-visibility-item-1"></a> **Collations have external**: Collations have external visibility by default, meaning that they can be displayed in a list of collation options for users to choose from.
 
@@ -1549,9 +1549,9 @@ Characters and strings that are tailored have case values computed from their ro
 * <a id="collation-collation-tailorings-visibility-item-4"></a> **See _[Collation Types](#Collation_Types**: See _[Collation Types](#Collation_Types)_ .
 
 
-### <a name="Collation_Indexes" id="collation-collation-tailorings-collation-indexes" href="#Collation_Indexes">Collation Indexes</a>
+### <a name="Collation_Indexes" id="Collation_Indexes" href="#Collation_Indexes">Collation Indexes</a> <a id="collation-collation-tailorings-collation-indexes"></a>
 
-#### <a name="Index_Characters" id="collation-collation-tailorings-collation-indexes-index-characters" href="#Index_Characters">Index Characters</a>
+#### <a name="Index_Characters" id="Index_Characters" href="#Index_Characters">Index Characters</a> <a id="collation-collation-tailorings-collation-indexes-index-characters"></a>
 
 The main data includes `<exemplarCharacters>` for collation indexes. See _Part 2 General, [Character Elements](tr35-general.md#Character_Elements)_, for general information about exemplar characters.
 
@@ -1666,7 +1666,7 @@ Here is a sample of the XML structure:
 
 The display of the index characters can be modified with the Index labels elements, discussed in the _Part 2 General, [Index Labels](tr35-general.md#IndexLabels)_.
 
-#### <a name="CJK_Index_Markers" id="collation-collation-tailorings-collation-indexes-cjk-index-markers" href="#CJK_Index_Markers">CJK Index Markers</a>
+#### <a name="CJK_Index_Markers" id="CJK_Index_Markers" href="#CJK_Index_Markers">CJK Index Markers</a> <a id="collation-collation-tailorings-collation-indexes-cjk-index-markers"></a>
 
 Special index markers have been added to the CJK collations for stroke, pinyin, zhuyin, and unihan. These markers allow for effective and robust use of indexes for these collations.
 

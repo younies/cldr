@@ -12,10 +12,10 @@ For the full header, table of contents, and status, see [Part 1: Core](tr35.md).
 
 This is a partial document, describing only the changes to the LDML since the previous release. For the other parts of the LDML see the [main LDML document](tr35.md).
 
-## <a name="Contents" id="modifications-contents-of-appendix-a-modifications" href="#Contents">Contents of Appendix A, Modifications</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Appendix A, Modifications</a> <a id="modifications-contents-of-appendix-a-modifications"></a>
 
   * [_Summary_ ](#summary-)
-* [Contents of Appendix A, Modifications](#Contents)
+* [Contents of Appendix A, Modifications](#Contents) 
 * [Modifications ](#modifications-)
   * [MessageFormat ](#messageformat-)
   * [Locale Identifiers and Names ](#locale-identifiers-and-names-)

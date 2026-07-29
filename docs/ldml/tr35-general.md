@@ -28,7 +28,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
+## Parts <a id="core-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -44,99 +44,99 @@ The LDML specification is divided into the following parts:
 *   Appendix A: [Modifications](tr35-modifications.md#modifications)
 *   Appendix B: [Acknowledgments](tr35-acknowledgments.md#acknowledgments)
 
-## <a name="Contents" id="general-contents-of-part-2-general" href="#Contents">Contents of Part 2, General</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Part 2, General</a> <a id="general-contents-of-part-2-general"></a>
 
   * [_Summary_ ](#summary-)
   * [_Status_ ](#status-)
 * [Parts ](#parts-)
-* [Contents of Part 2, General](#Contents)
-* [Display Name Elements](#Display_Name_Elements)
+* [Contents of Part 2, General](#Contents) 
+* [Display Name Elements](#Display_Name_Elements) 
   * [Notes ](#notes-)
-  * [Locale Display Name Algorithm](#locale_display_name_algorithm)
-  * [Locale Display Name Fields](#locale_display_name_fields)
+  * [Locale Display Name Algorithm](#locale_display_name_algorithm) 
+  * [Locale Display Name Fields](#locale_display_name_fields) 
   * [Type Values ](#type-values-)
-* [Layout Elements](#Layout_Elements)
-* [Character Elements](#Character_Elements)
-  * [Exemplars](#Exemplars)
-    * [Exemplar Syntax](#ExemplarSyntax)
-    * [Restrictions](#Restrictions)
+* [Layout Elements](#Layout_Elements) 
+* [Character Elements](#Character_Elements) 
+  * [Exemplars](#Exemplars) 
+    * [Exemplar Syntax](#ExemplarSyntax) 
+    * [Restrictions](#Restrictions) 
   * [~~Mapping~~ ](#mapping-)
   * [~~Index Labels~~ ](#index-labels-)
-  * [Ellipsis](#Ellipsis)
-  * [Nested Bracket Replacement](#Character_Nested_Bracket_Replacement)
-  * [More Information](#Character_More_Info)
-  * [Parse Lenient](#Character_Parse_Lenient)
-* [Delimiter Elements](#Delimiter_Elements)
-  * [Tailoring Linebreak Using Delimiters](#Tailor_Linebreak_With_Delimiters)
-* [Measurement System Data](#Measurement_System_Data)
-  * [Measurement Elements (deprecated)](#Measurement_Elements)
-* [Unit Elements](#Unit_Elements)
-  * [Unit Preference and Conversion Data](#Unit_Preference_and_Conversion)
-  * [Unit Identifiers](#Unit_Identifiers)
+  * [Ellipsis](#Ellipsis) 
+  * [Nested Bracket Replacement](#Character_Nested_Bracket_Replacement) 
+  * [More Information](#Character_More_Info) 
+  * [Parse Lenient](#Character_Parse_Lenient) 
+* [Delimiter Elements](#Delimiter_Elements) 
+  * [Tailoring Linebreak Using Delimiters](#Tailor_Linebreak_With_Delimiters) 
+* [Measurement System Data](#Measurement_System_Data) 
+  * [Measurement Elements (deprecated)](#Measurement_Elements) 
+* [Unit Elements](#Unit_Elements) 
+  * [Unit Preference and Conversion Data](#Unit_Preference_and_Conversion) 
+  * [Unit Identifiers](#Unit_Identifiers) 
     * [Nomenclature ](#nomenclature-)
     * [Unit Syntax ](#unit-syntax-)
-  * [Unit Identifier Uniqueness](#Unit_Identifier_Uniqueness)
-  * [Example Units](#Example_Units)
+  * [Unit Identifier Uniqueness](#Unit_Identifier_Uniqueness) 
+  * [Example Units](#Example_Units) 
   * [Compound Units ](#compound-units-)
     * [Precomposed Compound Units ](#precomposed-compound-units-)
-  * [Unit Sequences (Mixed Units)](#Unit_Sequences)
-  * [durationUnit](#durationUnit)
-  * [coordinateUnit](#coordinateUnit)
-  * [Territory-Based Unit Preferences](#Territory_Based_Unit_Preferences)
-  * [Private-Use Units](#Private_Use_Units)
-* [POSIX Elements](#POSIX_Elements)
-* [Reference Element](#Reference_Elements)
-* [Segmentations](#Segmentations)
-  * [Segmentation Inheritance](#Segmentation_Inheritance)
-  * [Segmentation Suppressions](#Segmentation_Exceptions)
-* [Transforms](#Transforms)
-  * [Inheritance](#Inheritance)
-    * [Pivots](#Pivots)
-  * [Variants](#Variants)
-  * [Transform Rules Syntax](#Transform_Rules_Syntax)
-    * [Dual Rules](#Dual_Rules)
-    * [Context](#Context)
-    * [Revisiting](#Revisiting)
-    * [Example](#Example)
-    * [Rule Syntax](#Rule_Syntax)
-    * [Transform Rules](#Transform_Rules)
-    * [Variable Definition Rules](#Variable_Definition_Rules)
-    * [Filter Rules](#Filter_Rules)
-    * [Conversion Rules](#Conversion_Rules)
-    * [Intermixing Transform Rules and Conversion Rules](#Intermixing_Transform_Rules_and_Conversion_Rules)
-    * [Inverse Summary](#Inverse_Summary)
+  * [Unit Sequences (Mixed Units)](#Unit_Sequences) 
+  * [durationUnit](#durationUnit) 
+  * [coordinateUnit](#coordinateUnit) 
+  * [Territory-Based Unit Preferences](#Territory_Based_Unit_Preferences) 
+  * [Private-Use Units](#Private_Use_Units) 
+* [POSIX Elements](#POSIX_Elements) 
+* [Reference Element](#Reference_Elements) 
+* [Segmentations](#Segmentations) 
+  * [Segmentation Inheritance](#Segmentation_Inheritance) 
+  * [Segmentation Suppressions](#Segmentation_Exceptions) 
+* [Transforms](#Transforms) 
+  * [Inheritance](#Inheritance) 
+    * [Pivots](#Pivots) 
+  * [Variants](#Variants) 
+  * [Transform Rules Syntax](#Transform_Rules_Syntax) 
+    * [Dual Rules](#Dual_Rules) 
+    * [Context](#Context) 
+    * [Revisiting](#Revisiting) 
+    * [Example](#Example) 
+    * [Rule Syntax](#Rule_Syntax) 
+    * [Transform Rules](#Transform_Rules) 
+    * [Variable Definition Rules](#Variable_Definition_Rules) 
+    * [Filter Rules](#Filter_Rules) 
+    * [Conversion Rules](#Conversion_Rules) 
+    * [Intermixing Transform Rules and Conversion Rules](#Intermixing_Transform_Rules_and_Conversion_Rules) 
+    * [Inverse Summary](#Inverse_Summary) 
   * [Transform Syntax Characters ](#transform-syntax-characters-)
-* [List Patterns](#ListPatterns)
-  * [Gender of Lists](#List_Gender)
-* [ContextTransform Elements](#Context_Transform_Elements)
+* [List Patterns](#ListPatterns) 
+  * [Gender of Lists](#List_Gender) 
+* [ContextTransform Elements](#Context_Transform_Elements) 
   * [Table: Element contextTransformUsage type attribute values ](#table-element-contexttransformusage-type-attribute-values-)
-* [Choice Patterns](#Choice_Patterns)
-* [Annotations and Labels](#Annotations)
+* [Choice Patterns](#Choice_Patterns) 
+* [Annotations and Labels](#Annotations) 
   * [Usage Model ](#usage-model-)
   * [cp attribute ](#cp-attribute-)
-  * [Synthesizing Sequence Names](#SynthesizingNames)
+  * [Synthesizing Sequence Names](#SynthesizingNames) 
     * [Table: Synthesized Emoji Sequence Names ](#table-synthesized-emoji-sequence-names-)
-  * [Annotations Character Labels](#Character_Labels)
+  * [Annotations Character Labels](#Character_Labels) 
     * [Table: characterLabelPattern ](#table-characterlabelpattern-)
     * [Table: characterLabel ](#table-characterlabel-)
-  * [Typographic Names](#Typographic_Names)
-* [Grammatical Features](#Grammatical_Features)
+  * [Typographic Names](#Typographic_Names) 
+* [Grammatical Features](#Grammatical_Features) 
 * [Features ](#features-)
-  * [Gender](#Gender)
+  * [Gender](#Gender) 
     * [Example ](#example-)
     * [Table: Values ](#table-values-)
-  * [Case](#Case)
+  * [Case](#Case) 
     * [Table: Case ](#table-case-)
       * [Example ](#example-)
         * [Table: Values ](#table-values-)
   * [Definiteness ](#definiteness-)
     * [Table: Values ](#table-values-)
-* [Grammatical Derivations](#Grammatical_Derivations)
-  * [Deriving the Gender of Compound Units](#gender_compound_units)
-  * [Deriving the Plural Category of Unit Components](#plural_compound_units)
-  * [Deriving the Case of Unit Components](#case_compound_units)
+* [Grammatical Derivations](#Grammatical_Derivations) 
+  * [Deriving the Gender of Compound Units](#gender_compound_units) 
+  * [Deriving the Plural Category of Unit Components](#plural_compound_units) 
+  * [Deriving the Case of Unit Components](#case_compound_units) 
 
-## <a name="Display_Name_Elements" id="general-display-name-elements" href="#Display_Name_Elements">Display Name Elements</a>
+## <a name="Display_Name_Elements" id="Display_Name_Elements" href="#Display_Name_Elements">Display Name Elements</a> <a id="general-display-name-elements"></a>
 
 ```xml
 <!ELEMENT localeDisplayNames ( alias | ( localeDisplayPattern?, languages?, scripts?, territories?, subdivisions?, variants?, keys?, types?, transformNames?, measurementSystemNames?, codePatterns?, special* ) )>
@@ -219,7 +219,7 @@ The core part can be used as the language name, with the extension going into th
 | Kyrgyz |
 | … |
 
-### <a name="locale_display_name_algorithm" id="general-display-name-elements-locale-display-name-algorithm" href="#locale_display_name_algorithm">Locale Display Name Algorithm</a>
+### <a name="locale_display_name_algorithm" id="locale_display_name_algorithm" href="#locale_display_name_algorithm">Locale Display Name Algorithm</a> <a id="general-display-name-elements-locale-display-name-algorithm"></a>
 
 A locale display name LDN is generated for a locale identifier L in the following way.
 1. Convert the locale identifier to *canonical syntax* per **[Part 1, Canonical Unicode Locale Identifiers](tr35.md#Canonical_Unicode_Locale_Identifiers)**.
@@ -341,7 +341,7 @@ When both the subtag display name and the \<localePattern\> contain bracket char
 
 
 
-### <a name="locale_display_name_fields" id="general-display-name-elements-locale-display-name-fields" href="#locale_display_name_fields">Locale Display Name Fields</a>
+### <a name="locale_display_name_fields" id="locale_display_name_fields" href="#locale_display_name_fields">Locale Display Name Fields</a> <a id="general-display-name-elements-locale-display-name-fields"></a>
 
 ```xml
 <languages>
@@ -579,7 +579,7 @@ These are intended to be used with key type names such as:
 
 These two strings are not inflected.
 
-## <a name="Layout_Elements" id="general-layout-elements" href="#Layout_Elements">Layout Elements</a>
+## <a name="Layout_Elements" id="Layout_Elements" href="#Layout_Elements">Layout Elements</a> <a id="general-layout-elements"></a>
 
 ```xml
 <!ELEMENT layout ( alias | (orientation*, inList*, inText*, special*) ) >
@@ -663,7 +663,7 @@ indicates that language names embedded in text are normally written in lower cas
 *   lowercase-words : all words in the phrase should be lower case
 *   mixed : a mixture of upper and lower case is permitted, generally used when the correct value is unknown
 
-## <a name="Character_Elements" id="general-character-elements" href="#Character_Elements">Character Elements</a>
+## <a name="Character_Elements" id="Character_Elements" href="#Character_Elements">Character Elements</a> <a id="general-character-elements"></a>
 
 ```xml
 <!ELEMENT characters ( alias | ( exemplarCharacters*, ellipsis*, moreInformation*, stopwords*, indexLabels*, mapping*, parseLenients*, special* ) ) >
@@ -678,7 +678,7 @@ indicates that language names embedded in text are normally written in lower cas
 * <a id="general-character-elements-item-4"></a> **The stopwords are**: The stopwords are an experimental feature, and should not be used.
 
 
-### <a name="Exemplars" id="general-character-elements-exemplars" href="#Exemplars">Exemplars</a>
+### <a name="Exemplars" id="Exemplars" href="#Exemplars">Exemplars</a> <a id="general-character-elements-exemplars"></a>
 
 Exemplars are characters used by a language, separated into different categories. The following table provides a summary, with more details below.
 
@@ -789,7 +789,7 @@ Here is a sample of the XML structure:
 
 The display of the index characters can be modified with the `indexLabel`s elements, discussed in Section 3.3.
 
-#### <a name="ExemplarSyntax" id="general-character-elements-exemplars-exemplar-syntax" href="#ExemplarSyntax">Exemplar Syntax</a>
+#### <a name="ExemplarSyntax" id="ExemplarSyntax" href="#ExemplarSyntax">Exemplar Syntax</a> <a id="general-character-elements-exemplars-exemplar-syntax"></a>
 
 In all of the exemplar characters, the list of characters is in the [Unicode Set](tr35.md#Unicode_Sets) format, which normally allows boolean combinations of sets of letters and Unicode properties.
 
@@ -828,7 +828,7 @@ If the letter 'z' were only ever used in the combination 'tz', then we might hav
 * <a id="general-character-elements-exemplars-exemplar-syntax-item-13"></a> **For more information**: For more information on casing, see the discussion of Special Casing in the Unicode Character Database.
 
 
-#### <a name="Restrictions" id="general-character-elements-exemplars-restrictions" href="#Restrictions">Restrictions</a>
+#### <a name="Restrictions" id="Restrictions" href="#Restrictions">Restrictions</a> <a id="general-character-elements-exemplars-restrictions"></a>
 
 1.  The main, auxiliary and index sets are normally restricted to those letters with a specific [Script](https://www.unicode.org/Public/UNIDATA/Scripts.txt) character property (that is, not the values Common or Inherited) or required [Default_Ignorable_Code_Point](https://www.unicode.org/Public/UNIDATA/DerivedCoreProperties.txt) characters (such as a non-joiner), or combining marks, or the [Word_Break](https://www.unicode.org/Public/UNIDATA/auxiliary/WordBreakProperty.txt) properties [Katakana](https://www.unicode.org/reports/tr29/#Katakana), [ALetter](https://www.unicode.org/reports/tr29/#ALetter), or [MidLetter](https://www.unicode.org/reports/tr29/#MidLetter).
 2.  The auxiliary set should not overlap with the main set. There is one exception to this: Hangul Syllables and CJK Ideographs can overlap between the sets.
@@ -852,7 +852,7 @@ If the letter 'z' were only ever used in the combination 'tz', then we might hav
 <!ELEMENT indexLabels (indexSeparator*, compressedIndexSeparator*, indexRangePattern*, indexLabelBefore*, indexLabelAfter*, indexLabel*) >
 ```
 
-### <a name="Ellipsis" id="general-character-elements-ellipsis" href="#Ellipsis">Ellipsis</a>
+### <a name="Ellipsis" id="Ellipsis" href="#Ellipsis">Ellipsis</a> <a id="general-character-elements-ellipsis"></a>
 
 ```xml
 <!ELEMENT ellipsis ( #PCDATA ) >
@@ -878,7 +878,7 @@ There are alternatives for cases where the breaks are on a word boundary, where 
 <ellipsis type="word-initial">… {0}</ellipsis>
 ```
 
-### <a name="Character_Nested_Bracket_Replacement" id="general-character-elements-nested-bracket-replacement" href="#Character_Nested_Bracket_Replacement">Nested Bracket Replacement</a>
+### <a name="Character_Nested_Bracket_Replacement" id="Character_Nested_Bracket_Replacement" href="#Character_Nested_Bracket_Replacement">Nested Bracket Replacement</a> <a id="general-character-elements-nested-bracket-replacement"></a>
 
 ```xml
 <!ELEMENT nestedBracketReplacement ( #PCDATA ) >
@@ -903,7 +903,7 @@ The `nestedBracketReplacement` element indicates a character to be used when two
 
 In cases where it is necessary to determine whether the brackets are nested, clients can use the `Bidi_Paired_Bracket_Type` property.
 
-### <a name="Character_More_Info" id="general-character-elements-more-information" href="#Character_More_Info">More Information</a>
+### <a name="Character_More_Info" id="Character_More_Info" href="#Character_More_Info">More Information</a> <a id="general-character-elements-more-information"></a>
 
 The moreInformation string is one that can be displayed in an interface to indicate that more information is available. For example:
 
@@ -911,7 +911,7 @@ The moreInformation string is one that can be displayed in an interface to indic
 <moreInformation>?</moreInformation>
 ```
 
-### <a name="Character_Parse_Lenient" id="general-character-elements-parse-lenient" href="#Character_Parse_Lenient">Parse Lenient</a>
+### <a name="Character_Parse_Lenient" id="Character_Parse_Lenient" href="#Character_Parse_Lenient">Parse Lenient</a> <a id="general-character-elements-parse-lenient"></a>
 
 ```xml
 <!ELEMENT parseLenients ( alias | ( parseLenient*, special* ) ) >
@@ -945,7 +945,7 @@ Example:
 * <a id="general-character-elements-parse-lenient-item-5"></a> **The first version**: The first version of this data is populated with the data used for lenient parsing from ICU.
 
 
-## <a name="Delimiter_Elements" id="general-delimiter-elements" href="#Delimiter_Elements">Delimiter Elements</a>
+## <a name="Delimiter_Elements" id="Delimiter_Elements" href="#Delimiter_Elements">Delimiter Elements</a> <a id="general-delimiter-elements"></a>
 
 ```xml
 <!ELEMENT delimiters (alias | (quotationStart*, quotationEnd*, alternateQuotationStart*, alternateQuotationEnd*, special*)) >
@@ -966,7 +966,7 @@ When quotations are nested, the quotation marks and alternate marks are used in 
 <alternateQuotationEnd>’</alternateQuotationEnd>
 ```
 
-### <a name="Tailor_Linebreak_With_Delimiters" id="general-delimiter-elements-tailoring-linebreak-using-delimiters" href="#Tailor_Linebreak_With_Delimiters">Tailoring Linebreak Using Delimiters</a>
+### <a name="Tailor_Linebreak_With_Delimiters" id="Tailor_Linebreak_With_Delimiters" href="#Tailor_Linebreak_With_Delimiters">Tailoring Linebreak Using Delimiters</a> <a id="general-delimiter-elements-tailoring-linebreak-using-delimiters"></a>
 
 The delimiter data can be used for language-specific tailoring of linebreak behavior, as suggested
 in the [description of linebreak class QU: Quotation](https://www.unicode.org/reports/tr14/#QU)
@@ -983,7 +983,7 @@ Some characters with multiple uses should generally be excluded from this linebr
 * U+2019 RIGHT SINGLE QUOTATION MARK, often used as apostrophe, should not be changed from QU; otherwise it will introduce breaks after apostrophe.
 * Several locales (mostly for central and eastern Europe) have U+201C LEFT DOUBLE QUOTATION MARK as `<quotationEnd>` or `<alternateQuotationEnd>`. However users in these locales may also encounter English text in which U+201C is used as `<quotationStart>`. In order to prevent improper breaks for English text, in these locales U+201C should not be changed from QU.
 
-## <a name="Measurement_System_Data" id="general-measurement-system-data" href="#Measurement_System_Data">Measurement System Data</a>
+## <a name="Measurement_System_Data" id="Measurement_System_Data" href="#Measurement_System_Data">Measurement System Data</a> <a id="general-measurement-system-data"></a>
 
 ```xml
 <!ELEMENT measurementData ( measurementSystem*, paperSize* ) >
@@ -1035,7 +1035,7 @@ The measurement information was formerly in the main LDML file, and had a somewh
 
 Again, for finer-grained detail about specific units for various usages, see **Part 6: Supplemental:** _[Preferred Units for Specific Usages](tr35-info.md#Preferred_Units_For_Usage)_.
 
-### <a name="Measurement_Elements" id="general-measurement-system-data-measurement-elements-deprecated" href="#Measurement_Elements">Measurement Elements (deprecated)</a>
+### <a name="Measurement_Elements" id="Measurement_Elements" href="#Measurement_Elements">Measurement Elements (deprecated)</a> <a id="general-measurement-system-data-measurement-elements-deprecated"></a>
 
 ```xml
 <!ELEMENT measurement (alias | (measurementSystem?, paperSize?, special*)) >
@@ -1043,7 +1043,7 @@ Again, for finer-grained detail about specific units for various usages, see **P
 
 The `measurement` element is deprecated in the main LDML files, because the data is more appropriately organized as connected to territories, not to linguistic data. Instead, the `measurementData` element in the supplemental data file should be used.
 
-## <a name="Unit_Elements" id="general-unit-elements" href="#Unit_Elements">Unit Elements</a>
+## <a name="Unit_Elements" id="Unit_Elements" href="#Unit_Elements">Unit Elements</a> <a id="general-unit-elements"></a>
 
 ```xml
 <!ELEMENT units (alias | (unit*, unitLength*, durationUnit*, special*) ) >
@@ -1153,7 +1153,7 @@ The displayName is used for labels, such as in a UI. It is typically lowercased 
 </tbody></table>
 
 
-### <a name="Unit_Preference_and_Conversion" id="general-unit-elements-unit-preference-and-conversion-data" href="#Unit_Preference_and_Conversion">Unit Preference and Conversion Data</a>
+### <a name="Unit_Preference_and_Conversion" id="Unit_Preference_and_Conversion" href="#Unit_Preference_and_Conversion">Unit Preference and Conversion Data</a> <a id="general-unit-elements-unit-preference-and-conversion-data"></a>
 
 * <a id="general-unit-elements-unit-preference-and-conversion-data-item-1"></a> **Different locales have**: Different locales have different preferences for which unit or combination of units is used for a particular usage, such as measuring a person’s height.
 
@@ -1173,7 +1173,7 @@ The size of the measurement can also be taken into account, so that an infant ca
 
 This data is supplied in **Part 6: [Supplemental](tr35-info.md#Contents)**: [Unit Conversion](tr35-info.md#Unit_Conversion) and [Unit Preferences](tr35-info.md#Unit_Preferences).
 
-### <a name="Unit_Identifiers" id="general-unit-elements-unit-identifiers" href="#Unit_Identifiers">Unit Identifiers</a>
+### <a name="Unit_Identifiers" id="Unit_Identifiers" href="#Unit_Identifiers">Unit Identifiers</a> <a id="general-unit-elements-unit-identifiers"></a>
 
 Units of measurement, such as _meter_, have defined programmatic identifiers as described in this section.
 The main identifier is a _core unit identifier_, which encompasses a number of simpler types of identifiers as follows.
@@ -1426,7 +1426,7 @@ For example:
 * Similarly, when a base_component is encountered, one can collect any suffix components, and stop.
 * Encountering a suffix_component in any other circumstance is an error.
 
-### <a name="Unit_Identifier_Uniqueness" id="general-unit-elements-unit-identifier-uniqueness" href="#Unit_Identifier_Uniqueness">Unit Identifier Uniqueness</a>
+### <a name="Unit_Identifier_Uniqueness" id="Unit_Identifier_Uniqueness" href="#Unit_Identifier_Uniqueness">Unit Identifier Uniqueness</a> <a id="general-unit-elements-unit-identifier-uniqueness"></a>
 CLDR Unit Identifiers can be used as values in locale identifiers. When that is done, the syntax is modified whenever a `prefixed_unit` would be longer than 8 characters. In such a case:
 
 * If there is no `prefix` the `prefixed_unit` is truncated to 8 characters.
@@ -1451,7 +1451,7 @@ This requires that each of the elements in base_components are unique to eight l
 * <a id="general-unit-elements-unit-identifier-uniqueness-item-3"></a> **That would cause**: That would cause prefixed `base_component` as short as 'gram' and 'gray' to be ambiguous when truncated to 8 letters: 'centigra'; and 'lumen' and 'lux' would fail with the 6 letter prefixes.
 
 
-### <a name="Example_Units" id="general-unit-elements-example-units" href="#Example_Units">Example Units</a>
+### <a name="Example_Units" id="Example_Units" href="#Example_Units">Example Units</a> <a id="general-unit-elements-example-units"></a>
 
 The following table contains examples of groupings and units currently defined by CLDR.
 The units in CLDR are not comprehensive; it is anticipated that more will be added over time.
@@ -1803,7 +1803,7 @@ If a unit is not supported by root, then the localization is not supported by CL
 * <a id="general-unit-elements-compound-units-precomposed-compound-units-item-7"></a> **The `perUnitPattern` should**: The `perUnitPattern` should be applied if the denominator has only one element, and matches the `perUnitPattern` type.
 
 
-### <a name="Unit_Sequences" id="general-unit-elements-unit-sequences-mixed-units" href="#Unit_Sequences">Unit Sequences (Mixed Units)</a>
+### <a name="Unit_Sequences" id="Unit_Sequences" href="#Unit_Sequences">Unit Sequences (Mixed Units)</a> <a id="general-unit-elements-unit-sequences-mixed-units"></a>
 
 Units may be used in composed sequences (aka _mixed units_), such as **5° 30′** for 5 degrees 30 minutes, or **3 ft 2 in.** For that purpose, the appropriate width of the unit `listPattern` can be used to compose the units in a sequence.
 
@@ -1815,7 +1815,7 @@ Units may be used in composed sequences (aka _mixed units_), such as **5° 30′
 
 In such a sequence, decimal fractions are typically only displayed for the last element of the sequence, if at all.
 
-### <a name="durationUnit" id="general-unit-elements-durationunit" href="#durationUnit">durationUnit</a>
+### <a name="durationUnit" id="durationUnit" href="#durationUnit">durationUnit</a> <a id="general-unit-elements-durationunit"></a>
 
 The durationUnit is a special type of unit used for composed time unit durations.
 
@@ -1827,7 +1827,7 @@ The durationUnit is a special type of unit used for composed time unit durations
 
 The type contains a skeleton, where 'h' stands for hours, 'm' for minutes, and 's' for seconds. These are the same symbols used in availableFormats, except that there is no need to distinguish different forms of the hour.
 
-### <a name="coordinateUnit" id="general-unit-elements-coordinateunit" href="#coordinateUnit">coordinateUnit</a>
+### <a name="coordinateUnit" id="coordinateUnit" href="#coordinateUnit">coordinateUnit</a> <a id="general-unit-elements-coordinateunit"></a>
 
 * <a id="general-unit-elements-coordinateunit-item-1"></a> **The **coordinateUnitPattern** is**: The **coordinateUnitPattern** is a special type of pattern used for composing degrees of latitude and longitude, with an indicator of the quadrant.
 
@@ -1846,7 +1846,7 @@ The type contains a skeleton, where 'h' stands for hours, 'm' for minutes, and '
 <coordinateUnitPattern type="west">{0}W</coordinateUnitPattern>
 ```
 
-### <a name="Territory_Based_Unit_Preferences" id="general-unit-elements-territory-based-unit-preferences" href="#Territory_Based_Unit_Preferences">Territory-Based Unit Preferences</a>
+### <a name="Territory_Based_Unit_Preferences" id="Territory_Based_Unit_Preferences" href="#Territory_Based_Unit_Preferences">Territory-Based Unit Preferences</a> <a id="general-unit-elements-territory-based-unit-preferences"></a>
 
 * <a id="general-unit-elements-territory-based-unit-preferences-item-1"></a> **Different locales have**: Different locales have different preferences for which unit or combination of units is used for a particular usage, such as measuring a person’s height.
 
@@ -1857,7 +1857,7 @@ The type contains a skeleton, where 'h' stands for hours, 'm' for minutes, and '
 
 The `<unitPreferenceData>` element, described in [Preferred Units for Specific Usages](tr35-info.md#Preferred_Units_For_Usage), provides information on which unit or combination of units is used for various purposes in different locales, with options for the level of formality and the scale of the measurement (e.g. measuring the height of an adult versus that of an infant).
 
-### <a name="Private_Use_Units" id="general-unit-elements-private-use-units" href="#Private_Use_Units">Private-Use Units</a>
+### <a name="Private_Use_Units" id="Private_Use_Units" href="#Private_Use_Units">Private-Use Units</a> <a id="general-unit-elements-private-use-units"></a>
 
 * <a id="general-unit-elements-private-use-units-item-1"></a> **CLDR has reserved**: CLDR has reserved the "xxx-" prefix in the simple_unit part of the unit identifier BNF for private-use units.
 
@@ -1872,7 +1872,7 @@ As explained earlier, CLDR defines all associations between types and units. It 
 
 The older syntax used “x-”, which was expanded to “xxx-” to simplify use with BCP47 syntax. That should be converted to “xxx-”.
 
-## <a name="POSIX_Elements" id="general-posix-elements" href="#POSIX_Elements">POSIX Elements</a>
+## <a name="POSIX_Elements" id="POSIX_Elements" href="#POSIX_Elements">POSIX Elements</a> <a id="general-posix-elements"></a>
 
 ```xml
 <!ELEMENT posix (alias | (messages*, special*)) >
@@ -1916,7 +1916,7 @@ noexpr "^([nN][oO]?)"
 
 This would match n,N,no,nO,No,NO.
 
-## <a name="Reference_Elements" id="general-reference-element" href="#Reference_Elements">Reference Element</a>
+## <a name="Reference_Elements" id="Reference_Elements" href="#Reference_Elements">Reference Element</a> <a id="general-reference-element"></a>
 
 (Use only in supplemental data; deprecated for ldml.dtd and locale data)
 
@@ -1935,7 +1935,7 @@ The references section supplies a central location for specifying references and
 <reference type="R3" uri="URN:ISBN:91-47-04974-X">Svenska skrivregler</reference>
 ```
 
-## <a name="Segmentations" id="general-segmentations" href="#Segmentations">Segmentations</a>
+## <a name="Segmentations" id="Segmentations" href="#Segmentations">Segmentations</a> <a id="general-segmentations"></a>
 
 ```xml
 <!ELEMENT segmentations ( alias | segmentation*) >
@@ -2018,7 +2018,7 @@ There are some implicit rules:
 *   The implicit initial rules are always "start-of-text ÷" and "÷ end-of-text"; these are not to be included explicitly.
 *   The implicit final rule is always "Any ÷ Any". This is not to be included explicitly.
 
-### <a name="Segmentation_Inheritance" id="general-segmentations-segmentation-inheritance" href="#Segmentation_Inheritance">Segmentation Inheritance</a>
+### <a name="Segmentation_Inheritance" id="Segmentation_Inheritance" href="#Segmentation_Inheritance">Segmentation Inheritance</a> <a id="general-segmentations-segmentation-inheritance"></a>
 
 Variables and rules both inherit from the parent.
 
@@ -2040,7 +2040,7 @@ Variables and rules both inherit from the parent.
 <rule id="3" /> // deletes rule 3
 ````
 
-### <a name="Segmentation_Exceptions" id="general-segmentations-segmentation-suppressions" href="#Segmentation_Exceptions">Segmentation Suppressions</a>
+### <a name="Segmentation_Exceptions" id="Segmentation_Exceptions" href="#Segmentation_Exceptions">Segmentation Suppressions</a> <a id="general-segmentations-segmentation-suppressions"></a>
 
 **Note:** As of CLDR 26, the `<suppressions>` data is to be considered a technology preview. Data currently in CLDR was extracted from the Unicode Localization Interoperability project, or ULI. The ULI committee has been disbanded, but historical information can be found at <https://www.unicode.org/uli/>.
 
@@ -2065,7 +2065,7 @@ Example:
 
 **Note:** These elements were called `<exceptions>` and `<exception>` prior to CLDR 26, but those names are now deprecated.
 
-## <a name="Transforms" id="general-transforms" href="#Transforms">Transforms</a>
+## <a name="Transforms" id="Transforms" href="#Transforms">Transforms</a> <a id="general-transforms"></a>
 
 * <a id="general-transforms-item-1"></a> **Transforms provide a**: Transforms provide a set of rules for transforming text via a specialized set of context-sensitive matching rules.
 
@@ -2165,7 +2165,7 @@ In version 29.0, BCP47 identifiers were added as aliases (while retaining the ol
 
 Note that the script and region codes are cased iff they are in the main subtag, but are lowercase in extensions.
 
-### <a name="Inheritance" id="general-transforms-inheritance" href="#Inheritance">Inheritance</a>
+### <a name="Inheritance" id="Inheritance" href="#Inheritance">Inheritance</a> <a id="general-transforms-inheritance"></a>
 
 The CLDR transforms are built using the following locale inheritance. While this inheritance is not required of LDML implementations, the transforms supplied with CLDR may not otherwise behave as expected without some changes.
 
@@ -2220,7 +2220,7 @@ For example, here is the fallback chain for **ru_RU-el_GR/BGN**.
 
 Japanese and Korean are special, since they can be represented by combined script codes, such as ja_Jpan, ja_Hrkt, ja_Hira, or ja_Kana. These need to be considered in the above fallback chain as well.
 
-#### <a name="Pivots" id="general-transforms-inheritance-pivots" href="#Pivots">Pivots</a>
+#### <a name="Pivots" id="Pivots" href="#Pivots">Pivots</a> <a id="general-transforms-inheritance-pivots"></a>
 
 * <a id="general-transforms-inheritance-pivots-item-1"></a> **Transforms can also**: Transforms can also use _pivots_.
 
@@ -2252,7 +2252,7 @@ The pivots can also be produced automatically (implicitly), as a fallback. A par
 
 The interaction of implicit pivots and inheritance may result in a longer inheritance chain lookup than desired, so implementers may consider having some sort of caching mechanism to increase performance.
 
-### <a name="Variants" id="general-transforms-variants" href="#Variants">Variants</a>
+### <a name="Variants" id="Variants" href="#Variants">Variants</a> <a id="general-transforms-variants"></a>
 
 * <a id="general-transforms-variants-item-1"></a> **Variants used in**: Variants used in CLDR include UNGEGN and BGN, both indicating sources for transliterations.
 
@@ -2281,7 +2281,7 @@ Additional transliterations may also be defined, such as customized language-spe
 
 The rules for transforms are described in [Transform Rules Syntax](#Transform_Rules_Syntax). For more information on Transliteration, see [Transliteration Guidelines](https://cldr.unicode.org/index/cldr-spec/transliteration-guidelines).
 
-### <a name="Transform_Rules_Syntax" id="general-transforms-transform-rules-syntax" href="#Transform_Rules_Syntax">Transform Rules Syntax</a>
+### <a name="Transform_Rules_Syntax" id="Transform_Rules_Syntax" href="#Transform_Rules_Syntax">Transform Rules Syntax</a> <a id="general-transforms-transform-rules-syntax"></a>
 
 ```xml
 <!ELEMENT transforms ( transform*) >
@@ -2412,7 +2412,7 @@ $pi = \u03C0 ;
 $pi → p ;
 ```
 
-#### <a name="Dual_Rules" id="general-transforms-transform-rules-syntax-dual-rules" href="#Dual_Rules">Dual Rules</a>
+#### <a name="Dual_Rules" id="Dual_Rules" href="#Dual_Rules">Dual Rules</a> <a id="general-transforms-transform-rules-syntax-dual-rules"></a>
 
 Rules can also specify what happens when an inverse transform is formed. To do this, we reverse the direction of the "←" sign. Thus the above example becomes:
 
@@ -2426,7 +2426,7 @@ With the inverse transform, "p" will convert to the Greek p. These two direction
 $pi ↔ p ;
 ```
 
-#### <a name="Context" id="general-transforms-transform-rules-syntax-context" href="#Context">Context</a>
+#### <a name="Context" id="Context" href="#Context">Context</a> <a id="general-transforms-transform-rules-syntax-context"></a>
 
 Context can be used to have the results of a transformation be different depending on the characters before or after. The following rule removes hyphens, but only when they follow lowercase characters:
 
@@ -2470,7 +2470,7 @@ Thus the negation of a UnicodeSet will normally also match before or after the e
 
 It will thus convert “-B A-B a-b” to “B AB a-b”.
 
-#### <a name="Revisiting" id="general-transforms-transform-rules-syntax-revisiting" href="#Revisiting">Revisiting</a>
+#### <a name="Revisiting" id="Revisiting" href="#Revisiting">Revisiting</a> <a id="general-transforms-transform-rules-syntax-revisiting"></a>
 
 If the resulting text contains a vertical bar "|", then that means that processing will proceed from that point and that the transform will revisit part of the resulting text.
 Thus the | marks a "cursor" position.
@@ -2518,7 +2518,7 @@ In that case, the results are different.
 | c⸠ab | matches **rule 2**, so the text is replaced, with cursor at the end. |
 | cJ⸠ | cursor is at the end, so we are done. |
 
-#### <a name="Example" id="general-transforms-transform-rules-syntax-example" href="#Example">Example</a>
+#### <a name="Example" id="Example" href="#Example">Example</a> <a id="general-transforms-transform-rules-syntax-example"></a>
 
 * <a id="general-transforms-transform-rules-syntax-example-item-1"></a> **The following shows**: The following shows how these features are combined together in the Transliterator "Any-Publishing".
 
@@ -2564,7 +2564,7 @@ There is an online demo where the rules can be tested, at:
 
 <https://util.unicode.org/UnicodeJsps/transform.jsp>
 
-#### <a name="Rule_Syntax" id="general-transforms-transform-rules-syntax-rule-syntax" href="#Rule_Syntax">Rule Syntax</a>
+#### <a name="Rule_Syntax" id="Rule_Syntax" href="#Rule_Syntax">Rule Syntax</a> <a id="general-transforms-transform-rules-syntax-rule-syntax"></a>
 
 The following describes the full format of the list of rules used to create a transform. Each rule in the list is terminated by a semicolon. The list consists of the following:
 
@@ -2583,7 +2583,7 @@ The following describes the full format of the list of rules used to create a tr
 
 The rule list can also generate the inverse of the transform. In that case, the inverse of each of the rules is used, as described below.
 
-#### <a name="Transform_Rules" id="general-transforms-transform-rules-syntax-transform-rules" href="#Transform_Rules">Transform Rules</a>
+#### <a name="Transform_Rules" id="Transform_Rules" href="#Transform_Rules">Transform Rules</a> <a id="general-transforms-transform-rules-syntax-transform-rules"></a>
 
 Each transform rule consists of two colons followed by a transform name, which is of the form source-target. For example:
 
@@ -2619,7 +2619,7 @@ The inverse of a transform rule uses parentheses to indicate what should be done
 :: lower ; # executed for both the normal and the inverse
 ```
 
-#### <a name="Variable_Definition_Rules" id="general-transforms-transform-rules-syntax-variable-definition-rules" href="#Variable_Definition_Rules">Variable Definition Rules</a>
+#### <a name="Variable_Definition_Rules" id="Variable_Definition_Rules" href="#Variable_Definition_Rules">Variable Definition Rules</a> <a id="general-transforms-transform-rules-syntax-variable-definition-rules"></a>
 
 Each variable definition is of the following form:
 
@@ -2642,7 +2642,7 @@ $mac = M [aA] [cC] ;
 
 Variables are only replaced within other variable definition rules and within conversion rules. They have no effect on transliteration rules.
 
-#### <a name="Filter_Rules" id="general-transforms-transform-rules-syntax-filter-rules" href="#Filter_Rules">Filter Rules</a>
+#### <a name="Filter_Rules" id="Filter_Rules" href="#Filter_Rules">Filter Rules</a> <a id="general-transforms-transform-rules-syntax-filter-rules"></a>
 
 * <a id="general-transforms-transform-rules-syntax-filter-rules-item-1"></a> **A filter rule**: A filter rule consists of two colons followed by a UnicodeSet.
 
@@ -2665,7 +2665,7 @@ For example, the Hiragana-Latin transform can be implemented by "pivoting" throu
 
 The filters keep the transform from mistakenly converting any of the "pivot" characters. Note that this is a case where a rule list contains no conversion rules at all, just transform rules and filters.
 
-#### <a name="Conversion_Rules" id="general-transforms-transform-rules-syntax-conversion-rules" href="#Conversion_Rules">Conversion Rules</a>
+#### <a name="Conversion_Rules" id="Conversion_Rules" href="#Conversion_Rules">Conversion Rules</a> <a id="general-transforms-transform-rules-syntax-conversion-rules"></a>
 
 Conversion rules can be forward, backward, or double. The complete conversion rule syntax is described below:
 
@@ -2713,7 +2713,7 @@ The `completed_result` | `result_to_revisit` is also known as the `resulting_tex
 [a-c] → ;
 ```
 
-#### <a name="Intermixing_Transform_Rules_and_Conversion_Rules" id="general-transforms-transform-rules-syntax-intermixing-transform-rules-and-conversion-rules" href="#Intermixing_Transform_Rules_and_Conversion_Rules">Intermixing Transform Rules and Conversion Rules</a>
+#### <a name="Intermixing_Transform_Rules_and_Conversion_Rules" id="Intermixing_Transform_Rules_and_Conversion_Rules" href="#Intermixing_Transform_Rules_and_Conversion_Rules">Intermixing Transform Rules and Conversion Rules</a> <a id="general-transforms-transform-rules-syntax-intermixing-transform-rules-and-conversion-rules"></a>
 
 Transform rules and conversion rules may be freely intermixed. Inserting a transform rule into the middle of a set of conversion rules has an important side effect.
 
@@ -2810,7 +2810,7 @@ sch → sh ;
 ss → z ;
 ```
 
-#### <a name="Inverse_Summary" id="general-transforms-transform-rules-syntax-inverse-summary" href="#Inverse_Summary">Inverse Summary</a>
+#### <a name="Inverse_Summary" id="Inverse_Summary" href="#Inverse_Summary">Inverse Summary</a> <a id="general-transforms-transform-rules-syntax-inverse-summary"></a>
 
 The following table shows how the same rule list generates two different transforms, where the inverse is restated in terms of forward rules (this is a contrived example, simply to show the reordering):
 
@@ -2905,7 +2905,7 @@ The following summarizes the syntax characters used in transforms.
 | $ | Within a UnicodeSet (not before ASCII letter), matches the start or end of the source text (but is not replaced) | [$] b → c |
 | Other | Many of these characters have special meanings inside a UnicodeSet | ... |
 
-## <a name="ListPatterns" id="general-list-patterns" href="#ListPatterns">List Patterns</a>
+## <a name="ListPatterns" id="ListPatterns" href="#ListPatterns">List Patterns</a> <a id="general-list-patterns"></a>
 
 ```xml
 <!ELEMENT listPatterns (alias | (listPattern*, special*)) >
@@ -3029,7 +3029,7 @@ In many languages there may not be a difference among many of these lists. In ot
 
 Currently there are no locale keywords that affect list patterns; they are selected using the base locale ID, ignoring anu -u- extension keywords.
 
-### <a name="List_Gender" id="general-list-patterns-gender-of-lists" href="#List_Gender">Gender of Lists</a>
+### <a name="List_Gender" id="List_Gender" href="#List_Gender">Gender of Lists</a> <a id="general-list-patterns-gender-of-lists"></a>
 
 ```xml
 <!-- Gender List support -->
@@ -3062,7 +3062,7 @@ There are three ways the gender of a list can be formatted:
 2. **mixedNeutral:** If the elements of the list are all male, "male" form is used for the list. If all the elements of the lists are female, "female" form is used. If the list has a mix of male, female and neutral names, the "other" form is used.
 3. **maleTaints:** If all the elements of the lists are female, "female" form is used, otherwise the "male" form is used.
 
-## <a name="Context_Transform_Elements" id="general-contexttransform-elements" href="#Context_Transform_Elements">ContextTransform Elements</a>
+## <a name="Context_Transform_Elements" id="Context_Transform_Elements" href="#Context_Transform_Elements">ContextTransform Elements</a> <a id="general-contexttransform-elements"></a>
 
 ```xml
 <!ELEMENT contextTransforms ( alias | (contextTransformUsage*, special*)) >
@@ -3155,7 +3155,7 @@ Example:
 | `unit-pattern`                   | `units/unitLength[type=*]/unit[type=*]/unitPattern[count=*]` unit names |
 | `number-spellout`                | `rbnf/rulesetGrouping[type=*]/ruleset[type=*]/rbnfrule` number spellout rules |
 
-## <a name="Choice_Patterns" id="general-choice-patterns" href="#Choice_Patterns">Choice Patterns</a>
+## <a name="Choice_Patterns" id="Choice_Patterns" href="#Choice_Patterns">Choice Patterns</a> <a id="general-choice-patterns"></a>
 
 A choice pattern is a string that chooses among a number of strings, based on numeric value. It has the following form:
 
@@ -3187,7 +3187,7 @@ A choice pattern is a string that chooses among a number of strings, based on nu
 
 Quoting is done using ' characters, as in date or number formats.
 
-## <a name="Annotations" id="general-annotations-and-labels" href="#Annotations">Annotations and Labels</a>
+## <a name="Annotations" id="Annotations" href="#Annotations">Annotations and Labels</a> <a id="general-annotations-and-labels"></a>
 
 Annotations provide information about characters, typically used in input. For example, on a mobile keyboard they can be used to do completion. They are typically used for symbols, especially emoji characters.
 
@@ -3266,7 +3266,7 @@ For example, a "black heart" might have the association of "wicked" in English, 
 The cp value may contain sequences, but does not contain any Emoji or Text Variant (VS15 & VS16) characters.
 All such characters should be removed before looking up any short names and keywords.
 
-### <a name="SynthesizingNames" id="general-annotations-and-labels-synthesizing-sequence-names" href="#SynthesizingNames">Synthesizing Sequence Names</a>
+### <a name="SynthesizingNames" id="SynthesizingNames" href="#SynthesizingNames">Synthesizing Sequence Names</a> <a id="general-annotations-and-labels-synthesizing-sequence-names"></a>
 
 * <a id="general-annotations-and-labels-synthesizing-sequence-names-item-1"></a> **Many emoji are**: Many emoji are represented by sequences of characters.
 
@@ -3332,7 +3332,7 @@ Some examples for English data (v30) are given in the following table.
 
 For more information, see [Unicode Emoji](https://www.unicode.org/reports/tr51/).
 
-### <a name="Character_Labels" id="general-annotations-and-labels-annotations-character-labels" href="#Character_Labels">Annotations Character Labels</a>
+### <a name="Character_Labels" id="Character_Labels" href="#Character_Labels">Annotations Character Labels</a> <a id="general-annotations-and-labels-annotations-character-labels"></a>
 
 ```xml
 <!ELEMENT characterLabels ( alias | ( characterLabelPattern*, characterLabel*, special* ) ) >
@@ -3418,7 +3418,7 @@ The following are character labels. Where the meaning of the label is fairly cle
 | facing-left                 | facing-left             | Characters that face to the left. Also used to construct names for emoji variants. |
 | facing-right                | facing-right            | Characters that face to the right. Also used to construct names for emoji variants. |
 
-### <a name="Typographic_Names" id="general-annotations-and-labels-typographic-names" href="#Typographic_Names">Typographic Names</a>
+### <a name="Typographic_Names" id="Typographic_Names" href="#Typographic_Names">Typographic Names</a> <a id="general-annotations-and-labels-typographic-names"></a>
 
 ```xml
 <!ELEMENT typographicNames ( alias | ( axisName*, styleName*, featureName*, special* ) ) >
@@ -3484,7 +3484,7 @@ To find a localized subfamily name such as “Extraleicht Schmal” for a font c
 
 7. Concatenate the strings, with a separator between them.
 
-## <a name="Grammatical_Features" id="general-grammatical-features" href="#Grammatical_Features">Grammatical Features</a>
+## <a name="Grammatical_Features" id="Grammatical_Features" href="#Grammatical_Features">Grammatical Features</a> <a id="general-grammatical-features"></a>
 
 * <a id="general-grammatical-features-item-1"></a> **LDML supplies grammatical**: LDML supplies grammatical information that can be used to distinguish localized forms on a per-locale basis.
 
@@ -3543,7 +3543,7 @@ Note that the CLDR plural categories overlap some of these features, since some 
 * a scope attribute is only used when there is a corresponding “general” element, one for the same language and target without a scope attribute.
 * the scope attribute values must be narrower (a proper subset, possibly empty) of those in the corresponding general element.
 
-### <a name="Gender" id="general-features-gender" href="#Gender">Gender</a>
+### <a name="Gender" id="Gender" href="#Gender">Gender</a> <a id="general-features-gender"></a>
 
 Feature that classifies nouns in classes.
 This is grammatical gender, which may be assigned on the basis of sex in some languages, but may be completely separate in others.
@@ -3595,7 +3595,7 @@ That is:
 * unspecified and animate are dropped.
 * if there is only a single gender with inanimate, then the gender is dropped.
 
-### <a name="Case" id="general-features-case" href="#Case">Case</a>
+### <a name="Case" id="Case" href="#Case">Case</a> <a id="general-features-case"></a>
 
 #### Table: Case <a id="general-features-case-table-case"></a>
 
@@ -3655,7 +3655,7 @@ Feature that encodes the fact that a noun has been already mentioned, or is fami
 | unspecified | Noun without any definiteness marking in some specific construction (specific to Danish). |   |
 
 
-## <a name="Grammatical_Derivations" id="general-grammatical-derivations" href="#Grammatical_Derivations">Grammatical Derivations</a>
+## <a name="Grammatical_Derivations" id="Grammatical_Derivations" href="#Grammatical_Derivations">Grammatical Derivations</a> <a id="general-grammatical-derivations"></a>
 
 ```xml
 <!ELEMENT grammaticalData ( grammaticalFeatures*, grammaticalDerivations*) >
@@ -3733,7 +3733,7 @@ Note that the prefix and power nodes are unary (exactly 1 child), the per patter
 
 For a description of how to use these fields to construct a localized name, see **[Compound Units](#compound-units)**.
 
-### <a name="gender_compound_units" id="general-grammatical-derivations-deriving-the-gender-of-compound-units" href="#gender_compound_units">Deriving the Gender of Compound Units</a>
+### <a name="gender_compound_units" id="gender_compound_units" href="#gender_compound_units">Deriving the Gender of Compound Units</a> <a id="general-grammatical-derivations-deriving-the-gender-of-compound-units"></a>
 
 * <a id="general-grammatical-derivations-deriving-the-gender-of-compound-units-item-1"></a> **The **deriveCompound\[@feature="gender"\]** data**: The **deriveCompound\[@feature="gender"\]** data provides information for how to derive the gender of the whole compound from the gender of its atomic units and structure.
 
@@ -3754,7 +3754,7 @@ For example, for gram-per-meter, the first line above means:
 * The gender of the compound is the gender of the first component of the 'per', that is, of the "gram". So if gram is feminine in that language, the gender of the compound is feminine.
 
 
-### <a name="plural_compound_units" id="general-grammatical-derivations-deriving-the-plural-category-of-unit-components" href="#plural_compound_units">Deriving the Plural Category of Unit Components</a>
+### <a name="plural_compound_units" id="plural_compound_units" href="#plural_compound_units">Deriving the Plural Category of Unit Components</a> <a id="general-grammatical-derivations-deriving-the-plural-category-of-unit-components"></a>
 
 * <a id="general-grammatical-derivations-deriving-the-plural-category-of-unit-components-item-1"></a> **The `deriveComponent[@feature="plural"]` data**: The `deriveComponent[@feature="plural"]` data provides information for how to derive the plural category for each of the atomic units, from the plural category of the whole compound and the structure of the compound.
 
@@ -3775,7 +3775,7 @@ For example, for gram-per-meter, the first line above means:
 *   When the plural form of gram-per-meter is needed (rather than singular), then the gram part of the translation has to have a plural form like “grams”, while the meter part of the translation has to have a singular form like “metre”. This would be composed with the pattern for "per" (say "{0} pro {1}") to get "grams pro metre".
 
 
-### <a name="case_compound_units" id="general-grammatical-derivations-deriving-the-case-of-unit-components" href="#case_compound_units">Deriving the Case of Unit Components</a>
+### <a name="case_compound_units" id="case_compound_units" href="#case_compound_units">Deriving the Case of Unit Components</a> <a id="general-grammatical-derivations-deriving-the-case-of-unit-components"></a>
 
 * <a id="general-grammatical-derivations-deriving-the-case-of-unit-components-item-1"></a> **The `deriveComponent[@feature="case"]` data**: The `deriveComponent[@feature="case"]` data provides information for how to derive the grammatical case for each of the atomic units, from the grammatical case of the whole compound and the structure of the compound.
 

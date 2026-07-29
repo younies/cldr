@@ -30,7 +30,7 @@ Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www
 
 See also [Compatibility Notice](#compatibility-notice).
 
-## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
+## Parts <a id="core-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -46,12 +46,12 @@ The LDML specification is divided into the following parts:
 *   Appendix A: [Modifications](tr35-modifications.md#modifications)
 *   Appendix B: [Acknowledgments](tr35-acknowledgments.md#acknowledgments)
 
-## <a name="Contents" id="keyboards-contents-of-part-7-keyboards" href="#Contents">Contents of Part 7, Keyboards</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Part 7, Keyboards</a> <a id="keyboards-contents-of-part-7-keyboards"></a>
 
   * [_Summary_ ](#summary-)
   * [_Status_ ](#status-)
 * [Parts ](#parts-)
-* [Contents of Part 7, Keyboards](#Contents)
+* [Contents of Part 7, Keyboards](#Contents) 
 * [Keyboards ](#keyboards-)
 * [Goals and Non-goals ](#goals-and-non-goals-)
   * [Compatibility Notice ](#compatibility-notice-)

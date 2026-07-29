@@ -12,10 +12,10 @@ For the full header, table of contents, and status, see [Part 1: Core](tr35.md).
 
 This is a partial document, describing only the acknowledgments of contributors to LDML. For the other parts of the LDML see the [main LDML document](tr35.md).
 
-## <a name="Contents" id="acknowledgments-contents-of-appendix-b-acknowledgments" href="#Contents">Contents of Appendix B, Acknowledgments</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Appendix B, Acknowledgments</a> <a id="acknowledgments-contents-of-appendix-b-acknowledgments"></a>
 
   * [_Summary_ ](#summary-)
-* [Contents of Appendix B, Acknowledgments](#Contents)
+* [Contents of Appendix B, Acknowledgments](#Contents) 
 * [Acknowledgments ](#acknowledgments-)
 
 ## Acknowledgments <a id="acknowledgments-acknowledgments"></a>

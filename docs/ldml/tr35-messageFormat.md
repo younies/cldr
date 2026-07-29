@@ -28,7 +28,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
+## Parts <a id="core-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -44,12 +44,12 @@ The LDML specification is divided into the following parts:
 *   Appendix A: [Modifications](tr35-modifications.md#modifications)
 *   Appendix B: [Acknowledgments](tr35-acknowledgments.md#acknowledgments)
 
-## <a name="Contents" id="messageFormat-contents-of-part-9-messageformat">Contents of Part 9, MessageFormat</a>
+## <a name="Contents" id="Contents">Contents of Part 9, MessageFormat</a> <a id="messageFormat-contents-of-part-9-messageformat"></a>
 
   * [_Summary_ ](#summary-)
   * [_Status_ ](#status-)
 * [Parts ](#parts-)
-* [Contents of Part 9, MessageFormat](#Contents)
+* [Contents of Part 9, MessageFormat](#Contents) 
 * [Introduction ](#introduction-)
   * [Conformance ](#conformance-)
   * [Terminology and Conventions ](#terminology-and-conventions-)

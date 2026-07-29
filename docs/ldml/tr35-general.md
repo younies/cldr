@@ -123,8 +123,8 @@ The LDML specification is divided into the following parts:
     * [Table: Values](#Table_Values) 
   * [Case](#Case) 
     * [Table: Case](#Table_Case) 
-      * [Example](#Example) 
-        * [Table: Values](#Table_Values) 
+    * [Example](#Example) 
+      * [Table: Values](#Table_Values) 
   * [Definiteness](#Definiteness) 
     * [Table: Values](#Table_Values) 
 * [Grammatical Derivations](#Grammatical_Derivations) 
@@ -3262,7 +3262,7 @@ That is:
 * <a id="general-features-case-table-case-rule-1"></a> **Feature that encodes**: Feature that encodes the syntactic (and sometimes semantic) relationship of a noun with the other constituents of the sentence. (adapted from [linguistics-ontology.org/gold/2010/CaseProperty](https://web.archive.org/20200115041525/linguistics-ontology.org/gold/2010/CaseProperty))
 
 
-##### <a name="Example" id="Example" href="#Example">Example</a> <a id="general-features-case-table-case-example"></a>
+#### <a name="Example" id="Example" href="#Example">Example</a> <a id="general-features-case-table-case-example"></a>
 
 ```xml
 <grammaticalFeatures targets="nominal" locales="de">

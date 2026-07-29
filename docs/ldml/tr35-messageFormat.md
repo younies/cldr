@@ -65,11 +65,11 @@ The LDML specification is divided into the following parts:
   * [Matcher](#Matcher) 
     * [Selector](#Selector) 
     * [Variant](#Variant) 
-      * [Key](#Key) 
+    * [Key](#Key) 
   * [Expressions](#Expressions) 
     * [Operand](#Operand) 
-      * [Function](#Function) 
-        * [Options](#Options) 
+    * [Function](#Function) 
+      * [Options](#Options) 
   * [Markup](#Markup) 
   * [Attributes](#Attributes) 
   * [Other Syntax Elements](#Other_Syntax_Elements) 
@@ -85,10 +85,10 @@ The LDML specification is divided into the following parts:
   * [Resolved Values](#Resolved_Values) 
   * [Expression and Markup Resolution](#Expression_and_Markup_Resolution) 
     * [Expression Resolution](#Expression_Resolution) 
-      * [Literal Resolution](#Literal_Resolution) 
-      * [Variable Resolution](#Variable_Resolution) 
-      * [Function Resolution](#Function_Resolution) 
-        * [Function Handler](#Function_Handler) 
+    * [Literal Resolution](#Literal_Resolution) 
+    * [Variable Resolution](#Variable_Resolution) 
+    * [Function Resolution](#Function_Resolution) 
+      * [Function Handler](#Function_Handler) 
     * [Markup Resolution](#Markup_Resolution) 
     * [Option Resolution](#Option_Resolution) 
     * [Fallback Resolution](#Fallback_Resolution) 
@@ -125,60 +125,60 @@ The LDML specification is divided into the following parts:
 * [Default Functions](#Default_Functions) 
   * [String Value Selection and Formatting](#String_Value_Selection_and_Formatting) 
     * [The `:string` function](#The_string_function) 
-      * [`:string` Operands](#string_Operands) 
-      * [`:string` Options](#string_Options) 
-      * [`:string` Resolved Value](#string_Resolved_Value) 
-      * [Selection with `:string`](#Selection_with_string) 
-      * [`:string` Formatting](#string_Formatting) 
+    * [`:string` Operands](#string_Operands) 
+    * [`:string` Options](#string_Options) 
+    * [`:string` Resolved Value](#string_Resolved_Value) 
+    * [Selection with `:string`](#Selection_with_string) 
+    * [`:string` Formatting](#string_Formatting) 
   * [Numeric Value Selection and Formatting](#Numeric_Value_Selection_and_Formatting) 
     * [The `:number` function](#The_number_function) 
-      * [`:number` Operands](#number_Operands) 
-      * [`:number` Options](#number_Options) 
-      * [`:number` Resolved Value](#number_Resolved_Value) 
-      * [Selection with `:number`](#Selection_with_number) 
+    * [`:number` Operands](#number_Operands) 
+    * [`:number` Options](#number_Options) 
+    * [`:number` Resolved Value](#number_Resolved_Value) 
+    * [Selection with `:number`](#Selection_with_number) 
     * [The `:integer` function](#The_integer_function) 
-      * [`:integer` Operands](#integer_Operands) 
-      * [`:integer` Options](#integer_Options) 
-      * [`:integer` Resolved Value](#integer_Resolved_Value) 
-      * [Selection with `:integer`](#Selection_with_integer) 
+    * [`:integer` Operands](#integer_Operands) 
+    * [`:integer` Options](#integer_Options) 
+    * [`:integer` Resolved Value](#integer_Resolved_Value) 
+    * [Selection with `:integer`](#Selection_with_integer) 
     * [The `:offset` function](#The_offset_function) 
-      * [`:offset` Operands](#offset_Operands) 
-      * [`:offset` Options](#offset_Options) 
-      * [`:offset` Resolved Value](#offset_Resolved_Value) 
-      * [Selection with `:offset`](#Selection_with_offset) 
+    * [`:offset` Operands](#offset_Operands) 
+    * [`:offset` Options](#offset_Options) 
+    * [`:offset` Resolved Value](#offset_Resolved_Value) 
+    * [Selection with `:offset`](#Selection_with_offset) 
     * [The `:currency` function](#The_currency_function) 
-      * [`:currency` Operands](#currency_Operands) 
-      * [`:currency` Options](#currency_Options) 
-      * [`:currency` Resolved Value](#currency_Resolved_Value) 
+    * [`:currency` Operands](#currency_Operands) 
+    * [`:currency` Options](#currency_Options) 
+    * [`:currency` Resolved Value](#currency_Resolved_Value) 
     * [The `:percent` function](#The_percent_function) 
-      * [`:percent` Operands](#percent_Operands) 
-      * [`:percent` Options](#percent_Options) 
-      * [`:percent` Resolved Value](#percent_Resolved_Value) 
-      * [Selection with `:percent`](#Selection_with_percent) 
+    * [`:percent` Operands](#percent_Operands) 
+    * [`:percent` Options](#percent_Options) 
+    * [`:percent` Resolved Value](#percent_Resolved_Value) 
+    * [Selection with `:percent`](#Selection_with_percent) 
     * [The `:unit` function](#The_unit_function) 
-      * [`:unit` Operands](#unit_Operands) 
-      * [`:unit` Options](#unit_Options) 
-      * [`:unit` Resolved Value](#unit_Resolved_Value) 
-      * [Unit Conversion](#Unit_Conversion) 
+    * [`:unit` Operands](#unit_Operands) 
+    * [`:unit` Options](#unit_Options) 
+    * [`:unit` Resolved Value](#unit_Resolved_Value) 
+    * [Unit Conversion](#Unit_Conversion) 
     * [Numeric Operands](#Numeric_Operands) 
     * [Digit Size Options](#Digit_Size_Options) 
     * [Number Selection](#Number_Selection) 
-      * [Default Value of `select` Option](#Default_Value_of_select_Option) 
-      * [Rule Selection](#Rule_Selection) 
-      * [Exact Literal Match Serialization](#Exact_Literal_Match_Serialization) 
+    * [Default Value of `select` Option](#Default_Value_of_select_Option) 
+    * [Rule Selection](#Rule_Selection) 
+    * [Exact Literal Match Serialization](#Exact_Literal_Match_Serialization) 
   * [Date and Time Value Formatting](#Date_and_Time_Value_Formatting) 
     * [The `:datetime` function](#The_datetime_function) 
-      * [`:datetime` Operands](#datetime_Operands) 
-      * [`:datetime` Options](#datetime_Options) 
-      * [`:datetime` Resolved Value](#datetime_Resolved_Value) 
+    * [`:datetime` Operands](#datetime_Operands) 
+    * [`:datetime` Options](#datetime_Options) 
+    * [`:datetime` Resolved Value](#datetime_Resolved_Value) 
     * [The `:date` function](#The_date_function) 
-      * [`:date` Operands](#date_Operands) 
-      * [`:date` Options](#date_Options) 
-      * [`:date` Resolved Value](#date_Resolved_Value) 
+    * [`:date` Operands](#date_Operands) 
+    * [`:date` Options](#date_Options) 
+    * [`:date` Resolved Value](#date_Resolved_Value) 
     * [The `:time` function](#The_time_function) 
-      * [`:time` Operands](#time_Operands) 
-      * [`:time` Options](#time_Options) 
-      * [`:time` Resolved Value](#time_Resolved_Value) 
+    * [`:time` Operands](#time_Operands) 
+    * [`:time` Options](#time_Options) 
+    * [`:time` Resolved Value](#time_Resolved_Value) 
     * [Date and Time Operands](#Date_and_Time_Operands) 
     * [Date and Time Override Options](#Date_and_Time_Override_Options) 
 * [Unicode Namespace](#Unicode_Namespace) 
@@ -197,9 +197,9 @@ The LDML specification is divided into the following parts:
   * [Security Considerations](#Security_Considerations) 
   * [Non-normative Examples](#Nonnormative_Examples) 
     * [Pattern Selection Examples](#Pattern_Selection_Examples) 
-      * [Selection Example 1](#Selection_Example_1) 
-      * [Selection Example 2](#Selection_Example_2) 
-      * [Selection Example 3](#Selection_Example_3) 
+    * [Selection Example 1](#Selection_Example_1) 
+    * [Selection Example 2](#Selection_Example_2) 
+    * [Selection Example 3](#Selection_Example_3) 
   * [Acknowledgments](#Acknowledgments) 
 
 ## <a name="Introduction" id="Introduction" href="#Introduction">Introduction</a> <a id="messageFormat-introduction"></a>
@@ -774,7 +774,7 @@ variant = key *(s key) o quoted-pattern
 key     = literal / "*"
 ```
 
-##### <a name="Key" id="Key" href="#Key">Key</a> <a id="messageFormat-syntax-matcher-variant-key"></a>
+#### <a name="Key" id="Key" href="#Key">Key</a> <a id="messageFormat-syntax-matcher-variant-key"></a>
 
 A **_<dfn>key</dfn>_** is a value in a _variant_ for use by a _selector_ when ranking
 or excluding _variants_ during the _matcher_ process.
@@ -858,7 +858,7 @@ Additionally, an _input-declaration_ can contain a _variable-expression_.
 An **_<dfn>operand</dfn>_** is the _literal_ of a _literal-expression_ or
 the _variable_ of a _variable-expression_.
 
-##### <a name="Function" id="Function" href="#Function">Function</a> <a id="messageFormat-syntax-expressions-operand-function"></a>
+#### <a name="Function" id="Function" href="#Function">Function</a> <a id="messageFormat-syntax-expressions-operand-function"></a>
 
 A **_<dfn>function</dfn>_** is named functionality in an _expression_.
 _Functions_ are used to evaluate, format, select, or otherwise process data
@@ -1780,7 +1780,7 @@ Its _resolved value_ is defined by _literal resolution_.
 > {{You have {42 :number}}}
 > ```
 
-##### <a name="Literal_Resolution" id="Literal_Resolution" href="#Literal_Resolution">Literal Resolution</a> <a id="messageFormat-formatting-expression-and-markup-resolution-expression-resolution-literal-resolution"></a>
+#### <a name="Literal_Resolution" id="Literal_Resolution" href="#Literal_Resolution">Literal Resolution</a> <a id="messageFormat-formatting-expression-and-markup-resolution-expression-resolution-literal-resolution"></a>
 
 **_<dfn>Literal resolution</dfn>_** : The _resolved value_ of a _text_ or a _literal_ contains
 the character sequence of the _text_ or _literal_
@@ -1809,7 +1809,7 @@ whether its value was originally a _quoted literal_ or an _unquoted literal_.
 > }
 > ```
 
-##### <a name="Variable_Resolution" id="Variable_Resolution" href="#Variable_Resolution">Variable Resolution</a> <a id="messageFormat-formatting-expression-and-markup-resolution-expression-resolution-variable-resolution"></a>
+#### <a name="Variable_Resolution" id="Variable_Resolution" href="#Variable_Resolution">Variable Resolution</a> <a id="messageFormat-formatting-expression-and-markup-resolution-expression-resolution-variable-resolution"></a>
 
 **_<dfn>Variable resolution</dfn>_** : To resolve the value of a _variable_,
 its _name_ is used to identify either a local variable or an input variable.
@@ -1827,7 +1827,7 @@ a _fallback value_ is used as the _resolved value_ of the _variable_.
 The _fallback value_ representation of a _variable_ has a string representation
 consisting of the U+0024 DOLLAR SIGN `$` followed by the _name_ of the _variable_.
 
-##### <a name="Function_Resolution" id="Function_Resolution" href="#Function_Resolution">Function Resolution</a> <a id="messageFormat-formatting-expression-and-markup-resolution-expression-resolution-function-resolution"></a>
+#### <a name="Function_Resolution" id="Function_Resolution" href="#Function_Resolution">Function Resolution</a> <a id="messageFormat-formatting-expression-and-markup-resolution-expression-resolution-function-resolution"></a>
 
 **_<dfn>Function resolution</dfn>_** : To resolve an _expression_ with a _function_,
 the following steps are taken:
@@ -2880,7 +2880,7 @@ Therefore, using _options_ not explicitly defined here is NOT RECOMMENDED.
 
 The function `:string` provides string selection and formatting.
 
-##### <a name="string_Operands" id="string_Operands" href="#string_Operands">`:string` Operands</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-string-operands"></a>
+#### <a name="string_Operands" id="string_Operands" href="#string_Operands">`:string` Operands</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-string-operands"></a>
 
 The _operand_ of `:string` is either any implementation-defined type
 that is a string or for which conversion to a string is supported,
@@ -2898,7 +2898,7 @@ All other values produce a _Bad Operand_ error.
 > classes according to their local needs, including, where appropriate,
 > coercion to string.
 
-##### <a name="string_Options" id="string_Options" href="#string_Options">`:string` Options</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-string-options"></a>
+#### <a name="string_Options" id="string_Options" href="#string_Options">`:string` Options</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-string-options"></a>
 
 The function `:string` has no _options_.
 
@@ -2911,14 +2911,14 @@ The function `:string` has no _options_.
 > {$s :string u:dir=ltr u:id=my-string}
 > ```
 
-##### <a name="string_Resolved_Value" id="string_Resolved_Value" href="#string_Resolved_Value">`:string` Resolved Value</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-string-resolved-value"></a>
+#### <a name="string_Resolved_Value" id="string_Resolved_Value" href="#string_Resolved_Value">`:string` Resolved Value</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-string-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with a `:string` _function_
 contains the string value of the _operand_ of the annotated _expression_,
 together with its resolved locale and directionality.
 None of the _options_ set on the _expression_ are part of the _resolved value_.
 
-##### <a name="Selection_with_string" id="Selection_with_string" href="#Selection_with_string">Selection with `:string`</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-selection-with-string"></a>
+#### <a name="Selection_with_string" id="Selection_with_string" href="#Selection_with_string">Selection with `:string`</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-selection-with-string"></a>
 
 When implementing [Match(`resolvedSelector`, `key`)](#operations-on-resolved-values)
 where `resolvedSelector` is the _resolved value_ of a _selector_
@@ -2954,7 +2954,7 @@ as the BetterThan operation should only be called on keys that match.
 > *             {{Matches the string "space key"}}
 > ```
 
-##### <a name="string_Formatting" id="string_Formatting" href="#string_Formatting">`:string` Formatting</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-string-formatting"></a>
+#### <a name="string_Formatting" id="string_Formatting" href="#string_Formatting">`:string` Formatting</a> <a id="messageFormat-default-functions-string-value-selection-and-formatting-the-string-function-string-formatting"></a>
 
 The `:string` function returns the string value of the _resolved value_ of the _operand_.
 
@@ -2969,11 +2969,11 @@ The `:string` function returns the string value of the _resolved value_ of the _
 
 The function `:number` is a selector and formatter for numeric values.
 
-##### <a name="number_Operands" id="number_Operands" href="#number_Operands">`:number` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-number-operands"></a>
+#### <a name="number_Operands" id="number_Operands" href="#number_Operands">`:number` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-number-operands"></a>
 
 The function `:number` requires a _numeric operand_ as its _operand_.
 
-##### <a name="number_Options" id="number_Options" href="#number_Options">`:number` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-number-options"></a>
+#### <a name="number_Options" id="number_Options" href="#number_Options">`:number` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-number-options"></a>
 
 Some options do not have default values defined in this specification.
 The defaults for these options are implementation-dependent.
@@ -3048,14 +3048,14 @@ with _options_ on the _expression_ taking priority over any options of the _oper
 > would be formatted with the resolved options
 > `{ minimumFractionDigits: '1', signDisplay: 'always' }`.
 
-##### <a name="number_Resolved_Value" id="number_Resolved_Value" href="#number_Resolved_Value">`:number` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-number-resolved-value"></a>
+#### <a name="number_Resolved_Value" id="number_Resolved_Value" href="#number_Resolved_Value">`:number` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-number-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with a `:number` _function_
 contains an implementation-defined numerical value
 of the _operand_ of the annotated _expression_,
 together with the resolved options' values.
 
-##### <a name="Selection_with_number" id="Selection_with_number" href="#Selection_with_number">Selection with `:number`</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-selection-with-number"></a>
+#### <a name="Selection_with_number" id="Selection_with_number" href="#Selection_with_number">Selection with `:number`</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-number-function-selection-with-number"></a>
 
 The _function_ `:number` performs selection as described in [Number Selection](#number-selection) below.
 
@@ -3064,11 +3064,11 @@ The _function_ `:number` performs selection as described in [Number Selection](#
 The function `:integer` is a selector and formatter for matching or formatting numeric
 values as integers.
 
-##### <a name="integer_Operands" id="integer_Operands" href="#integer_Operands">`:integer` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-integer-operands"></a>
+#### <a name="integer_Operands" id="integer_Operands" href="#integer_Operands">`:integer` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-integer-operands"></a>
 
 The function `:integer` requires a _numeric operand_ as its _operand_.
 
-##### <a name="integer_Options" id="integer_Options" href="#integer_Options">`:integer` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-integer-options"></a>
+#### <a name="integer_Options" id="integer_Options" href="#integer_Options">`:integer` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-integer-options"></a>
 
 Some options do not have default values defined in this specification.
 The defaults for these options are implementation-dependent.
@@ -3113,14 +3113,14 @@ Options with the following names are however discarded if included in the _opera
 - `maximumFractionDigits`
 - `minimumSignificantDigits`
 
-##### <a name="integer_Resolved_Value" id="integer_Resolved_Value" href="#integer_Resolved_Value">`:integer` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-integer-resolved-value"></a>
+#### <a name="integer_Resolved_Value" id="integer_Resolved_Value" href="#integer_Resolved_Value">`:integer` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-integer-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with an `:integer` _function_
 contains the implementation-defined integer value
 of the _operand_ of the annotated _expression_,
 together with the resolved options' values.
 
-##### <a name="Selection_with_integer" id="Selection_with_integer" href="#Selection_with_integer">Selection with `:integer`</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-selection-with-integer"></a>
+#### <a name="Selection_with_integer" id="Selection_with_integer" href="#Selection_with_integer">Selection with `:integer`</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-integer-function-selection-with-integer"></a>
 
 The _function_ `:integer` performs selection as described in [Number Selection](#number-selection) below.
 
@@ -3148,11 +3148,11 @@ The "offset" is a small integer adjustment of the _operand_'s value.
 > The purpose of this _function_ is to supply compatibility with
 > ICU's `PluralFormat` and its `offset` feature, also found in ICU MessageFormat.
 
-##### <a name="offset_Operands" id="offset_Operands" href="#offset_Operands">`:offset` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-offset-operands"></a>
+#### <a name="offset_Operands" id="offset_Operands" href="#offset_Operands">`:offset` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-offset-operands"></a>
 
 The function `:offset` requires a _numeric operand_ as its _operand_.
 
-##### <a name="offset_Options" id="offset_Options" href="#offset_Options">`:offset` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-offset-options"></a>
+#### <a name="offset_Options" id="offset_Options" href="#offset_Options">`:offset` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-offset-options"></a>
 
 The _options_ on `:offset` are exclusive with each other,
 and exactly one _option_ is always required.
@@ -3170,7 +3170,7 @@ or if an _option value_ is not a _digit size option_,
 a _Bad Option_ error is emitted
 and a _fallback value_ used as the _resolved value_ of the _expression_.
 
-##### <a name="offset_Resolved_Value" id="offset_Resolved_Value" href="#offset_Resolved_Value">`:offset` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-offset-resolved-value"></a>
+#### <a name="offset_Resolved_Value" id="offset_Resolved_Value" href="#offset_Resolved_Value">`:offset` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-offset-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with a `:offset` _function_
 contains the implementation-defined numeric value
@@ -3197,7 +3197,7 @@ The `:offset` _options_ are not included in the resolved option values.
 > In such cases, implementations can emit an _Unsupported Operation_ error
 > or they might just silently overflow the underlying data value.
 
-##### <a name="Selection_with_offset" id="Selection_with_offset" href="#Selection_with_offset">Selection with `:offset`</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-selection-with-offset"></a>
+#### <a name="Selection_with_offset" id="Selection_with_offset" href="#Selection_with_offset">Selection with `:offset`</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-offset-function-selection-with-offset"></a>
 
 The _function_ `:offset` performs selection as described in [Number Selection](#number-selection) below.
 
@@ -3206,7 +3206,7 @@ The _function_ `:offset` performs selection as described in [Number Selection](#
 The _function_ `:currency` is a _formatter_ for currency values,
 which is a specialized form of numeric formatting.
 
-##### <a name="currency_Operands" id="currency_Operands" href="#currency_Operands">`:currency` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-currency-function-currency-operands"></a>
+#### <a name="currency_Operands" id="currency_Operands" href="#currency_Operands">`:currency` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-currency-function-currency-operands"></a>
 
 The _operand_ of the `:currency` function can be one of any number of
 implementation-defined types,
@@ -3255,7 +3255,7 @@ A _numeric operand_ without a `currency` _option_ results in a _Bad Operand_ err
 > }
 > ```
 
-##### <a name="currency_Options" id="currency_Options" href="#currency_Options">`:currency` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-currency-function-currency-options"></a>
+#### <a name="currency_Options" id="currency_Options" href="#currency_Options">`:currency` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-currency-function-currency-options"></a>
 
 Some options do not have default values defined in this specification.
 The defaults for these options are implementation-dependent.
@@ -3367,7 +3367,7 @@ with _options_ on the _expression_ taking priority over any options of the _oper
 > would be formatted with the resolved options
 > `{ currencySign: 'accounting', trailingZeroDisplay: 'stripIfInteger', currency: 'USD' }`.
 
-##### <a name="currency_Resolved_Value" id="currency_Resolved_Value" href="#currency_Resolved_Value">`:currency` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-currency-function-currency-resolved-value"></a>
+#### <a name="currency_Resolved_Value" id="currency_Resolved_Value" href="#currency_Resolved_Value">`:currency` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-currency-function-currency-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with a `:currency` _function_
 contains an implementation-defined currency value
@@ -3378,14 +3378,14 @@ together with the resolved options' values.
 
 The function `:percent` is a selector and formatter for percent values.
 
-##### <a name="percent_Operands" id="percent_Operands" href="#percent_Operands">`:percent` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-percent-operands"></a>
+#### <a name="percent_Operands" id="percent_Operands" href="#percent_Operands">`:percent` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-percent-operands"></a>
 
 The function `:percent` requires a _numeric operand_ as its _operand_.
 
 When either selecting or formatting the _expression_,
 the numeric value of the _operand_ is multiplied by 100.
 
-##### <a name="percent_Options" id="percent_Options" href="#percent_Options">`:percent` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-percent-options"></a>
+#### <a name="percent_Options" id="percent_Options" href="#percent_Options">`:percent` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-percent-options"></a>
 
 Some options do not have default values defined in this specification.
 The defaults for these options are implementation-dependent.
@@ -3460,7 +3460,7 @@ Options with the following names are however discarded if included in the _opera
 - `roundingIncrement`
 - `select`
 
-##### <a name="percent_Resolved_Value" id="percent_Resolved_Value" href="#percent_Resolved_Value">`:percent` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-percent-resolved-value"></a>
+#### <a name="percent_Resolved_Value" id="percent_Resolved_Value" href="#percent_Resolved_Value">`:percent` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-percent-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with a `:percent` _function_
 contains an implementation-defined numerical value
@@ -3470,7 +3470,7 @@ The numerical value of the _resolved value_ of the _expression_
 is the same as the numerical value of its _operand_;
 it is not multiplied by 100.
 
-##### <a name="Selection_with_percent" id="Selection_with_percent" href="#Selection_with_percent">Selection with `:percent`</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-selection-with-percent"></a>
+#### <a name="Selection_with_percent" id="Selection_with_percent" href="#Selection_with_percent">Selection with `:percent`</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-percent-function-selection-with-percent"></a>
 
 The _function_ `:percent` performs selection as described in [Number Selection](#number-selection) below.
 This selection always uses the `plural` selection mode,
@@ -3498,7 +3498,7 @@ The _function_ `:unit` is proposed to be a RECOMMENDED formatter for unitized va
 that is, for numeric values associated with a unit of measurement.
 This is a specialized form of numeric formatting.
 
-##### <a name="unit_Operands" id="unit_Operands" href="#unit_Operands">`:unit` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-unit-function-unit-operands"></a>
+#### <a name="unit_Operands" id="unit_Operands" href="#unit_Operands">`:unit` Operands</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-unit-function-unit-operands"></a>
 
 The _operand_ of the `:unit` function can be one of any number of
 implementation-defined types,
@@ -3532,7 +3532,7 @@ A _numeric operand_ without a `unit` _option_ results in a _Bad Operand_ error.
 > }
 > ```
 
-##### <a name="unit_Options" id="unit_Options" href="#unit_Options">`:unit` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-unit-function-unit-options"></a>
+#### <a name="unit_Options" id="unit_Options" href="#unit_Options">`:unit` Options</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-unit-function-unit-options"></a>
 
 Some _options_ do not have default values defined in this specification.
 The defaults for these _options_ are implementation-dependent.
@@ -3607,14 +3607,14 @@ with _options_ on the _expression_ taking priority over any options of the _oper
 > would have the resolved options:
 > `{ unit: 'furlong', minimumFractionDigits: '2', minimumIntegerDigits: '1' }`.
 
-##### <a name="unit_Resolved_Value" id="unit_Resolved_Value" href="#unit_Resolved_Value">`:unit` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-unit-function-unit-resolved-value"></a>
+#### <a name="unit_Resolved_Value" id="unit_Resolved_Value" href="#unit_Resolved_Value">`:unit` Resolved Value</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-unit-function-unit-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with a `:unit` _function_
 consist of an implementation-defined unit value
 of the _operand_ of the annotated _expression_,
 together with the resolved options and their resolved values.
 
-##### <a name="Unit_Conversion" id="Unit_Conversion" href="#Unit_Conversion">Unit Conversion</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-unit-function-unit-conversion"></a>
+#### <a name="Unit_Conversion" id="Unit_Conversion" href="#Unit_Conversion">Unit Conversion</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-the-unit-function-unit-conversion"></a>
 
 Implementations MAY support conversion to the locale's preferred units via the `usage` _option_.
 Implementing this _option_ is optional.
@@ -3776,7 +3776,7 @@ numeric selectors perform as described below.
 > Implementations are not required to implement this exactly as written.
 > However, the observed behavior must be consistent with what is described here.
 
-##### <a name="Default_Value_of_select_Option" id="Default_Value_of_select_Option" href="#Default_Value_of_select_Option">Default Value of `select` Option</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-number-selection-default-value-of-select-option"></a>
+#### <a name="Default_Value_of_select_Option" id="Default_Value_of_select_Option" href="#Default_Value_of_select_Option">Default Value of `select` Option</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-number-selection-default-value-of-select-option"></a>
 
 The _option value_ `plural` is the default for the _option_ `select`
 because it is the most common use case for numeric selection.
@@ -3799,7 +3799,7 @@ but can cause problems in target locales that the original developer is not cons
 > The `one` variant is needed by languages such as Polish or Russian.
 > Such locales typically also require other keywords such as `two`, `few`, and `many`.
 
-##### <a name="Rule_Selection" id="Rule_Selection" href="#Rule_Selection">Rule Selection</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-number-selection-rule-selection"></a>
+#### <a name="Rule_Selection" id="Rule_Selection" href="#Rule_Selection">Rule Selection</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-number-selection-rule-selection"></a>
 
 Rule selection is intended to support the grammatical matching needs of different
 languages/locales in order to support plural or ordinal numeric values.
@@ -3859,7 +3859,7 @@ for examples.
 > | 27 | `other` | 27 dní |
 > | 2.4 | `many` | 2,4 dne |
 
-##### <a name="Exact_Literal_Match_Serialization" id="Exact_Literal_Match_Serialization" href="#Exact_Literal_Match_Serialization">Exact Literal Match Serialization</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-number-selection-exact-literal-match-serialization"></a>
+#### <a name="Exact_Literal_Match_Serialization" id="Exact_Literal_Match_Serialization" href="#Exact_Literal_Match_Serialization">Exact Literal Match Serialization</a> <a id="messageFormat-default-functions-numeric-value-selection-and-formatting-number-selection-exact-literal-match-serialization"></a>
 
 If the numeric value of `resolvedSelector` is an integer
 and none of the following options are set for `resolvedSelector`,
@@ -3919,14 +3919,14 @@ If no options are specified, this function defaults to the following:
 > in JavaScript and with `{d,date}` in ICU MessageFormat 1.0.
 > This is because, unlike those implementations, `:datetime` is distinct from `:date` and `:time`.
 
-##### <a name="datetime_Operands" id="datetime_Operands" href="#datetime_Operands">`:datetime` Operands</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-datetime-function-datetime-operands"></a>
+#### <a name="datetime_Operands" id="datetime_Operands" href="#datetime_Operands">`:datetime` Operands</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-datetime-function-datetime-operands"></a>
 
 The _operand_ of the `:datetime` function is either
 an implementation-defined date/time type
 or a _date/time literal value_, as defined in [Date and Time Operand](#date-and-time-operands).
 All other _operand_ values produce a _Bad Operand_ error.
 
-##### <a name="datetime_Options" id="datetime_Options" href="#datetime_Options">`:datetime` Options</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-datetime-function-datetime-options"></a>
+#### <a name="datetime_Options" id="datetime_Options" href="#datetime_Options">`:datetime` Options</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-datetime-function-datetime-options"></a>
 
 The following _options_ are REQUIRED to be available on the function `:datetime`:
 
@@ -3965,7 +3965,7 @@ Any _date/time override options_ of the operand are included in the resolved opt
 with _options_ on the _expression_ taking priority over any options of the _operand_.
 Any _operand_ options not matching the _date/time override options_ are ignored.
 
-##### <a name="datetime_Resolved_Value" id="datetime_Resolved_Value" href="#datetime_Resolved_Value">`:datetime` Resolved Value</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-datetime-function-datetime-resolved-value"></a>
+#### <a name="datetime_Resolved_Value" id="datetime_Resolved_Value" href="#datetime_Resolved_Value">`:datetime` Resolved Value</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-datetime-function-datetime-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with a `:datetime` _function_
 contains an implementation-defined date/time value
@@ -3980,14 +3980,14 @@ If no options are specified, this function defaults to the following:
 
 - `{$d :date}` is the same as `{$d :date fields=year-month-day length=medium}`
 
-##### <a name="date_Operands" id="date_Operands" href="#date_Operands">`:date` Operands</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-date-function-date-operands"></a>
+#### <a name="date_Operands" id="date_Operands" href="#date_Operands">`:date` Operands</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-date-function-date-operands"></a>
 
 The _operand_ of the `:date` function is either
 an implementation-defined date/time type
 or a _date/time literal value_, as defined in [Date and Time Operand](#date-and-time-operands).
 All other _operand_ values produce a _Bad Operand_ error.
 
-##### <a name="date_Options" id="date_Options" href="#date_Options">`:date` Options</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-date-function-date-options"></a>
+#### <a name="date_Options" id="date_Options" href="#date_Options">`:date` Options</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-date-function-date-options"></a>
 
 The following _options_ are REQUIRED to be available on the function `:date`:
 
@@ -4015,7 +4015,7 @@ Any _date/time override options_ of the operand are included in the resolved opt
 with _options_ on the _expression_ taking priority over any options of the _operand_.
 Any _operand_ options not matching the _date/time override options_ are ignored.
 
-##### <a name="date_Resolved_Value" id="date_Resolved_Value" href="#date_Resolved_Value">`:date` Resolved Value</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-date-function-date-resolved-value"></a>
+#### <a name="date_Resolved_Value" id="date_Resolved_Value" href="#date_Resolved_Value">`:date` Resolved Value</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-date-function-date-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with a `:date` _function_
 is implementation-defined.
@@ -4034,14 +4034,14 @@ If no options are specified, this function defaults to the following:
 
 - `{$t :time}` is the same as `{$t :time precision=minute}`
 
-##### <a name="time_Operands" id="time_Operands" href="#time_Operands">`:time` Operands</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-time-function-time-operands"></a>
+#### <a name="time_Operands" id="time_Operands" href="#time_Operands">`:time` Operands</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-time-function-time-operands"></a>
 
 The _operand_ of the `:time` function is either
 an implementation-defined date/time type
 or a _date/time literal value_, as defined in [Date and Time Operand](#date-and-time-operands).
 All other _operand_ values produce a _Bad Operand_ error.
 
-##### <a name="time_Options" id="time_Options" href="#time_Options">`:time` Options</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-time-function-time-options"></a>
+#### <a name="time_Options" id="time_Options" href="#time_Options">`:time` Options</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-time-function-time-options"></a>
 
 The following _options_ are REQUIRED to be available on the function `:time`:
 
@@ -4068,7 +4068,7 @@ Any _date/time override options_ of the operand are included in the resolved opt
 with _options_ on the _expression_ taking priority over any options of the _operand_.
 Any _operand_ options not matching the _date/time override options_ are ignored.
 
-##### <a name="time_Resolved_Value" id="time_Resolved_Value" href="#time_Resolved_Value">`:time` Resolved Value</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-time-function-time-resolved-value"></a>
+#### <a name="time_Resolved_Value" id="time_Resolved_Value" href="#time_Resolved_Value">`:time` Resolved Value</a> <a id="messageFormat-default-functions-date-and-time-value-formatting-the-time-function-time-resolved-value"></a>
 
 The _resolved value_ of an _expression_ with a `:time` _function_
 is implementation-defined.
@@ -4717,7 +4717,7 @@ In addition, end-users need to be aware of the risks involved.
 
 #### <a name="Pattern_Selection_Examples" id="Pattern_Selection_Examples" href="#Pattern_Selection_Examples">Pattern Selection Examples</a> <a id="messageFormat-appendices-non-normative-examples-pattern-selection-examples"></a>
 
-##### <a name="Selection_Example_1" id="Selection_Example_1" href="#Selection_Example_1">Selection Example 1</a> <a id="messageFormat-appendices-non-normative-examples-pattern-selection-examples-selection-example-1"></a>
+#### <a name="Selection_Example_1" id="Selection_Example_1" href="#Selection_Example_1">Selection Example 1</a> <a id="messageFormat-appendices-non-normative-examples-pattern-selection-examples-selection-example-1"></a>
 
 Presuming a minimal implementation which only supports `:string` _function_
 which matches keys by using string comparison,
@@ -4773,7 +4773,7 @@ foo foo {{All foo}}
 9. `bestVariant` is set to the variant `* * {{Otherwise}}`
 10. The pattern `Otherwise` is selected.
 
-##### <a name="Selection_Example_2" id="Selection_Example_2" href="#Selection_Example_2">Selection Example 2</a> <a id="messageFormat-appendices-non-normative-examples-pattern-selection-examples-selection-example-2"></a>
+#### <a name="Selection_Example_2" id="Selection_Example_2" href="#Selection_Example_2">Selection Example 2</a> <a id="messageFormat-appendices-non-normative-examples-pattern-selection-examples-selection-example-2"></a>
 
 Alternatively, with the same implementation and formatting context as in Example 1,
 pattern selection would proceed as follows for this message:
@@ -4851,7 +4851,7 @@ foo bar {{Foo and bar}}
 
 The pattern `{{Foo and bar}}` is selected.
 
-##### <a name="Selection_Example_3" id="Selection_Example_3" href="#Selection_Example_3">Selection Example 3</a> <a id="messageFormat-appendices-non-normative-examples-pattern-selection-examples-selection-example-3"></a>
+#### <a name="Selection_Example_3" id="Selection_Example_3" href="#Selection_Example_3">Selection Example 3</a> <a id="messageFormat-appendices-non-normative-examples-pattern-selection-examples-selection-example-3"></a>
 
 A more-complex example is the matching found in selection APIs
 such as ICU's `PluralFormat`.

@@ -57,9 +57,9 @@ The LDML specification is divided into the following parts:
   * [Number Formats](#Number_Formats) 
     * [Compact Number Formats](#Compact_Number_Formats) 
     * [Currency Formats](#Currency_Formats) 
-      * [Element Placement](#Element_Placement) 
-      * [Format Types & Display Forms](#Format_Types_and_Display_Forms) 
-      * [Pattern Variant Usage Rules](#Pattern_Variant_Usage_Rules) 
+    * [Element Placement](#Element_Placement) 
+    * [Format Types & Display Forms](#Format_Types_and_Display_Forms) 
+    * [Pattern Variant Usage Rules](#Pattern_Variant_Usage_Rules) 
   * [Miscellaneous Patterns](#Miscellaneous_Patterns) 
   * [Minimal Pairs](#Minimal_Pairs) 
 * [Number Format Patterns](#Number_Format_Patterns) 
@@ -95,10 +95,10 @@ The LDML specification is divided into the following parts:
 * [Rule-Based Number Formatting](#Rule-Based_Number_Formatting) 
   * [Rule-Based Number Formatting Scope](#Rule-Based_Number_Formatting_Scope) 
     * [SpelloutRules](#SpelloutRules) 
-      * [numbering](#numbering) 
-      * [numbering-year](#numberingyear) 
-      * [cardinal](#cardinal) 
-      * [ordinal](#ordinal) 
+    * [numbering](#numbering) 
+    * [numbering-year](#numberingyear) 
+    * [cardinal](#cardinal) 
+    * [ordinal](#ordinal) 
     * [NumberingSystemRules](#NumberingSystemRules) 
     * [OrdinalRules](#OrdinalRules) 
   * [Limitations](#RBNF_Limitations) 
@@ -511,7 +511,7 @@ Patterns for use with currency formatting:
 <!ELEMENT currencyPatternAppendISO ( #PCDATA ) >
 ```
 
-##### <a name="Element_Placement" id="Element_Placement" href="#Element_Placement">Element Placement</a> <a id="numbers-currency-formats-element-placement"></a>
+#### <a name="Element_Placement" id="Element_Placement" href="#Element_Placement">Element Placement</a> <a id="numbers-currency-formats-element-placement"></a>
 
 * <a id="numbers-number-elements-number-formats-currency-formats-rule-1"></a> **The following additional**: The following additional elements were intended to allow proper placement of the currency symbol relative to the numeric quantity. These are specified in the root locale and typically not overridden in any other locale. However, as of CLDR 42, the preferred approach to controlling placement of the currency symbol is use of the `alt="alphaNextToNumber"` variant for `currencyFormat` `pattern`s. See below and _[- Currencies](#Currencies)_ for additional information on the use of these options.
 
@@ -525,7 +525,7 @@ Patterns for use with currency formatting:
 <!ELEMENT insertBetween ( #PCDATA ) >
 ```
 
-##### <a name="Format_Types_and_Display_Forms" id="Format_Types_and_Display_Forms" href="#Format_Types_and_Display_Forms">Format Types & Display Forms</a> <a id="numbers-currency-formats-format-types-display-forms"></a>
+#### <a name="Format_Types_and_Display_Forms" id="Format_Types_and_Display_Forms" href="#Format_Types_and_Display_Forms">Format Types & Display Forms</a> <a id="numbers-currency-formats-format-types-display-forms"></a>
 
 * <a id="numbers-number-elements-number-formats-currency-formats-rule-2"></a> **In addition to**: In addition to a standard currency format, in which negative currency amounts might typically be displayed as something like “-$3.27”, locales may provide an "accounting" form, in which for "en_US" the same example would appear as “($3.27)”. The locale keyword "cf" can be used to select the standard or accounting form, see [Unicode Currency Format Identifier](tr35.md#UnicodeCurrencyFormatIdentifier).
 
@@ -558,7 +558,7 @@ Patterns for use with currency formatting:
 </currencyFormats>
 ```
 
-##### <a name="Pattern_Variant_Usage_Rules" id="Pattern_Variant_Usage_Rules" href="#Pattern_Variant_Usage_Rules">Pattern Variant Usage Rules</a> <a id="numbers-currency-formats-pattern-variant-usage-rules"></a>
+#### <a name="Pattern_Variant_Usage_Rules" id="Pattern_Variant_Usage_Rules" href="#Pattern_Variant_Usage_Rules">Pattern Variant Usage Rules</a> <a id="numbers-currency-formats-pattern-variant-usage-rules"></a>
 
 * <a id="numbers-number-elements-number-formats-currency-formats-rule-3"></a> **The `alt="alphaNextToNumber"` pattern**: The `alt="alphaNextToNumber"` pattern, if available, should be used instead of the standard pattern when the currency symbol character closest to the numeric value has Unicode General Category L (letter). The `alt="alphaNextToNumber"` pattern is typically provided when the standard currency pattern does not have a space between currency symbol and numeric value; the alphaNextToNumber variant adds a non-breaking space if appropriate for the locale.
 
@@ -1607,16 +1607,16 @@ Used to group rules into functional sets. There are 3 known rule types. They are
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-rule-1"></a> **The `SpelloutRules` type**: The `SpelloutRules` type is used for representing a numerical datatype with words that are typically found in speech. There are 4 common rule categories for spellout rules. A language with complete coverage will cover all of these categories. Some languages may provide more than these 4 types depending on what is relevant for a given language:
 
 
-##### <a name="numbering" id="numbering" href="#numbering">numbering</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering"></a>
+#### <a name="numbering" id="numbering" href="#numbering">numbering</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering"></a>
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering-rule-1"></a> **This is the**: This is the default used when there is no context for the number. Usually this is used for counting without reference to a noun. For many languages, this may also be used for enumeration of objects, like used when pronouncing "table number one" and "table number two". It can also be used for pronouncing a math equation, like "2 - 3 = -1".
 
-##### <a name="numberingyear" id="numberingyear" href="#numberingyear">numbering-year</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering-year"></a>
+#### <a name="numberingyear" id="numberingyear" href="#numberingyear">numbering-year</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering-year"></a>
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-numbering-year-rule-1"></a> **This is used**: This is used for cases where years are pronounced or written a certain way. An example in English is the year 1999, which comes out as "nineteen ninety-nine" instead of the numbering value "one thousand nine hundred ninety-nine". The rules for this type have undefined behavior for non-integer numbers, and values less than 1.
 
-##### <a name="cardinal" id="cardinal" href="#cardinal">cardinal</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-cardinal"></a>
+#### <a name="cardinal" id="cardinal" href="#cardinal">cardinal</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-cardinal"></a>
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-cardinal-rule-1"></a> **This is used**: This is used when providing the quantity of the number of objects. For many languages, there may not be a default cardinal type. Many languages require the notion of the gender and other grammatical properties so that the number and the objects being referenced are in grammatical agreement. An example of its usage is "one e-mail", "two people" or "three kilometers". Some languages may not have dedicated words for 0 or negative numbers for cardinals. In those cases, the words from the numbering type can be reused.
 
-##### <a name="ordinal" id="ordinal" href="#ordinal">ordinal</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-ordinal"></a>
+#### <a name="ordinal" id="ordinal" href="#ordinal">ordinal</a> <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-ordinal"></a>
 * <a id="numbers-rule-based-number-formatting-rule-based-number-formatting-scope-spelloutrules-ordinal-rule-1"></a> **This is used**: This is used when providing the order of the number of objects. For many languages, there may not be a default ordinal type. Many languages also require the notion of the gender for ordinal so that the ordinal number and the objects being referenced are in grammatical agreement. An example of its usage is "first place", "second e-mail" or "third house on the right". The rules for this type have undefined behavior for non-integer numbers, and values less than 1.
 
 

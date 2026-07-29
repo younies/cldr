@@ -122,9 +122,9 @@ The LDML specification is divided into the following parts:
     * [Disallowed Regex Features](#Disallowed_Regex_Features) 
     * [Replacement syntax](#Replacement_syntax) 
     * [Transform Grammar](#Transform_Grammar) 
-      * [Transform From Grammar](#Transform_From_Grammar) 
-      * [Transform To Grammar](#Transform_To_Grammar) 
-      * [ABNF](#ABNF) 
+    * [Transform From Grammar](#Transform_From_Grammar) 
+    * [Transform To Grammar](#Transform_To_Grammar) 
+    * [ABNF](#ABNF) 
   * [Element: reorder](#Element_reorder) 
     * [Using `<import>` with `<reorder>` elements](#Using_with_elements) 
     * [Example Post-reorder transforms](#Example_Postreorder_transforms) 
@@ -1331,7 +1331,7 @@ _Attribute:_ `width="1.2"` (optional, default "1.0")
 <key id="wide-gap" gap="true" width="2.5"/>
 ```
 
-##### <a name="Implied_Keys" id="Implied_Keys" href="#Implied_Keys">Implied Keys</a> <a id="keyboards-element-hierarchy-element-key-implied-keys"></a>
+#### <a name="Implied_Keys" id="Implied_Keys" href="#Implied_Keys">Implied Keys</a> <a id="keyboards-element-hierarchy-element-key-implied-keys"></a>
 
 Not all keys need to be listed explicitly.  The following two can be assumed to already exist:
 
@@ -1540,7 +1540,7 @@ _Attribute:_ `id` (required)
 </form>
 ```
 
-##### <a name="Implied_Form_Values" id="Implied_Form_Values" href="#Implied_Form_Values">Implied Form Values</a> <a id="keyboards-element-hierarchy-element-form-implied-form-values"></a>
+#### <a name="Implied_Form_Values" id="Implied_Form_Values" href="#Implied_Form_Values">Implied Form Values</a> <a id="keyboards-element-hierarchy-element-form-implied-form-values"></a>
 
 There is an implied set of `<form>` elements corresponding to the default forms, thus implementations must behave as if there was the following import statement:
 
@@ -2513,7 +2513,7 @@ Used in the `to=`
 
 #### <a name="Transform_Grammar" id="Transform_Grammar" href="#Transform_Grammar">Transform Grammar</a> <a id="keyboards-element-hierarchy-element-transform-transform-grammar"></a>
 
-##### <a name="Transform_From_Grammar" id="Transform_From_Grammar" href="#Transform_From_Grammar">Transform From Grammar</a> <a id="keyboards-element-hierarchy-element-transform-transform-grammar-transform-from-grammar"></a>
+#### <a name="Transform_From_Grammar" id="Transform_From_Grammar" href="#Transform_From_Grammar">Transform From Grammar</a> <a id="keyboards-element-hierarchy-element-transform-transform-grammar-transform-from-grammar"></a>
 
 The `from=` attribute MUST match the `from-match` rule in this grammar. Not all strings which match this grammar are valid, specifically
 
@@ -2687,7 +2687,7 @@ NAMECHAR ::= NAMESTARTCHAR
 NMTOKEN  ::= NAMECHAR+
 ```
 
-##### <a name="Transform_To_Grammar" id="Transform_To_Grammar" href="#Transform_To_Grammar">Transform To Grammar</a> <a id="keyboards-element-hierarchy-element-transform-transform-grammar-transform-to-grammar"></a>
+#### <a name="Transform_To_Grammar" id="Transform_To_Grammar" href="#Transform_To_Grammar">Transform To Grammar</a> <a id="keyboards-element-hierarchy-element-transform-transform-grammar-transform-to-grammar"></a>
 
 This is the grammar for the `<transform to="…"/>` attribute.  The `to=` attribute MUST match the `to-replacement` rule in this grammar. Not all strings which match this grammar are valid:
 
@@ -2789,7 +2789,7 @@ NAMECHAR ::= NAMESTARTCHAR
 NMTOKEN  ::= NAMECHAR+
 ```
 
-##### <a name="ABNF" id="ABNF" href="#ABNF">ABNF</a> <a id="keyboards-element-hierarchy-element-transform-transform-grammar-abnf"></a>
+#### <a name="ABNF" id="ABNF" href="#ABNF">ABNF</a> <a id="keyboards-element-hierarchy-element-transform-transform-grammar-abnf"></a>
 
 The grammar for the transform rules is also available in ABNF notation [[STD68](https://www.rfc-editor.org/info/std68)],
 including the modifications found in [RFC 7405](https://www.rfc-editor.org/rfc/rfc7405).

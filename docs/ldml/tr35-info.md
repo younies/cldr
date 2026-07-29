@@ -84,10 +84,10 @@ The LDML specification is divided into the following parts:
     * [Derived Unit System](#Derived_Unit_System) 
     * [Conversion Mechanisms](#Conversion_Mechanisms) 
     * [Exceptional Cases](#Exceptional_Cases) 
-      * [Identities](#Identities) 
-      * [Aliases](#Aliases) 
-      * [“Duplicate” Units](#Duplicate_Units) 
-      * [Discarding Offsets](#Discarding_Offsets) 
+    * [Identities](#Identities) 
+    * [Aliases](#Aliases) 
+    * [“Duplicate” Units](#Duplicate_Units) 
+    * [Discarding Offsets](#Discarding_Offsets) 
     * [Unresolved Units](#Unresolved_Units) 
 * [Quantities and Base Units](#Quantities_and_Base_Units) 
   * [UnitType vs Quantity](#UnitType_vs_Quantity) 
@@ -1116,7 +1116,7 @@ This applies to more than just these cases: one can convert from any unit to rel
 
 #### <a name="Exceptional_Cases" id="Exceptional_Cases" href="#Exceptional_Cases">Exceptional Cases</a> <a id="info-unit-conversion-conversion-data-exceptional-cases"></a>
 
-##### <a name="Identities" id="Identities" href="#Identities">Identities</a> <a id="info-unit-conversion-conversion-data-exceptional-cases-identities"></a>
+#### <a name="Identities" id="Identities" href="#Identities">Identities</a> <a id="info-unit-conversion-conversion-data-exceptional-cases-identities"></a>
 
 For completeness, identity mappings are also provided for the base units themselves, such as:
 
@@ -1124,7 +1124,7 @@ For completeness, identity mappings are also provided for the base units themsel
 <convertUnit source='meter' baseUnit='meter' />
 ```
 
-##### <a name="Aliases" id="Aliases" href="#Aliases">Aliases</a> <a id="info-unit-conversion-conversion-data-exceptional-cases-aliases"></a>
+#### <a name="Aliases" id="Aliases" href="#Aliases">Aliases</a> <a id="info-unit-conversion-conversion-data-exceptional-cases-aliases"></a>
 
 In a few instances the old identifiers are deprecated in favor of regular syntax. Implementations should handle both on input:
 
@@ -1137,12 +1137,12 @@ In a few instances the old identifiers are deprecated in favor of regular syntax
 
 These use the standard alias elements in XML, and are also included in the [units.xml](https://github.com/unicode-org/cldr/blob/main/common/supplemental/units.xml) file.
 
-##### <a name="Duplicate_Units" id="Duplicate_Units" href="#Duplicate_Units">“Duplicate” Units</a> <a id="info-unit-conversion-conversion-data-exceptional-cases-duplicate-units"></a>
+#### <a name="Duplicate_Units" id="Duplicate_Units" href="#Duplicate_Units">“Duplicate” Units</a> <a id="info-unit-conversion-conversion-data-exceptional-cases-duplicate-units"></a>
 
 * <a id="info-unit-conversion-conversion-data-exceptional-cases-duplicate-units-rule-1"></a> **Some CLDR units**: Some CLDR units are provided simply because they have different names in some languages. For example, year and year-person, or foodcalorie and kilocalorie. One CLDR unit is not convertible (temperature-generic), it is only used for the translation (where the exact unit would be understood by context).
 
 
-##### <a name="Discarding_Offsets" id="Discarding_Offsets" href="#Discarding_Offsets">Discarding Offsets</a> <a id="info-unit-conversion-conversion-data-exceptional-cases-discarding-offsets"></a>
+#### <a name="Discarding_Offsets" id="Discarding_Offsets" href="#Discarding_Offsets">Discarding Offsets</a> <a id="info-unit-conversion-conversion-data-exceptional-cases-discarding-offsets"></a>
 
 * <a id="info-unit-conversion-conversion-data-exceptional-cases-discarding-offsets-rule-1"></a> **The temperature units**: The temperature units are special. When they represent a scale, they have an offset. But where they represent an amount, such as in complex units, they do not. So celsius-per-second is the same as kelvin-per-second.
 

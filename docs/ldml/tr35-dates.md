@@ -59,8 +59,8 @@ The LDML specification is divided into the following parts:
       * [Table: Date-Time Combination Examples](#Date_Time_Combination_Examples) 
     * [Elements availableFormats, appendItems](#availableFormats_appendItems) 
       * [Table: Mapping Requested Time Skeletons To Patterns](#Mapping_Requested_Time_Skeletons_To_Patterns) 
-      * [Matching Skeletons](#Matching_Skeletons) 
-      * [Missing Skeleton Fields](#Missing_Skeleton_Fields) 
+    * [Matching Skeletons](#Matching_Skeletons) 
+    * [Missing Skeleton Fields](#Missing_Skeleton_Fields) 
     * [Element intervalFormats](#intervalFormats) 
 * [Calendar Fields](#Calendar_Fields) 
 * [Supplemental Calendar Data](#Supplemental_Calendar_Data) 
@@ -72,9 +72,9 @@ The LDML specification is divided into the following parts:
   * [Time Data](#Time_Data) 
   * [Day Period Rule Sets](#Day_Period_Rule_Sets) 
     * [Day Period Rules](#Day_Period_Rules) 
-      * [Fixed periods](#Fixed_periods) 
-      * [Variable periods](#Variable_periods) 
-      * [Parsing Day Periods](#Parsing_Day_Periods) 
+    * [Fixed periods](#Fixed_periods) 
+    * [Variable periods](#Variable_periods) 
+    * [Parsing Day Periods](#Parsing_Day_Periods) 
 * [Time Zone Names](#Time_Zone_Names) 
   * [Table: timeZoneNames Elements Used for Fallback](#timeZoneNames_Elements_Used_for_Fallback) 
   * [Metazone Names](#Metazone_Names) 
@@ -98,22 +98,22 @@ The LDML specification is divided into the following parts:
 * [Semantic Skeletons](#Semantic_Skeletons) 
   * [Parts of a Semantic Skeleton](#Parts_of_a_Semantic_Skeleton) 
     * [Semantic Field Sets](#Semantic_Field_Sets) 
-      * [Date Field Sets](#Semantic_Date_Field_Sets) 
-      * [Calendar Period Field Sets](#Semantic_Calendar_Period_Field_Sets) 
-      * [Time Field Sets](#Semantic_Time_Field_Sets) 
-      * [Time Zone Field Sets](#Semantic_Time_Zone_Field_Sets) 
-      * [Composite Field Sets](#Semantic_Composite_Field_Sets) 
+    * [Date Field Sets](#Semantic_Date_Field_Sets) 
+    * [Calendar Period Field Sets](#Semantic_Calendar_Period_Field_Sets) 
+    * [Time Field Sets](#Semantic_Time_Field_Sets) 
+    * [Time Zone Field Sets](#Semantic_Time_Zone_Field_Sets) 
+    * [Composite Field Sets](#Semantic_Composite_Field_Sets) 
     * [Semantic Skeleton Options](#Semantic_Skeleton_Options) 
-      * [Length](#Semantic_Skeleton_Length) 
-      * [Alignment](#Semantic_Skeleton_Alignment) 
-      * [Year Style](#Semantic_Skeleton_Year_Style) 
-      * [Hour Cycle](#Semantic_Skeleton_Hour_Cycle) 
-      * [Time Precision](#Semantic_Skeleton_Time_Precision) 
-      * [Time Zone Style](#Semantic_Skeleton_Time_Zone_Style) 
+    * [Length](#Semantic_Skeleton_Length) 
+    * [Alignment](#Semantic_Skeleton_Alignment) 
+    * [Year Style](#Semantic_Skeleton_Year_Style) 
+    * [Hour Cycle](#Semantic_Skeleton_Hour_Cycle) 
+    * [Time Precision](#Semantic_Skeleton_Time_Precision) 
+    * [Time Zone Style](#Semantic_Skeleton_Time_Zone_Style) 
   * [Generating Patterns for Semantic Skeletons](#Generating_Patterns_for_Semantic_Skeletons) 
     * [Mapping to Standard Skeletons](#Mapping_to_Standard_Skeletons) 
-      * [Time Precision Skeleton Variations](#Semantic_Time_Precision_Skeleton_Variations) 
-      * [Year Style Skeleton Variations](#Semantic_Year_Style_Skeleton_Variations) 
+    * [Time Precision Skeleton Variations](#Semantic_Time_Precision_Skeleton_Variations) 
+    * [Year Style Skeleton Variations](#Semantic_Year_Style_Skeleton_Variations) 
   * [Semantic Skeleton Conformance](#Semantic_Skeleton_Conformance) 
 
 ## <a name="Overview_Dates_Element_Supplemental" id="Overview_Dates_Element_Supplemental" href="#Overview_Dates_Element_Supplemental">Overview: Dates Element, Supplemental Date and Calendar Information</a> <a id="dates-overview-dates-element-supplemental-date-and-calendar-information"></a>
@@ -795,7 +795,7 @@ Locales that use 12-hour-cycle time formats with B may provide availableFormats 
 
 The dateFormatItems inherit from their parent locale, so the inherited items need to be considered when processing.
 
-##### <a name="Matching_Skeletons" id="Matching_Skeletons" href="#Matching_Skeletons">Matching Skeletons</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons"></a>
+#### <a name="Matching_Skeletons" id="Matching_Skeletons" href="#Matching_Skeletons">Matching Skeletons</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons"></a>
 
 It is not necessary to supply `dateFormatItem`s with skeletons for every field length; fields in the skeleton and pattern are expected to be adjusted in parallel to handle a request.
 
@@ -870,7 +870,7 @@ For an example of not converting a pattern field length if the corresponding ske
 * <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-matching-skeletons-rule-5"></a> **Finally: If the**: Finally: If the requested skeleton included both seconds and fractional seconds and the dateFormatItem skeleton included seconds but not fractional seconds, then the seconds field of the corresponding pattern should be adjusted by appending the locale’s decimal separator, followed by the sequence of ‘S’ characters from the requested skeleton.
 
 
-##### <a name="Missing_Skeleton_Fields" id="Missing_Skeleton_Fields" href="#Missing_Skeleton_Fields">Missing Skeleton Fields</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields"></a>
+#### <a name="Missing_Skeleton_Fields" id="Missing_Skeleton_Fields" href="#Missing_Skeleton_Fields">Missing Skeleton Fields</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields"></a>
 
 * <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-missing-skeleton-fields-rule-1"></a> **If a client-requested**: If a client-requested set of fields includes both date and time fields, and if the `availableFormats` data does not include a `dateFormatItem` whose skeleton matches the same set of fields, then the request should be handled as follows:
 
@@ -1410,7 +1410,7 @@ These are relative times within a single day. If the event can occur on multiple
 
 Here are the requirements for a rule set.
 
-##### <a name="Fixed_periods" id="Fixed_periods" href="#Fixed_periods">Fixed periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods"></a>
+#### <a name="Fixed_periods" id="Fixed_periods" href="#Fixed_periods">Fixed periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods"></a>
 
 * <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-rule-1"></a> **There are 4**: There are 4 dayPeriods that are fixed; am/pm are always defined, and always have the same meaning and definition for every locale. Midnight and noon are optional, however if they are defined, they have the same meaning and definition as in all other locales where they are defined.
 
@@ -1432,7 +1432,7 @@ Note that midnight and am can overlap, as can noon and pm.
 * <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-fixed-periods-rule-3"></a> **It is strongly**: It is strongly recommended that implementations provide for the ability to specify whether **midnight** is supported or not (and for either 00:00 or 24:00 or both), since only the caller knows enough of the context to determine what to use. In the absence of such information, 24:00 may be the best choice.
 
 
-##### <a name="Variable_periods" id="Variable_periods" href="#Variable_periods">Variable periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-variable-periods"></a>
+#### <a name="Variable_periods" id="Variable_periods" href="#Variable_periods">Variable periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-variable-periods"></a>
 
 1. If a locale has a set of dayPeriodRules for variable periods, it needs to completely cover the 24 hours in a day (from 0:00 before 24:00), with **no** overlaps between any dayPeriodRules. They may overlap with the **Fixed Periods**.
    If it does not have a rule set for variable periods, behavior should fall back to using the fixed periods (am, pm).
@@ -1451,7 +1451,7 @@ Note that midnight and am can overlap, as can noon and pm.
      * `<dayPeriod type = "night1" from="21:00" to="24:00"/>`
 9. 24:00 is _only_ allowed in _before_="24:00".
 
-##### <a name="Parsing_Day_Periods" id="Parsing_Day_Periods" href="#Parsing_Day_Periods">Parsing Day Periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods"></a>
+#### <a name="Parsing_Day_Periods" id="Parsing_Day_Periods" href="#Parsing_Day_Periods">Parsing Day Periods</a> <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods"></a>
 
 * <a id="dates-supplemental-calendar-data-day-period-rule-sets-day-period-rules-parsing-day-periods-rule-1"></a> **When parsing, if**: When parsing, if the hour is present with a strict parse the dayperiod is checked for consistency with the hour. If there is no hour, the center of the first matching dayPeriodRule can be chosen (starting from 0:00). However, if there is other information available when parsing, a different point within the interval may be chosen.
 
@@ -2634,7 +2634,7 @@ This section defines four disjoint categories of field sets:
 
 Certain combinations of categories form [Composite Field Sets](#Semantic_Composite_Field_Sets).
 
-##### <a name="Semantic_Date_Field_Sets" id="Semantic_Date_Field_Sets" href="#Semantic_Date_Field_Sets">Date Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-date-field-sets"></a>
+#### <a name="Semantic_Date_Field_Sets" id="Semantic_Date_Field_Sets" href="#Semantic_Date_Field_Sets">Date Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-date-field-sets"></a>
 
 A _date field set_ refers to a particular day in time. Higher-order fields, such as the month or year, could be omitted, but there must always be a reference to a particular day.
 
@@ -2661,7 +2661,7 @@ Note: Month and Year are not valid date field sets on their own because they do 
 
 Note: This table may be extended in the future to include additional fields, such as week and quarter.
 
-##### <a name="Semantic_Calendar_Period_Field_Sets" id="Semantic_Calendar_Period_Field_Sets" href="#Semantic_Calendar_Period_Field_Sets">Calendar Period Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-calendar-period-field-sets"></a>
+#### <a name="Semantic_Calendar_Period_Field_Sets" id="Semantic_Calendar_Period_Field_Sets" href="#Semantic_Calendar_Period_Field_Sets">Calendar Period Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-calendar-period-field-sets"></a>
 
 A _calendar period field set_ refers to a span of time in a calendar system, _above_ the order of a day.
 
@@ -2679,7 +2679,7 @@ Note: This table may be extended in the future to include additional fields, suc
 
 Note: A _calendar period_ is distinct from a _date_ because it cannot be paired with time to form a composite field set.
 
-##### <a name="Semantic_Time_Field_Sets" id="Semantic_Time_Field_Sets" href="#Semantic_Time_Field_Sets">Time Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-field-sets"></a>
+#### <a name="Semantic_Time_Field_Sets" id="Semantic_Time_Field_Sets" href="#Semantic_Time_Field_Sets">Time Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-field-sets"></a>
 
 The **Time** field signifies the time of day.
 
@@ -2693,7 +2693,7 @@ Note: A day period (AM/PM) may be implied by the time field, depending on factor
 
 Note: Durations, such as "3 minutes and 12 seconds" (or 3:12), are not handled through the skeleton mechanisms.
 
-##### <a name="Semantic_Time_Zone_Field_Sets" id="Semantic_Time_Zone_Field_Sets" href="#Semantic_Time_Zone_Field_Sets">Time Zone Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-zone-field-sets"></a>
+#### <a name="Semantic_Time_Zone_Field_Sets" id="Semantic_Time_Zone_Field_Sets" href="#Semantic_Time_Zone_Field_Sets">Time Zone Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-time-zone-field-sets"></a>
 
 The **Zone** field signifies the time zone.
 
@@ -2703,7 +2703,7 @@ The rendering can be configured with the [Zone Style](#Semantic_Skeleton_Time_Zo
 |-----------|-------------------------------------|
 | { Zone }  | PST / PT / Los Angeles Time / GMT-8 |
 
-##### <a name="Semantic_Composite_Field_Sets" id="Semantic_Composite_Field_Sets" href="#Semantic_Composite_Field_Sets">Composite Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-composite-field-sets"></a>
+#### <a name="Semantic_Composite_Field_Sets" id="Semantic_Composite_Field_Sets" href="#Semantic_Composite_Field_Sets">Composite Field Sets</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-field-sets-composite-field-sets"></a>
 
 Date, calendar period, and time field sets can be combined in certain ways shown in the following table:
 
@@ -2724,7 +2724,7 @@ Note: This table may be extended in the future to include additional combination
 * <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-rule-1"></a> **A semantic skeleton**: A semantic skeleton associates fields with zero or more options, listed in this section. Options apply to specific fields, and they should not be specified if their respective fields are not in the field set. Some options have a default value.
 
 
-##### <a name="Semantic_Skeleton_Length" id="Semantic_Skeleton_Length" href="#Semantic_Skeleton_Length">Length</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-length"></a>
+#### <a name="Semantic_Skeleton_Length" id="Semantic_Skeleton_Length" href="#Semantic_Skeleton_Length">Length</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-length"></a>
 
 **Required Fields: Year, Month, Day, Weekday, Hour, or Zone**
 
@@ -2750,7 +2750,7 @@ The _length_ determines how wide the fields should be rendered. There are three 
 
 Note: Additional lengths could be added in the future, such as "narrow" or "conversational".
 
-##### <a name="Semantic_Skeleton_Alignment" id="Semantic_Skeleton_Alignment" href="#Semantic_Skeleton_Alignment">Alignment</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-alignment"></a>
+#### <a name="Semantic_Skeleton_Alignment" id="Semantic_Skeleton_Alignment" href="#Semantic_Skeleton_Alignment">Alignment</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-alignment"></a>
 
 **Required Fields: Year, Month, Day, or Hour**
 
@@ -2764,7 +2764,7 @@ The _alignment_ provides additional context that can be used for determining how
 * <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-alignment-rule-1"></a> **Note: The most**: Note: The most common behavior with "column" alignment is for implementations to render a minimum of two digits on impacted fields. For example, an implementation might render "01/01/2000" instead of "1/1/2000" in US English.
 
 
-##### <a name="Semantic_Skeleton_Year_Style" id="Semantic_Skeleton_Year_Style" href="#Semantic_Skeleton_Year_Style">Year Style</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-year-style"></a>
+#### <a name="Semantic_Skeleton_Year_Style" id="Semantic_Skeleton_Year_Style" href="#Semantic_Skeleton_Year_Style">Year Style</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-year-style"></a>
 
 **Required Field: Year**
 
@@ -2796,7 +2796,7 @@ Examples in Gregorian:
 
 Note: This algorithm and the list of choices is likely to evolve as CLDR learns more about era display customs in different regions and calendar systems, and it may become normative.
 
-##### <a name="Semantic_Skeleton_Hour_Cycle" id="Semantic_Skeleton_Hour_Cycle" href="#Semantic_Skeleton_Hour_Cycle">Hour Cycle</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-hour-cycle"></a>
+#### <a name="Semantic_Skeleton_Hour_Cycle" id="Semantic_Skeleton_Hour_Cycle" href="#Semantic_Skeleton_Hour_Cycle">Hour Cycle</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-hour-cycle"></a>
 
 **Required Field: Hour**
 
@@ -2820,7 +2820,7 @@ The choices are:
 
 Note: An option could be added in the future to give the developer more control over how day periods are displayed or to disable day periods when there is sufficient context.
 
-##### <a name="Semantic_Skeleton_Time_Precision" id="Semantic_Skeleton_Time_Precision" href="#Semantic_Skeleton_Time_Precision">Time Precision</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-precision"></a>
+#### <a name="Semantic_Skeleton_Time_Precision" id="Semantic_Skeleton_Time_Precision" href="#Semantic_Skeleton_Time_Precision">Time Precision</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-precision"></a>
 
 **Required Field: Time**
 
@@ -2841,7 +2841,7 @@ Note: The finest level of precision is currently specified as nanoseconds, consi
 
 Note: The default value of time precision may change as more options are added.
 
-##### <a name="Semantic_Skeleton_Time_Zone_Style" id="Semantic_Skeleton_Time_Zone_Style" href="#Semantic_Skeleton_Time_Zone_Style">Time Zone Style</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-zone-style"></a>
+#### <a name="Semantic_Skeleton_Time_Zone_Style" id="Semantic_Skeleton_Time_Zone_Style" href="#Semantic_Skeleton_Time_Zone_Style">Time Zone Style</a> <a id="dates-semantic-skeletons-parts-of-a-semantic-skeleton-semantic-skeleton-options-time-zone-style"></a>
 
 **Required Field: Zone**
 
@@ -2922,7 +2922,7 @@ This means that the Year, Month, and Day semantic field mapping in en-US should 
 | Month          | Japanese  | MMMM   | MMM    | M      |
 | Day            | Japanese  | d      | d      | d      |
 
-##### <a name="Semantic_Time_Precision_Skeleton_Variations" id="Semantic_Time_Precision_Skeleton_Variations" href="#Semantic_Time_Precision_Skeleton_Variations">Time Precision Skeleton Variations</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-time-precision-skeleton-variations"></a>
+#### <a name="Semantic_Time_Precision_Skeleton_Variations" id="Semantic_Time_Precision_Skeleton_Variations" href="#Semantic_Time_Precision_Skeleton_Variations">Time Precision Skeleton Variations</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-time-precision-skeleton-variations"></a>
 
 The [time precision](#Semantic_Skeleton_Time_Precision) should change the skeleton for all lengths as follows:
 
@@ -2932,7 +2932,7 @@ The [time precision](#Semantic_Skeleton_Time_Precision) should change the skelet
 - Second: Add "m" and "s"
 - FractionalSecond: Add "m", "s", and a number of "S" characters equal to the integer option
 
-##### <a name="Semantic_Year_Style_Skeleton_Variations" id="Semantic_Year_Style_Skeleton_Variations" href="#Semantic_Year_Style_Skeleton_Variations">Year Style Skeleton Variations</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-year-style-skeleton-variations"></a>
+#### <a name="Semantic_Year_Style_Skeleton_Variations" id="Semantic_Year_Style_Skeleton_Variations" href="#Semantic_Year_Style_Skeleton_Variations">Year Style Skeleton Variations</a> <a id="dates-semantic-skeletons-generating-patterns-for-semantic-skeletons-mapping-to-standard-skeletons-year-style-skeleton-variations"></a>
 
 The [year style](#Semantic_Skeleton_Year_Style) should change the skeleton for all lengths as follows:
 

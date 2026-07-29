@@ -5,11 +5,11 @@ editors:
 - name: Peter Edberg
 ---
 
-## Unicode Technical Standard #35
+## <a name="Unicode_Technical_Standard_35" id="Unicode_Technical_Standard_35" href="#Unicode_Technical_Standard_35">Unicode Technical Standard #35</a> <a id="dates-unicode-technical-standard-35"></a>
 
 # Unicode Locale Data Markup Language (LDML)<br/>Part 4: Dates
 
-### _Summary_
+### <a name="_Summary_" id="_Summary_" href="#_Summary_">_Summary_</a> <a id="dates-unicode-technical-standard-35-summary"></a>
 
 * <a id="dates-unicode-technical-standard-35-summary-rule-1"></a> **This document describes**: This document describes parts of an XML format (_vocabulary_) for the exchange of structured locale data. This format is used in the [Unicode Common Locale Data Repository](https://www.unicode.org/cldr/).
 
@@ -17,7 +17,7 @@ editors:
 * <a id="dates-unicode-technical-standard-35-summary-rule-2"></a> **This is a**: This is a partial document, describing only those parts of the LDML that are relevant for date, time, and time zone formatting. For the other parts of the LDML see the [main LDML document](tr35.md) and the links above.
 
 
-### _Status_
+### <a name="_Status_" id="_Status_" href="#_Status_">_Status_</a> <a id="dates-unicode-technical-standard-35-status"></a>
 
 <div id='currentStatus'></div>
 
@@ -29,7 +29,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts
+## <a name="Parts" id="Parts" href="#Parts">Parts</a> <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -45,20 +45,20 @@ The LDML specification is divided into the following parts:
 *   Appendix A: [Modifications](tr35-modifications.md#modifications)
 *   Appendix B: [Acknowledgments](tr35-acknowledgments.md#acknowledgments)
 
-## <a name="Contents" href="#Contents">Contents of Part 4, Dates</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Part 4, Dates</a> <a id="dates-contents-of-part-4-dates"></a>
 
-* [Overview: Dates Element, Supplemental Date and Calendar Information](#Overview_Dates_Element_Supplemental)
-* [Calendar Elements](#Calendar_Elements)
-  * [Elements months, days, quarters, eras](#months_days_quarters_eras)
-  * [Elements monthPatterns, cyclicNameSets](#monthPatterns_cyclicNameSets)
-  * [Element dayPeriods](#dayPeriods)
-  * [Element dateFormats](#dateFormats)
-  * [Element timeFormats](#timeFormats)
-  * [Element dateTimeFormats](#dateTimeFormats)
-    * [Element dateTimeFormat](#dateTimeFormat)
-      * Table: [Date-Time Combination Examples](#Date_Time_Combination_Examples)
-    * [Elements availableFormats, appendItems](#availableFormats_appendItems)
-      * Table: [Mapping Requested Time Skeletons To Patterns](#Mapping_Requested_Time_Skeletons_To_Patterns)
+* [Overview: Dates Element, Supplemental Date and Calendar Information](#Overview_Dates_Element_Supplemental) 
+* [Calendar Elements](#Calendar_Elements) 
+  * [Elements months, days, quarters, eras](#months_days_quarters_eras) 
+  * [Elements monthPatterns, cyclicNameSets](#monthPatterns_cyclicNameSets) 
+  * [Element dayPeriods](#dayPeriods) 
+  * [Element dateFormats](#dateFormats) 
+  * [Element timeFormats](#timeFormats) 
+  * [Element dateTimeFormats](#dateTimeFormats) 
+    * [Element dateTimeFormat](#dateTimeFormat) 
+      * [Table: Date-Time Combination Examples](#Date_Time_Combination_Examples) 
+    * [Elements availableFormats, appendItems](#availableFormats_appendItems) 
+      * [Table: Mapping Requested Time Skeletons To Patterns](#Mapping_Requested_Time_Skeletons_To_Patterns) 
       * [Matching Skeletons](#Matching_Skeletons)
       * [Missing Skeleton Fields](#Missing_Skeleton_Fields)
     * [Element intervalFormats](#intervalFormats)
@@ -116,7 +116,7 @@ The LDML specification is divided into the following parts:
       * [Year Style Skeleton Variations](#Semantic_Year_Style_Skeleton_Variations)
   * [Semantic Skeleton Conformance](#Semantic_Skeleton_Conformance)
 
-## <a name="Overview_Dates_Element_Supplemental" href="#Overview_Dates_Element_Supplemental">Overview: Dates Element, Supplemental Date and Calendar Information</a>
+## <a name="Overview_Dates_Element_Supplemental" id="Overview_Dates_Element_Supplemental" href="#Overview_Dates_Element_Supplemental">Overview: Dates Element, Supplemental Date and Calendar Information</a> <a id="dates-overview-dates-element-supplemental-date-and-calendar-information"></a>
 
 ```xml
 <!ELEMENT dates (alias | (calendars?, fields?, timeZoneNames?, special*)) >
@@ -139,7 +139,7 @@ The relevant top-level supplemental elements are listed above.
 *   The `<timezoneData>` element is deprecated and no longer used; the `<metazoneInfo>` element is deprecated at this level, and is now only used as a sub-element of `<metaZones>`.
 *   The `<metaZones>`, `<primaryZones>`, and `<windowsZones>` elements are described in [Supplemental Time Zone Data](#Supplemental_Time_Zone_Data).
 
-## <a name="Calendar_Elements" href="#Calendar_Elements">Calendar Elements</a>
+## <a name="Calendar_Elements" id="Calendar_Elements" href="#Calendar_Elements">Calendar Elements</a> <a id="dates-calendar-elements"></a>
 
 ```xml
 <!ELEMENT calendars (alias | (calendar*, special*)) >
@@ -161,7 +161,7 @@ Each calendar provides—directly or indirectly—two general types of data:
 * <a id="dates-calendar-elements-rule-3"></a> **The primary difference**: The primary difference between Gregorian and "generic" format data is that date formats in "generic" usually include era with year, in order to provide an indication of which calendar is being used (Gregorian calendar formats may also commonly include era with year when Gregorian is not the default calendar for the locale). Otherwise, the "generic" date formats should normally be consistent with those in the Gregorian calendar. The "generic" calendar formats are intended to provide a consistent set of default formats for non-Gregorian calendars in the locale, so that in most cases the only data items that need be provided for non-Gregorian calendars are the era names and month names (and the latter only for calendars other than Buddhist, Japanese, and Minguo, since those inherit month names from Gregorian).
 
 
-### <a name="months_days_quarters_eras" href="#months_days_quarters_eras">Elements months, days, quarters, eras</a>
+### <a name="months_days_quarters_eras" id="months_days_quarters_eras" href="#months_days_quarters_eras">Elements months, days, quarters, eras</a> <a id="dates-calendar-elements-elements-months-days-quarters-eras"></a>
 
 ```xml
 <!ELEMENT months ( alias | (monthContext*, special*)) >
@@ -366,7 +366,7 @@ Example:
     </eras>
 ```
 
-### <a name="monthPatterns_cyclicNameSets" href="#monthPatterns_cyclicNameSets">Elements monthPatterns, cyclicNameSets</a>
+### <a name="monthPatterns_cyclicNameSets" id="monthPatterns_cyclicNameSets" href="#monthPatterns_cyclicNameSets">Elements monthPatterns, cyclicNameSets</a> <a id="dates-calendar-elements-elements-monthpatterns-cyclicnamesets"></a>
 
 ```xml
 <!ELEMENT monthPatterns ( alias | (monthPatternContext*, special*)) >
@@ -455,7 +455,7 @@ Example:
     </cyclicNameSets>
 ```
 
-### <a name="dayPeriods" href="#dayPeriods">Element dayPeriods</a>
+### <a name="dayPeriods" id="dayPeriods" href="#dayPeriods">Element dayPeriods</a> <a id="dates-calendar-elements-element-dayperiods"></a>
 
 The former `am`/`pm` elements have been deprecated, and replaced by the more flexible `dayPeriods`.
 
@@ -495,7 +495,7 @@ Example:
     </dayPeriods>
 ```
 
-### <a name="dateFormats" href="#dateFormats">Element dateFormats</a>
+### <a name="dateFormats" id="dateFormats" href="#dateFormats">Element dateFormats</a> <a id="dates-calendar-elements-element-dateformats"></a>
 
 ```xml
 <!ELEMENT dateFormats (alias | (default*, dateFormatLength*, special*)) >
@@ -565,7 +565,7 @@ Standard date and time patterns are each normally provided in four types: full (
 * <a id="dates-calendar-elements-element-dateformats-rule-3"></a> **The `datetimeSkeleton` element**: The `datetimeSkeleton` element contains a _skeleton_ (see [availableFormats](#availableFormats_appendItems)) derived from the pattern. In the future the intent is to be able to generate the standard patterns from these `datetimeSkeleton` elements. However, in CLDR 40, the mechanisms associated with the `availableFormats` elements are not quite powerful enough to generate patterns that exactly match all of the ones provided in the `pattern` elements.
 
 
-### <a name="timeFormats" href="#timeFormats">Element timeFormats</a>
+### <a name="timeFormats" id="timeFormats" href="#timeFormats">Element timeFormats</a> <a id="dates-calendar-elements-element-timeformats"></a>
 
 ```xml
 <!ELEMENT timeFormats (alias | (default*, timeFormatLength*, special*)) >
@@ -604,7 +604,7 @@ Friday: 19:00 – 26:00
 * <a id="dates-calendar-elements-element-timeformats-rule-3"></a> **Time formats use**: Time formats use the specific non-location format (z or zzzz) for the time zone name. This is the format that should be used when formatting a specific time for presentation. When formatting a time referring to a recurring time (such as a meeting in a calendar), applications should substitute the generic non-location format (v or vvvv) for the time zone in the time format pattern. See _[Using Time Zone Names](#Using_Time_Zone_Names)_ for a complete description of available time zone formats and their uses.
 
 
-### <a name="dateTimeFormats" href="#dateTimeFormats">Element dateTimeFormats</a>
+### <a name="dateTimeFormats" id="dateTimeFormats" href="#dateTimeFormats">Element dateTimeFormats</a> <a id="dates-calendar-elements-element-datetimeformats"></a>
 
 ```xml
 <!ELEMENT dateTimeFormats (alias | (default*, dateTimeFormatLength*, availableFormats*, appendItems*, intervalFormats*, special*)) >
@@ -691,7 +691,7 @@ Date/Time formats have the following form:
 
 These formats allow for date and time formats to be composed in various ways.
 
-#### <a name="dateTimeFormat" href="#dateTimeFormat">Element dateTimeFormat</a>
+#### <a name="dateTimeFormat" id="dateTimeFormat" href="#dateTimeFormat">Element dateTimeFormat</a> <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat"></a>
 
 ```xml
 <!ELEMENT dateTimeFormatLength (alias | (default*, dateTimeFormat*, special*))>
@@ -707,7 +707,7 @@ These formats allow for date and time formats to be composed in various ways.
 * <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-rule-2"></a> **When combining a**: When combining a standard date pattern with a standard time pattern, start with the `dateTimeFormatLength` whose `type` matches the type of the *date* pattern, and then use one of the `dateTimeFormat`s for that `dateTimeFormatLength` (as described after the following table). For example:
 
 
-###### Table: <a name="Date_Time_Combination_Examples" href="#Date_Time_Combination_Examples">Date-Time Combination Examples</a>
+###### <a name="Date_Time_Combination_Examples" id="Date_Time_Combination_Examples" href="#Date_Time_Combination_Examples">Table: Date-Time Combination Examples</a> <a id="dates-calendar-elements-element-datetimeformats-element-datetimeformat-table-date-time-combination-examples"></a>
 
 | Date-Time Combination   | dateTimeFormat            | Results |
 | ----------------------- | ------------------------- | ------- |
@@ -730,7 +730,7 @@ The default guidelines for choosing which `dateTimeFormat` to use for a given `d
 
 * For all other uses of these patterns, use the `standard` pattern.
 
-#### <a name="availableFormats_appendItems" href="#availableFormats_appendItems">Elements availableFormats, appendItems</a>
+#### <a name="availableFormats_appendItems" id="availableFormats_appendItems" href="#availableFormats_appendItems">Elements availableFormats, appendItems</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems"></a>
 
 ```xml
 <!ELEMENT availableFormats (alias | (dateFormatItem*, special*))>
@@ -771,7 +771,7 @@ Locales that use 12-hour-cycle time formats with B may provide availableFormats 
 * <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-rule-5"></a> **When matching a**: When matching a requested skeleton containing b or B to the skeletons actually available in the data, if there is no skeleton matching the specified day period field, then find a match in which the b or B matches an explicit or implicit 'a' in the skeleton, but replace the 'a' in the corresponding pattern with the requested day period b or B. The following table illustrates how requested skeletons map to patterns with different sets of `availableFormats` data:
 
 
-###### Table: <a name="Mapping_Requested_Time_Skeletons_To_Patterns" href="#Mapping_Requested_Time_Skeletons_To_Patterns">Mapping Requested Time Skeletons To Patterns</a>
+###### <a name="Mapping_Requested_Time_Skeletons_To_Patterns" id="Mapping_Requested_Time_Skeletons_To_Patterns" href="#Mapping_Requested_Time_Skeletons_To_Patterns">Table: Mapping Requested Time Skeletons To Patterns</a> <a id="dates-calendar-elements-element-datetimeformats-elements-availableformats-appenditems-table-mapping-requested-time-skeletons-to-patterns"></a>
 
 <!-- HTML: spanning columns, header cells on non-first row -->
 <table><tbody>

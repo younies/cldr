@@ -6,18 +6,18 @@ editors:
 #   email: yoshito_umaoka@us.ibm.com
 ---
 
-## Unicode Technical Standard #35
+## <a name="Unicode_Technical_Standard_35" id="Unicode_Technical_Standard_35" href="#Unicode_Technical_Standard_35">Unicode Technical Standard #35</a> <a id="general-unicode-technical-standard-35"></a>
 
 # Unicode Locale Data Markup Language (LDML)<br/>Part 2: General
 
-### _Summary_
+### <a name="_Summary_" id="_Summary_" href="#_Summary_">_Summary_</a> <a id="general-unicode-technical-standard-35-summary"></a>
 
 * <a id="general-unicode-technical-standard-35-summary-rule-1"></a> **This document describes**: This document describes parts of an XML format (_vocabulary_) for the exchange of structured locale data. This format is used in the [Unicode Common Locale Data Repository](https://www.unicode.org/cldr/).
 
 
 This is a partial document, describing general parts of the LDML: display names & transforms, etc. For the other parts of the LDML see the [main LDML document](tr35.md) and the links above.
 
-### _Status_
+### <a name="_Status_" id="_Status_" href="#_Status_">_Status_</a> <a id="general-unicode-technical-standard-35-status"></a>
 
 <div id='currentStatus'></div>
 
@@ -29,7 +29,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts
+## <a name="Parts" id="Parts" href="#Parts">Parts</a> <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -45,13 +45,13 @@ The LDML specification is divided into the following parts:
 *   Appendix A: [Modifications](tr35-modifications.md#modifications)
 *   Appendix B: [Acknowledgments](tr35-acknowledgments.md#acknowledgments)
 
-## <a name="Contents" href="#Contents">Contents of Part 2, General</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Part 2, General</a> <a id="general-contents-of-part-2-general"></a>
 
-* [Display Name Elements](#Display_Name_Elements)
-  * [Locale Display Name Algorithm](#locale_display_name_algorithm)
-  * [Locale Display Name Fields](#locale_display_name_fields)
-  * [Type Values](#type-values)
-* [Layout Elements](#Layout_Elements)
+* [Display Name Elements](#Display_Name_Elements) 
+  * [Locale Display Name Algorithm](#locale_display_name_algorithm) 
+  * [Locale Display Name Fields](#locale_display_name_fields) 
+  * [Type Values](#Type_Values) 
+* [Layout Elements](#Layout_Elements) 
 * [Character Elements](#Character_Elements)
   * [Exemplars](#Exemplars)
     * [Exemplar Syntax](#ExemplarSyntax)
@@ -132,7 +132,7 @@ The LDML specification is divided into the following parts:
   * [Deriving the Plural Category of Unit Components](#plural_compound_units)
   * [Deriving the Case of Unit Components](#case_compound_units)
 
-## <a name="Display_Name_Elements" href="#Display_Name_Elements">Display Name Elements</a>
+## <a name="Display_Name_Elements" id="Display_Name_Elements" href="#Display_Name_Elements">Display Name Elements</a> <a id="general-display-name-elements"></a>
 
 ```xml
 <!ELEMENT localeDisplayNames ( alias | ( localeDisplayPattern?, languages?, scripts?, territories?, subdivisions?, variants?, keys?, types?, transformNames?, measurementSystemNames?, codePatterns?, special* ) )>
@@ -205,7 +205,7 @@ The core part can be used as the language name, with the extension going into th
 | Kyrgyz |
 | … |
 
-### <a name="locale_display_name_algorithm" href="#locale_display_name_algorithm">Locale Display Name Algorithm</a>
+### <a name="locale_display_name_algorithm" id="locale_display_name_algorithm" href="#locale_display_name_algorithm">Locale Display Name Algorithm</a> <a id="general-display-name-elements-locale-display-name-algorithm"></a>
 
 A locale display name LDN is generated for a locale identifier L in the following way.
 1. Convert the locale identifier to *canonical syntax* per **[Part 1, Canonical Unicode Locale Identifiers](tr35.md#Canonical_Unicode_Locale_Identifiers)**.
@@ -311,7 +311,7 @@ The processing can be controlled via the following parameters (the names of the 
 
 
 
-### <a name="locale_display_name_fields" href="#locale_display_name_fields">Locale Display Name Fields</a>
+### <a name="locale_display_name_fields" id="locale_display_name_fields" href="#locale_display_name_fields">Locale Display Name Fields</a> <a id="general-display-name-elements-locale-display-name-fields"></a>
 
 ```xml
 <languages>
@@ -514,7 +514,7 @@ Note that the subdivision names are in separate files, in the subdivisions/ dire
 
 See also **Part 6** _[Subdivision Containment](tr35-info.md#Subdivision_Containment)_.
 
-### Type Values
+### <a name="Type_Values" id="Type_Values" href="#Type_Values">Type Values</a> <a id="general-display-name-elements-type-values"></a>
 
 Many BCP47 types have boolean values, such as `ka` (`colAlternate`).
 Rather than track translations for each of these separately, the `<typeValues>` element provides a centralized translation for this particular purpose.
@@ -536,7 +536,7 @@ These are intended to be used with key type names such as:
 
 These two strings are not inflected.
 
-## <a name="Layout_Elements" href="#Layout_Elements">Layout Elements</a>
+## <a name="Layout_Elements" id="Layout_Elements" href="#Layout_Elements">Layout Elements</a> <a id="general-layout-elements"></a>
 
 ```xml
 <!ELEMENT layout ( alias | (orientation*, inList*, inText*, special*) ) >
@@ -2267,7 +2267,7 @@ In that case, the results are different.
 
 
 ```perl
-# Variables
+# <a name="Variables" id="Variables" href="#Variables">Variables</a> <a id="general-variables"></a>
 
 $single = \' ;
 $space = ' ' ;
@@ -2275,15 +2275,15 @@ $double = \" ;
 $back = \` ;
 $tab = '\u0008' ;
 
-# the following is for spaces, line ends, (, [, {, ...
+# <a name="the_following_is_for_spaces_line_ends" id="the_following_is_for_spaces_line_ends" href="#the_following_is_for_spaces_line_ends">the following is for spaces, line ends, (, [, {, ...</a> <a id="general-the-following-is-for-spaces-line-ends"></a>
 $makeRight = [[:separator:][:start punctuation:][:initial punctuation:]] ;
 
-# fix UNIX quotes
+# <a name="fix_UNIX_quotes" id="fix_UNIX_quotes" href="#fix_UNIX_quotes">fix UNIX quotes</a> <a id="general-fix-unix-quotes"></a>
 
 $back $back → “ ; # generate right d.q.m. (double quotation mark)
 $back → ‘ ;
 
-# fix typewriter quotes, by context
+# <a name="fix_typewriter_quotes_by_context" id="fix_typewriter_quotes_by_context" href="#fix_typewriter_quotes_by_context">fix typewriter quotes, by context</a> <a id="general-fix-typewriter-quotes-by-context"></a>
 
 $makeRight { $double ↔ “ ; # convert a double to right d.q.m. after certain chars
 ^ { $double → “ ; # convert a double at the start of the line.
@@ -2293,7 +2293,7 @@ $makeRight {$single} ↔ ‘ ; # do the same for s.q.m.s
 ^ {$single} → ‘ ;
 $single ↔ ’;
 
-# fix multiple spaces and hyphens
+# <a name="fix_multiple_spaces_and_hyphens" id="fix_multiple_spaces_and_hyphens" href="#fix_multiple_spaces_and_hyphens">fix multiple spaces and hyphens</a> <a id="general-fix-multiple-spaces-and-hyphens"></a>
 
 $space {$space} → ; # collapse multiple spaces
 '--' ↔ — ; # convert fake dash into real one

@@ -6,11 +6,11 @@ editors:
   email: markus.icu@gmail.com
 ---
 
-## Unicode Technical Standard #35
+## <a name="Unicode_Technical_Standard_35" id="Unicode_Technical_Standard_35" href="#Unicode_Technical_Standard_35">Unicode Technical Standard #35</a> <a id="collation-unicode-technical-standard-35"></a>
 
 # Unicode Locale Data Markup Language (LDML)<br/>Part 5: Collation
 
-### _Summary_
+### <a name="_Summary_" id="_Summary_" href="#_Summary_">_Summary_</a> <a id="collation-unicode-technical-standard-35-summary"></a>
 
 * <a id="collation-unicode-technical-standard-35-summary-rule-1"></a> **This document describes**: This document describes parts of an XML format (_vocabulary_) for the exchange of structured locale data. This format is used in the [Unicode Common Locale Data Repository](https://www.unicode.org/cldr/).
 
@@ -18,7 +18,7 @@ editors:
 * <a id="collation-unicode-technical-standard-35-summary-rule-2"></a> **This is a**: This is a partial document, describing only those parts of the LDML that are relevant for collation (sorting, searching & grouping). For the other parts of the LDML see the [main LDML document](tr35.md) and the links above.
 
 
-### _Status_
+### <a name="_Status_" id="_Status_" href="#_Status_">_Status_</a> <a id="collation-unicode-technical-standard-35-status"></a>
 
 <div id='currentStatus'></div>
 
@@ -30,7 +30,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts
+## <a name="Parts" id="Parts" href="#Parts">Parts</a> <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -46,15 +46,15 @@ The LDML specification is divided into the following parts:
 *   Appendix A: [Modifications](tr35-modifications.md#modifications)
 *   Appendix B: [Acknowledgments](tr35-acknowledgments.md#acknowledgments)
 
-## <a name="Contents" href="#Contents">Contents of Part 5, Collation</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Part 5, Collation</a> <a id="collation-contents-of-part-5-collation"></a>
 
-* [CLDR Collation](#CLDR_Collation)
-  * [CLDR Collation Algorithm](#CLDR_Collation_Algorithm)
-    * [U+FFFE](#Algorithm_FFFE)
-    * [Context-Sensitive Mappings](#Context_Sensitive_Mappings)
-    * [Case Handling](#Algorithm_Case)
-    * [Reordering Groups](#Algorithm_Reordering_Groups)
-    * [Combining Rules](#Combining_Rules)
+* [CLDR Collation](#CLDR_Collation) 
+  * [CLDR Collation Algorithm](#CLDR_Collation_Algorithm) 
+    * [U+FFFE](#Algorithm_FFFE) 
+    * [Context-Sensitive Mappings](#Context_Sensitive_Mappings) 
+    * [Case Handling](#Algorithm_Case) 
+    * [Reordering Groups](#Algorithm_Reordering_Groups) 
+    * [Combining Rules](#Combining_Rules) 
 * [Root Collation](#Root_Collation)
   * [Grouping classes of characters](#grouping_classes_of_characters)
   * [Non-variable symbols](#non_variable_symbols)
@@ -101,7 +101,7 @@ The LDML specification is divided into the following parts:
     * [Index Characters](#Index_Characters)
     * [CJK Index Markers](#CJK_Index_Markers)
 
-## <a name="CLDR_Collation" href="#CLDR_Collation">CLDR Collation</a>
+## <a name="CLDR_Collation" id="CLDR_Collation" href="#CLDR_Collation">CLDR Collation</a> <a id="collation-cldr-collation"></a>
 
 * <a id="collation-cldr-collation-rule-1"></a> **Collation is the**: Collation is the general term for the process and function of determining the sorting order of strings of characters, for example for lists of strings presented to users, or in databases for sorting and selecting records.
 
@@ -111,11 +111,11 @@ Collation varies by language, by application (some languages use special phonebo
 * <a id="collation-cldr-collation-rule-2"></a> **CLDR provides collation**: CLDR provides collation data for many languages and styles. The data supports not only sorting but also language-sensitive searching and grouping under index headers. All CLDR collations are based on the [[UCA](https://www.unicode.org/reports/tr41/#UTS10)] default order, with common modifications applied in the CLDR root collation, and further tailored for language and style as needed.
 
 
-### <a name="CLDR_Collation_Algorithm" href="#CLDR_Collation_Algorithm">CLDR Collation Algorithm</a>
+### <a name="CLDR_Collation_Algorithm" id="CLDR_Collation_Algorithm" href="#CLDR_Collation_Algorithm">CLDR Collation Algorithm</a> <a id="collation-cldr-collation-cldr-collation-algorithm"></a>
 
 The CLDR collation algorithm is an extension of the [Unicode Collation Algorithm](https://www.unicode.org/reports/tr10/#Main_Algorithm).
 
-#### <a name="Algorithm_FFFE" href="#Algorithm_FFFE">U+FFFE</a>
+#### <a name="Algorithm_FFFE" id="Algorithm_FFFE" href="#Algorithm_FFFE">U+FFFE</a> <a id="collation-cldr-collation-cldr-collation-algorithm-ufffe"></a>
 
 * <a id="collation-cldr-collation-cldr-collation-algorithm-ufffe-rule-1"></a> **U+FFFE maps to**: U+FFFE maps to a CE with a minimal, unique primary weight. Its primary weight is not "variable": U+FFFE must not become ignorable in alternate handling. On the identical level, a minimal, unique “weight” must be emitted for U+FFFE as well. This allows for [Merging Sort Keys](https://www.unicode.org/reports/tr10/#Merging_Sort_Keys) within code point space.
 
@@ -128,7 +128,7 @@ The CLDR collation algorithm is an extension of the [Unicode Collation Algorithm
 
 > 👉 **Note**: With unique, low weights on _all_ levels it is possible to achieve `sortkey(str1 + "\uFFFE" + str2) == mergeSortkeys(sortkey(str1), sortkey(str2))` . When that is not necessary, then code can be a little simpler (no special handling for U+FFFE except for backwards-secondary), sort keys can be a little shorter (when using compressible common non-primary weights for U+FFFE), and another low weight can be used in tailorings.
 
-#### <a name="Context_Sensitive_Mappings" href="#Context_Sensitive_Mappings">Context-Sensitive Mappings</a>
+#### <a name="Context_Sensitive_Mappings" id="Context_Sensitive_Mappings" href="#Context_Sensitive_Mappings">Context-Sensitive Mappings</a> <a id="collation-cldr-collation-cldr-collation-algorithm-context-sensitive-mappings"></a>
 
 * <a id="collation-cldr-collation-cldr-collation-algorithm-context-sensitive-mappings-rule-1"></a> **Contraction matching, as**: Contraction matching, as in the UCA, starts from the first character of the contraction string. It slows down processing of that first character even when none of its contractions matches. In some cases, it is preferrable to change such contractions to mappings with a prefix (context before a character), so that complex processing is done only when the less-frequently occurring trailing character is encountered.
 
@@ -180,17 +180,17 @@ With these, text collates like this:
 * <a id="collation-cldr-collation-cldr-collation-algorithm-context-sensitive-mappings-rule-8"></a> **However, if the**: However, if the mapping p|c → CE(u) is missing, then text "pch" maps to CE(p)CE(d), "opch" maps to CE(o)CE(p)CE(d), and "pĉ̣" maps to CE(p)CE(c)CE(U+0323)CE(U+0302) (because discontiguous contraction matching extends _an existing match_ by one non-starter at a time).
 
 
-#### <a name="Algorithm_Case" href="#Algorithm_Case">Case Handling</a>
+#### <a name="Algorithm_Case" id="Algorithm_Case" href="#Algorithm_Case">Case Handling</a> <a id="collation-cldr-collation-cldr-collation-algorithm-case-handling"></a>
 
 * <a id="collation-cldr-collation-cldr-collation-algorithm-case-handling-rule-1"></a> **CLDR specifies how**: CLDR specifies how to sort lowercase or uppercase first, as a stronger distinction than other tertiary variants (**caseFirst**) or while completely ignoring all other tertiary distinctions (**caseLevel**). See _[Setting Options](#Setting_Options)_ and _[Case Parameters](#Case_Parameters)_.
 
 
-#### <a name="Algorithm_Reordering_Groups" href="#Algorithm_Reordering_Groups">Reordering Groups</a>
+#### <a name="Algorithm_Reordering_Groups" id="Algorithm_Reordering_Groups" href="#Algorithm_Reordering_Groups">Reordering Groups</a> <a id="collation-cldr-collation-cldr-collation-algorithm-reordering-groups"></a>
 
 * <a id="collation-cldr-collation-cldr-collation-algorithm-reordering-groups-rule-1"></a> **CLDR specifies how**: CLDR specifies how to do parametric reordering of groups of scripts (e.g., “native script first”) as well as special groups (e.g., “digits after letters”), and provides data for the effective implementation of such reordering.
 
 
-#### <a name="Combining_Rules" href="#Combining_Rules">Combining Rules</a>
+#### <a name="Combining_Rules" id="Combining_Rules" href="#Combining_Rules">Combining Rules</a> <a id="collation-cldr-collation-cldr-collation-algorithm-combining-rules"></a>
 
 Rules from different sources can be combined, with the later rules overriding the earlier ones. The following is an example of how this can be useful.
 
@@ -426,7 +426,7 @@ The assignment of 2 vs 3 bytes does not reflect importance, or exact frequency.
 
 
 ```
-# SPECIAL MAX/MIN COLLATION ELEMENTS
+# <a name="SPECIAL_MAXMIN_COLLATION_ELEMENTS" id="SPECIAL_MAXMIN_COLLATION_ELEMENTS" href="#SPECIAL_MAXMIN_COLLATION_ELEMENTS">SPECIAL MAX/MIN COLLATION ELEMENTS</a> <a id="collation-special-maxmin-collation-elements"></a>
 FFFE; [02, 05, 05]     # Special LOWEST primary, for merge/interleaving
 FFFF; [EF FE, 05, 05]  # Special HIGHEST primary, for ranges
 ```
@@ -478,7 +478,7 @@ FDD0 0034;      [11, 05, 05]    # lead byte for numeric sorting
 
 
 ```
-# HOMELESS COLLATION ELEMENTS
+# <a name="HOMELESS_COLLATION_ELEMENTS" id="HOMELESS_COLLATION_ELEMENTS" href="#HOMELESS_COLLATION_ELEMENTS">HOMELESS COLLATION ELEMENTS</a> <a id="collation-homeless-collation-elements"></a>
 FDD0 0063; [, 97, 3D]       # [15E4.0020.0004] [1844.0020.0004] [0000.0041.001F]    * U+01C6 LATIN SMALL LETTER DZ WITH CARON
 FDD0 0064; [, A7, 09]       # [15D1.0020.0004] [0000.0056.0004]     * U+1DD7 COMBINING LATIN SMALL LETTER C CEDILLA
 FDD0 0065; [, B1, 09]       # [1644.0020.0004] [0000.0061.0004]     * U+A7A1 LATIN SMALL LETTER G WITH OBLIQUE STROKE
@@ -490,7 +490,7 @@ FDD0 0065; [, B1, 09]       # [1644.0020.0004] [0000.0061.0004]     * U+A7A1 LAT
 Next, a number of tables are defined. The function of each of the tables is summarized afterwards.
 
 ```
-# VALUES BASED ON UCA
+# <a name="VALUES_BASED_ON_UCA" id="VALUES_BASED_ON_UCA" href="#VALUES_BASED_ON_UCA">VALUES BASED ON UCA</a> <a id="collation-values-based-on-uca"></a>
 ...
 [first regular [0D 0A, 05, 05]] # U+0060 GRAVE ACCENT
 [last regular [7A FE, 05, 05]] # U+1342E EGYPTIAN HIEROGLYPH AA032
@@ -504,7 +504,7 @@ Next, a number of tables are defined. The function of each of the tables is summ
 This table summarizes ranges of important groups of characters for implementations.
 
 ```
-# Top Byte => Reordering Tokens
+# <a name="Top_Byte_Reordering_Tokens" id="Top_Byte_Reordering_Tokens" href="#Top_Byte_Reordering_Tokens">Top Byte => Reordering Tokens</a> <a id="collation-top-byte-reordering-tokens"></a>
 [top_byte     00      TERMINATOR ]    #       [0]     TERMINATOR=1
 [top_byte     01      LEVEL-SEPARATOR ]       #       [0]     LEVEL-SEPARATOR=1
 [top_byte     02      FIELD-SEPARATOR ]       #       [0]     FIELD-SEPARATOR=1
@@ -516,7 +516,7 @@ This table summarizes ranges of important groups of characters for implementatio
 
 
 ```
-# Reordering Tokens => Top Bytes
+# <a name="Reordering_Tokens_Top_Bytes" id="Reordering_Tokens_Top_Bytes" href="#Reordering_Tokens_Top_Bytes">Reordering Tokens => Top Bytes</a> <a id="collation-reordering-tokens-top-bytes"></a>
 [reorderingTokens     Arab    61=910 62=910 ]
 [reorderingTokens     Armi    7A=22 ]
 [reorderingTokens     Armn    5F=82 ]
@@ -528,7 +528,7 @@ This table summarizes ranges of important groups of characters for implementatio
 
 
 ```
-# General Categories => Top Byte
+# <a name="General_Categories_Top_Byte" id="General_Categories_Top_Byte" href="#General_Categories_Top_Byte">General Categories => Top Byte</a> <a id="collation-general-categories-top-byte"></a>
 [categories   Cc      03{SPACE}=6 ]
 [categories   Cf      77{Khmr Tale Talu Lana Cham Bali Java Mong Olck Cher Cans Ogam Runr Orkh Vaii Bamu}=2 ]
 [categories   Lm      0D{SYMBOL}=25 0E{SYMBOL}=22 27{Latn}=12 28{Latn}=12 29{Latn}=12 2A{Latn}=12...
@@ -537,7 +537,7 @@ This table summarizes ranges of important groups of characters for implementatio
 This table is informational, providing the top bytes, scripts, and primaries associated with each general category value.
 
 ```
-# FIXED VALUES
+# <a name="FIXED_VALUES" id="FIXED_VALUES" href="#FIXED_VALUES">FIXED VALUES</a> <a id="collation-fixed-values"></a>
 [fixed first implicit byte E0]
 [fixed last implicit byte E4]
 [fixed first trail byte E5]

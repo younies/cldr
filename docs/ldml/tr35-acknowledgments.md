@@ -2,21 +2,21 @@
 appendix: B
 title: Acknowledgments
 ---
-## Unicode Technical Standard #35
+## <a name="Unicode_Technical_Standard_35" id="Unicode_Technical_Standard_35" href="#Unicode_Technical_Standard_35">Unicode Technical Standard #35</a> <a id="acknowledgments-unicode-technical-standard-35"></a>
 
 # Unicode Locale Data Markup Language (LDML)<br/>Appendix B: Acknowledgments
 
 For the full header, table of contents, and status, see [Part 1: Core](tr35.md).
 
-### _Summary_
+### <a name="_Summary_" id="_Summary_" href="#_Summary_">_Summary_</a> <a id="acknowledgments-unicode-technical-standard-35-summary"></a>
 
 This is a partial document, describing only the acknowledgments of contributors to LDML. For the other parts of the LDML see the [main LDML document](tr35.md).
 
-## <a name="Contents" href="#Contents">Contents of Appendix B, Acknowledgments</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Appendix B, Acknowledgments</a> <a id="acknowledgments-contents-of-appendix-b-acknowledgments"></a>
 
-* [Acknowledgments](#acknowledgments)
+* [Acknowledgments](#Acknowledgments) 
 
-## Acknowledgments
+## <a name="Acknowledgments" id="Acknowledgments" href="#Acknowledgments">Acknowledgments</a> <a id="acknowledgments-acknowledgments"></a>
 
 * <a id="acknowledgments-acknowledgments-rule-1"></a> **Special thanks to**: Special thanks to the following people for their continuing overall contributions to the CLDR project, and for their specific contributions in the following areas. These descriptions only touch on the many contributions that they have made.
 

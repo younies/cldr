@@ -6,11 +6,11 @@ editors:
   email: shane@unicode.org
 ---
 
-## Unicode Technical Standard #35
+## <a name="Unicode_Technical_Standard_35" id="Unicode_Technical_Standard_35" href="#Unicode_Technical_Standard_35">Unicode Technical Standard #35</a> <a id="numbers-unicode-technical-standard-35"></a>
 
 # Unicode Locale Data Markup Language (LDML)<br/>Part 3: Numbers
 
-### _Summary_
+### <a name="_Summary_" id="_Summary_" href="#_Summary_">_Summary_</a> <a id="numbers-unicode-technical-standard-35-summary"></a>
 
 * <a id="numbers-unicode-technical-standard-35-summary-rule-1"></a> **This document describes**: This document describes parts of an XML format (_vocabulary_) for the exchange of structured locale data. This format is used in the [Unicode Common Locale Data Repository](https://www.unicode.org/cldr/).
 
@@ -18,7 +18,7 @@ editors:
 * <a id="numbers-unicode-technical-standard-35-summary-rule-2"></a> **This is a**: This is a partial document, describing only those parts of the LDML that are relevant for number and currency formatting. For the other parts of the LDML see the [main LDML document](tr35.md) and the links above.
 
 
-### _Status_
+### <a name="_Status_" id="_Status_" href="#_Status_">_Status_</a> <a id="numbers-unicode-technical-standard-35-status"></a>
 
 <div id='currentStatus'></div>
 
@@ -31,7 +31,7 @@ For the latest version of the Unicode Standard see [[Unicode](https://www.unicod
 For more information see [About Unicode Technical Reports](https://www.unicode.org/reports/about-reports.html) and the [Specifications FAQ](https://www.unicode.org/faq/specifications.html).
 Unicode Technical Reports are governed by the Unicode [Terms of Use](https://www.unicode.org/copyright.html)._
 
-## Parts
+## <a name="Parts" id="Parts" href="#Parts">Parts</a> <a id="core-unicode-locale-data-markup-language-ldml-parts"></a>
 
 The LDML specification is divided into the following parts:
 
@@ -47,24 +47,24 @@ The LDML specification is divided into the following parts:
 *   Appendix A: [Modifications](tr35-modifications.md#modifications)
 *   Appendix B: [Acknowledgments](tr35-acknowledgments.md#acknowledgments)
 
-## <a name="Contents" href="#Contents">Contents of Part 3, Numbers</a>
+## <a name="Contents" id="Contents" href="#Contents">Contents of Part 3, Numbers</a> <a id="numbers-contents-of-part-3-numbers"></a>
 
-* [Numbering Systems](#Numbering_Systems)
-* [Number Elements](#Number_Elements)
-  * [Default Numbering System](#defaultNumberingSystem)
-  * [Other Numbering Systems](#otherNumberingSystems)
-  * [Number Symbols](#Number_Symbols)
-  * [Number Formats](#Number_Formats)
-    * [Compact Number Formats](#Compact_Number_Formats)
-    * [Currency Formats](#Currency_Formats)
-  * [Miscellaneous Patterns](#Miscellaneous_Patterns)
-  * [Minimal Pairs](#Minimal_Pairs)
-* [Number Format Patterns](#Number_Format_Patterns)
-  * [Number Patterns](#Number_Patterns)
-    * Table: [Number Pattern Examples](#Number_Pattern_Examples)
-  * [Special Pattern Characters](#Special_Pattern_Characters)
-    * Table: [Number Pattern Character Definitions](#Number_Pattern_Character_Definitions)
-    * Table: [Sample Patterns and Results](#Sample_Patterns_and_Results)
+* [Numbering Systems](#Numbering_Systems) 
+* [Number Elements](#Number_Elements) 
+  * [Default Numbering System](#defaultNumberingSystem) 
+  * [Other Numbering Systems](#otherNumberingSystems) 
+  * [Number Symbols](#Number_Symbols) 
+  * [Number Formats](#Number_Formats) 
+    * [Compact Number Formats](#Compact_Number_Formats) 
+    * [Currency Formats](#Currency_Formats) 
+  * [Miscellaneous Patterns](#Miscellaneous_Patterns) 
+  * [Minimal Pairs](#Minimal_Pairs) 
+* [Number Format Patterns](#Number_Format_Patterns) 
+  * [Number Patterns](#Number_Patterns) 
+    * [Table: Number Pattern Examples](#Number_Pattern_Examples) 
+  * [Special Pattern Characters](#Special_Pattern_Characters) 
+    * [Table: Number Pattern Character Definitions](#Number_Pattern_Character_Definitions) 
+    * [Table: Sample Patterns and Results](#Sample_Patterns_and_Results) 
     * [Explicit Plus Signs](#Explicit_Plus)
   * [Formatting](#Formatting)
   * [Scientific Notation](#sci)
@@ -108,7 +108,7 @@ The LDML specification is divided into the following parts:
   * [Collapsing Number Ranges](#Collapsing_Number_Ranges)
   * [Range Pattern Processing](#Range_Pattern_Processing)
 
-## <a name="Numbering_Systems" href="#Numbering_Systems">Numbering Systems</a>
+## <a name="Numbering_Systems" id="Numbering_Systems" href="#Numbering_Systems">Numbering Systems</a> <a id="numbers-numbering-systems"></a>
 
 ```dtd
 <!ELEMENT numberingSystems ( numberingSystem* ) >
@@ -148,7 +148,7 @@ Examples:
 
 For general information about the numbering system data, including the BCP47 identifiers, see the main document _Section Q.1.1 [Numbering System Data](tr35.md#Numbering%20System%20Data)._
 
-## <a name="Number_Elements" href="#Number_Elements">Number Elements</a>
+## <a name="Number_Elements" id="Number_Elements" href="#Number_Elements">Number Elements</a> <a id="numbers-number-elements"></a>
 
 ```dtd
 <!ELEMENT numbers ( alias | ( defaultNumberingSystem*, otherNumberingSystems*, minimumGroupingDigits*, symbols*, decimalFormats*, scientificFormats*, percentFormats*, currencyFormats*, currencies?, miscPatterns*, minimalPairs*, special* ) ) >
@@ -157,7 +157,7 @@ For general information about the numbering system data, including the BCP47 ide
 * <a id="numbers-number-elements-rule-1"></a> **The numbers element**: The numbers element supplies information for formatting and parsing numbers and currencies. It has the following sub-elements: `<defaultNumberingSystem>`, `<otherNumberingSystems>`, `<symbols>`, `<decimalFormats>`, `<scientificFormats>`, `<percentFormats>`, `<currencyFormats>`, and `<currencies>`. The currency IDs are from [[ISO4217](tr35.md#ISO4217)] (plus some additional common-use codes). For more information, including the pattern structure, see _[Section 3: Number Format Patterns](#Number_Format_Patterns)_.
 
 
-### <a name="defaultNumberingSystem" href="#defaultNumberingSystem">Default Numbering System</a>
+### <a name="defaultNumberingSystem" id="defaultNumberingSystem" href="#defaultNumberingSystem">Default Numbering System</a> <a id="numbers-number-elements-default-numbering-system"></a>
 
 ```dtd
 <!ELEMENT defaultNumberingSystem ( #PCDATA )>
@@ -165,7 +165,7 @@ For general information about the numbering system data, including the BCP47 ide
 
 This element indicates which numbering system should be used for presentation of numeric quantities in the given locale.
 
-### <a name="otherNumberingSystems" href="#otherNumberingSystems">Other Numbering Systems</a>
+### <a name="otherNumberingSystems" id="otherNumberingSystems" href="#otherNumberingSystems">Other Numbering Systems</a> <a id="numbers-number-elements-other-numbering-systems"></a>
 
 ```dtd
 <!ELEMENT otherNumberingSystems ( alias | ( native*, traditional*, finance*)) >
@@ -196,7 +196,7 @@ This element indicates which numbering system should be used for presentation of
 
 For more information on numbering systems and their definitions, see _[Section 1: Numbering Systems](#Numbering_Systems)_.
 
-### <a name="Number_Symbols" href="#Number_Symbols">Number Symbols</a>
+### <a name="Number_Symbols" id="Number_Symbols" href="#Number_Symbols">Number Symbols</a> <a id="numbers-number-elements-number-symbols"></a>
 
 ```dtd
 <!ELEMENT symbols (alias | (decimal*, group*, list*, percentSign*, nativeZeroDigit*, patternDigit*, plusSign*, minusSign*, approximatelySign*, exponential*, superscriptingExponent*, perMille*, infinity*, nan*, currencyDecimal*, currencyGroup*, timeSeparator*, special*)) >
@@ -305,7 +305,7 @@ Example:
 
 For more information on numbering systems and their definitions, see _[Section 1: Numbering Systems](#Numbering_Systems)_.
 
-### <a name="Number_Formats" href="#Number_Formats">Number Formats</a>
+### <a name="Number_Formats" id="Number_Formats" href="#Number_Formats">Number Formats</a> <a id="numbers-number-elements-number-formats"></a>
 
 ```dtd
 <!ELEMENT decimalFormats (alias | (default*, decimalFormatLength*, special*)) >
@@ -374,7 +374,7 @@ Example:
 
 For more information on numbering systems and their definitions, see _[Section 1: Numbering Systems](#Numbering_Systems)_.
 
-#### <a name="Compact_Number_Formats" href="#Compact_Number_Formats">Compact Number Formats</a>
+#### <a name="Compact_Number_Formats" id="Compact_Number_Formats" href="#Compact_Number_Formats">Compact Number Formats</a> <a id="numbers-number-elements-number-formats-compact-number-formats"></a>
 
 A pattern `type` attribute is used for _compact number formats_, such as the following:
 
@@ -494,7 +494,7 @@ then switch to the `alt=alphaNextToNumber` pattern, if there is one.
 The short non-currency format is designed for UI environments where space is at a premium, and should ideally result in a formatted string no more than about 6 em wide (with no fractional digits).
 The short currency format will include currency symbols, and should ideally be no more than 8 em in width.
 
-#### <a name="Currency_Formats" href="#Currency_Formats">Currency Formats</a>
+#### <a name="Currency_Formats" id="Currency_Formats" href="#Currency_Formats">Currency Formats</a> <a id="numbers-number-elements-number-formats-currency-formats"></a>
 
 Patterns for use with currency formatting:
 
@@ -567,7 +567,7 @@ Patterns for use with currency formatting:
 * The currency symbol does not have the same value as the ISO 4217 3-letter code.
 Most locales will not need to override the pattern provided in root, shown in the xml sample above.
 
-### <a name="Miscellaneous_Patterns" href="#Miscellaneous_Patterns">Miscellaneous Patterns</a>
+### <a name="Miscellaneous_Patterns" id="Miscellaneous_Patterns" href="#Miscellaneous_Patterns">Miscellaneous Patterns</a> <a id="numbers-number-elements-miscellaneous-patterns"></a>
 
 ```dtd
 <!ELEMENT miscPatterns (alias | (default*, pattern*, special*)) >
@@ -603,7 +603,7 @@ _For example:_
 </miscPatterns>
 ```
 
-### <a name="Minimal_Pairs" href="#Minimal_Pairs">Minimal Pairs</a>
+### <a name="Minimal_Pairs" id="Minimal_Pairs" href="#Minimal_Pairs">Minimal Pairs</a> <a id="numbers-number-elements-minimal-pairs"></a>
 
 ```dtd
 <!ELEMENT minimalPairs ( alias | ( pluralMinimalPairs*, ordinalMinimalPairs*, caseMinimalPairs*, genderMinimalPairs*, special* ) ) >
@@ -653,14 +653,14 @@ Examples
 
 For more information, see [Plural Rules](https://cldr.unicode.org/index/cldr-spec/plural-rules) and [Grammatical Inflection](https://cldr.unicode.org/translation/grammatical-inflection).
 
-## <a name="Number_Format_Patterns" href="#Number_Format_Patterns">Number Format Patterns</a>
+## <a name="Number_Format_Patterns" id="Number_Format_Patterns" href="#Number_Format_Patterns">Number Format Patterns</a> <a id="numbers-number-format-patterns"></a>
 
-### <a name="Number_Patterns" href="#Number_Patterns">Number Patterns</a>
+### <a name="Number_Patterns" id="Number_Patterns" href="#Number_Patterns">Number Patterns</a> <a id="numbers-number-format-patterns-number-patterns"></a>
 
 * <a id="numbers-number-format-patterns-number-patterns-rule-1"></a> **Number patterns affect**: Number patterns affect how numbers are interpreted in a localized context. Here are some examples, based on the French locale. The "." shows where the decimal point should go. The "," shows where the thousands separator should go. A "0" indicates zero-padding: if the number is too short, a zero (in the locale's numeric set) will go there. A "#" indicates no padding: if the number is too short, nothing goes there. A "¤" shows where the currency sign will go. The following illustrates the effects of different patterns for the French locale, with the number "1234.567". Notice how the pattern characters ',' and '.' are replaced by the characters appropriate for the locale.
 
 
-###### Table: <a name="Number_Pattern_Examples" href="#Number_Pattern_Examples">Number Pattern Examples</a>
+###### <a name="Number_Pattern_Examples" id="Number_Pattern_Examples" href="#Number_Pattern_Examples">Table: Number Pattern Examples</a> <a id="numbers-number-format-patterns-number-patterns-table-number-pattern-examples"></a>
 
 | Pattern    | Currency | Text       |
 |------------|----------|------------|
@@ -680,7 +680,7 @@ For more information, see [Plural Rules](https://cldr.unicode.org/index/cldr-spe
 
 _When parsing using a pattern, a lenient parse should be used; see [Lenient Parsing](tr35.md#Lenient_Parsing)._ As noted there, lenient parsing should ignore bidi format characters.
 
-### <a name="Special_Pattern_Characters" href="#Special_Pattern_Characters">Special Pattern Characters</a>
+### <a name="Special_Pattern_Characters" id="Special_Pattern_Characters" href="#Special_Pattern_Characters">Special Pattern Characters</a> <a id="numbers-number-format-patterns-special-pattern-characters"></a>
 
 * <a id="numbers-number-format-patterns-special-pattern-characters-rule-1"></a> **Many characters in**: Many characters in a pattern are taken literally; they are matched during parsing and output unchanged during formatting. Special characters, on the other hand, stand for other characters, strings, or classes of characters. For example, the '#' character is replaced by a localized digit for the chosen numberSystem. Often the replacement character is the same as the pattern character; in the U.S. locale, the ',' grouping character is replaced by ','. However, the replacement is still happening, and if the symbols are modified, the grouping character changes. Some special characters affect the behavior of the formatter by their presence; for example, if the percent character is seen, then the value is multiplied by 100 before being displayed.
 
@@ -690,7 +690,7 @@ _When parsing using a pattern, a lenient parse should be used; see [Lenient Pars
 
 Invalid sequences of special characters (such as “¤¤¤¤¤¤” in current CLDR) should be handled for formatting and parsing as described in [Handling Invalid Patterns](tr35.md#Invalid_Patterns).
 
-###### Table: <a name="Number_Pattern_Character_Definitions" href="#Number_Pattern_Character_Definitions">Number Pattern Character Definitions</a>
+###### <a name="Number_Pattern_Character_Definitions" id="Number_Pattern_Character_Definitions" href="#Number_Pattern_Character_Definitions">Table: Number Pattern Character Definitions</a> <a id="numbers-number-format-patterns-special-pattern-characters-table-number-pattern-character-definitions"></a>
 
 | Symbol | Location | Localized Replacement | Meaning |
 | :-- | :-- | :-- | :-- |
@@ -732,7 +732,7 @@ Invalid sequences of special characters (such as “¤¤¤¤¤¤” in current C
 
 Below is a sample of patterns, special characters, and results:
 
-###### Table: <a name="Sample_Patterns_and_Results" href="#Sample_Patterns_and_Results">Sample Patterns and Results</a>
+###### <a name="Sample_Patterns_and_Results" id="Sample_Patterns_and_Results" href="#Sample_Patterns_and_Results">Table: Sample Patterns and Results</a> <a id="numbers-number-format-patterns-special-pattern-characters-table-sample-patterns-and-results"></a>
 
 <table><tbody>
 ```xml

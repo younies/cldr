@@ -292,6 +292,123 @@ Scans of `common/main` (all locales): no decimal, percent, scientific, or curren
 
 ---
 
+## Section 3: Number Formats (`#Number_Formats`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Number_Formats`](../../../docs/ldml/tr35-numbers.md#Number_Formats) (UTS #35 Part 3, Section 2.4: *Number Formats*, with its subsections [`decimalFormats`](../../../docs/ldml/tr35-numbers.md#decimalformats), [`percentFormats`](../../../docs/ldml/tr35-numbers.md#percentformats), and [`scientificFormats`](../../../docs/ldml/tr35-numbers.md#scientificformats); L308–L374 at `c33251cf82`). The quote below has L310–L374. Compact number formats (L376 onward) are in Section 4.
+* **Related specification text**: L645 onward ([Number Format Patterns](../../../docs/ldml/tr35-numbers.md#Number_Format_Patterns): the pattern syntax) and Section 1 of this document (the numbering systems that the `numberSystem` attribute refers to)
+
+### 3.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> ```dtd
+> <!ELEMENT decimalFormats (alias | (default*, decimalFormatLength*, special*)) >
+> <!ELEMENT decimalFormatLength (alias | (default*, decimalFormat*, special*)) >
+> <!ATTLIST decimalFormatLength type ( full | long | medium | short ) #IMPLIED >
+> <!ELEMENT decimalFormat (alias | (pattern*, special*)) >
+> ```
+>
+> (scientificFormats, percentFormats have the same structure)
+>
+> Number formats are used to define the rules for formatting numeric quantities using the pattern syntax described in _[Section 3: Number Format Patterns](../../../docs/ldml/tr35-numbers.md#Number_Format_Patterns)_.
+>
+> Different formats are provided for different contexts, as follows:
+>
+> #### decimalFormats
+>
+> > The normal locale specific way to write a base 10 number. Variations of the decimalFormat pattern are provided that allow compact number formatting.
+>
+> #### percentFormats
+>
+> > Pattern for use with percentage formatting
+>
+> #### scientificFormats
+>
+> > Pattern for use with scientific (exponent) formatting.
+>
+> Example:
+>
+> ```xml
+> <decimalFormats numberSystem="latn">
+>   <decimalFormatLength type="long">
+>     <decimalFormat>
+>       <pattern>#,##0.###</pattern>
+>     </decimalFormat>
+>   </decimalFormatLength>
+> </decimalFormats>
+>
+> <scientificFormats numberSystem="latn">
+>   <default type="long"/>
+>   <scientificFormatLength type="long">
+>     <scientificFormat>
+>       <pattern>0.000###E+00</pattern>
+>     </scientificFormat>
+>   </scientificFormatLength>
+>   <scientificFormatLength type="medium">
+>     <scientificFormat>
+>       <pattern>0.00##E+00</pattern>
+>     </scientificFormat>
+>   </scientificFormatLength>
+> </scientificFormats>
+>
+> <percentFormats numberSystem="latn">
+>   <percentFormatLength type="long">
+>     <percentFormat>
+>       <pattern>#,##0%</pattern>
+>     </percentFormat>
+>   </percentFormatLength>
+> </percentFormats>
+> ```
+>
+> ```dtd
+> <!ATTLIST symbols numberSystem CDATA #IMPLIED >
+> ```
+>
+> The `numberSystem` attribute is used to specify that the given number formatting pattern(s) are to be used when the given numbering system is active. By default, number formatting patterns without a specific `numberSystem` attribute are assumed to be used for the "latn" numbering system, which is western (ASCII) digits; however, number formatting patterns without a specific `numberSystem` attribute should not be used and will be deprecated in CLDR v48. Locales that specify a numbering system other than "latn" as the default should also specify number formatting patterns that are appropriate for use within the context of the given numbering system.
+> For more information on numbering systems and their definitions, see _[Section 1: Numbering Systems](../../../docs/ldml/tr35-numbers.md#Numbering_Systems)_.
+
+---
+
+### 3.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** Number format patterns of the CORE locales, resolved for each locale's default numbering system (`root` makes the `arab` and `beng` decimal and scientific formats an alias of the `latn` ones).
+
+| `number_format` | Element | Lengths with data | Patterns of the CORE locales |
+| :--- | :--- | :--- | :--- |
+| `"decimal"` | `decimalFormats` | no `type` (the non-compact pattern); `long` and `short` hold only compact patterns (Section 4) | `#,##0.###` (`bn`: `#,##,##0.###`) |
+| `"percent"` | `percentFormats` | no `type` only | `#,##0%`; `de`, `ru`: `#,##0 %` / `"#,##0\u00A0%"`; `bn`: `#,##0%` for `beng` and `#,##,##0%` for `latn` |
+| `"scientific"` | `scientificFormats` | no `type` only | `#E0` |
+
+Scans of `common/main` (all locales): no locale has a `full` or `medium` length, a `<default>` element, or a `percentFormatLength` or `scientificFormatLength` with a `type`. Every pattern has a `numberSystem` attribute. Four locales have a pattern that differs between their numbering systems: `bn`, `ccp`, and `gu` (percent) and `te` (decimal); `bn` is the only CORE locale among them.
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S3.1** | DTD: `<!ATTLIST decimalFormatLength type ( full \| long \| medium \| short ) #IMPLIED >`, *"(scientificFormats, percentFormats have the same structure)"* | • **S3.1a**: each `number_format` with no length (`format_length = ""`)<br>• **S3.1b**: `number_format = "decimal"` × `format_length = "short"` and `"long"`<br>• **S3.1c**: the lengths `full` and `medium`, and `"percent"` or `"scientific"` with a length | • S3.1a, S3.1b: see S3.3–S3.5.<br>• S3.1c: no CLDR data. |
+| **S3.2** | *"Number formats are used to define the rules for formatting numeric quantities using the pattern syntax described in Section 3: Number Format Patterns."* | — (the pattern syntax is checked in a later section) | — |
+| **S3.3** | **`decimalFormats`** — *"The normal locale specific way to write a base 10 number. Variations of the decimalFormat pattern are provided that allow compact number formatting."* | • **S3.3a**: `number_format = "decimal"` × `format_length = ""` × several `locale` values (`"en"`, `"de"`, `"bn"`)<br>• **S3.3b**: `number_format = "decimal"` × `format_length = "short"` and `"long"` | • S3.3a: `en` 1234565.0 → `1,234,565`; `de` → `1.234.565`; `bn` → `১২,৩৪,৫৬৫`.<br>• S3.3b: `en` 1234565.0 → `1.2M` (short), `1.2 million` (long); see Section 4. |
+| **S3.4** | **`percentFormats`** — *"Pattern for use with percentage formatting"* | • `number_format = "percent"` × several `locale` values (`"en"`, `"de"`) | `en` 1.2 → `120%`; `de` → `120 %` / `"120\u00A0%"`. |
+| **S3.5** | **`scientificFormats`** — *"Pattern for use with scientific (exponent) formatting."* | • `number_format = "scientific"` × several `locale` values (`"en"`, `"de"`) | `en` 1234565.0 → `1.234565E6`; `de` → `1,234565E6`. |
+| **S3.6** | The example: a `long` `decimalFormatLength` with `#,##0.###`, a `scientificFormats` with `<default type="long"/>` and `long` and `medium` lengths, and a `long` `percentFormatLength` | — | No CLDR data (see the notes). |
+| **S3.7** | **`numberSystem`** — *"The `numberSystem` attribute is used to specify that the given number formatting pattern(s) are to be used when the given numbering system is active. By default, number formatting patterns without a specific `numberSystem` attribute are assumed to be used for the "latn" numbering system [...] Locales that specify a numbering system other than "latn" as the default should also specify number formatting patterns that are appropriate for use within the context of the given numbering system."* | • **S3.7a**: a `locale` whose pattern differs between two numbering systems (`"bn"`, percent) × `numbering_system = "latn"` (Section 1) and the default × `number_format = "percent"` × `input` with at least 6 integer digits after scaling (e.g. `1234565.0`)<br>• **S3.7b**: patterns without a `numberSystem` attribute<br>• **S3.7c**: a `locale` whose default is not `latn` (`"ar_EG"`) × each `number_format` | • S3.7a: `bn` 1234565.0 → `১২৩,৪৫৬,৫০০%` (`beng`: `#,##0%`) vs. `bn-u-nu-latn` → `12,34,56,500%` (`latn`: `#,##,##0%`).<br>• S3.7b: no CLDR data.<br>• S3.7c: `ar_EG` 1234565.0 → `١٬٢٣٤٬٥٦٥` (decimal), `١٫٢٣٤٥٦٥أس٦` (scientific); 1.2 → `١٢٠٪؜` / `"\u0661\u0662\u0660\u066A\u061C"` (percent). |
+
+---
+
+### 3.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S3.1a**, **S3.3a**, **S3.4**, **S3.5** | each `number_format` × `format_length = ""` × several `locale` values | ✅ **Covered** | CORE values: `"decimal"`, `"percent"`, and `"scientific"` with `format_length = ""`, all `CORE_LOCALES`, and `CORE_NUMBERS`. |
+| **S3.1b**, **S3.3b** | `"decimal"` × `"short"`, `"long"` | ✅ **Covered** | CORE values: `"decimal"` with `"short"` and `"long"`. |
+| **S3.1c**, **S3.6**, **S3.7b** | lengths and elements that CLDR does not use | ⚪ **Out of scope** | No CLDR data. |
+| **S3.7a** | `locale = "bn"` × `numbering_system = "latn"` × `"percent"` × `1234565.0` | 🟡 **Missing: new dimension** | `numbering_system` is added in Section 1, but only with `"decimal"`, and the `bn` decimal pattern is the same for `beng` and `latn`. **Action**: add `numbering_system` rows for `"percent"` (see the Summary). |
+| **S3.7c** | `locale = "ar_EG"` × each `number_format` | ✅ **Covered** | CORE values: `ar_EG` in `CORE_LOCALES`, with all five styles. |
+
+### 3.4 Notes
+
+* S3.6: in CLDR data a `decimalFormatLength` with a `type` holds only compact patterns, and percent and scientific formats have no lengths. The example's `long` decimal pattern `#,##0.###`, its scientific lengths, and its `<default>` element do not occur in the data.
+* S3.7: the DTD line above the paragraph is `<!ATTLIST symbols numberSystem CDATA #IMPLIED >`, the attribute of `<symbols>` (Section 2), not of the number format elements. The paragraph also says that patterns without a `numberSystem` attribute *"will be deprecated in CLDR v48"*, while the pinned data is CLDR 49 and every pattern has the attribute.
+* S3.7a: the other three locales with patterns that differ between numbering systems (`ccp`, `gu`, `te`) are not CORE locales; `gu` and `te` are extended locales.
+
+---
+
 ## Summary: Required Generator Changes
 
 | Change | Needed by |
@@ -300,7 +417,8 @@ Scans of `common/main` (all locales): no decimal, percent, scientific, or curren
 | Add the `sign_display` dimension, with its rows in a separate file: `CORE_LOCALES` × `"always"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (45 rows), and `CORE_LOCALES` × `"approximately"` × the same × the non-negative `CORE_NUMBERS` (36 rows) (+81 rows) | S2.9, S2.10 |
 | Add the `exponent_style` dimension, with its rows in a separate file: the 7 `CORE_LOCALES` with Latin digits (all but `ar_EG` and `bn`) × `"superscript"` × `number_format = "scientific"` × `CORE_NUMBERS` (+35 rows) | S2.12 |
 | Add the special values `Infinity`, `-Infinity`, and `NaN`, with their rows in a separate file: `CORE_LOCALES` × `number_format = "decimal"`, `format_length = ""` (+27 rows) | S2.14 |
+| Add `numbering_system` rows for `number_format = "percent"`, in a separate file: `CORE_LOCALES` × `"latn"`, `"native"` × `format_length = ""` × `CORE_NUMBERS` (+90 rows) | S3.7a |
 
 The rows that change the digits are `ar` × `"native"` and `"traditio"` (`arab`), and `ar_EG` and `bn` × `"latn"`. The other rows check that each key falls back to the expected numbering system.
 
-Together, Sections 1 and 2 add 313 rows, all in separate files (170 + 81 + 35 + 27); `decimals.tsv` is unchanged.
+Together, Sections 1–3 add 403 rows, all in separate files (170 + 81 + 35 + 27 + 90); `decimals.tsv` is unchanged.

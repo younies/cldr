@@ -47,6 +47,7 @@ Values at `c33251cf82`. `decimals.tsv` combines all CORE values with each other 
 | **`numbering_system`** | The `nu` key of the Unicode locale identifier (`-u-nu-…`) | **Needs to be added** (Section 1): `"latn"`, `"native"`, `"traditio"`, `"finance"`. The current rows use no `nu` key, that is, the locale's default numbering system. | — |
 | **`sign_display`** | When a sign is shown | **Needs to be added** (Section 2): `"always"` (the `plusSign` for positive numbers), `"approximately"` (the `approximatelySign`). The current rows show a sign only for negative numbers. | — |
 | **`exponent_style`** | How the exponent of `"scientific"` is written | **Needs to be added** (Section 2): `"superscript"` (`superscriptingExponent`, as in `1.234565×10⁶`). The current rows use the `exponential` symbol (`1.234565E6`). | — |
+| **`precision`** | Rounding of the number | **Needs to be added** (Section 4): `"significant: 3"` (minimum and maximum 3 significant digits) and `"fraction: 1"` (minimum and maximum 1 fraction digit), the two settings of the specification's compact example. The current rows use the default precision. | — |
 
 The generator produces 5 of the 9 combinations of `number_format` and `format_length`: `"decimal"` with each length, and `"percent"` and `"scientific"` with `""` only.
 
@@ -409,6 +410,170 @@ Scans of `common/main` (all locales): no locale has a `full` or `medium` length,
 
 ---
 
+## Section 4: Compact Number Formats (`#Compact_Number_Formats`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Compact_Number_Formats`](../../../docs/ldml/tr35-numbers.md#Compact_Number_Formats) (UTS #35 Part 3, Section 2.4.1: *Compact Number Formats*; L376–L491 at `c33251cf82`). The quote below has L378–L476, the patterns and the formatting steps. The `"0"` pattern (L479–L487) and the width guidance (L489–L490) are checked in a later section.
+* **Related specification text**: L742 ([`minimumGroupingDigits`](../../../docs/ldml/tr35-numbers.md#Examples_of_minimumGroupingDigits)), L811 onward ([Significant Digits](../../../docs/ldml/tr35-numbers.md#sigdig)), L840 onward ([Rounding](../../../docs/ldml/tr35-numbers.md#Rounding)), L1168 onward ([Language Plural Rules](../../../docs/ldml/tr35-numbers.md#Language_Plural_Rules): the plural categories of step 8), and Section 2 of the [currency document](../currency/tr35_currency_test_coverage.md) (step 4, `alt="alphaNextToNumber"`)
+
+### 4.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> A pattern `type` attribute is used for _compact number formats_, such as the following:
+>
+> ```xml
+> <decimalFormatLength type="long">
+> 	<decimalFormat>
+> 		<pattern type="1000" count="one">0 thousand</pattern>
+> 		<pattern type="1000" count="other">0 thousand</pattern>
+> 		<pattern type="10000" count="one">00 thousand</pattern>
+> 		<pattern type="10000" count="other">00 thousand</pattern>
+> 		<pattern type="100000" count="one">000 thousand</pattern>
+> 		<pattern type="100000" count="other">000 thousand</pattern>
+> 		<pattern type="1000000" count="one">0 million</pattern>
+> 		<pattern type="1000000" count="other">0 million</pattern>
+> 		<pattern type="10000000" count="one">00 million</pattern>
+> 		<pattern type="10000000" count="other">00 million</pattern>
+> …
+> 	</decimalFormat>
+> </decimalFormatLength>
+> <decimalFormatLength type="short">
+> 	<decimalFormat>
+> 		<pattern type="1000" count="one">0K</pattern>
+> 		<pattern type="1000" count="other">0K</pattern>
+> 		<pattern type="10000" count="one">00K</pattern>
+> 		<pattern type="10000" count="other">00K</pattern>
+> 		<pattern type="100000" count="one">000K</pattern>
+> 		<pattern type="100000" count="other">000K</pattern>
+> 		<pattern type="1000000" count="one">0M</pattern>
+> 		<pattern type="1000000" count="other">0M</pattern>
+> 		<pattern type="10000000" count="one">00M</pattern>
+> 		<pattern type="10000000" count="other">00M</pattern>
+> …
+> 	</decimalFormat>
+> </decimalFormatLength>
+> …
+> <currencyFormatLength type="short">
+>     <currencyFormat type="standard">
+> 		<pattern type="1000" count="one">¤0K</pattern>
+> 		<pattern type="1000" count="one" alt="alphaNextToNumber">¤ 0K</pattern>
+> 		<pattern type="1000" count="other">¤0K</pattern>
+> 		<pattern type="1000" count="other" alt="alphaNextToNumber">¤ 0K</pattern>
+> 		<pattern type="10000" count="one">¤00K</pattern>
+> 		<pattern type="10000" count="one" alt="alphaNextToNumber">¤ 00K</pattern>
+> 		<pattern type="10000" count="other">¤00K</pattern>
+> 		<pattern type="10000" count="other" alt="alphaNextToNumber">¤ 00K</pattern>
+> 		<pattern type="100000" count="one">¤000K</pattern>
+> 		<pattern type="100000" count="one" alt="alphaNextToNumber">¤ 000K</pattern>
+> 		<pattern type="100000" count="other">¤000K</pattern>
+> 		<pattern type="100000" count="other" alt="alphaNextToNumber">¤ 000K</pattern>
+> 		<pattern type="1000000" count="one">¤0M</pattern>
+> 		<pattern type="1000000" count="one" alt="alphaNextToNumber">¤ 0M</pattern>
+> 		<pattern type="1000000" count="other">¤0M</pattern>
+> 		<pattern type="1000000" count="other" alt="alphaNextToNumber">¤ 0M</pattern>
+> 		<pattern type="10000000" count="one">¤00M</pattern>
+> 		<pattern type="10000000" count="one" alt="alphaNextToNumber">¤ 00M</pattern>
+> 		<pattern type="10000000" count="other">¤00M</pattern>
+> 		<pattern type="10000000" count="other" alt="alphaNextToNumber">¤ 00M</pattern>        …
+>     </currencyFormat>
+> </currencyFormatLength>
+> ```
+>
+> Formats can be supplied for numbers (as above) or for currencies or other units. They can also be used with ranges of numbers, resulting in formatting strings like “$10K” or “$3–7M”.
+>
+> To format a number N, use the following steps:
+>
+> Notes:
+> - A _letter grapheme cluster_ is a grapheme cluster that starts with a letter and then 0 or more combining marks.
+> For example, each of the following are are _letter grapheme clusters_: \<q>, \<q, _combining ring above_>, \<q, _combining ring above_, _acute accent_>.
+> - All of the pattern elements with the same type must have the same number of zeros in the pattern element value.
+> - The examples use N = 123456, the currency = CAD, and the currency symbol string = "$CA"
+>
+> 1. Let P be the pattern element with greatest type less than or equal to N, and any count value.
+>     * P = `<pattern type="100000" count="**one**">¤000K</pattern>`
+> 2. Let V be the pattern element value.
+>     * V = "¤000K"
+> 3. If the element value of P is "0", then use the corresponding non-compact number formatting instead, and skip the rest of these steps — but adjust the precision as described below.
+>     * For example, instead of `currencyFormat` `<pattern type="10000" count="one">¤00K</pattern>`, use `<pattern>¤#,##0.00</pattern>`.
+> 4. If P is a currency format, look at the currency symbol string, and the position of the currency symbol ¤ in the pattern element value.
+> If ¤ is immediately to the left of a 0 and the currency string ends with a _letter grapheme cluster_ (eg, "$CA"),
+> or to the right and the currency starts with a letter (eg, "CA$"),
+> then switch to the `alt=alphaNextToNumber` pattern, if there is one.
+>     * P = `<pattern type="100000" count="**one**" alt="alphaNextToNumber">¤ 000K</pattern>` // with the currency symbol "CA$"
+>     * V = "¤ 000K"
+> 5. Let Z be the number of 0 characters in V, minus 1.
+>     * Z = 2
+> 6. Let T be the numeric value of the `type` attribute value, after removing the final Z zeros.
+>     * "100000" removing "00" = "1000"
+>     * T  = 1000
+> 7. Let N' be N / T
+>     * N = 123.456
+> 8. Determine the plural category of N, based on the numeric precision settings (the min/max number of significant or fraction digits), and switch  the value of V if necessary.
+>     * In this case, the plural category of 123.456 in English with any precision is "other", so the
+>     * P = `<pattern type="100000" count="**other**" alt="alphaNextToNumber">¤ 000K</pattern>`
+>     * V = "¤ 000K"
+>     * For the short compact formats, it doesn't make a difference for English, but may for other locales!
+> 9. Let V' be the same as V, but replacing that sequence of zeros by "{0}".
+>     * V' = "¤ {0}K"
+> 10. Let F be N' formatted according to V' and the numeric precision settings.
+>     * F = "$CA 123K"   // where the precision is min = max = 3 significant digits
+>     * F = "$CA 123.4K" // where the precision is min = max = 1 fraction digit
+
+---
+
+### 4.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** Compact decimal patterns of the CORE locales for the types that the CORE inputs reach (1000 for −1230.05, 1000000 for 1234565.0). The short patterns of `de`, `ru`, `pt_PT`, `bn`, `ar`, and `ar_EG` have U+00A0 between the number and the abbreviation, for example `0 Mio'.'` / `"0\u00A0Mio'.'"`.
+
+| Locale | `short` 1000 | `short` 1000000 | `long` 1000 | `long` 1000000 |
+| :--- | :--- | :--- | :--- | :--- |
+| `en` | `0K` | `0M` | `0 thousand` | `0 million` |
+| `de`, `de_CH` | `0` | `0 Mio'.'` | `0 Tausend` | `0 Million` (one), `0 Millionen` (other) |
+| `ru` | `0 тыс'.'` | `0 млн` | `0 тысяча` (one), `0 тысячи` (few, other), `0 тысяч` (many) | `0 миллион` (one), `0 миллиона` (few, other), `0 миллионов` (many) |
+| `pt_PT` | `0 mil` | `0 M` | `0 mil` | `0 milhão` (one), `0 milhões` (other) |
+| `ja` | `0` | `000万` (10000: `0万`) | as `short` | as `short` |
+| `bn` | `0 হা` | `00 লা` (100000: `0 লা`) | `0 হাজার` | `00 লাখ` (100000: `0 লাখ`) |
+| `ar`, `ar_EG` | `0 ألف` (few: `0 آلاف`) | `0 مليون` | `0 ألف` (few: `0 آلاف`) | `0 مليون` (few: `0 ملايين`) |
+
+`ja` has no `long` patterns of its own; `root` makes `long` an alias of `short`. The `ar_EG` patterns are those of `ar` (`root` makes `arab` an alias of `latn`), formatted with `arab` digits and symbols.
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S4.1** | *"A pattern `type` attribute is used for _compact number formats_"*; *"Formats can be supplied for numbers (as above) or for currencies or other units. They can also be used with ranges of numbers [...]"* | • **S4.1a**: `number_format = "decimal"` × `format_length = "short"` and `"long"`<br>• **S4.1b**: currencies and units<br>• **S4.1c**: ranges | • S4.1a: see S4.3–S4.7.<br>• S4.1b: currency formats are in the currency document; units are outside this generator.<br>• S4.1c: checked in a later section on number ranges. |
+| **S4.2** | Notes: *"A _letter grapheme cluster_ is a grapheme cluster that starts with a letter and then 0 or more combining marks."*; *"All of the pattern elements with the same type must have the same number of zeros in the pattern element value."* | — | The first note is used only by step 4 (currencies). The second is a constraint on the data. |
+| **S4.3** | Step 1: *"Let P be the pattern element with greatest type less than or equal to N, and any count value."* | • **S4.3a**: `format_length = "short"`, `"long"` × `input` values that reach different types (`1234565.0`: 1000000; `-1230.05`: 1000)<br>• **S4.3b**: `input` equal to a type (e.g. `1000.0`, `1000000.0`)<br>• **S4.3c**: `input` below the smallest type (`0.0`, `1.2`, `0.00831765`) | • S4.3a: `en` short 1234565.0 → `1.2M`; −1230.05 → `-1.2K`.<br>• S4.3b: `en` short 1000.0 → `1K`; 1000000.0 → `1M`.<br>• S4.3c: no pattern applies; the number is formatted with the `"0"` pattern (later section): `en` short 1.2 → `1.2`. |
+| **S4.4** | Steps 2–3: *"Let V be the pattern element value."*; *"If the element value of P is "0", then use the corresponding non-compact number formatting instead, and skip the rest of these steps — but adjust the precision as described below."* | • explicit `"0"` patterns (`"de"`, `"ja"` type 1000) | Checked in the later section on the `"0"` pattern: `de` short −1230.05 → `-1230`. |
+| **S4.5** | Step 4: *"If P is a currency format, look at the currency symbol string, and the position of the currency symbol ¤ in the pattern element value."* [...] | — | Currencies only; see Section 2 of the currency document. |
+| **S4.6** | Steps 5–7: *"Let Z be the number of 0 characters in V, minus 1."*; *"Let T be the numeric value of the `type` attribute value, after removing the final Z zeros."*; *"Let N' be N / T"* | • **S4.6a**: Z = 0 (`"en"`, `"de"` × `1234565.0`)<br>• **S4.6b**: Z > 0, which for the CORE inputs needs a `locale` with patterns of 2 or more zeros at 1000 or 1000000 (`"ja"`: `000万`, Z = 2, T = 10000; `"bn"`: `00 লা`, Z = 1, T = 100000) | • S4.6a: `de` long 1234565.0 → N′ = 1.234565 → `1,2 Millionen`.<br>• S4.6b: `ja` short 1234565.0 → N′ = 123.4565 → `123万`; `bn` short → N′ = 12.34565 → `১২ লা` / `"\u09E7\u09E8\u00A0\u09B2\u09BE"`. |
+| **S4.7** | Step 8: *"Determine the plural category of N, based on the numeric precision settings (the min/max number of significant or fraction digits), and switch the value of V if necessary."* [...] *"For the short compact formats, it doesn't make a difference for English, but may for other locales!"* | • **S4.7a**: `format_length = "long"` × a `locale` with different patterns per count × `input` in the `other` category (`1234565.0`)<br>• **S4.7b**: the same × `input` in another category: one (`1000000.0`), many (`5000000.0` in `"ru"`), few (`5000000.0` in `"ar"`)<br>• **S4.7c**: `format_length = "short"` × a `locale` with different short patterns per count (`"ar"` few) × `5000.0`<br>• **S4.7d**: an `input` whose category changes with the precision (`1040000.0`: `1` with the default precision, `1,0` with one fraction digit) | • S4.7a: `de` long 1234565.0 → `1,2 Millionen`; `ru` → `1,2 миллиона`.<br>• S4.7b: `de` long 1000000.0 → `1 Million`; `ru` 5000000.0 → `5 миллионов`; `ar` → `5 ملايين`.<br>• S4.7c: `ar` short 5000.0 → `5 آلاف` / `"5\u00A0\u0622\u0644\u0627\u0641"`.<br>• S4.7d: `de` long 1040000.0 → `1 Million` (one) by default; `1,0 Millionen` (other) with one fraction digit. |
+| **S4.8** | Steps 9–10: *"Let V' be the same as V, but replacing that sequence of zeros by "{0}"."*; *"Let F be N' formatted according to V' and the numeric precision settings."*, with the examples min = max = 3 significant digits and min = max = 1 fraction digit | • **S4.8a**: the default precision × `"short"`, `"long"` × the CORE inputs (S4.3a)<br>• **S4.8b**: `precision` = 3 significant digits and 1 fraction digit (new dimension) × `"short"`, `"long"` × `1234565.0`, `-1230.05` | • S4.8a: see S4.3a and S4.6.<br>• S4.8b: `en` short 1234565.0 → `1.23M` (3 significant digits), `1.2M` (1 fraction digit); −1230.05 → `-1.23K`, `-1.2K`; `ja` short 1234565.0 → `123万`, `123.5万`. |
+| **S4.9** | Steps 1 and 7 for a number N where the rounded N′ reaches the next type | • `input` that rounds up to a type (`999999.9`) | ❓ See the notes: `en` short 999999.9 → step 1 gives type 100000 and N′ = 999.9999. |
+
+---
+
+### 4.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S4.1a**, **S4.3a**, **S4.6a**, **S4.7a**, **S4.8a** | `"decimal"` × `"short"`, `"long"` × `1234565.0`, `-1230.05` × `en`, `de`, `ru` | ✅ **Covered** | CORE values: `"decimal"` with `"short"` and `"long"`, all `CORE_LOCALES`, and `CORE_NUMBERS`. |
+| **S4.1b**, **S4.2**, **S4.5** | — | ⚪ **Out of scope** | Currencies and units, or a constraint on the data. |
+| **S4.1c**, **S4.4** | — | — | Checked in later sections (number ranges; the `"0"` pattern). |
+| **S4.3b** | `input` = `1000.0`, `1000000.0` | 🟡 **Missing: `input` in CORE** | Both are extended values (10³, 10⁶); `decimals_extended_numbers.tsv` has them with all `CORE_LOCALES` and all five styles. No action needed. |
+| **S4.3c** | `input` below 1000 | ✅ **Covered** | CORE values: `0.0`, `1.2`, `0.00831765` with `"short"` and `"long"`. |
+| **S4.6b** | `locale = "ja"`, `"bn"` × `1234565.0` | ✅ **Covered** | CORE values: `ja` and `bn` in `CORE_LOCALES`; `1234565.0` in `CORE_NUMBERS`. |
+| **S4.7b**, **S4.7c** | `input` = `1000000.0`, `5000000.0`, `5000.0` × `"long"` / `"short"` | 🟡 **Missing: `input` in CORE** | Extended values (10⁶, 5 × 10⁶, 5 × 10³), in `decimals_extended_numbers.tsv` with all `CORE_LOCALES` and styles. No action needed. |
+| **S4.7d** | `input = 1040000.0` × `"long"` × `de`, `ru`, `pt_PT` | 🟡 **Missing: `input`** | Not a CORE or extended value. **Action**: add it to the extended numbers, and to the `precision` rows (see the Summary). |
+| **S4.8b** | `precision` × `"short"`, `"long"` | 🟡 **Missing: new dimension** | The generator uses the default precision of ICU's compact notation only. **Action**: add the `precision` dimension (see the Summary). |
+| **S4.9** | `input = 999999.9` × `"short"`, `"long"` | 🟡 **Missing: `input` in CORE** | Extended value, in `decimals_extended_numbers.tsv` with all `CORE_LOCALES` and styles. The expected value is open (see the notes). |
+
+### 4.4 Notes
+
+* S4.3: step 1 compares the types with N, so a negative N has no pattern with a type less than or equal to it. The expected values above use the absolute value of N (`-1.2K`), as the examples elsewhere in the specification imply; the text does not say so.
+* S4.7: the step says *"the plural category of N"*, but the example (*"the plural category of 123.456"*) and the step's reference to precision show that the category of the formatted N′ is meant. Step 7 also writes *"N = 123.456"* for N′.
+* S4.8: the specification does not define a default precision for compact formats; it describes one only for the `"0"` pattern (*"typically to 2 or 3 digits"*, L483). The expected values for the default precision follow ICU's (2 significant digits below 100, otherwise integers), which matches the examples in the CLDR data and the TSV files. The example *"F = "$CA 123.4K" // where the precision is min = max = 1 fraction digit"* rounds 123.456 down; with any of the rounding modes that round to nearest, the result is `123.5K` (`en` short 123456 → `123.5K`).
+* S4.9: after N′ = 999.9999 is rounded to `1000`, the steps give `1000K`, while ICU formats `1M` by choosing the type again. The specification does not say which is intended.
+* S4.2: the text in the notes has a typo (*"are are"*), and the currency example of step 4 writes `CA$` for the symbol that the notes call `$CA`.
+
+---
+
 ## Summary: Required Generator Changes
 
 | Change | Needed by |
@@ -418,7 +583,9 @@ Scans of `common/main` (all locales): no locale has a `full` or `medium` length,
 | Add the `exponent_style` dimension, with its rows in a separate file: the 7 `CORE_LOCALES` with Latin digits (all but `ar_EG` and `bn`) × `"superscript"` × `number_format = "scientific"` × `CORE_NUMBERS` (+35 rows) | S2.12 |
 | Add the special values `Infinity`, `-Infinity`, and `NaN`, with their rows in a separate file: `CORE_LOCALES` × `number_format = "decimal"`, `format_length = ""` (+27 rows) | S2.14 |
 | Add `numbering_system` rows for `number_format = "percent"`, in a separate file: `CORE_LOCALES` × `"latn"`, `"native"` × `format_length = ""` × `CORE_NUMBERS` (+90 rows) | S3.7a |
+| Add the `precision` dimension, with its rows in a separate file: `CORE_LOCALES` × `"significant: 3"`, `"fraction: 1"` × `number_format = "decimal"` × `format_length = "short"`, `"long"` × `CORE_NUMBERS` and `1040000.0` (+216 rows: 9 × 2 × 2 × 6) | S4.7d, S4.8b |
+| Add `1040000.0` to the extended numbers (+45 rows in `decimals_extended_numbers.tsv`: `CORE_LOCALES` × the five styles) | S4.7d |
 
 The rows that change the digits are `ar` × `"native"` and `"traditio"` (`arab`), and `ar_EG` and `bn` × `"latn"`. The other rows check that each key falls back to the expected numbering system.
 
-Together, Sections 1–3 add 403 rows, all in separate files (170 + 81 + 35 + 27 + 90); `decimals.tsv` is unchanged.
+Together, Sections 1–4 add 664 rows: 619 in separate files (170 + 81 + 35 + 27 + 90 + 216) and 45 in `decimals_extended_numbers.tsv`; `decimals.tsv` is unchanged.

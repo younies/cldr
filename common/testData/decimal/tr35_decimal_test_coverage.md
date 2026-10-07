@@ -47,9 +47,9 @@ Values at `c33251cf82`. `decimals.tsv` combines all CORE values with each other 
 | **`numbering_system`** | The `nu` key of the Unicode locale identifier (`-u-nu-…`) | **Needs to be added** (Section 1): `"latn"`, `"native"`, `"traditio"`, `"finance"`. The current rows use no `nu` key, that is, the locale's default numbering system. | — |
 | **`sign_display`** | When a sign is shown | **Needs to be added** (Section 2): `"always"` (the `plusSign` for positive numbers), `"approximately"` (the `approximatelySign`). The current rows show a sign only for negative numbers. | — |
 | **`exponent_style`** | How the exponent of `"scientific"` is written | **Needs to be added** (Section 2): `"superscript"` (`superscriptingExponent`, as in `1.234565×10⁶`). The current rows use the `exponential` symbol (`1.234565E6`). | — |
-| **`precision`** | Rounding of the number | **Needs to be added** (Sections 4 and 6): `"significant: 3"` (minimum and maximum 3 significant digits) and `"fraction: 1"` (minimum and maximum 1 fraction digit), the two settings of the specification's compact example; `"fraction: 4-5"` (minimum 4 and maximum 5 fraction digits, as in the pattern `###0.0000#`). The current rows use the default precision. | — |
+| **`precision`** | Rounding of the number | **Needs to be added** (Sections 4, 6, and 11–13): `"significant: 3"` (minimum and maximum 3 significant digits) and `"fraction: 1"` (minimum and maximum 1 fraction digit), the two settings of the specification's compact example; `"fraction: 4-5"` (minimum 4 and maximum 5 fraction digits, as in the pattern `###0.0000#`); `"significant: 2-4"` (minimum 2 and maximum 4 significant digits, as in the pattern `@@##`); `"increment: 50"` and `"increment: 0.65"` (rounding increments). The current rows use the default precision. | — |
 | **`grouping`** | Whether grouping separators are shown | **Needs to be added** (Section 6): `"off"` (as in the pattern `###0.#####`). The current rows use the locale's grouping. | — |
-| **`integer_width`** | Minimum and maximum number of integer digits | **Needs to be added** (Section 6): `"min: 5"` (as in the pattern `00000.0000`). The current rows use a minimum of 1 and no maximum. | — |
+| **`integer_width`** | Minimum and maximum number of integer digits | **Needs to be added** (Sections 6 and 10): `"min: 5"` (as in the pattern `00000.0000`) and `"max: 2"`. The current rows use a minimum of 1 and no maximum. | — |
 
 The generator produces 5 of the 9 combinations of `number_format` and `format_length`: `"decimal"` with each length, and `"percent"` and `"scientific"` with `""` only.
 
@@ -291,7 +291,7 @@ Scans of `common/main` (all locales): no decimal, percent, scientific, or curren
 
 * S2.10: the specification does not say how the approximately sign combines with a negative number, since both replace the same minus sign. The Summary therefore adds `"approximately"` rows only for non-negative inputs.
 * S2.12: the example “1.23 × 10<sup>4</sup>” has spaces around `×`, but no CLDR `superscriptingExponent` value has spaces (`en`: `×`), and the text does not say where the `10` comes from or how it is localized (for example with `arab` digits, which have no superscript characters). The expected values above follow the data: `1.234565×10⁶`.
-* S2.14: [Special Values](../../../docs/ldml/tr35-numbers.md#special-values) (L777) says that NaN is shown without the prefixes and suffixes of the pattern; a later section on special values checks the percent and compact results.
+* S2.14: [Special Values](../../../docs/ldml/tr35-numbers.md#special-values) (L777) says that NaN is shown without the prefixes and suffixes of the pattern; Section 10 checks the other styles.
 
 ---
 
@@ -935,6 +935,281 @@ The non-compact pattern of these locales is `#,##0.###` (`group`: `de` `.`, `de_
 
 ---
 
+## Section 10: Formatting and Special Values (`#Formatting`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Formatting`](../../../docs/ldml/tr35-numbers.md#Formatting) (UTS #35 Part 3, Section 3.3: *Formatting*, with its subsection [Special Values](../../../docs/ldml/tr35-numbers.md#special-values); L765–L779 at `c33251cf82`). The quote below has L767–L779.
+* **Related specification text**: L781 onward ([Scientific Notation](../../../docs/ldml/tr35-numbers.md#sci), Section 11), L811 onward ([Significant Digits](../../../docs/ldml/tr35-numbers.md#sigdig), Section 12), L840 onward ([Rounding](../../../docs/ldml/tr35-numbers.md#Rounding), Section 13), and Section 2 (S2.14: `infinity` and `nan`)
+
+### 10.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> Formatting is guided by several parameters, all of which can be specified either using a pattern or using an external API designed for number formatting. The following description applies to formats that do not use [scientific notation](../../../docs/ldml/tr35-numbers.md#sci) or [significant digits](../../../docs/ldml/tr35-numbers.md#sigdig).
+>
+> * If the number of actual integer digits exceeds the _maximum integer digits_, then only the least significant digits are shown. For example, 1997 is formatted as "97" if the maximum integer digits is set to 2.
+> * If the number of actual integer digits is less than the _minimum integer digits_, then leading zeros are added. For example, 1997 is formatted as "01997" if the minimum integer digits is set to 5.
+> * If the number of actual fraction digits exceeds the _maximum fraction digits_, then half-even rounding it performed to the maximum fraction digits. For example, 0.125 is formatted as "0.12" if the maximum fraction digits is 2. This behavior can be changed by specifying a rounding increment and a rounding mode.
+> * If the number of actual fraction digits is less than the _minimum fraction digits_, then trailing zeros are added. For example, 0.125 is formatted as "0.1250" if the minimum fraction digits is set to 4.
+> * Trailing fractional zeros are not displayed if they occur _j_ positions after the decimal, where _j_ is less than the maximum fraction digits. For example, 0.10004 is formatted as "0.1" if the maximum fraction digits is four or less.
+>
+> #### Special Values
+>
+> `NaN` is represented as a single character, typically `(U+FFFD)` . This character is determined by the localized number symbols. This is the only value for which the prefixes and suffixes are not used.
+>
+> Infinity is represented as a single character, typically ∞ `(U+221E)` , with the positive or negative prefixes and suffixes applied. The infinity character is determined by the localized number symbols.
+
+---
+
+### 10.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** Digit counts of the CORE patterns:
+
+| `number_format` | Pattern | Integer digits | Fraction digits |
+| :--- | :--- | :--- | :--- |
+| `"decimal"` | `#,##0.###` (`bn`: `#,##,##0.###`) | at least 1, no maximum | 0–3 |
+| `"percent"` | `#,##0%` (`de`, `ru`: `#,##0 %` / `"#,##0\u00A0%"`) | at least 1, no maximum | 0 |
+| `"scientific"` | `#E0` | see Section 11 | see Section 11 |
+
+`infinity` is `∞` (U+221E) in the CORE locales. `nan` is `NaN`, except `ar` and `ar_EG` (`ليس رقمًا` / `"\u0644\u064A\u0633\u00A0\u0631\u0642\u0645\u064B\u0627"`) and `ru` (`не число` / `"\u043D\u0435\u00A0\u0447\u0438\u0441\u043B\u043E"`).
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S10.1** | *"Formatting is guided by several parameters, all of which can be specified either using a pattern or using an external API designed for number formatting. The following description applies to formats that do not use scientific notation or significant digits."* | — (introduces S10.2–S10.6) | — |
+| **S10.2** | *"If the number of actual integer digits exceeds the maximum integer digits, then only the least significant digits are shown. For example, 1997 is formatted as "97" if the maximum integer digits is set to 2."* | • `integer_width = "max: 2"` × `input` with more than 2 integer digits (`1234565.0`, `-1230.05`) × several `locale` values (`"en"`, `"ar_EG"`) | `en` 1234565.0 → `65`; −1230.05 → `-30.05`; `ar_EG` 1234565.0 → `٦٥` / `"\u0666\u0665"`. |
+| **S10.3** | *"If the number of actual integer digits is less than the minimum integer digits, then leading zeros are added. For example, 1997 is formatted as "01997" if the minimum integer digits is set to 5."* | • `integer_width = "min: 5"` (Section 6) | See S6.4e; `en` 0.0 → `00000`. |
+| **S10.4** | *"If the number of actual fraction digits exceeds the maximum fraction digits, then half-even rounding it performed to the maximum fraction digits. For example, 0.125 is formatted as "0.12" if the maximum fraction digits is 2. This behavior can be changed by specifying a rounding increment and a rounding mode."* | • **S10.4a**: `input` with more fraction digits than the maximum (`0.00831765` × `"decimal"`, `"percent"`)<br>• **S10.4b**: ties, where half-even rounding differs from half-up (`0.0005`, `0.0015`; percent: `0.005`, `0.015`, `0.125`, `0.135`)<br>• **S10.4c**: a rounding increment and a rounding mode | • S10.4a: `en` 0.00831765 → `0.008`; percent → `1%`.<br>• S10.4b: `en` 0.0005 → `0`; 0.0015 → `0.002`; percent 0.005 → `0%`; 0.015 → `2%`; 0.125 → `12%`; 0.135 → `14%`.<br>• S10.4c: see Section 13. |
+| **S10.5** | *"If the number of actual fraction digits is less than the minimum fraction digits, then trailing zeros are added. For example, 0.125 is formatted as "0.1250" if the minimum fraction digits is set to 4."* | • `precision = "fraction: 4-5"` (Section 6) | See S6.4d; `en` 1.2 → `1.2000`. |
+| **S10.6** | *"Trailing fractional zeros are not displayed if they occur j positions after the decimal, where j is less than the maximum fraction digits. For example, 0.10004 is formatted as "0.1" if the maximum fraction digits is four or less."* | • `input` with fewer fraction digits than the maximum (`1.2` × `#,##0.###`) | `en` 1.2 → `1.2`, not `1.200`. |
+| **S10.7** | *"`NaN` is represented as a single character, typically `(U+FFFD)` . This character is determined by the localized number symbols. This is the only value for which the prefixes and suffixes are not used."* | • `input = NaN` × the styles with a prefix or suffix (`"percent"`, `"short"`, `"long"`) and `"scientific"` × `locale` values with different `nan` (`"en"`, `"ru"`, `"ar"`) | `en` percent → `NaN` (no `%`); `ru` percent → `не число` / `"\u043D\u0435\u00A0\u0447\u0438\u0441\u043B\u043E"`; `ar` short → `ليس رقمًا` / `"\u0644\u064A\u0633\u00A0\u0631\u0642\u0645\u064B\u0627"`. |
+| **S10.8** | *"Infinity is represented as a single character, typically ∞ `(U+221E)` , with the positive or negative prefixes and suffixes applied. The infinity character is determined by the localized number symbols."* | • **S10.8a**: `input = Infinity`, `-Infinity` × `"percent"` × several `locale` values (`"en"`, `"de"`, `"ar_EG"`)<br>• **S10.8b**: × `"scientific"`<br>• **S10.8c**: × `"short"`, `"long"` | • S10.8a: `en` → `∞%`, `-∞%`; `de` → `∞ %` / `"\u221E\u00A0%"`; `ar_EG` → `∞٪؜` / `"\u221E\u066A\u061C"`.<br>• S10.8b: `en` → `∞`, `-∞` (`#E0` has no prefix or suffix).<br>• S10.8c: ❓ see the notes. |
+
+---
+
+### 10.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S10.1** | — | — | Introduction. |
+| **S10.2** | `integer_width = "max: 2"` | 🟡 **Missing: new dimension** | No CLDR pattern has a maximum number of integer digits. **Action**: add the `integer_width` value `"max: 2"` (see the Summary). |
+| **S10.3**, **S10.5** | `integer_width = "min: 5"`, `precision = "fraction: 4-5"` | 🟡 **Missing: new dimension** | **Action**: Section 6's rows (see the Summary). |
+| **S10.4a**, **S10.6** | `input` with more or fewer fraction digits than the pattern | ✅ **Covered** | CORE values: `0.00831765` and `1.2` with `"decimal"` and `"percent"`. |
+| **S10.4b** | ties | 🟡 **Missing: `input` in CORE** | Extended values (5 × 10⁻⁴, 1.5 × 10⁻³, 5 × 10⁻³, 1.5 × 10⁻², `0.125`, `0.135`), in `decimals_extended_numbers.tsv` with all `CORE_LOCALES` and all five styles. No action needed. |
+| **S10.4c** | — | — | See Section 13. |
+| **S10.7**, **S10.8** | `input = NaN`, `Infinity`, `-Infinity` × `"percent"`, `"scientific"`, `"short"`, `"long"` | 🟡 **Missing: `input`** | Section 2 adds the special values with `"decimal"` and `format_length = ""` only. **Action**: add them for the other four styles (see the Summary). The expected value of S10.8c is open. |
+
+### 10.4 Notes
+
+* S10.7: no CLDR `nan` value is a single character, and none is U+FFFD.
+* S10.8c: step 1 of the compact formatting steps (Section 4) takes the pattern with the greatest type less than or equal to N. For infinity that is the largest type (`en` short: `000T`, 10¹⁴), which would give `∞T`; the text does not say whether infinity skips the compact patterns. For NaN no type compares as less than or equal, so the `"0"` pattern applies (Section 5) and the result is `NaN` (S10.7).
+* S10.4: typo *"rounding it performed"* (*is performed*).
+
+---
+
+## Section 11: Scientific Notation (`#sci`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#sci`](../../../docs/ldml/tr35-numbers.md#sci) (UTS #35 Part 3, Section 3.4: *Scientific Notation*; L781–L809 at `c33251cf82`). The quote below has L783–L809.
+* **Related specification text**: L829 ([Significant Digits](../../../docs/ldml/tr35-numbers.md#sigdig), Section 12: *"Significant digits may be used together with exponential notation."*) and Section 2 (S2.11 and S2.12: `exponential`, `superscriptingExponent`)
+
+### 11.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> Numbers in scientific notation are expressed as the product of a mantissa and a power of ten, for example, 1234 can be expressed as 1.234 x 10<sup>3</sup>. The mantissa is typically in the half-open interval [1.0, 10.0) or sometimes [0.0, 1.0), but it need not be. In a pattern, the exponent character immediately followed by one or more digit characters indicates scientific notation. Example: "0.###E0" formats the number 1234 as "1.234E3".
+>
+> * The number of digit characters after the exponent character gives the minimum exponent digit count. There is no maximum. Negative exponents are formatted using the localized minus sign, _not_ the prefix and suffix from the pattern. This allows patterns such as "0.###E0 m/s". To prefix positive exponents with a localized plus sign, specify '+' between the exponent and the digits: "0.###E+0" will produce formats "1E+1", "1E+0", "1E-1", and so on. (In localized patterns, use the localized plus sign rather than '+'.)
+> * The minimum number of integer digits is achieved by adjusting the exponent. Example: 0.00123 formatted with "00.###E0" yields "12.3E-4". This only happens if there is no maximum number of integer digits. If there is a maximum, then the minimum number of integer digits is fixed at one.
+> * The maximum number of integer digits, if present, specifies the exponent grouping. The most common use of this is to generate _engineering notation_, in which the exponent is a multiple of three, for example, "##0.###E0". The number 12345 is formatted using "##0.####E0" as "12.345E3".
+> * When using scientific notation, the formatter controls the digit counts using logic for significant digits. The maximum number of significant digits comes from the mantissa portion of the pattern: the string of #, 0, and period (".") characters immediately preceding the E. To get the maximum number of significant digits, use the following algorithm:
+>
+>     1.  If the mantissa pattern contains a period:
+>         1.  If the mantissa pattern contains at least one 0:
+>             *   Return the number of 0s before the period added to the number of #s or 0s after the period
+>         2.  Else:
+>             *   Return 1 plus the number of #s after the period
+>     2.  Else:
+>         1.  If the mantissa pattern contains at least one 0:
+>             *   Return the number of 0s.
+>         2.  Else:
+>             *   Return positive infinity.
+>
+>     Examples:
+>
+>     *   0.##E0 means a max of 3 significant digits.
+>     *   #.##E0 also means a max of 3 significant digits.
+>     *   #.0#E0 means a max of 2 significant digits.
+>     *   0E0 means a max of 1 significant digit.
+>     *   #E0 means infinite precision.
+>     *   ###E0 means engineering notation with infinite precision.
+> *   Exponential patterns may not contain grouping separators.
+
+---
+
+### 11.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** The scientific pattern of the CORE locales is `#E0`: one exponent digit, no `+`, and a mantissa with no `0` and no period, so by the algorithm the maximum number of significant digits is infinite. Other scientific patterns in `common/main`:
+
+| Pattern | Locales |
+| :--- | :--- |
+| `[#E0]` | `gu`, `hi`, `hi_Latn`, `mr`, `pa` (extended); `mai`, `sa` |
+| `#` | `lo`, `si` (extended) |
+| `0.000000E+000` | `en_US_POSIX` |
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S11.1** | *"Numbers in scientific notation are expressed as the product of a mantissa and a power of ten, for example, 1234 can be expressed as 1.234 x 10<sup>3</sup>."* [...] *"In a pattern, the exponent character immediately followed by one or more digit characters indicates scientific notation."* | • **S11.1a**: `number_format = "scientific"` × `input` of different magnitudes (`CORE_NUMBERS`)<br>• **S11.1b**: a scientific pattern without an exponent character (`"si"`, `"lo"`: `#`) | • S11.1a: `en` 1234565.0 → `1.234565E6`; −1230.05 → `-1.23005E3`; 0.00831765 → `8.31765E-3`; 1.2 → `1.2E0`.<br>• S11.1b: ❓ see the notes. |
+| **S11.2** | *"The number of digit characters after the exponent character gives the minimum exponent digit count. There is no maximum. Negative exponents are formatted using the localized minus sign, not the prefix and suffix from the pattern."* | • **S11.2a**: `#E0` × exponents of one digit (`CORE_NUMBERS`) and of two digits (`input` ≥ 10¹⁰)<br>• **S11.2b**: a negative exponent (`0.00831765`) × `locale` values with different `minusSign` (`"ar"`, `"ar_EG"`)<br>• **S11.2c**: a minimum of more than one exponent digit (`E00`) | • S11.2a: `en` 1234565.0 → `1.234565E6`; 1.5E12 → `1.5E12`.<br>• S11.2b: `ar` → `8.31765E‎-3` / `"8.31765E\u200E-3"`; `ar_EG` → `٨٫٣١٧٦٥أس؜-٣` / `"\u0668\u066B\u0663\u0661\u0667\u0666\u0665\u0623\u0633\u061C-\u0663"`.<br>• S11.2c: no pattern of a CORE or extended locale has it. |
+| **S11.3** | *"This allows patterns such as "0.###E0 m/s". To prefix positive exponents with a localized plus sign, specify '+' between the exponent and the digits: "0.###E+0" will produce formats "1E+1", "1E+0", "1E-1", and so on."* | — | No pattern of a CORE or extended locale has a suffix after the exponent or `E+` (`en_US_POSIX` only). |
+| **S11.4** | *"The minimum number of integer digits is achieved by adjusting the exponent. Example: 0.00123 formatted with "00.###E0" yields "12.3E-4"."* [...] | — | No CLDR scientific pattern has a minimum of more than one integer digit. |
+| **S11.5** | *"The maximum number of integer digits, if present, specifies the exponent grouping. The most common use of this is to generate engineering notation, in which the exponent is a multiple of three, for example, "##0.###E0". The number 12345 is formatted using "##0.####E0" as "12.345E3"."* | — | No CLDR scientific pattern has a maximum number of integer digits. |
+| **S11.6** | *"When using scientific notation, the formatter controls the digit counts using logic for significant digits. The maximum number of significant digits comes from the mantissa portion of the pattern: the string of #, 0, and period (".") characters immediately preceding the E."*, the algorithm, and its examples (*"#E0 means infinite precision."*) | • **S11.6a**: `#E0` × `input` with many significant digits (`1234565.0`: 7)<br>• **S11.6b**: a maximum number of significant digits × `"scientific"`: `precision = "significant: 3"`, `"significant: 2-4"` × `CORE_NUMBERS` × several `locale` values<br>• **S11.6c**: the other example patterns (`0.##E0`, `#.0#E0`, `0E0`, `###E0`) | • S11.6a: `en` 1234565.0 → `1.234565E6` (7 digits).<br>• S11.6b: `en` 1234565.0 → `1.23E6` (3) / `1.235E6` (2–4); 1.2 → `1.20E0` / `1.2E0`; 0.00831765 → `8.32E-3` / `8.318E-3`; `de` 1234565.0 → `1,23E6` / `1,235E6`.<br>• S11.6c: no CLDR data. |
+| **S11.7** | *"Exponential patterns may not contain grouping separators."* | — | A constraint on the data. |
+
+---
+
+### 11.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S11.1a**, **S11.2a** (one digit), **S11.2b**, **S11.6a** | `"scientific"` × `CORE_NUMBERS` × `en`, `ar`, `ar_EG` | ✅ **Covered** | CORE values: `"scientific"` with all `CORE_LOCALES` and `CORE_NUMBERS`. |
+| **S11.2a** (two digits) | `input` ≥ 10¹⁰ | 🟡 **Missing: `input` in CORE** | Extended values (10¹⁰ to 5 × 10¹²), in `decimals_extended_numbers.tsv` with all `CORE_LOCALES` and all five styles. No action needed. |
+| **S11.1b** | `locale = "si"`, `"lo"` × `"scientific"` | 🟡 **Missing: `locale` in CORE** | Extended locales, in `decimals_modern_locales.tsv`. No action needed; the expected value is open (see the notes). |
+| **S11.6b** | `precision` × `"scientific"` | 🟡 **Missing: new dimension** | Section 4 adds `precision` rows for compact formats only. **Action**: add `"significant: 3"` and `"significant: 2-4"` rows for `"scientific"` (see the Summary). |
+| **S11.2c**, **S11.3**, **S11.4**, **S11.5**, **S11.6c**, **S11.7** | — | ⚪ **Out of scope** | No scientific pattern of a CORE or extended locale has these features, or a constraint on the data. |
+
+### 11.4 Notes
+
+* S11.1b: the scientific pattern `#` of `si` and `lo` has no exponent character, so by S11.1 it is not scientific notation (`si` 1234565.0 → `1234565`); it also has no `0`, which S6.5 asks for.
+* S11.1: the `[#E0]` patterns have literal brackets: `hi` 1234565.0 → `[1.234565E6]`.
+* S11.6b: `"significant: 3"` also sets a minimum of 3 significant digits, so 1.2 → `1.20E0`. The specification's examples set only a maximum: `0.##E0` (at most 3) gives `1.2E0`.
+
+---
+
+## Section 12: Significant Digits (`#sigdig`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#sigdig`](../../../docs/ldml/tr35-numbers.md#sigdig) (UTS #35 Part 3, Section 3.5: *Significant Digits*, with the table [Significant Digits Examples](../../../docs/ldml/tr35-numbers.md#Significant_Digits_Examples); L811–L829 at `c33251cf82`). The quote below has L813–L829.
+* **Related specification text**: L765 onward ([Formatting](../../../docs/ldml/tr35-numbers.md#Formatting), Section 10), Section 4 (S4.8b: `precision` with compact formats), and Section 11 (S11.6: scientific notation)
+
+### 12.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> There are two ways of controlling how many digits are shown: (a) significant digits counts, or (b) integer and fraction digit counts. Integer and fraction digit counts are described above. When a formatter is using significant digits counts, it uses however many integer and fraction digits are required to display the specified number of significant digits. It may ignore min/max integer/fraction digits, or it may use them to the extent possible.
+>
+> ###### Table: <a name="Significant_Digits_Examples" href="../../../docs/ldml/tr35-numbers.md#Significant_Digits_Examples">Significant Digits Examples</a>
+>
+> | Pattern | Minimum significant digits | Maximum significant digits | Number | Output |
+> | :-- | :-- | :-- | :-- | :-- |
+> | `@@@` | 3 | 3 | 12345 | `12300` |
+> | `@@@` | 3 | 3 | 0.12345 | `0.123` |
+> | `@@##` | 2 | 4 | 3.14159 | `3.142` |
+> | `@@##` | 2 | 4 | 1.23004 | `1.23` |
+>
+> * In order to enable significant digits formatting, use a pattern containing the `'@'` pattern character. In order to disable significant digits formatting, use a pattern that does not contain the `'@'` pattern character.
+> * Significant digit counts may be expressed using patterns that specify a minimum and maximum number of significant digits. These are indicated by the `'@'` and `'#'` characters. The minimum number of significant digits is the number of `'@'` characters. The maximum number of significant digits is the number of `'@'` characters plus the number of `'#'` characters following on the right. For example, the pattern `"@@@"` indicates exactly 3 significant digits. The pattern `"@##"` indicates from 1 to 3 significant digits. Trailing zero digits to the right of the decimal separator are suppressed after the minimum number of significant digits have been shown. For example, the pattern `"@##"` formats the number 0.1203 as `"0.12"`.
+> * Implementations may forbid the use of significant digits in combination with min/max integer/fraction digits. In such a case, if a pattern uses significant digits, it may not contain a decimal separator, nor the `'0'` pattern character. Patterns such as `"@00"` or `"@.###"` would be disallowed.
+> * Any number of `'#'` characters may be prepended to the left of the leftmost `'@'` character. These have no effect on the minimum and maximum significant digits counts, but may be used to position grouping separators. For example, `"#,#@#"` indicates a minimum of one significant digit, a maximum of two significant digits, and a grouping size of three.
+> * The number of significant digits has no effect on parsing.
+> * Significant digits may be used together with exponential notation. Such patterns are equivalent to a normal exponential pattern with a minimum and maximum integer digit count of one, a minimum fraction digit count of `Minimum Significant Digits - 1`, and a maximum fraction digit count of `Maximum Significant Digits - 1`. For example, the pattern `"@@###E0"` is equivalent to `"0.0###E0"`.
+
+---
+
+### 12.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** No CLDR pattern contains `@` (Section 7), so significant digits come only from API settings. The `precision` values below correspond to patterns of the table:
+
+| `precision` | Minimum significant digits | Maximum significant digits | As a pattern |
+| :--- | :--- | :--- | :--- |
+| `"significant: 3"` (Section 4) | 3 | 3 | `@@@` |
+| `"significant: 2-4"` | 2 | 4 | `@@##` |
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S12.1** | *"There are two ways of controlling how many digits are shown: (a) significant digits counts, or (b) integer and fraction digit counts. Integer and fraction digit counts are described above. When a formatter is using significant digits counts, it uses however many integer and fraction digits are required to display the specified number of significant digits."* | • **S12.1a**: (b) integer and fraction digit counts (Section 10)<br>• **S12.1b**: (a) significant digits × `number_format = "decimal"`, `format_length = ""` | • S12.1a: see Section 10.<br>• S12.1b: see S12.2. |
+| **S12.2** | The table [Significant Digits Examples](../../../docs/ldml/tr35-numbers.md#Significant_Digits_Examples) (`@@@` × 12345 → `12300`; `@@##` × 3.14159 → `3.142`) | • `precision = "significant: 3"`, `"significant: 2-4"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` × several `locale` values | `en` 1234565.0 → `1,230,000` (3) / `1,235,000` (2–4); −1230.05 → `-1,230` (both); 1.2 → `1.20` / `1.2`; 0.00831765 → `0.00832` / `0.008318`; `de` 1234565.0 → `1.230.000` / `1.235.000`. |
+| **S12.3** | *"In order to enable significant digits formatting, use a pattern containing the `'@'` pattern character."* [...] *"The minimum number of significant digits is the number of `'@'` characters. The maximum number of significant digits is the number of `'@'` characters plus the number of `'#'` characters following on the right."* | — | No CLDR pattern contains `@`. |
+| **S12.4** | *"Trailing zero digits to the right of the decimal separator are suppressed after the minimum number of significant digits have been shown. For example, the pattern `"@##"` formats the number 0.1203 as `"0.12"`."* | • a minimum below the maximum (`"significant: 2-4"`) and an equal minimum and maximum (`"significant: 3"`) × `input` with fewer significant digits (`1.2`) | `en` 1.2 → `1.2` (2–4), `1.20` (3). |
+| **S12.5** | *"It may ignore min/max integer/fraction digits, or it may use them to the extent possible."*; *"Implementations may forbid the use of significant digits in combination with min/max integer/fraction digits."* [...] | — | An implementation choice. The expected values above use the significant digits only. |
+| **S12.6** | *"Any number of `'#'` characters may be prepended to the left of the leftmost `'@'` character. These have no effect on the minimum and maximum significant digits counts, but may be used to position grouping separators."* | • significant digits × the locale's grouping × `input` with 7 integer digits (`1234565.0`) × `locale` values with different `group` (`"de"`, `"ar_EG"`) | `de` 1234565.0 → `1.230.000` (3); `ar_EG` → `١٬٢٣٠٬٠٠٠` / `"\u0661\u066C\u0662\u0663\u0660\u066C\u0660\u0660\u0660"`. |
+| **S12.7** | *"The number of significant digits has no effect on parsing."* | — | Parsing. |
+| **S12.8** | *"Significant digits may be used together with exponential notation. Such patterns are equivalent to a normal exponential pattern with a minimum and maximum integer digit count of one, a minimum fraction digit count of `Minimum Significant Digits - 1`, and a maximum fraction digit count of `Maximum Significant Digits - 1`."* [...] | • `precision` × `"scientific"` (S11.6b) | `"significant: 3"` is equivalent to `0.00E0`: `en` 1234565.0 → `1.23E6` (S11.6b). |
+
+---
+
+### 12.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S12.1a** | integer and fraction digit counts | ✅ **Covered** | See Section 10. |
+| **S12.1b**, **S12.2**, **S12.4**, **S12.6** | `precision = "significant: 3"`, `"significant: 2-4"` × `"decimal"`, `format_length = ""` | 🟡 **Missing: new dimension** | Section 4 adds `precision` rows for compact formats only. **Action**: add them for `"decimal"` with `format_length = ""` (see the Summary). |
+| **S12.8** | `precision` × `"scientific"` | 🟡 **Missing: new dimension** | **Action**: Section 11's rows (see the Summary). |
+| **S12.3**, **S12.5**, **S12.7** | — | ⚪ **Out of scope** | Pattern syntax that CLDR does not use, an implementation choice, or parsing. |
+
+### 12.4 Notes
+
+* S12.2: the table's outputs are not grouped (`12300`); with the locale's pattern they are (S12.6; `en` 12345 → `12,300`).
+* The text does not say how many significant digits zero has, so the expected value of `0.0` × `"significant: 3"` is open (`0`, `0.0`, or `0.00`).
+
+---
+
+## Section 13: Rounding (`#Rounding`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Rounding`](../../../docs/ldml/tr35-numbers.md#Rounding) (UTS #35 Part 3, Section 3.7: *Rounding*; L840–L856 at `c33251cf82`). The quote below has L842–L856.
+* **Related specification text**: L771 (half-even rounding to the maximum fraction digits; Section 10, S10.4) and Section 12 of the [currency document](../currency/tr35_currency_test_coverage.md) (currency rounding)
+
+### 13.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> Patterns support rounding to a specific increment. For example, 1230 rounded to the nearest 50 is 1250. Mathematically, rounding to specific increments is performed by dividing by the increment, rounding to an integer, then multiplying by the increment. To take a more bizarre example, 1.234 rounded to the nearest 0.65 is 1.3, as follows:
+>
+> <table><tbody>
+> <tr><th>Original:</th><td>1.234</td></tr>
+> <tr><th>Divide by increment (0.65):</th><td>1.89846…</td></tr>
+> <tr><th>Round:</th><td>2</td></tr>
+> <tr><th>Multiply by increment (0.65):</th><td>1.3</td></tr>
+> </tbody></table>
+>
+> To specify a rounding increment in a pattern, include the increment in the pattern itself. "#,#50" specifies a rounding increment of 50. "#,##0.05" specifies a rounding increment of 0.05.
+>
+> * Rounding only affects the string produced by formatting. It does not affect parsing or change any numerical values.
+> * An implementation may allow the specification of a _rounding mode_ to determine how values are rounded. In the absence of such choices, the default is to round "half-even", as described in IEEE arithmetic. That is, it rounds towards the "nearest neighbor" unless both neighbors are equidistant, in which case, it rounds towards the even neighbor. Behaves as for round "half-up" if the digit to the left of the discarded fraction is odd; behaves as for round "half-down" if it's even. Note that this is the rounding mode that minimizes cumulative error when applied repeatedly over a sequence of calculations.
+> * Some locales use rounding in their currency formats to reflect the smallest currency denomination.
+> * In a pattern, digits '1' through '9' specify rounding, but otherwise behave identically to digit '0'.
+
+---
+
+### 13.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** No CLDR pattern contains a digit `1`–`9` (Section 7), and every `rounding` value in `<fractions>` is `0`, so rounding increments come only from API settings. The steps for the two increments of the text (50 and 0.65) with CORE inputs:
+
+| Increment | Input | Divided by the increment | Rounded (half-even) | Result |
+| :--- | :--- | :--- | :--- | :--- |
+| 50 | 1234565.0 | 24691.3 | 24691 | 1234550 |
+| 50 | −1230.05 | −24.601 | −25 | −1250 |
+| 50 | 1.2 | 0.024 | 0 | 0 |
+| 0.65 | 1.2 | 1.846… | 2 | 1.3 |
+| 0.65 | −1230.05 | −1892.38… | −1892 | −1229.8 |
+| 0.65 | 1234565.0 | 1899330.77… | 1899331 | 1234565.15 |
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S13.1** | *"Patterns support rounding to a specific increment. For example, 1230 rounded to the nearest 50 is 1250. Mathematically, rounding to specific increments is performed by dividing by the increment, rounding to an integer, then multiplying by the increment. To take a more bizarre example, 1.234 rounded to the nearest 0.65 is 1.3, as follows:"*, and the table | • `precision = "increment: 50"`, `"increment: 0.65"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` × several `locale` values | `en` 1234565.0 → `1,234,550` (50) / `1,234,565.15` (0.65); −1230.05 → `-1,250` / `-1,229.8`; 1.2 → `0` / `1.3`; `de` −1230.05 → `-1.250` / `-1.229,8`. |
+| **S13.2** | *"To specify a rounding increment in a pattern, include the increment in the pattern itself. "#,#50" specifies a rounding increment of 50. "#,##0.05" specifies a rounding increment of 0.05."* | — | No CLDR pattern has a rounding increment. |
+| **S13.3** | *"Rounding only affects the string produced by formatting. It does not affect parsing or change any numerical values."* | — | Not visible in a formatted string. |
+| **S13.4** | *"An implementation may allow the specification of a rounding mode to determine how values are rounded. In the absence of such choices, the default is to round "half-even", as described in IEEE arithmetic."* [...] | • **S13.4a**: half-even × ties (Section 10, S10.4b)<br>• **S13.4b**: other rounding modes | • S13.4a: see S10.4b (`en` percent 0.125 → `12%`; 0.135 → `14%`).<br>• S13.4b: optional (*"may allow"*). |
+| **S13.5** | *"Some locales use rounding in their currency formats to reflect the smallest currency denomination."* | — | Currencies; see Section 12 of the currency document. |
+| **S13.6** | *"In a pattern, digits '1' through '9' specify rounding, but otherwise behave identically to digit '0'."* | — | No CLDR pattern contains them. |
+
+---
+
+### 13.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S13.1** | `precision = "increment: 50"`, `"increment: 0.65"` | 🟡 **Missing: new dimension** | No CLDR pattern has an increment, and the generator does not set one. **Action**: add the `precision` values `"increment: 50"` and `"increment: 0.65"` (see the Summary). |
+| **S13.4a** | ties | 🟡 **Missing: `input` in CORE** | See S10.4b. No action needed. |
+| **S13.2**, **S13.6** | — | ⚪ **Out of scope** | Pattern syntax that CLDR does not use. |
+| **S13.3**, **S13.4b** | — | ⚪ **Out of scope** | Not visible in formatted strings, or optional. |
+| **S13.5** | — | ⚪ **Out of scope** | Currencies; see the currency document. |
+
+### 13.4 Notes
+
+* S13.1: the expected values apply the increment to the locale's pattern (`#,##0.###`), so 1.2 → `1.3`. A pattern with the increment, such as `#,##0.65`, would also set a minimum of 2 fraction digits and give `1.30`.
+
+---
+
 ## Summary: Required Generator Changes
 
 | Change | Needed by |
@@ -946,9 +1221,14 @@ The non-compact pattern of these locales is `#,##0.###` (`group`: `de` `.`, `de_
 | Add `numbering_system` rows for `number_format = "percent"`, in a separate file: `CORE_LOCALES` × `"latn"`, `"native"` × `format_length = ""` × `CORE_NUMBERS` (+90 rows) | S3.7a |
 | Add the `precision` dimension, with its rows in a separate file: `CORE_LOCALES` × `"significant: 3"`, `"fraction: 1"` × `number_format = "decimal"` × `format_length = "short"`, `"long"` × `CORE_NUMBERS` and `1040000.0` (+216 rows: 9 × 2 × 2 × 6) | S4.7d, S4.8b, S5.4 |
 | Add `1040000.0` to the extended numbers (+45 rows in `decimals_extended_numbers.tsv`: `CORE_LOCALES` × the five styles) | S4.7d |
-| Add the `grouping` and `integer_width` dimensions and the `precision` value `"fraction: 4-5"`, with their rows in a separate file: `CORE_LOCALES` × (`grouping = "off"`; `integer_width = "min: 5"` with `grouping = "off"`; `precision = "fraction: 4-5"`) × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (+135 rows: 9 × 3 × 5) | S6.2c, S6.4c–e |
+| Add the `grouping` and `integer_width` dimensions and the `precision` value `"fraction: 4-5"`, with their rows in a separate file: `CORE_LOCALES` × (`grouping = "off"`; `integer_width = "min: 5"` with `grouping = "off"`; `precision = "fraction: 4-5"`) × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (+135 rows: 9 × 3 × 5) | S6.2c, S6.4c–e, S10.3, S10.5 |
 | Add `sign_display = "always"` rows for `number_format = "percent"`, in a separate file: `CORE_LOCALES` × `format_length = ""` × `CORE_NUMBERS` (+45 rows) | S7.5b, S9.2a |
+| Add the `integer_width` value `"max: 2"`, with its rows in a separate file: `CORE_LOCALES` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (+45 rows) | S10.2 |
+| Add the special values `Infinity`, `-Infinity`, and `NaN` for the other styles, in a separate file: `CORE_LOCALES` × `number_format = "percent"`, `"scientific"`, and `"decimal"` with `format_length = "short"` and `"long"` (+108 rows: 9 × 4 × 3) | S10.7, S10.8 |
+| Add `precision` rows for `number_format = "scientific"`, in a separate file: `CORE_LOCALES` × `"significant: 3"`, `"significant: 2-4"` × `CORE_NUMBERS` (+90 rows) | S11.6b, S12.8 |
+| Add `precision` rows for `number_format = "decimal"`, `format_length = ""`, in a separate file: `CORE_LOCALES` × `"significant: 3"`, `"significant: 2-4"` × `CORE_NUMBERS` (+90 rows) | S12.1b, S12.2, S12.4, S12.6 |
+| Add the `precision` values `"increment: 50"` and `"increment: 0.65"`, with their rows in a separate file: `CORE_LOCALES` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (+90 rows) | S13.1 |
 
 The rows that change the digits are `ar` × `"native"` and `"traditio"` (`arab`), and `ar_EG` and `bn` × `"latn"`. The other rows check that each key falls back to the expected numbering system.
 
-Together, Sections 1–9 add 844 rows: 799 in separate files (170 + 81 + 35 + 27 + 90 + 216 + 135 + 45) and 45 in `decimals_extended_numbers.tsv`; `decimals.tsv` is unchanged.
+Together, Sections 1–13 add 1,267 rows: 1,222 in separate files (170 + 81 + 35 + 27 + 90 + 216 + 135 + 45 + 45 + 108 + 90 + 90 + 90) and 45 in `decimals_extended_numbers.tsv`; `decimals.tsv` is unchanged.

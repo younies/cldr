@@ -50,6 +50,7 @@ Values at `5e1d4b0ee3`. `currencies.tsv` combines all CORE values with each othe
 | **`cf`** | `cf` key of the Unicode locale identifier, which selects the standard or accounting form ([Unicode Currency Format Identifier](../../../docs/ldml/tr35.md#UnicodeCurrencyFormatIdentifier)) | **Needs to be added** (Section 3): `"standard"`, `"account"` | — |
 | **`currency_pattern_append_iso`** | Whether the result is combined with the ISO 4217 code through the locale's `currencyPatternAppendISO` pattern ([Combining Currency Symbols and ISO Codes](../../../docs/ldml/tr35-numbers.md#combining-currency-symbols-and-iso-codes-currencypatternappendiso)) | **Needs to be added** (Section 6): `true`, with `currency_display` = `"symbol"` or `"symbolNarrow"`; the current rows correspond to `false` | — |
 | **`fraction_digits`** | Number of fraction digits requested through the API instead of the currency's number of decimals ([Formatting Currency Display Names](../../../docs/ldml/tr35-numbers.md#formatting-currency-display-names-unitpattern), step 5.1) | **Needs to be added** (Section 9): `0`, with `currency_display = "name"`; the current rows use the currency's number of decimals | — |
+| **`currency_usage`** | Whether the amount is formatted for cash transactions, with the `cashDigits` and `cashRounding` of the currency ([Currency Fraction Digits and Rounding](../../../docs/ldml/tr35-numbers.md#currency-fraction-digits-and-rounding-fractions)) | **Needs to be added** (Section 12): `"cash"`; the current rows correspond to `"standard"` | — |
 
 The generator produces 12 of the 20 combinations of `currency_format_length`, `currency_format_type`, and `currency_display`: it skips `"short"` with `"accounting"`, `"name"`, or `"noCurrency"`, and `"accounting"` with `"name"`. `"noCurrency"` is not combined with extended values. In the tables below, *any `¤` display* means `currency_display` = `"symbol"`, `"symbolNarrow"`, or `"code"`.
 
@@ -780,6 +781,343 @@ Plural categories that the CORE inputs reach, with the currency's number of deci
 
 ---
 
+## Section 10: Currency Boundary Spacing (`#currency-boundary-spacing-currencyspacing`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#currency-boundary-spacing-currencyspacing`](../../../docs/ldml/tr35-numbers.md#currency-boundary-spacing-currencyspacing) (UTS #35 Part 3, Section 5.2: *Currency Boundary Spacing (`currencySpacing`)*; L1025–L1048 at `2997bffaf0`)
+* **Related specification text**: L525–L534 (the `currencySpacing` DTD in [Currency Formats](../../../docs/ldml/tr35-numbers.md#Currency_Formats): the elements "are specified in the root locale and typically not overridden in any other locale"), L568–L570 ([the `alt="alphaNextToNumber"` pattern variant](../../../docs/ldml/tr35-numbers.md#the-altalphanexttonumber-pattern-variant), the preferred mechanism for non-compact patterns; see Section 4), and L462–L463 and L473–L478 (step 4 of [compact number formatting](../../../docs/ldml/tr35-numbers.md#Compact_Number_Formats), the preferred mechanism for compact patterns; see Section 2)
+
+### 10.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> ### Currency Boundary Spacing (`currencySpacing`)
+>
+> When a currency symbol is substitited into a pattern, some spacing adjustments or other adjustments may be necessary depending on the nature of the symbol. In CLDR 42 and later, the preferred way to handle this is via the `alt="alphaNextToNumber"` variant of the `currencyFormat` `pattern`, as described in _[Section 2.4.2: Currency Formats](../../../docs/ldml/tr35-numbers.md#Currency_Formats)_. In earlier versions of CLDR this was handled via the `currencySpacing` element as described below. This element is still present in CLDR 42 and its use is described below for implementations that may not yet support the `alt="alphaNextToNumber"` variant of the `currencyFormat` `pattern`.
+>
+> ```xml
+> <currencySpacing>
+>   <beforeCurrency>
+>     <currencyMatch>[:^S:]</currencyMatch>
+>     <surroundingMatch>[:digit:]</surroundingMatch>
+>     <insertBetween> </insertBetween>
+>   </beforeCurrency>
+>   <afterCurrency>
+>     <currencyMatch>[:^S:]</currencyMatch>
+>     <surroundingMatch>[:digit:]</surroundingMatch>
+>     <insertBetween> </insertBetween>
+>   </afterCurrency>
+> </currencySpacing>
+> ```
+>
+> This element controls whether additional characters are inserted on the boundary between the symbol and the pattern. For example, with the above `currencySpacing`, inserting the symbol "US\$" into the pattern "#,##0.00¤" would result in an extra _no-break space_ inserted before the symbol, for example, "#,##0.00 US\$". The `beforeCurrency` element governs this case, since we are looking _before_ the "¤" symbol. The `currencyMatch` is positive, since the "U" in "US\$" is at the start of the currency symbol being substituted. The `surroundingMatch` is positive, since the character just before the "¤" will be a digit. Because these two conditions are true, the insertion is made.
+>
+> Conversely, look at the pattern "¤#,##0.00" with the symbol "US$". In this case, there is no insertion; the result is simply "US$#,##0.00". The `afterCurrency` element governs this case, since we are looking _after_ the "¤" symbol. The `surroundingMatch` is positive, since the character just after the "¤" will be a digit. However, the `currencyMatch` is **not** positive, since the "\$" in "US\$" is at the end of the currency symbol being substituted. So the insertion is not made.
+>
+> For more information on the matching used in the `currencyMatch` and `surroundingMatch` elements, see the main document _[Appendix E: Unicode Sets](../../../docs/ldml/tr35.md#Unicode_Sets)_.
+
+---
+
+### 10.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** Only `root` has `currencySpacing`, in its `latn` `currencyFormats` (the other numbering systems are aliases of `latn`); no other locale overrides it. Its values differ from the sample:
+
+| Element | Sample (L1029–L1042) | `root` (`beforeCurrency` and `afterCurrency`) |
+| :--- | :--- | :--- |
+| `currencyMatch` | `[:^S:]` | `[[:^S:]&[:^Z:]]` |
+| `surroundingMatch` | `[:digit:]` | `[:digit:]` |
+| `insertBetween` | U+0020 SPACE | U+00A0 NO-BREAK SPACE |
+
+`beforeCurrency` applies where `¤` follows the number: `currencyMatch` tests the first character of the symbol, and `surroundingMatch` the character before `¤`. `afterCurrency` applies where `¤` precedes the number: it tests the last character of the symbol and the character after `¤`. The CORE patterns with `¤` next to the number are those of `en` and `ja` (`¤#,##0.00`, standard and accounting), `bn` (`#,##,##0.00¤`, standard and accounting), and `ar` accounting (`؜#,##0.00¤;(؜#,##0.00¤)` / `"\u061C#,##0.00¤;(\u061C#,##0.00¤)"`); in the negative pattern of `de_CH` (`¤-#,##0.00`), `¤` is next to the minus sign. The other CORE patterns have U+00A0 between `¤` and the number. Among the `short` patterns, `en` has `¤` before the number (`¤0M`) and `bn` after an abbreviation (`00 লা¤` / `"00\u00A0লা¤"`).
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S10.1** | *"When a currency symbol is substitited into a pattern, some spacing adjustments or other adjustments may be necessary depending on the nature of the symbol."* | A `locale` whose pattern has `¤` next to the number × symbols of different kinds (`bn` × `USD` and `EUR`) | `bn` USD 1.2 → `১.২০ US$` / `"১.২০\u00A0US$"`; EUR 1.2 → `১.২০€`. See S10.4–S10.5. |
+| **S10.2** | *"In CLDR 42 and later, the preferred way to handle this is via the `alt="alphaNextToNumber"` variant of the `currencyFormat` `pattern`, as described in [Section 2.4.2: Currency Formats](../../../docs/ldml/tr35-numbers.md#Currency_Formats). In earlier versions of CLDR this was handled via the `currencySpacing` element as described below. This element is still present in CLDR 42 and its use is described below for implementations that may not yet support the `alt="alphaNextToNumber"` variant of the `currencyFormat` `pattern`."* | — | The `alt="alphaNextToNumber"` rule is checked in Sections 2 and 4. See 10.4 for the values where the two give different results. |
+| **S10.3** | *"This element controls whether additional characters are inserted on the boundary between the symbol and the pattern."*, with the sample `currencySpacing` | The `currencySpacing` data of each `locale` | Every locale uses the data of `root` (see the table above). |
+| **S10.4** | **`beforeCurrency`** — *"For example, with the above `currencySpacing`, inserting the symbol "US\$" into the pattern "#,##0.00¤" would result in an extra no-break space inserted before the symbol, for example, "#,##0.00 US\$". The `beforeCurrency` element governs this case, since we are looking before the "¤" symbol. The `currencyMatch` is positive, since the "U" in "US\$" is at the start of the currency symbol being substituted. The `surroundingMatch` is positive, since the character just before the "¤" will be a digit. Because these two conditions are true, the insertion is made."* | • **S10.4a**: `¤` after a digit × a symbol that starts with a letter (`bn` × `USD` and `JPY`; `ar` × `"accounting"` × `USD`)<br>• **S10.4b**: `¤` after a digit × a symbol that starts with a currency sign (`bn` × `EUR`; `ar` × `"accounting"` × `EUR`)<br>• **S10.4c**: a symbol that starts with a letter × `¤` after a character that is not a digit (`de` × `RUB`; `bn` × `"short"` × `USD` × `1234565.0`) | • S10.4a: `bn` USD 1.2 → `১.২০ US$` / `"১.২০\u00A0US$"` (`[:digit:]` also matches the Bengali digit `০`); `bn` JPY 1.2 → `১ JP¥` / `"১\u00A0JP¥"`; `ar` accounting USD 1.2 → `؜1.20 US$` / `"\u061C1.20\u00A0US$"`.<br>• S10.4b: `bn` EUR 1.2 → `১.২০€`; `ar` accounting EUR 1.2 → `؜1.20€` / `"\u061C1.20€"`.<br>• S10.4c: `de` RUB 1.2 → `1,20 RUB` / `"1,20\u00A0RUB"` (the U+00A0 of the pattern; nothing is inserted); `bn` short USD 1234565.0 → `১২ লাUS$` / `"১২\u00A0লাUS$"` (`¤` follows the vowel sign `া`). |
+| **S10.5** | **`afterCurrency`** — *"Conversely, look at the pattern "¤#,##0.00" with the symbol "US\$". In this case, there is no insertion; the result is simply "US\$#,##0.00". The `afterCurrency` element governs this case, since we are looking after the "¤" symbol. The `surroundingMatch` is positive, since the character just after the "¤" will be a digit. However, the `currencyMatch` is not positive, since the "\$" in "US\$" is at the end of the currency symbol being substituted. So the insertion is not made."* | • **S10.5a**: `¤` before a digit × a symbol that ends with a currency sign (`en` × `USD`; `en` × `EGP` × `"symbolNarrow"`; the example itself: `zh` × `USD`)<br>• **S10.5b**: `¤` before a digit × a symbol that ends with a letter (`en` × `RUB`; `en` × `"code"`; `en` × `RUB` × `"short"` × `1234565.0`)<br>• **S10.5c**: a symbol that ends with a letter × `¤` before a character that is not a digit (`de_CH` × `EUR` × `-1230.05`) | • S10.5a: `en` USD 1.2 → `$1.20`; `en` EGP narrow 1.2 → `E£1.20`; `zh` USD 1.2 → `US$1.20`.<br>• S10.5b: `en` RUB 1.2 → `RUB 1.20` / `"RUB\u00A01.20"`; `en` USD code 1.2 → `USD 1.20` / `"USD\u00A01.20"`; `en` RUB short 1234565.0 → `RUB 1.2M` / `"RUB\u00A01.2M"`.<br>• S10.5c: `de_CH` EUR −1230.05 → `EUR-1'230.05` (the negative pattern `¤-#,##0.00`, with the `de_CH` symbol `EUR`). |
+| **S10.6** | *"For more information on the matching used in the `currencyMatch` and `surroundingMatch` elements, see the main document [Appendix E: Unicode Sets](../../../docs/ldml/tr35.md#Unicode_Sets)."* | — | A reference. |
+
+---
+
+### 10.3 Comparison Against `GenerateCurrencyFormatTestData.java` (PR [#5808](https://github.com/unicode-org/cldr/pull/5808))
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S10.1**, **S10.4a–c** | `¤` after the number: `bn`, and `ar` × `"accounting"`, × symbols that start with a letter or a currency sign; `de` × `RUB`; `bn` × `"short"` | ✅ **Covered** | CORE values: `bn`, `ar`, and `de`; `USD`, `JPY`, `EUR`, and `RUB`; `"accounting"` and `"short"`; `1.2` and `1234565.0`. |
+| **S10.2**, **S10.6** | — | ⚪ **Out of scope** | The preferred mechanism (see 10.4) and a reference. |
+| **S10.3** | The `currencySpacing` data | ✅ **Covered** | Every CORE locale uses the data of `root`. |
+| **S10.5a–c** | `¤` before the number: `en` × symbols that end with a currency sign or a letter; `de_CH` × `EUR` × `-1230.05` | ✅ **Covered** | CORE values: `en` and `de_CH`; `USD`, `EGP`, `RUB`, and `EUR`; `"symbol"`, `"symbolNarrow"`, `"code"`, and `"short"`; `1.2`, `1234565.0`, and `-1230.05`. The example itself (`zh` × `USD`) needs `zh`, which the Summary adds for S2.1b. |
+
+### 10.4 Notes
+
+* **The sample and the data** (S10.3): the sample has `currencyMatch` `[:^S:]` and `insertBetween` U+0020 SPACE. `root` also excludes separators from `currencyMatch` (`[[:^S:]&[:^Z:]]`) and inserts U+00A0 NO-BREAK SPACE, as the text says (*"an extra no-break space"*); the example result "#,##0.00 US\$" has U+0020.
+* **The two mechanisms** (S10.2): the `alt="alphaNextToNumber"` rule (Sections 2 and 4) and `currencySpacing` give the same result for every CORE value above. They give different results for some values that the Summary adds: `XCG` (S2.2c, S4.1d: `en` XCG −1230.05 → `-Cg.1,230.05` with the `alt` rule, but `-Cg. 1,230.05` / `"-Cg.\u00A01,230.05"` with `currencySpacing`, because `.` is not a letter but matches `currencyMatch`), `id` (S2.4b), `kn` × `RON` (S4.1e), and `en_ZA` (S4.4b), and, with lateral inheritance, `ja` and `kn` (S4.2b). A row's `expected` value can follow only one of them.
+* **Editorial**: L1027 has a typo (*"substitited"*) and still names CLDR 42 as the current version (*"This element is still present in CLDR 42"*).
+
+---
+
+## Section 11: Currency-Specific Overrides and Currency Amounts (`#currency-specific-decimal-and-grouping-overrides`, `#currency-codes-and-currency-amounts`)
+
+* **TR35 Specification Links**: [`tr35-numbers.md#currency-specific-decimal-and-grouping-overrides`](../../../docs/ldml/tr35-numbers.md#currency-specific-decimal-and-grouping-overrides) (UTS #35 Part 3, Section 5.3: *Currency-Specific Decimal and Grouping Overrides*; L1052–L1054 at `2997bffaf0`) and [`tr35-numbers.md#currency-codes-and-currency-amounts`](../../../docs/ldml/tr35-numbers.md#currency-codes-and-currency-amounts) (Section 5.4: *Currency Codes and Currency Amounts*; L1056–L1066)
+* **Related specification text**: L286–L292 ([`currencyDecimal` and `currencyGroup`](../../../docs/ldml/tr35-numbers.md#currencydecimal), the monetary separators of a locale; see Section 1), L690 (in currency patterns, "the number of digits after the decimal also does not matter"), and L1122–L1141 ([Currency Fraction Digits and Rounding](../../../docs/ldml/tr35-numbers.md#currency-fraction-digits-and-rounding-fractions), the data that the last note refers to; see Section 12)
+
+### 11.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> ### Currency-Specific Decimal and Grouping Overrides
+>
+> Currencies can also contain optional grouping, decimal data, and pattern elements. This data is inherited from the `<symbols>` in the same locale data (if not present in the chain up to root), so only the _differing_ data will be present. See the main document _[Multiple Inheritance](../../../docs/ldml/tr35.md#Multiple_Inheritance)_.
+>
+> ### Currency Codes and Currency Amounts
+>
+> > **Note:** _Currency values should **never** be interchanged without a known currency code. You never want the number 3.5 interpreted as $3.50 by one user and €3.50 by another._ Locale data contains localization information for currencies, not a currency value for a country. A currency amount logically consists of a numeric value, plus an accompanying currency code (or equivalent). The currency code may be implicit in a protocol, such as where USD is implicit. But if the raw numeric value is transmitted without any context, then it has no definitive interpretation.
+>
+> Notice that the currency code is completely independent of the end-user's language or locale. For example, BGN is the code for Bulgarian Lev. A currency amount of <BGN, 1.23456×10³> would be localized for a Bulgarian user into "1 234,56 лв." (using Cyrillic letters). For an English user it would be localized into the string "BGN 1,234.56". The end-user's language is needed for doing this last localization step; but that language is completely orthogonal to the currency code needed in the data. After all, the same English user could be working with dozens of currencies. Notice also that the currency code is also independent of whether currency values are inter-converted, which requires more interesting financial processing: the rate of conversion may depend on a variety of factors.
+>
+> Thus logically speaking, once a currency amount is entered into a system, it should be logically accompanied by a currency code in all processing. This currency code is independent of whatever the user's original locale was. Only in badly-designed software is the currency code (or equivalent) not present, so that the software has to "guess" at the currency code based on the user's locale.
+>
+> > **Note:** The number of decimal places **and** the rounding for each currency is not locale-specific data, and is not contained in the Locale Data Markup Language format. Those values override whatever is given in the currency `numberFormat`. For more information, see _[Supplemental Currency Data](../../../docs/ldml/tr35-numbers.md#Supplemental_Currency_Data)_.
+>
+> For background information on currency names, see [[CurrencyInfo](../../../docs/ldml/tr35.md#CurrencyInfo)].
+
+---
+
+### 11.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** Currency-specific `decimal`, `group`, and `pattern` elements (`<currencies>` in `common/main`) of the currencies that are legal tender today:
+
+| Locales | Currency | Elements of the currency | Data of the locale |
+| :--- | :--- | :--- | :--- |
+| `kea` (inherited by `kea_CV`) and `pt_CV` | `CVE` | `<decimal>$</decimal>`, and the `<symbol>` U+200B ZERO WIDTH SPACE | `decimal` `,`; `group` U+00A0; standard pattern `#,##0.00 ¤` / `"#,##0.00\u00A0¤"` |
+| `en_150`, inherited by 23 locales (`en_BE`, `en_CH`, `en_CZ`, `en_DE`, `en_DK`, `en_EE`, `en_ES`, `en_FI`, `en_FR`, `en_GE`, `en_HU`, `en_IT`, `en_LT`, `en_LV`, `en_NL`, `en_NO`, `en_PL`, `en_PT`, `en_RO`, `en_SE`, `en_SI`, `en_SK`, `en_UA`) | `EUR` | `<pattern>¤#,##0.00</pattern>` | standard pattern of `en_150` `#,##0.00 ¤` / `"#,##0.00\u00A0¤"`; `en_NL` has its own `¤ #,##0.00;¤ -#,##0.00` / `"¤\u00A0#,##0.00;¤\u00A0-#,##0.00"` |
+| `tr`; `en_AT` | `TRY`; `EUR` | A `pattern` equal to the standard pattern of the locale | — |
+
+Currencies that are no longer legal tender, and so are neither CORE nor extended currency values, also have these elements: `ESP` (`ca`, `eu`, `gl`), `GRD` (`el`), `ITL` (`it`), `EEK` (`et`), `LUF` (`de_LU`), and `PTE` (`pt_PT`, a CORE locale: `decimal` `$`, `group` `,`, and the `symbol` U+200B). Only these have a `group`. Of the locales in the table, only `tr` is a CORE or extended locale value.
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S11.1** | *"Currencies can also contain optional grouping, decimal data, and pattern elements."* | • **S11.1a**: a currency with its own `decimal` (`kea` × `CVE`)<br>• **S11.1b**: a currency with its own `group` × an `input` that is grouped (`pt_PT` × `PTE` × `1234565.0`)<br>• **S11.1c**: a currency with its own `pattern` (`en_150` or a locale that inherits from it, such as `en_NL`, × `EUR`) | • S11.1a: `kea` CVE 1.2 → `1$20 ​` / `"1$20\u00A0\u200B"`, where `kea` USD 1.2 → `1,20 US$` / `"1,20\u00A0US$"`.<br>• S11.1b: `pt_PT` PTE 1234565.0 → `1,234,565$00 ​` / `"1,234,565$00\u00A0\u200B"`, where `pt_PT` EUR 1234565.0 → `1 234 565,00 €` / `"1\u00A0234\u00A0565,00\u00A0€"`.<br>• S11.1c: `en_NL` EUR 1.2 → `€1.20`; −1230.05 → `-€1,230.05` (the `EUR` pattern `¤#,##0.00` of `en_150`). |
+| **S11.2** | *"This data is inherited from the `<symbols>` in the same locale data (if not present in the chain up to root), so only the differing data will be present."* | • **S11.2a**: the elements that the currency does not have come from the locale (`kea` × `CVE` × `-1230.05`: the `group`)<br>• **S11.2b**: the element of the currency is in a parent locale (`en_NL` × `EUR`, from `en_150`)<br>• **S11.2c**: a currency without its own elements, in a locale where another currency has them (`pt_PT` × `EUR`) | • S11.2a: `kea` CVE −1230.05 → `-1 230$05 ​` / `"-1\u00A0230$05\u00A0\u200B"` (the `group` U+00A0 of `kea`).<br>• S11.2b: `en_NL` EUR 1.2 → `€1.20`, where the standard pattern of `en_NL` would give `€ 1.20` / `"€\u00A01.20"`.<br>• S11.2c: `pt_PT` EUR 1234565.0 → `1 234 565,00 €` / `"1\u00A0234\u00A0565,00\u00A0€"` (S11.1b). |
+| **S11.3** | *"See the main document [Multiple Inheritance](../../../docs/ldml/tr35.md#Multiple_Inheritance)."* | — | A reference. |
+| **S11.4** | *"Currency values should never be interchanged without a known currency code. You never want the number 3.5 interpreted as \$3.50 by one user and €3.50 by another."*; *"Locale data contains localization information for currencies, not a currency value for a country. A currency amount logically consists of a numeric value, plus an accompanying currency code (or equivalent)."* | A `currency` in every row; the same `input` with different `currency` values | `en` 1.2 → `$1.20` (`USD`), `€1.20` (`EUR`), `¥1` (`JPY`). |
+| **S11.5** | *"Notice that the currency code is completely independent of the end-user's language or locale. For example, BGN is the code for Bulgarian Lev. [...] would be localized for a Bulgarian user into "1 234,56 лв." (using Cyrillic letters). For an English user it would be localized into the string "BGN 1,234.56"."* | The same `currency` × a `locale` of its country and an English `locale` × an `input` with a grouping separator (`ru` and `en` × `RUB` × `1234565.0`) | `ru` RUB 1234565.0 → `1 234 565,00 ₽` / `"1\u00A0234\u00A0565,00\u00A0₽"`; `en` → `RUB 1,234,565.00` / `"RUB\u00A01,234,565.00"`. With the values of the example: `bg` BGN 1234.56 → `1234,56 лв.` / `"1234,56\u00A0лв."`; `en` → `BGN 1,234.56` / `"BGN\u00A01,234.56"` (see 11.4). |
+| **S11.6** | *"The end-user's language is needed for doing this last localization step; but that language is completely orthogonal to the currency code needed in the data. After all, the same English user could be working with dozens of currencies."* | `locale = "en"` × many `currency` values | `en` 1.2 → `$1.20`, `€1.20`, `¥1`, `RUB 1.20` / `"RUB\u00A01.20"`, and `EGP 1.20` / `"EGP\u00A01.20"`. |
+| **S11.7** | *"The currency code may be implicit in a protocol, such as where USD is implicit. But if the raw numeric value is transmitted without any context, then it has no definitive interpretation."*; *"Notice also that the currency code is also independent of whether currency values are inter-converted, [...]"*; *"Thus logically speaking, once a currency amount is entered into a system, it should be logically accompanied by a currency code in all processing. [...]"* | — | Guidance for protocols and processing. |
+| **S11.8** | *"The number of decimal places and the rounding for each currency is not locale-specific data, and is not contained in the Locale Data Markup Language format. Those values override whatever is given in the currency `numberFormat`."* | • **S11.8a**: a currency with fewer decimals than the patterns × several `locale` values (`en`, `de`, and `ja` × `JPY` × `1.2`)<br>• **S11.8b**: a currency with more decimals than the patterns (`KWD`: 3)<br>• The rounding: see Section 12 | • S11.8a: `en` JPY 1.2 → `¥1`; `de` → `1 ¥` / `"1\u00A0¥"`; `ja` → `￥1`. Every CORE currency pattern has two decimals.<br>• S11.8b: `en` KWD 1.2 → `KWD 1.200` / `"KWD\u00A01.200"`; 0.00831765 → `KWD 0.008` / `"KWD\u00A00.008"`. |
+| **S11.9** | *"For background information on currency names, see [[CurrencyInfo](../../../docs/ldml/tr35.md#CurrencyInfo)]."* | — | A reference. |
+
+---
+
+### 11.3 Comparison Against `GenerateCurrencyFormatTestData.java` (PR [#5808](https://github.com/unicode-org/cldr/pull/5808))
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S11.1a**, **S11.2a** | `locale = "kea"` × `currency = "CVE"` | 🟡 **Missing: `locale`** | `kea`, `kea_CV`, and `pt_CV` are neither CORE nor extended locale values. `CVE` is an extended currency value, but the TSV files combine it only with `ar`, `de`, `en`, and `fa` (`currencies_*_modern_currencies.tsv`) and `be` (`currencies_modern_locales.tsv`), which have no override for it. **Action**: the currency override row of the Summary. |
+| **S11.1b** | `locale = "pt_PT"` × `currency = "PTE"` × `1234565.0` | 🟡 **Missing: `currency`** | `pt_PT` and `1234565.0` are CORE values, but `PTE` is not legal tender, so it is neither a CORE nor an extended currency value. No legal-tender currency has its own `group`. **Action**: the currency override row of the Summary. |
+| **S11.1c**, **S11.2b** | `locale = "en_NL"` × `currency = "EUR"` | 🟡 **Missing: `locale`** | `en_150` and the locales that inherit from it are neither CORE nor extended locale values. **Action**: the currency override row of the Summary. |
+| **S11.2c** | `locale = "pt_PT"` × a currency other than `PTE` | ✅ **Covered** | CORE values: `pt_PT`; `EUR`; `1234565.0`. |
+| **S11.3**, **S11.7**, **S11.9** | — | ⚪ **Out of scope** | References, and guidance for protocols and processing. |
+| **S11.4** | A `currency` in every row | ✅ **Covered** | Every row has a `currency` value. CORE values: `en`; `USD`, `EUR`, and `JPY`; `1.2`. |
+| **S11.5** | `ru` and `en` × `RUB` × `1234565.0` | ✅ **Covered** | CORE values: `ru` and `en`; `RUB`; `1234565.0`. The values of the example are not needed (see 11.4). |
+| **S11.6** | `locale = "en"` × many `currency` values | ✅ **Covered** | CORE values: `en` with all `CORE_CURRENCIES`. `currencies_*_modern_currencies.tsv` also combines `en` (a `TINY_LOCALES` value) with every extended currency value. |
+| **S11.8a** | `en`, `de`, and `ja` × `JPY` × `1.2` | ✅ **Covered** | CORE values: `en`, `de`, and `ja`; `JPY`; `1.2`. |
+| **S11.8b** | `currency = "KWD"` | 🟡 **Missing: `currency` in CORE** | `KWD` is an extended currency value: the TSV files combine it only with `TINY_NUMBERS`, and with `ar`, `de`, `en`, and `si` (`currencies_*_modern_currencies.tsv`) and `th` (`currencies_modern_locales.tsv`). **Action**: the `KWD` row of the Summary. |
+
+### 11.4 Notes
+
+* **The BGN example** (S11.5): with the CLDR data, `bg` BGN 1234.56 → `1234,56 лв.` / `"1234,56\u00A0лв."`, without a grouping separator (`bg` has `minimumGroupingDigits` 2) and with U+00A0 before the symbol; both strings of the example have U+0020. BGN is no longer a current currency of `BG` (`EUR` from 2026-01-01; `BGN` until 2026-01-31), so it is not an extended currency value; `RUB` stands in for it.
+* **Other format types** (S11.1c): the specification does not say whether the `pattern` of a currency also replaces the accounting and compact patterns of the locale (`en_150` accounting: `#,##0.00 ¤` / `"#,##0.00\u00A0¤"`). The Summary row uses `currency_format_type = "standard"` only.
+* **`en_NL`** (S11.2b): the `EUR` pattern of `en_150` applies although `en_NL` has its own standard pattern, because the data of the locale is used only if the element of the currency is *"not present in the chain up to root"*.
+
+---
+
+## Section 12: Currency Fraction Digits and Rounding (`#currency-fraction-digits-and-rounding-fractions`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#currency-fraction-digits-and-rounding-fractions`](../../../docs/ldml/tr35-numbers.md#currency-fraction-digits-and-rounding-fractions) (UTS #35 Part 3, Section 5.5.1: *Currency Fraction Digits and Rounding (`fractions`)*; L1122–L1141 at `2997bffaf0`)
+* **Related specification text**: L1068–L1120 ([Supplemental Currency Data](../../../docs/ldml/tr35-numbers.md#Supplemental_Currency_Data): the DTD of `fractions` and `info`, and an example with `<info iso4217="CHF" digits="2" rounding="5"/>` and `<info iso4217="ITL" digits="0"/>`), L690 and L1064 (these values override the number of decimals of the currency patterns; see Section 11), and L867–L883 ([Rounding](../../../docs/ldml/tr35-numbers.md#Rounding): rounding increments, and "half-even" as the default rounding mode)
+
+### 12.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> #### Currency Fraction Digits and Rounding (`fractions`)
+>
+> The `fractions` element contains any number of `info` elements, with the following attributes:
+>
+> * **iso4217:** the ISO 4217 code for the currency in question. If a particular currency does not occur in the fractions list, then it is given the defaults listed for the next two attributes.
+> * **digits:** the minimum and maximum number of decimal digits normally formatted.
+> The default is 2.
+> For example, in the en_US locale with the default value of 2 digits, the value 1 USD would format as "$1.00", and the value 1.123 USD would format as → "$1.12".
+> This value of this field is based on the "minor unit" value from ISO 4217, but may deviate from ISO 4217 where there is compelling evidence for different customary practice.
+> * **rounding:** the rounding increment, in units of 10<sup>-digits</sup>. The default is 0, which means no rounding is to be done. Therefore, rounding=0 and rounding=1 have identical behavior. Thus with fraction digits of 2 and rounding increment of 5, numeric values are rounded to the nearest 0.05 units in formatting. With fraction digits of 0 and rounding increment of 50, numeric values are rounded to the nearest 50.
+> * **cashDigits:** the number of decimal digits to be used when formatting quantities used in cash transactions (as opposed to a quantity that would appear in a more formal setting, such as on a bank statement). If absent, the value of "digits" should be used as a default.
+> * **cashRounding:** the cash rounding increment, in units of 10-cashDigits. The default is 0, which means no rounding is to be done; and as with rounding, this has the same effect as cashRounding="1". This is the rounding increment to be used when formatting quantities used in cash transactions (as opposed to a quantity that would appear in a more formal setting, such as on a bank statement). If absent, the value of "rounding" should be used as a default.
+>
+> For example, the following line
+>
+> ```xml
+> <info iso4217="CZK" digits="2" rounding="0"/>
+> ```
+>
+> should cause the value 2.006 to be displayed as “2.01”, not “2.00”.
+
+---
+
+### 12.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** `<fractions>` in `common/supplemental/supplementalData.xml` has 76 `info` elements, including `<info iso4217="DEFAULT" digits="2" rounding="0"/>`. Every `rounding` is `0`, and no element has `rounding="1"` or `cashRounding="1"`. The currencies used below:
+
+| Currency | `digits` | `rounding` | `cashDigits` | `cashRounding` | Used in |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| `USD`, `EUR`, `RUB`, `EGP` (not listed: `DEFAULT`) | 2 | 0 | — | — | S12.1b, S12.2a–b, S12.5b, S12.6d, S12.7 |
+| `JPY` | 0 | 0 | — | — | S12.1a, S12.2c |
+| `KWD` | 3 | 0 | — | — | S12.2d |
+| `CHF` | 2 | 0 | — | 5 | S12.5b, S12.6a |
+| `DKK` | 2 | 0 | — | 50 | S12.6b |
+| `HUF` | 0 | 0 | — | 5 | S12.6c |
+| `SEK`, `CZK` | 2 | 0 | 0 | 0 | S12.5a, S12.7 |
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S12.1** | **`iso4217`** — *"If a particular currency does not occur in the fractions list, then it is given the defaults listed for the next two attributes."* | • **S12.1a**: a listed `currency` (`JPY`)<br>• **S12.1b**: a `currency` that is not listed (`USD`) | • S12.1a: `en` JPY 1.2 → `¥1` (0 digits).<br>• S12.1b: `en` USD 1.2 → `$1.20` (the defaults: 2 digits, rounding 0). |
+| **S12.2** | **`digits`** — *"the minimum and maximum number of decimal digits normally formatted. The default is 2. For example, in the en_US locale with the default value of 2 digits, the value 1 USD would format as "\$1.00", and the value 1.123 USD would format as → "\$1.12"."* | • **S12.2a**: an `input` with fewer decimals than `digits` (`en` × `USD` × `1.2` and `0.0`)<br>• **S12.2b**: an `input` with more decimals than `digits` (`en` × `USD` × `0.00831765`)<br>• **S12.2c**: `digits="0"` (`JPY` × `1.2` and `-1230.05`)<br>• **S12.2d**: `digits="3"` (`KWD` × `1.2` and `0.00831765`) | • S12.2a: `en` USD 1.2 → `$1.20`; 0.0 → `$0.00`. The example: 1.0 → `$1.00`.<br>• S12.2b: `en` USD 0.00831765 → `$0.01`. The example: 1.123 → `$1.12`.<br>• S12.2c: `en` JPY 1.2 → `¥1`; −1230.05 → `-¥1,230`.<br>• S12.2d: `en` KWD 1.2 → `KWD 1.200` / `"KWD\u00A01.200"`; 0.00831765 → `KWD 0.008` / `"KWD\u00A00.008"`. |
+| **S12.3** | *"This value of this field is based on the "minor unit" value from ISO 4217, but may deviate from ISO 4217 where there is compelling evidence for different customary practice."* | — | The source of the data. |
+| **S12.4** | **`rounding`** — *"the rounding increment, in units of 10<sup>-digits</sup>. The default is 0, which means no rounding is to be done. Therefore, rounding=0 and rounding=1 have identical behavior. Thus with fraction digits of 2 and rounding increment of 5, numeric values are rounded to the nearest 0.05 units in formatting. With fraction digits of 0 and rounding increment of 50, numeric values are rounded to the nearest 50."* | • **S12.4a**: `rounding="0"`<br>• **S12.4b**: `rounding="1"`<br>• **S12.4c**: an increment of 5 with 2 digits<br>• **S12.4d**: an increment of 50 with 0 digits | • S12.4a: every currency; see S12.2.<br>• S12.4b–d: no CLDR data. `cashRounding` has increments of 5 and 50 (S12.6). |
+| **S12.5** | **`cashDigits`** — *"the number of decimal digits to be used when formatting quantities used in cash transactions (as opposed to a quantity that would appear in a more formal setting, such as on a bank statement). If absent, the value of "digits" should be used as a default."* | • **S12.5a**: `currency_usage = "cash"` × a `currency` with `cashDigits` (`SEK`: 0)<br>• **S12.5b**: `currency_usage = "cash"` × a `currency` without `cashDigits` (`CHF`, `USD`) | • S12.5a: `en` SEK 1.2 → `SEK 1` / `"SEK\u00A01"`, where the standard amount is `SEK 1.20` / `"SEK\u00A01.20"`.<br>• S12.5b: `en` CHF 1.2 → `CHF 1.20` / `"CHF\u00A01.20"`; `en` USD 1.2 → `$1.20`. |
+| **S12.6** | **`cashRounding`** — *"the cash rounding increment, in units of 10-cashDigits. The default is 0, which means no rounding is to be done; and as with rounding, this has the same effect as cashRounding="1". [...] If absent, the value of "rounding" should be used as a default."* | • **S12.6a**: `currency_usage = "cash"` × an increment of 5 with 2 digits (`CHF`)<br>• **S12.6b**: an increment of 50 with 2 digits (`DKK`)<br>• **S12.6c**: an increment of 5 with 0 digits (`HUF`)<br>• **S12.6d**: no `cashRounding` (`USD`)<br>• **S12.6e**: `cashRounding="1"` | • S12.6a: to the nearest 0.05: `en` CHF 0.00831765 → `CHF 0.00` / `"CHF\u00A00.00"` (standard: `CHF 0.01` / `"CHF\u00A00.01"`).<br>• S12.6b: to the nearest 0.50: `en` DKK 1.2 → `DKK 1.00` / `"DKK\u00A01.00"`; −1230.05 → `-DKK 1,230.00` / `"-DKK\u00A01,230.00"`.<br>• S12.6c: to the nearest 5: `en` HUF 1.2 → `HUF 0` / `"HUF\u00A00"` (standard: `HUF 1` / `"HUF\u00A01"`).<br>• S12.6d: `en` USD 0.00831765 → `$0.01`, as for standard amounts.<br>• S12.6e: no CLDR data. |
+| **S12.7** | The example `<info iso4217="CZK" digits="2" rounding="0"/>`: *"should cause the value 2.006 to be displayed as “2.01”, not “2.00”."* | A `currency` with 2 digits × an `input` whose third decimal rounds up (`en` × `USD` × `0.00831765`) | `en` USD 0.00831765 → `$0.01`, not `$0.00`. With the values of the example: `en` CZK 2.006 → `CZK 2.01` / `"CZK\u00A02.01"`. |
+
+---
+
+### 12.3 Comparison Against `GenerateCurrencyFormatTestData.java` (PR [#5808](https://github.com/unicode-org/cldr/pull/5808))
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S12.1a–b**, **S12.2a–c**, **S12.4a** | Listed and unlisted currencies × inputs with fewer and more decimals than `digits` | ✅ **Covered** | CORE values: `JPY` (listed, 0 digits) and `USD`, `EUR`, `RUB`, and `EGP` (not listed); `0.0`, `1.2`, and `0.00831765`. |
+| **S12.2d** | `currency = "KWD"` × `0.00831765` | 🟡 **Missing: `currency` in CORE** | `KWD` is an extended currency value, combined only with `TINY_NUMBERS` (`1.2`, `-1230.05`), which show its minimum of 3 digits but not its maximum. **Action**: the `KWD` row of the Summary. |
+| **S12.3** | — | ⚪ **Out of scope** | The source of the data. |
+| **S12.4b–d**, **S12.6e** | `rounding` other than `0`; `cashRounding="1"` | ⚪ **Out of scope** | No CLDR data. |
+| **S12.5a–b**, **S12.6a–d** | `currency_usage = "cash"` × `SEK`, `CHF`, `DKK`, `HUF`, and `USD` | 🟡 **Missing: new dimension** | The generator formats standard amounts only. `CHF`, `DKK`, `HUF`, and `SEK` are extended currency values. **Action**: add the `currency_usage` dimension (see the dimensions table and the Summary). |
+| **S12.7** | A currency with 2 digits × an input whose third decimal rounds up | ✅ **Covered** | CORE values: `USD`; `0.00831765`. |
+
+### 12.4 Notes
+
+* **`DEFAULT`** (S12.1): the defaults of a currency that is not listed are in `<info iso4217="DEFAULT" digits="2" rounding="0"/>`; the text does not mention this element.
+* **The CHF example** (L1100): the example of the supplemental data has `<info iso4217="CHF" digits="2" rounding="5"/>`. The data has `rounding="0"` and `cashRounding="5"`, so CHF amounts are rounded to 0.05 only in cash transactions (S12.6a).
+* **The CZK example** (S12.7): the data also has `cashDigits="0"` and `cashRounding="0"` for CZK, so `en` CZK 2.006 in cash transactions → `CZK 2` / `"CZK\u00A02"`.
+* **`en_US`** (S12.2): `en_US` has no number data of its own; it formats as `en`.
+* **Editorial**: L1129 has a stray "→" before "\$1.12"; L1130 says *"This value of this field"*; L1133 writes "10-cashDigits" without the superscript of L1131 (10<sup>-digits</sup>).
+
+---
+
+## Section 13: Regional Currency Mappings (`#regional-currency-mappings-region`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#regional-currency-mappings-region`](../../../docs/ldml/tr35-numbers.md#regional-currency-mappings-region) (UTS #35 Part 3, Section 5.5.2: *Regional Currency Mappings (`region`)*; L1143–L1205 at `2997bffaf0`)
+* **Related specification text**: L1068–L1120 ([Supplemental Currency Data](../../../docs/ldml/tr35-numbers.md#Supplemental_Currency_Data): the DTD of `region` and `currency`, and an example with the regions `IT` and `CS`), and L1058–L1062 (a currency amount always has a currency code; see Section 11)
+
+### 13.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> #### Regional Currency Mappings (`region`)
+>
+> Each `region` element contains one attribute:
+>
+> * **iso3166:** the ISO 3166 code for the region in question. The special value _XXX_ can be used to indicate that the region has no valid currency or that the circumstances are unknown (usually used in conjunction with _before_, as described below).
+>
+> And can have any number of `currency` elements, with the `ordered` subelements.
+>
+> ```xml
+> <region iso3166="HR"> <!-- Croatia -->
+>     <currency iso4217="EUR" from="2023-01-01" tz="Europe/Zagreb"/>
+>     <currency iso4217="HRK" from="1994-05-30" to="2023-01-14" to-tz="Europe/Zagreb"/>
+>     <currency iso4217="HRD" from="1991-12-23" to="1995-01-01"/>
+>     <currency iso4217="YUN" from="1990-01-01" to="1991-12-23"/>
+>     <currency iso4217="YUD" from="1966-01-01" to="1990-01-01"/>
+> </region>
+> ```
+>
+> * **iso4217:** the ISO 4217 code for the currency in question. Note that some additional codes that were in widespread usage are included, others such as GHP are not included because they were never used.
+> * **from:** the currency was valid from the datetime indicated by the value. See the main document _[Dates and Date Ranges](../../../docs/ldml/tr35.md#Date_Ranges)_.
+> * **to:** the currency was valid up to the datetime indicated by the value. See the main document _[Dates and Date Ranges](../../../docs/ldml/tr35.md#Date_Ranges)_.
+> * **tz:** the timezone associated with the `from` transition datetime. If no `to-tz` attribute is specified, it also applies to the `to` transition datetime.
+>     * Timezones for the `tz` and `to-tz` attribute are specified using the CLDR canonical “long” time zone ID as described under **Stability of Time Zone Identifiers** in [Time Zone Identifiers](../../../docs/ldml/tr35.md#Time_Zone_Identifiers).
+> * **to-tz:** the timezone associated with the `to` transition datetime. This timezone applies to the `to` value, and need only be specified if it is different from any timezone specified by a `tz` attribute.
+> * **tender:** indicates whether the ISO currency code represents a currency that was or is legal tender in some country. The default is "true". Certain ISO codes represent things like financial instruments or precious metals, and do not represent normally interchanged currencies.
+>
+> > **Note on converting transition datetimes for implementation use:** The fact that CLDR stores the timezone separately from the transition datetime is for ease of CLDR maintenance. Implementations that use CLDR data may want to convert the combination into something like a single UTC timestamp for internal use.
+>
+> That is, each `currency` element will list an interval in which it was valid. The _ordering_ of the elements in the list tells us which was the primary currency during any period in time. Here is an example of such an overlap:
+>
+> ```xml
+> <currency iso4217="CSD" to="2002-05-15"/>
+> <currency iso4217="YUD" from="1994-01-24" to="2002-05-15"/>
+> <currency iso4217="YUN" from="1994-01-01" to="1994-07-22"/>
+> ```
+>
+> All `currency` elements with `tender="false"` should be at the end of the list for a given `region`.
+>
+> The `from` element is limited by the fact that ISO 4217 does not go very far back in time, so there may be no ISO code for the previous currency.
+>
+> Currencies change relatively frequently. There are different types of changes:
+>
+> 1. YU=>CS (name change)
+> 2. CS=>RS+ME (split, different names)
+> 3. SD=>SD+SS (split, same name for one // South Sudan splits from Sudan)
+> 4. DE+DD=>DE (Union, reuses one name // East Germany unifies with Germany)
+>
+> The [UN Information](https://unstats.un.org/unsd/methodology/m49/) is used to determine dates due to country changes.
+>
+> When a code is no longer in use, it is terminated (see #1, #2, #4, #5)
+>
+> > Example:
+> >
+> > * ```<currency iso4217="EUR" from="2003-02-04" to="2006-06-03"/>```
+>
+> When codes split, each of the new codes inherits (see #2, #3) the previous data. However, some modifications can be made if it is clear that currencies were only in use in one of the parts.
+>
+> When codes merge, the data is copied from the most populous part.
+>
+> > Example. When CS split into RS and ME:
+> >
+> > * RS & ME copy the former CS, except that the line for EUR is dropped from RS
+> > * CS now terminates on Jun 3, 2006 (following the UN info)
+
+---
+
+### 13.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** The examples of the specification, compared with `<currencyData>` in `common/supplemental/supplementalData.xml`:
+
+| Example | Specification | Data |
+| :--- | :--- | :--- |
+| `HR` (L1151–L1159) | `EUR` from 2023-01-01 with `tz`; `HRK` with `to-tz`; `HRD`; `YUN`; `YUD` | The same |
+| `IT` (L1106–L1109) | `ITL` with `from="1862-8-24"` | `from="1862-08-24"` |
+| `CS` (L1111–L1115) | `EUR` from 2003-02-04, then `CSD` from 2002-05-15, both without `to`; `YUM` | `CSD`, then `EUR`, both with `to="2006-06-03"`; `YUM` |
+| The overlap (L1173–L1177) | `CSD` with only `to="2002-05-15"`; `YUD` from 1994-01-24 to 2002-05-15; `YUN` from 1994-01-01 to 1994-07-22 | `CSD` from 2002-05-15 (`CS`, `RS`); in `YU`, `YUM` from 1994-01-24 to 2002-05-15 and `YUN` from 1990-01-01 to 1992-07-24 |
+| The split of `CS` (L1202–L1205) | `RS` and `ME` copy `CS`, without `EUR` in `RS`; `CS` ends on 2006-06-03 | `RS` has `RSD`, `CSD`, and `YUM`, without `EUR`; `ME` has `EUR` (from 2002-01-01), `DEM`, and `YUM`, without `CSD` |
+| `XXX` (L1147) | A value of `iso3166` | A value of `iso4217`: `<region iso3166="AQ"><currency iso4217="XXX" tender="false"/></region>` |
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S13.1** | **`iso3166`** — *"The special value XXX can be used to indicate that the region has no valid currency or that the circumstances are unknown (usually used in conjunction with before, as described below)."* | — | `AQ` has `XXX` as its `currency` (see the table above). |
+| **S13.2** | *"And can have any number of `currency` elements, with the `ordered` subelements."*, and the `HR` example | — | The `HR` example matches the data. |
+| **S13.3** | **`iso4217`**, **`from`**, and **`to`** — *"the currency was valid from the datetime indicated by the value."*; *"the currency was valid up to the datetime indicated by the value."* | — | — |
+| **S13.4** | **`tz`** and **`to-tz`**, and the note on transition datetimes: *"Implementations that use CLDR data may want to convert the combination into something like a single UTC timestamp for internal use."* | — | `HR` has both. |
+| **S13.5** | **`tender`** — *"indicates whether the ISO currency code represents a currency that was or is legal tender in some country."*; *"All `currency` elements with `tender="false"` should be at the end of the list for a given `region`."* | — | — |
+| **S13.6** | *"The ordering of the elements in the list tells us which was the primary currency during any period in time."*, and the overlap example | — | The overlap example does not match the data (see the table above). |
+| **S13.7** | *"The `from` element is limited by the fact that ISO 4217 does not go very far back in time, so there may be no ISO code for the previous currency."* | — | — |
+| **S13.8** | The types of changes: *"When a code is no longer in use, it is terminated"*; *"When codes split, each of the new codes inherits (see #2, #3) the previous data."*; *"When codes merge, the data is copied from the most populous part."*, with the examples | — | `CS` ends on 2006-06-03, and `RS` has no `EUR` (see the table above). |
+
+---
+
+### 13.3 Comparison Against `GenerateCurrencyFormatTestData.java` (PR [#5808](https://github.com/unicode-org/cldr/pull/5808))
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S13.1**–**S13.8** | — | ⚪ **Out of scope** | The `region` data does not change how an amount is formatted: every row gives its `currency` (S11.4). The generator uses the data only to choose `currency` values: the extended values are the currencies with `tender` true whose `from`–`to` interval contains the date of the run (`getModernCurrencies()`), and each extended locale is combined with the current currencies of its likely region (`getCurrenciesForLocale()`). |
+
+### 13.4 Notes
+
+* **The date of the run** (S13.3): the generator compares `from` and `to` with the date of the run, so the extended currency values change over time. `BG` has `EUR` from 2026-01-01 and `BGN` until 2026-01-31: `BGN` is an extended currency value only in runs before 2026-01-31, and the TSV files at `5e1d4b0ee3` have no `BGN` rows.
+* **Editorial**: L1147 describes `XXX` as a value of `iso3166` and refers to *"before"*, but the DTD has no `before` attribute, and the data uses `XXX` as an `iso4217` value. L1149 (*"with the `ordered` subelements"*) names no element or attribute; L1171 explains that the order of the `currency` elements matters. L1192 refers to *"#5"*, but the list of changes has four items.
+
+---
+
 ## Summary: Required Generator Changes
 
 | Change | Needed by |
@@ -796,7 +1134,10 @@ Plural categories that the CORE inputs reach, with the currency's number of deci
 | Add `"nl"` to `CORE_LOCALES` (+300 rows): the only extended locale whose negative pattern has a space between `¤` and the minus sign (`¤ -#,##0.00` / `"¤\u00A0-#,##0.00"`) | S8.3d |
 | Add a separate file of `currency_display = "name"` rows: `CORE_LOCALES` and `"si"` (whose `unitPattern` puts the display name first) × `CORE_CURRENCIES` × the inputs `1.0` (exactly 1), `2.0` (`two` in `ar`; `few` in `ru` with `JPY`), `5.0` (`few` in `ar`), and `1000000.0` (`many` in `pt_PT` with `JPY`) (+220 rows) | S9.4b, S9.5b–d, S9.6c, S9.7b |
 | Add the `fraction_digits` dimension with `0`, in a separate file: `TINY_LOCALES` × `TINY_CURRENCIES` × `TINY_NUMBERS` × `currency_display = "name"` (+12 rows) | S9.9 |
+| Add a separate file of rows for currencies with their own `decimal`, `group`, or `pattern`: `"kea"` × `"CVE"`, `"en_NL"` × `"EUR"` (the `pattern` of `en_150`), and `"pt_PT"` × `"PTE"` (not legal tender; the only currency with its own `group` in a CORE locale), each × `CORE_NUMBERS`, with `currency_format_length = ""`, `currency_format_type = "standard"`, and `currency_display = "symbol"` (+15 rows) | S11.1a–c, S11.2a–b |
+| Add `"KWD"` (3 decimals) rows in a separate file: `TINY_LOCALES` × `"KWD"` × `CORE_NUMBERS`, with `currency_format_length = ""`, `currency_format_type = "standard"`, and `currency_display = "symbol"` (+15 rows) | S11.8b, S12.2d |
+| Add the `currency_usage` dimension with `"cash"`, in a separate file: `TINY_LOCALES` × `"CHF"`, `"DKK"`, `"HUF"`, `"SEK"`, and `"USD"` × `CORE_NUMBERS`, with `currency_format_length = ""`, `currency_format_type = "standard"`, and `currency_display = "symbol"` (+75 rows) | S12.5a–b, S12.6a–d |
 
 For Section 1, one locale with a monetary separator is enough to exercise the override. `en` and the other CORE locales already cover the "otherwise" clauses (S1.2, S1.4). The clauses of the locale that is not added stay 🟡 **Missing: `locale`**.
 
-The row counts are for each change alone. All changes except the `cf`, `currency_pattern_append_iso`, and `fraction_digits` dimensions and the `"name"` rows of Section 9 add rows to `currencies.tsv`. The file now has 10 locales × 5 currencies × 12 combinations of the format and display dimensions × 5 inputs = 3,000 rows; with all the changes above, including `"short"` × `"noCurrency"` as a 13th combination, it would have 16 × 7 × 13 × 5 = 7,280. The 24 `cf` rows, the 240 `currency_pattern_append_iso` rows, the 220 `"name"` rows of Section 9, and the 12 `fraction_digits` rows go in their own files.
+The row counts are for each change alone. All changes except the `cf`, `currency_pattern_append_iso`, `fraction_digits`, and `currency_usage` dimensions, the `"name"` rows of Section 9, and the override and `KWD` rows of Sections 11 and 12 add rows to `currencies.tsv`. The file now has 10 locales × 5 currencies × 12 combinations of the format and display dimensions × 5 inputs = 3,000 rows; with all the changes above, including `"short"` × `"noCurrency"` as a 13th combination, it would have 16 × 7 × 13 × 5 = 7,280. The 24 `cf` rows, the 240 `currency_pattern_append_iso` rows, the 220 `"name"` rows of Section 9, the 12 `fraction_digits` rows, the 15 override rows and 15 `KWD` rows of Sections 11 and 12, and the 75 `currency_usage` rows go in their own files.

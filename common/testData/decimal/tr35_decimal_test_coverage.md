@@ -47,7 +47,9 @@ Values at `c33251cf82`. `decimals.tsv` combines all CORE values with each other 
 | **`numbering_system`** | The `nu` key of the Unicode locale identifier (`-u-nu-…`) | **Needs to be added** (Section 1): `"latn"`, `"native"`, `"traditio"`, `"finance"`. The current rows use no `nu` key, that is, the locale's default numbering system. | — |
 | **`sign_display`** | When a sign is shown | **Needs to be added** (Section 2): `"always"` (the `plusSign` for positive numbers), `"approximately"` (the `approximatelySign`). The current rows show a sign only for negative numbers. | — |
 | **`exponent_style`** | How the exponent of `"scientific"` is written | **Needs to be added** (Section 2): `"superscript"` (`superscriptingExponent`, as in `1.234565×10⁶`). The current rows use the `exponential` symbol (`1.234565E6`). | — |
-| **`precision`** | Rounding of the number | **Needs to be added** (Section 4): `"significant: 3"` (minimum and maximum 3 significant digits) and `"fraction: 1"` (minimum and maximum 1 fraction digit), the two settings of the specification's compact example. The current rows use the default precision. | — |
+| **`precision`** | Rounding of the number | **Needs to be added** (Sections 4 and 6): `"significant: 3"` (minimum and maximum 3 significant digits) and `"fraction: 1"` (minimum and maximum 1 fraction digit), the two settings of the specification's compact example; `"fraction: 4-5"` (minimum 4 and maximum 5 fraction digits, as in the pattern `###0.0000#`). The current rows use the default precision. | — |
+| **`grouping`** | Whether grouping separators are shown | **Needs to be added** (Section 6): `"off"` (as in the pattern `###0.#####`). The current rows use the locale's grouping. | — |
+| **`integer_width`** | Minimum and maximum number of integer digits | **Needs to be added** (Section 6): `"min: 5"` (as in the pattern `00000.0000`). The current rows use a minimum of 1 and no maximum. | — |
 
 The generator produces 5 of the 9 combinations of `number_format` and `format_length`: `"decimal"` with each length, and `"percent"` and `"scientific"` with `""` only.
 
@@ -383,7 +385,7 @@ Scans of `common/main` (all locales): no locale has a `full` or `medium` length,
 | # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
 | :---: | :--- | :--- | :--- |
 | **S3.1** | DTD: `<!ATTLIST decimalFormatLength type ( full \| long \| medium \| short ) #IMPLIED >`, *"(scientificFormats, percentFormats have the same structure)"* | • **S3.1a**: each `number_format` with no length (`format_length = ""`)<br>• **S3.1b**: `number_format = "decimal"` × `format_length = "short"` and `"long"`<br>• **S3.1c**: the lengths `full` and `medium`, and `"percent"` or `"scientific"` with a length | • S3.1a, S3.1b: see S3.3–S3.5.<br>• S3.1c: no CLDR data. |
-| **S3.2** | *"Number formats are used to define the rules for formatting numeric quantities using the pattern syntax described in Section 3: Number Format Patterns."* | — (the pattern syntax is checked in a later section) | — |
+| **S3.2** | *"Number formats are used to define the rules for formatting numeric quantities using the pattern syntax described in Section 3: Number Format Patterns."* | — (the pattern syntax is checked in Sections 6 and 7) | — |
 | **S3.3** | **`decimalFormats`** — *"The normal locale specific way to write a base 10 number. Variations of the decimalFormat pattern are provided that allow compact number formatting."* | • **S3.3a**: `number_format = "decimal"` × `format_length = ""` × several `locale` values (`"en"`, `"de"`, `"bn"`)<br>• **S3.3b**: `number_format = "decimal"` × `format_length = "short"` and `"long"` | • S3.3a: `en` 1234565.0 → `1,234,565`; `de` → `1.234.565`; `bn` → `১২,৩৪,৫৬৫`.<br>• S3.3b: `en` 1234565.0 → `1.2M` (short), `1.2 million` (long); see Section 4. |
 | **S3.4** | **`percentFormats`** — *"Pattern for use with percentage formatting"* | • `number_format = "percent"` × several `locale` values (`"en"`, `"de"`) | `en` 1.2 → `120%`; `de` → `120 %` / `"120\u00A0%"`. |
 | **S3.5** | **`scientificFormats`** — *"Pattern for use with scientific (exponent) formatting."* | • `number_format = "scientific"` × several `locale` values (`"en"`, `"de"`) | `en` 1234565.0 → `1.234565E6`; `de` → `1,234565E6`. |
@@ -412,7 +414,7 @@ Scans of `common/main` (all locales): no locale has a `full` or `medium` length,
 
 ## Section 4: Compact Number Formats (`#Compact_Number_Formats`)
 
-* **TR35 Specification Link**: [`tr35-numbers.md#Compact_Number_Formats`](../../../docs/ldml/tr35-numbers.md#Compact_Number_Formats) (UTS #35 Part 3, Section 2.4.1: *Compact Number Formats*; L376–L491 at `c33251cf82`). The quote below has L378–L476, the patterns and the formatting steps. The `"0"` pattern (L479–L487) and the width guidance (L489–L490) are checked in a later section.
+* **TR35 Specification Link**: [`tr35-numbers.md#Compact_Number_Formats`](../../../docs/ldml/tr35-numbers.md#Compact_Number_Formats) (UTS #35 Part 3, Section 2.4.1: *Compact Number Formats*; L376–L491 at `c33251cf82`). The quote below has L378–L476, the patterns and the formatting steps. The `"0"` pattern (L479–L487) and the width guidance (L489–L490) are checked in Section 5.
 * **Related specification text**: L742 ([`minimumGroupingDigits`](../../../docs/ldml/tr35-numbers.md#Examples_of_minimumGroupingDigits)), L811 onward ([Significant Digits](../../../docs/ldml/tr35-numbers.md#sigdig)), L840 onward ([Rounding](../../../docs/ldml/tr35-numbers.md#Rounding)), L1168 onward ([Language Plural Rules](../../../docs/ldml/tr35-numbers.md#Language_Plural_Rules): the plural categories of step 8), and Section 2 of the [currency document](../currency/tr35_currency_test_coverage.md) (step 4, `alt="alphaNextToNumber"`)
 
 ### 4.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
@@ -539,8 +541,8 @@ Scans of `common/main` (all locales): no locale has a `full` or `medium` length,
 | :---: | :--- | :--- | :--- |
 | **S4.1** | *"A pattern `type` attribute is used for _compact number formats_"*; *"Formats can be supplied for numbers (as above) or for currencies or other units. They can also be used with ranges of numbers [...]"* | • **S4.1a**: `number_format = "decimal"` × `format_length = "short"` and `"long"`<br>• **S4.1b**: currencies and units<br>• **S4.1c**: ranges | • S4.1a: see S4.3–S4.7.<br>• S4.1b: currency formats are in the currency document; units are outside this generator.<br>• S4.1c: checked in a later section on number ranges. |
 | **S4.2** | Notes: *"A _letter grapheme cluster_ is a grapheme cluster that starts with a letter and then 0 or more combining marks."*; *"All of the pattern elements with the same type must have the same number of zeros in the pattern element value."* | — | The first note is used only by step 4 (currencies). The second is a constraint on the data. |
-| **S4.3** | Step 1: *"Let P be the pattern element with greatest type less than or equal to N, and any count value."* | • **S4.3a**: `format_length = "short"`, `"long"` × `input` values that reach different types (`1234565.0`: 1000000; `-1230.05`: 1000)<br>• **S4.3b**: `input` equal to a type (e.g. `1000.0`, `1000000.0`)<br>• **S4.3c**: `input` below the smallest type (`0.0`, `1.2`, `0.00831765`) | • S4.3a: `en` short 1234565.0 → `1.2M`; −1230.05 → `-1.2K`.<br>• S4.3b: `en` short 1000.0 → `1K`; 1000000.0 → `1M`.<br>• S4.3c: no pattern applies; the number is formatted with the `"0"` pattern (later section): `en` short 1.2 → `1.2`. |
-| **S4.4** | Steps 2–3: *"Let V be the pattern element value."*; *"If the element value of P is "0", then use the corresponding non-compact number formatting instead, and skip the rest of these steps — but adjust the precision as described below."* | • explicit `"0"` patterns (`"de"`, `"ja"` type 1000) | Checked in the later section on the `"0"` pattern: `de` short −1230.05 → `-1230`. |
+| **S4.3** | Step 1: *"Let P be the pattern element with greatest type less than or equal to N, and any count value."* | • **S4.3a**: `format_length = "short"`, `"long"` × `input` values that reach different types (`1234565.0`: 1000000; `-1230.05`: 1000)<br>• **S4.3b**: `input` equal to a type (e.g. `1000.0`, `1000000.0`)<br>• **S4.3c**: `input` below the smallest type (`0.0`, `1.2`, `0.00831765`) | • S4.3a: `en` short 1234565.0 → `1.2M`; −1230.05 → `-1.2K`.<br>• S4.3b: `en` short 1000.0 → `1K`; 1000000.0 → `1M`.<br>• S4.3c: no pattern applies; the number is formatted with the `"0"` pattern (Section 5): `en` short 1.2 → `1.2`. |
+| **S4.4** | Steps 2–3: *"Let V be the pattern element value."*; *"If the element value of P is "0", then use the corresponding non-compact number formatting instead, and skip the rest of these steps — but adjust the precision as described below."* | • explicit `"0"` patterns (`"de"`, `"ja"` type 1000) | See Section 5. |
 | **S4.5** | Step 4: *"If P is a currency format, look at the currency symbol string, and the position of the currency symbol ¤ in the pattern element value."* [...] | — | Currencies only; see Section 2 of the currency document. |
 | **S4.6** | Steps 5–7: *"Let Z be the number of 0 characters in V, minus 1."*; *"Let T be the numeric value of the `type` attribute value, after removing the final Z zeros."*; *"Let N' be N / T"* | • **S4.6a**: Z = 0 (`"en"`, `"de"` × `1234565.0`)<br>• **S4.6b**: Z > 0, which for the CORE inputs needs a `locale` with patterns of 2 or more zeros at 1000 or 1000000 (`"ja"`: `000万`, Z = 2, T = 10000; `"bn"`: `00 লা`, Z = 1, T = 100000) | • S4.6a: `de` long 1234565.0 → N′ = 1.234565 → `1,2 Millionen`.<br>• S4.6b: `ja` short 1234565.0 → N′ = 123.4565 → `123万`; `bn` short → N′ = 12.34565 → `১২ লা` / `"\u09E7\u09E8\u00A0\u09B2\u09BE"`. |
 | **S4.7** | Step 8: *"Determine the plural category of N, based on the numeric precision settings (the min/max number of significant or fraction digits), and switch the value of V if necessary."* [...] *"For the short compact formats, it doesn't make a difference for English, but may for other locales!"* | • **S4.7a**: `format_length = "long"` × a `locale` with different patterns per count × `input` in the `other` category (`1234565.0`)<br>• **S4.7b**: the same × `input` in another category: one (`1000000.0`), many (`5000000.0` in `"ru"`), few (`5000000.0` in `"ar"`)<br>• **S4.7c**: `format_length = "short"` × a `locale` with different short patterns per count (`"ar"` few) × `5000.0`<br>• **S4.7d**: an `input` whose category changes with the precision (`1040000.0`: `1` with the default precision, `1,0` with one fraction digit) | • S4.7a: `de` long 1234565.0 → `1,2 Millionen`; `ru` → `1,2 миллиона`.<br>• S4.7b: `de` long 1000000.0 → `1 Million`; `ru` 5000000.0 → `5 миллионов`; `ar` → `5 ملايين`.<br>• S4.7c: `ar` short 5000.0 → `5 آلاف` / `"5\u00A0\u0622\u0644\u0627\u0641"`.<br>• S4.7d: `de` long 1040000.0 → `1 Million` (one) by default; `1,0 Millionen` (other) with one fraction digit. |
@@ -555,7 +557,7 @@ Scans of `common/main` (all locales): no locale has a `full` or `medium` length,
 | :---: | :--- | :---: | :--- |
 | **S4.1a**, **S4.3a**, **S4.6a**, **S4.7a**, **S4.8a** | `"decimal"` × `"short"`, `"long"` × `1234565.0`, `-1230.05` × `en`, `de`, `ru` | ✅ **Covered** | CORE values: `"decimal"` with `"short"` and `"long"`, all `CORE_LOCALES`, and `CORE_NUMBERS`. |
 | **S4.1b**, **S4.2**, **S4.5** | — | ⚪ **Out of scope** | Currencies and units, or a constraint on the data. |
-| **S4.1c**, **S4.4** | — | — | Checked in later sections (number ranges; the `"0"` pattern). |
+| **S4.1c**, **S4.4** | — | — | Checked in Section 5 (the `"0"` pattern) and in a later section (number ranges). |
 | **S4.3b** | `input` = `1000.0`, `1000000.0` | 🟡 **Missing: `input` in CORE** | Both are extended values (10³, 10⁶); `decimals_extended_numbers.tsv` has them with all `CORE_LOCALES` and all five styles. No action needed. |
 | **S4.3c** | `input` below 1000 | ✅ **Covered** | CORE values: `0.0`, `1.2`, `0.00831765` with `"short"` and `"long"`. |
 | **S4.6b** | `locale = "ja"`, `"bn"` × `1234565.0` | ✅ **Covered** | CORE values: `ja` and `bn` in `CORE_LOCALES`; `1234565.0` in `CORE_NUMBERS`. |
@@ -574,18 +576,379 @@ Scans of `common/main` (all locales): no locale has a `full` or `medium` length,
 
 ---
 
+## Section 5: The Compact "0" Pattern (`#Compact_Number_Formats`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Compact_Number_Formats`](../../../docs/ldml/tr35-numbers.md#Compact_Number_Formats) (UTS #35 Part 3, Section 2.4.1: *Compact Number Formats*; L376–L491 at `c33251cf82`). The quote below has L479–L490, the end of the section: the `"0"` pattern and the width guidance. The formatting steps before it are in Section 4.
+* **Related specification text**: L742 ([`minimumGroupingDigits`](../../../docs/ldml/tr35-numbers.md#Examples_of_minimumGroupingDigits), Section 8), L811 onward ([Significant Digits](../../../docs/ldml/tr35-numbers.md#sigdig)), and Section 2 of the [currency document](../currency/tr35_currency_test_coverage.md) (the `"0"` pattern of compact currency formats)
+
+### 5.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> The default pattern for any type that is not supplied is the special value “0”, as in the following. The value “0” must be used when a child locale overrides a parent locale to drop the compact pattern for that type and use the default pattern.
+>
+>  `<pattern type="1" count="one">0</pattern>`
+>
+> If the value is precisely “0”, either explicit or defaulted, then the normal number format pattern for that sort of object is supplied — either `<decimalFormat>` or `<currencyFormat type="standard">` — with the normal formatting for the locale (such as the grouping separators). However, for the “0” case by default the significant digits are adjusted for consistency, typically to 2 or 3 digits, and the maximum fractional digits are set to 0 (for both currencies and plain decimal). Thus the output would be $12, not $12.01. APIs may, however, allow these default behaviors to be overridden.
+>
+> With the data above, N=12345 matches `<pattern type="10000" count="other">00 K</pattern>`. N is divided by 1000 (obtained from 10000 after removing "00" and restoring one "0"). The result is formatted according to the normal decimal pattern. With no fractional digits, that yields "12 K".
+>
+> Formatting 1200 in USD would result in “1.2 K $”, while 990 implicitly maps to the special value “0”, which maps to `<currencyFormat type="standard"><pattern>#,##0.00 ¤</pattern>`, and would result in simply “990 $”.
+>
+> The short non-currency format is designed for UI environments where space is at a premium, and should ideally result in a formatted string no more than about 6 em wide (with no fractional digits).
+> The short currency format will include currency symbols, and should ideally be no more than 8 em in width.
+
+---
+
+### 5.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** No CLDR pattern has `type="1"`. The smallest `type` of the CORE locales is 1000, so the CORE inputs below 1000 (0.0, 1.2, 0.00831765) use the defaulted `"0"`. Explicit `"0"` patterns, and the parent patterns they override:
+
+| Locale | `short` 1000 | `long` 1000 |
+| :--- | :--- | :--- |
+| `root` | `0K` | as `short` (alias) |
+| `en` | `0K` | `0 thousand` |
+| `de`, `de_CH` | `0` (also at 10000 and 100000) | `0 Tausend` |
+| `ja` | `0` (10000: `0万`) | as `short` (`root` alias) |
+
+The non-compact pattern of these locales is `#,##0.###` (`group`: `de` `.`, `de_CH` `'`, `ja` `,`), and their `minimumGroupingDigits` is 1.
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S5.1** | *"The default pattern for any type that is not supplied is the special value “0”, as in the following."*, with the example `<pattern type="1" count="one">0</pattern>` | • `format_length = "short"`, `"long"` × `input` below the smallest type (`0.0`, `1.2`, `0.00831765`) | `en` short 1.2 → `1.2`; 0.00831765 → `0.0083` (see S5.3b). |
+| **S5.2** | *"The value “0” must be used when a child locale overrides a parent locale to drop the compact pattern for that type and use the default pattern."* | • a `locale` whose `"0"` overrides a parent pattern (`"de"`, `"de_CH"`, `"ja"` over `root` `0K`) × `format_length = "short"` × `input` that reaches type 1000 (`-1230.05`) | `de` short −1230.05 → `-1.230` (S5.3a), not `-1,2K`; `en` (no override) → `-1.2K`. |
+| **S5.3** | *"If the value is precisely “0”, either explicit or defaulted, then the normal number format pattern for that sort of object is supplied — either `<decimalFormat>` or `<currencyFormat type="standard">` — with the normal formatting for the locale (such as the grouping separators). However, for the “0” case by default the significant digits are adjusted for consistency, typically to 2 or 3 digits, and the maximum fractional digits are set to 0 (for both currencies and plain decimal)."* | • **S5.3a**: an explicit `"0"` × `input` ≥ 1000 with fraction digits (`-1230.05`) × `"short"` (`"de"`, `"de_CH"`, `"ja"`) and `"long"` (`"ja"`)<br>• **S5.3b**: the defaulted `"0"` × `input` below 100 with fraction digits (`1.2`, `0.00831765`) | • S5.3a: `de` short −1230.05 → `-1.230` (3 significant digits) or `-1.200` (2), grouped and with no fraction digits; `de_CH` → `-1'230` / `-1'200`; `ja` short and long → `-1,230` / `-1,200`.<br>• S5.3b: ❓ `en` short 1.2 → `1.2` (2 significant digits) or `1` (maximum 0 fraction digits); 0.00831765 → `0.0083` or `0`. See the notes. |
+| **S5.4** | *"APIs may, however, allow these default behaviors to be overridden."* | • `precision` (Section 4) × an explicit `"0"` × `-1230.05` | `de` short −1230.05 → `-1.230` (`"significant: 3"`), `-1.230,0` (`"fraction: 1"`). |
+| **S5.5** | *"With the data above, N=12345 matches `<pattern type="10000" count="other">00 K</pattern>`. [...] The result is formatted according to the normal decimal pattern. With no fractional digits, that yields "12 K"."* | • a pattern with more than one `0` (Section 4, S4.6b) | `ja` short 1234565.0 → `123万` (S4.6b). |
+| **S5.6** | The currency example: 1200 and 990 in USD, with a `"0"` pattern for 990 | — | Currencies; see Section 2 of the currency document. |
+| **S5.7** | *"The short non-currency format is designed for UI environments where space is at a premium, and should ideally result in a formatted string no more than about 6 em wide (with no fractional digits)."*, and the 8 em guidance for currency formats | — | Guidance for the data; formatting tests don't measure width. |
+
+---
+
+### 5.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S5.1**, **S5.3b** | `"short"`, `"long"` × `input` below 1000 | ✅ **Covered** | CORE values: `0.0`, `1.2`, `0.00831765` with `"short"` and `"long"`. The expected value of S5.3b is open (see the notes). |
+| **S5.2**, **S5.3a** | `locale = "de"`, `"de_CH"`, `"ja"` × `"short"`, `"long"` × `-1230.05` | ✅ **Covered** | CORE values: `de`, `de_CH`, and `ja` in `CORE_LOCALES`; `-1230.05` in `CORE_NUMBERS`. |
+| **S5.4** | `precision` × an explicit `"0"` × `-1230.05` | 🟡 **Missing: new dimension** | **Action**: Section 4's `precision` rows, which combine `"short"` and `"long"` with all `CORE_LOCALES` and `-1230.05` (see the Summary). |
+| **S5.5** | a pattern with more than one `0` | ✅ **Covered** | As S4.6b. |
+| **S5.6**, **S5.7** | — | ⚪ **Out of scope** | Currencies, or guidance for the data. |
+
+### 5.4 Notes
+
+* S5.3: the text gives no exact precision (*"typically to 2 or 3 digits"*). For inputs of 100 or more, both settings give integers. Below 100, the significant digits conflict with the maximum of 0 fraction digits: 2 significant digits give `1.2` and `0.0083`, while 0 fraction digits give `1` and `0`. S4.3c's expected value (`en` short 1.2 → `1.2`) follows the significant digits.
+* S5.5: *"the data above"* is the sample of L380 onward, whose `short` type 10000 pattern is `00K`, with no space, so the result there is `12K`.
+
+---
+
+## Section 6: Number Patterns (`#Number_Patterns`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Number_Patterns`](../../../docs/ldml/tr35-numbers.md#Number_Patterns) (UTS #35 Part 3, Section 3.1: *Number Patterns*, with the table [Number Pattern Examples](../../../docs/ldml/tr35-numbers.md#Number_Pattern_Examples); L647–L667 at `c33251cf82`). The quote below has L649–L667.
+* **Related specification text**: L669 onward ([Special Pattern Characters](../../../docs/ldml/tr35-numbers.md#Special_Pattern_Characters), Section 7), L765 onward ([Formatting](../../../docs/ldml/tr35-numbers.md#Formatting): the integer and fraction digit counts), and Sections 7 and 12 of the [currency document](../currency/tr35_currency_test_coverage.md) (the `¤` placeholder and the currency fraction digits)
+
+### 6.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> Number patterns affect how numbers are interpreted in a localized context. Here are some examples, based on the French locale. The "." shows where the decimal point should go. The "," shows where the thousands separator should go. A "0" indicates zero-padding: if the number is too short, a zero (in the locale's numeric set) will go there. A "#" indicates no padding: if the number is too short, nothing goes there. A "¤" shows where the currency sign will go. The following illustrates the effects of different patterns for the French locale, with the number "1234.567". Notice how the pattern characters ',' and '.' are replaced by the characters appropriate for the locale.
+>
+> ###### Table: <a name="Number_Pattern_Examples" href="../../../docs/ldml/tr35-numbers.md#Number_Pattern_Examples">Number Pattern Examples</a>
+>
+> | Pattern    | Currency | Text       |
+> |------------|----------|------------|
+> | #,##0.##   | _n/a_    | 1 234,57   |
+> | #,##0.###  | _n/a_    | 1 234,567  |
+> | ###0.##### | _n/a_    | 1234,567   |
+> | ###0.0000# | _n/a_    | 1234,5670  |
+> | 00000.0000 | _n/a_    | 01234,5670 |
+> | #,##0.00 ¤ | EUR      | 1 234,57 € |
+> |            | JPY      | 1 235 ¥JP  |
+>
+> The number of # placeholder characters before the decimal does not matter, since no limit is placed on the maximum number of digits. There should, however, be at least one zero someplace in the pattern. In currency formats, the number of digits after the decimal also does not matter, since the information in the supplemental data (see _[Supplemental Currency Data](../../../docs/ldml/tr35-numbers.md#Supplemental_Currency_Data))_ is used to override the number of decimal places — and the rounding — according to the currency that is being formatted. That can be seen in the above chart, with the difference between Yen and Euro formatting.
+>
+> To ensure correct layout, especially in currency patterns in which a variety of symbols may be used, number patterns may contain (invisible) bidirectional text format characters such as LRM, RLM, and ALM.
+>
+> _When parsing using a pattern, a lenient parse should be used; see [Lenient Parsing](../../../docs/ldml/tr35.md#Lenient_Parsing)._ As noted there, lenient parsing should ignore bidi format characters.
+
+---
+
+### 6.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** `fr` (an extended locale) has the decimal pattern `#,##0.###`, the `decimal` `,`, and the `group` U+202F NARROW NO-BREAK SPACE. No CLDR decimal, percent, or scientific pattern contains a bidi format character. Settings of the table's patterns:
+
+| Pattern | Minimum integer digits | Fraction digits | Grouping |
+| :--- | :--- | :--- | :--- |
+| `#,##0.##` | 1 | 0–2 | yes |
+| `#,##0.###` | 1 | 0–3 | yes (the decimal pattern of the CORE locales; `bn`: `#,##,##0.###`) |
+| `###0.#####` | 1 | 0–5 | no |
+| `###0.0000#` | 1 | 4–5 | no |
+| `00000.0000` | 5 | 4 | no |
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S6.1** | *"The "." shows where the decimal point should go. The "," shows where the thousands separator should go."* [...] *"Notice how the pattern characters ',' and '.' are replaced by the characters appropriate for the locale."* | • the same pattern (`#,##0.###`) × `locale` values with different `decimal` and `group` (`"en"`, `"de"`, `"de_CH"`, `"ar_EG"`) × `-1230.05` | `en` −1230.05 → `-1,230.05`; `de` → `-1.230,05`; `de_CH` → `-1'230.05`; `ar_EG` → `؜-١٬٢٣٠٫٠٥` / `"\u061C-\u0661\u066C\u0662\u0663\u0660\u066B\u0660\u0665"`. |
+| **S6.2** | *"A "0" indicates zero-padding: if the number is too short, a zero (in the locale's numeric set) will go there. A "#" indicates no padding: if the number is too short, nothing goes there."* | • **S6.2a**: one `0` before the decimal point (`#,##0.###`) × `input` below 1 (`0.00831765`) × `locale` values with different digits (`"en"`, `"ar_EG"`, `"bn"`)<br>• **S6.2b**: `#` × `input` with fewer digits than the pattern (`1.2`)<br>• **S6.2c**: more than one `0` | • S6.2a: `en` 0.00831765 → `0.008`; `ar_EG` → `٠٫٠٠٨` / `"\u0660\u066B\u0660\u0660\u0668"`; `bn` → `০.০০৮` / `"\u09E6.\u09E6\u09E6\u09EE"`.<br>• S6.2b: `en` 1.2 → `1.2`.<br>• S6.2c: see S6.4d and S6.4e. |
+| **S6.3** | *"A "¤" shows where the currency sign will go."* | — | Currencies; see the currency document. |
+| **S6.4** | The table [Number Pattern Examples](../../../docs/ldml/tr35-numbers.md#Number_Pattern_Examples) (`fr`, 1234.567) | • **S6.4a**: `#,##0.###` (the CORE decimal pattern) × several `locale` values<br>• **S6.4b**: `#,##0.##` (at most 2 fraction digits)<br>• **S6.4c**: `###0.#####` (no grouping)<br>• **S6.4d**: `###0.0000#` (4–5 fraction digits)<br>• **S6.4e**: `00000.0000` (at least 5 integer digits, no grouping)<br>• **S6.4f**: the currency rows | • S6.4a: see S6.1; `fr` −1230.05 → `-1 230,05` / `"-1\u202F230,05"`.<br>• S6.4b: the same rounding as S6.4a (`en` 0.00831765 → `0.008`), with at most 3 fraction digits instead of 2.<br>• S6.4c: `grouping = "off"`: `en` 1234565.0 → `1234565`; −1230.05 → `-1230.05`.<br>• S6.4d: `precision = "fraction: 4-5"`: `en` 1.2 → `1.2000`; 0.00831765 → `0.00832`; −1230.05 → `-1,230.0500`.<br>• S6.4e: `integer_width = "min: 5"` with `grouping = "off"`: `en` 1.2 → `00001.2`; −1230.05 → `-01230.05`; `ar_EG` 1.2 → `٠٠٠٠١٫٢` / `"\u0660\u0660\u0660\u0660\u0661\u066B\u0662"`.<br>• S6.4f: see S6.6. |
+| **S6.5** | *"The number of # placeholder characters before the decimal does not matter, since no limit is placed on the maximum number of digits. There should, however, be at least one zero someplace in the pattern."* | • **S6.5a**: `input` with more integer digits than the pattern (`1234565.0` × `#,##0.###`)<br>• **S6.5b**: the requirement of a zero | • S6.5a: `en` 1234565.0 → `1,234,565`.<br>• S6.5b: a constraint on the data. |
+| **S6.6** | *"In currency formats, the number of digits after the decimal also does not matter, since the information in the supplemental data [...] is used to override the number of decimal places — and the rounding — according to the currency that is being formatted."* | — | Currencies; see Section 12 of the currency document. |
+| **S6.7** | *"To ensure correct layout, especially in currency patterns in which a variety of symbols may be used, number patterns may contain (invisible) bidirectional text format characters such as LRM, RLM, and ALM."* | • a pattern with a bidi format character | No CLDR decimal, percent, or scientific pattern has one. The bidi marks in the CORE results come from the symbols (`ar` `minusSign` `"\u200E-"`, Section 2). |
+| **S6.8** | *"When parsing using a pattern, a lenient parse should be used"* [...] | — | Parsing. |
+
+---
+
+### 6.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S6.1**, **S6.2a**, **S6.2b**, **S6.4a**, **S6.4b**, **S6.5a** | the CORE decimal pattern × several `locale` values × `CORE_NUMBERS` | ✅ **Covered** | CORE values: `"decimal"` with `format_length = ""`, all `CORE_LOCALES`, and `CORE_NUMBERS`. `fr` is an extended locale (`decimals_modern_locales.tsv`). |
+| **S6.2c**, **S6.4c**, **S6.4d**, **S6.4e** | `grouping = "off"`, `precision = "fraction: 4-5"`, `integer_width = "min: 5"` | 🟡 **Missing: new dimension** | No pattern of a CORE locale has these settings, and the generator does not set them through the API. **Action**: add the `grouping` and `integer_width` dimensions and the `precision` value `"fraction: 4-5"` (see the Summary). |
+| **S6.3**, **S6.4f**, **S6.6** | — | ⚪ **Out of scope** | Currencies; see the currency document. |
+| **S6.5b**, **S6.7** | — | ⚪ **Out of scope** | A constraint on the data, or no CLDR data. |
+| **S6.8** | — | ⚪ **Out of scope** | Parsing. |
+
+### 6.4 Notes
+
+* S6.4: the table's `Text` column has U+0020 as the grouping separator, but the `fr` data has U+202F: `#,##0.###` × 1234.567 → `1 234,567` / `"1\u202F234,567"`.
+* S6.4: each new Summary row changes one setting of the locale's pattern, except that the minimum of 5 integer digits is combined with no grouping, as in `00000.0000` and in the `01997` example of [Formatting](../../../docs/ldml/tr35-numbers.md#Formatting) (L770).
+
+---
+
+## Section 7: Special Pattern Characters (`#Special_Pattern_Characters`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Special_Pattern_Characters`](../../../docs/ldml/tr35-numbers.md#Special_Pattern_Characters) (UTS #35 Part 3, Section 3.2: *Special Pattern Characters*, with the tables [Number Pattern Character Definitions](../../../docs/ldml/tr35-numbers.md#Number_Pattern_Character_Definitions) and [Sample Patterns and Results](../../../docs/ldml/tr35-numbers.md#Sample_Patterns_and_Results); L669–L753 at `c33251cf82`). The quote below has L671–L732. The CLDR conventions and `minimumGroupingDigits` (L734–L753) are in Section 8.
+* **Related specification text**: L755 onward ([Explicit Plus Signs](../../../docs/ldml/tr35-numbers.md#Explicit_Plus), Section 9), L781 onward ([Scientific Notation](../../../docs/ldml/tr35-numbers.md#sci)), L858 onward ([Quoting Rules](../../../docs/ldml/tr35-numbers.md#Quoting_Rules)), and Sections 7 and 8 of the [currency document](../currency/tr35_currency_test_coverage.md) (the `¤` row and the placement of the currency symbol)
+
+### 7.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> Many characters in a pattern are taken literally; they are matched during parsing and output unchanged during formatting. Special characters, on the other hand, stand for other characters, strings, or classes of characters. For example, the '#' character is replaced by a localized digit for the chosen numberSystem. Often the replacement character is the same as the pattern character; in the U.S. locale, the ',' grouping character is replaced by ','. However, the replacement is still happening, and if the symbols are modified, the grouping character changes. Some special characters affect the behavior of the formatter by their presence; for example, if the percent character is seen, then the value is multiplied by 100 before being displayed.
+>
+> To insert a special character in a pattern as a literal, that is, without any special meaning, the character must be quoted. There are some exceptions to this which are noted below. The Localized Replacement column shows the replacement from _[Number Symbols](../../../docs/ldml/tr35-numbers.md#Number_Symbols)_ or the numberSystem's digits: _italic_ indicates a special function.
+>
+> Invalid sequences of special characters (such as “¤¤¤¤¤¤” in current CLDR) should be handled for formatting and parsing as described in [Handling Invalid Patterns](../../../docs/ldml/tr35.md#Invalid_Patterns).
+>
+> ###### Table: <a name="Number_Pattern_Character_Definitions" href="../../../docs/ldml/tr35-numbers.md#Number_Pattern_Character_Definitions">Number Pattern Character Definitions</a>
+>
+> | Symbol | Location | Localized Replacement | Meaning |
+> | :-- | :-- | :-- | :-- |
+> | 0 | Number | digit | Digit |
+> | 1-9 | Number | digit | '1' through '9' indicate rounding. |
+> | @ | Number | digit | Significant digit |
+> | # | Number | digit, _nothing_ | Digit, omitting leading/trailing zeros |
+> | . | Number | decimal, currencyDecimal | Decimal separator or monetary decimal separator |
+> | - | Number | minusSign, plusSign, approximatelySign | Minus sign. **Warning:** the pattern '-'0.0 is not the same as the pattern -0.0. In the former case, the minus sign is a literal. In the latter case, it is a special symbol, which is replaced by the minusSymbol, and can also be replaced by the plusSymbol for a format like +12% as in [Explicit Plus Signs](../../../docs/ldml/tr35-numbers.md#Explicit_Plus). |
+> | , | Number | group, currencyGroup | Grouping separator. May occur in both the integer part and the fractional part. The position determines the grouping. |
+> | E | Number | exponential, superscriptingExponent | Separates mantissa and exponent in scientific notation. _Need not be quoted in prefix or suffix._ |
+> | + | Exponent or Number (for explicit plus) | plusSign | Prefix positive exponents with localized plus sign. Used for explicit plus for numbers as well, as described in [Explicit Plus Signs](../../../docs/ldml/tr35-numbers.md#Explicit_Plus). _Need not be quoted in prefix or suffix._ |
+> | % | Prefix or suffix | percentSign | Multiply by 100 and show as percentage |
+> | ‰ (U+2030) | Prefix or suffix | perMille | Multiply by 1000 and show as per mille (aka “basis points”) |
+> | ; | Subpattern boundary | _syntax_ | Separates positive and negative subpatterns. When there is no explicit negative subpattern, an implicit negative subpattern is formed from the positive pattern with a prefixed - (ASCII U+002D HYPHEN-MINUS). |
+> | ¤ (U+00A4) | Prefix or suffix | _currency symbol/name from currency specified in API_ | Any sequence is replaced by the localized currency symbol for the currency being formatted, as in the table below. If present in a pattern, the monetary decimal separator and grouping separators (if available) are used instead of the numeric ones. If data is unavailable for a given sequence in a given locale, the display may fall back to ¤ or ¤¤. See also the formatting for currency display names, steps 2 and 4 in [Currencies](../../../docs/ldml/tr35-numbers.md#Currencies). <table><tr><th>No.</th><th>Replacement / Example</th></tr><tr><td rowspan="2">¤</td><td>Standard currency symbol</td></tr><tr><td>_C$12.00_</td></tr><tr><td rowspan="2">¤¤</td><td>ISO currency symbol (constant)</td></tr><tr><td>_CAD 12.00_</td></tr><tr><td rowspan="2">¤¤¤</td><td>Appropriate currency display name for the currency, based on the plural rules in effect for the locale</td></tr><tr><td>_5.00 Canadian dollars_</td></tr><tr><td rowspan="2" >¤¤¤¤¤</td><td>Narrow currency symbol. The same symbols may be used for multiple currencies. Thus the symbol may be ambiguous, and should only be where the context is clear.</td></tr><tr><td>_$12.00_</td></tr><tr><td>_others_</td><td>_Invalid in current CLDR. Reserved for future specification_</td></tr></table> |
+> | * | Prefix or suffix boundary | _padding character specified in API_ | Pad escape, precedes pad character |
+> | ' | Prefix or suffix | _syntax-only_ | Used to quote special characters in a prefix or suffix, for example, `"'#'#"` formats 123 to `"#123"`. To create a single quote itself, use two in a row: `"# o''clock"`. |
+>
+> A pattern contains a positive subpattern and may contain a negative subpattern, for example, "#,##0.00;(#,##0.00)". Each subpattern has a prefix, a numeric part, and a suffix. If there is no explicit negative subpattern, the implicit negative subpattern is the ASCII minus sign (-) prefixed to the positive subpattern. That is, "0.00" alone is equivalent to "0.00;-0.00". (The data in CLDR is normalized to remove an explicit negative subpattern where it would be identical to the implicit form.)
+>
+> Note that if a negative subpattern is used as-is: a minus sign is _not_ added, eg "0.00;0.00" ≠ "0.00;-0.00". Trailing semicolons are ignored, eg "0.00;" = "0.00". Whitespace is not ignored, including those around semicolons, so "0.00 ; -0.00" ≠ "0.00;-0.00".
+>
+> If there is an explicit negative subpattern, it serves only to specify the negative prefix and suffix; the number of digits, minimal digits, and other characteristics are ignored in the negative subpattern. That means that "#,##0.0#;(#)" has precisely the same result as "#,##0.0#;(#,##0.0#)". However in the CLDR data, the format is normalized so that the other characteristics are preserved, just for readability.
+>
+> > **Note:** The thousands separator and decimal separator in patterns are always ASCII ',' and '.'. They are substituted by the code with the correct local values according to other fields in CLDR. The same is true of the - (ASCII minus sign) and other special characters listed above.
+>
+> A currency decimal pattern normally contains a currency symbol placeholder (¤, ¤¤, ¤¤¤, or ¤¤¤¤¤). The currency symbol placeholder may occur before the first digit, after the last digit symbol, or where the decimal symbol would otherwise be placed (for formats such as "12€50", as in "12€50 pour une omelette").
+>
+> | Placement | Examples                                                                         |
+> |-----------|----------------------------------------------------------------------------------|
+> | Before    | "¤#,##0.00" "¤ #,##0.00" "¤-#,##0.00" "¤ -#,##0.00" "-¤#,##0.00" "-¤ #,##0.00" … |
+> | After     | "#,##0.00¤" "#,##0.00 ¤" "#,##0.00-¤" "#,##0.00- ¤" "#,##0.00¤-" "#,##0.00 ¤-" … |
+> | Decimal   | "#,##0¤00"                                                                       |
+>
+> Below is a sample of patterns, special characters, and results:
+>
+> ###### Table: <a name="Sample_Patterns_and_Results" href="../../../docs/ldml/tr35-numbers.md#Sample_Patterns_and_Results">Sample Patterns and Results</a>
+>
+> <table><tbody>
+> <tr><th>explicit pattern:</th><td colspan="2">0.00;-0.00</td><td colspan="2">0.00;0.00-</td><td colspan="2">0.00+;0.00-</td></tr>
+> <tr><th>decimalSign:</th><td colspan="2">,</td><td colspan="2">,</td><td colspan="2">,</td></tr>
+> <tr><th>minusSign:</th><td colspan="2">∸</td><td colspan="2">∸</td><td colspan="2">∸</td></tr>
+> <tr><th>plusSign:</th><td colspan="2">∔</td><td colspan="2">∔</td><td colspan="2">∔</td></tr>
+> <tr><th>number:</th><td>3.1415</td><td>-3.1415</td><td>3.1415</td><td>-3.1415</td><td>3.1415</td><td>-3.1415</td></tr>
+> <tr><th>formatted:</th><td>3,14</td><td>∸3,14</td><td>3,14</td><td>3,14∸</td><td>3,14∔</td><td>3,14∸</td></tr>
+> </tbody></table>
+>
+> _In the above table, ∸ = U+2238 DOT MINUS and ∔ = U+2214 DOT PLUS are used for illustration._
+>
+> The prefixes, suffixes, and various symbols used for infinity, digits, thousands separators, decimal separators, and so on may be set to arbitrary values, and they will appear properly during formatting. _However, care must be taken that the symbols and strings do not conflict, or parsing will be unreliable._ For example, either the positive and negative prefixes or the suffixes must be distinct for any parser using this data to be able to distinguish positive from negative values. Another example is that the decimal separator and thousands separator should be distinct characters, or parsing will be impossible.
+>
+> The _grouping separator_ is a character that separates clusters of integer digits to make large numbers more legible. It is commonly used for thousands, but in some locales it separates ten-thousands. The _grouping size_ is the number of digits between the grouping separators, such as 3 for "100,000,000" or 4 for "1 0000 0000". There are actually two different grouping sizes: One used for the least significant integer digits, the _primary grouping size_, and one used for all others, the _secondary grouping size_. In most locales these are the same, but sometimes they are different. For example, if the primary grouping interval is 3, and the secondary is 2, then this corresponds to the pattern "#,##,##0", and the number 123456789 is formatted as "12,34,56,789". If a pattern contains multiple grouping separators, the interval between the last one and the end of the integer defines the primary grouping size, and the interval between the last two defines the secondary grouping size. All others are ignored, so "#,##,###,####" == "###,###,####" == "##,#,###,####".
+>
+> The grouping separator may also occur in the fractional part, such as in “#,##0.###,#”. This is most commonly done where the grouping separator character is a thin, non-breaking space (U+202F), such as “1.618 033 988 75”. See [physics.nist.gov/cuu/Units/checklist.html](https://physics.nist.gov/cuu/Units/checklist.html).
+
+---
+
+### 7.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** Special characters in the decimal (including compact), percent, and scientific patterns of all locales in `common/main`:
+
+| Character | Use in CLDR patterns |
+| :--- | :--- |
+| `0`, `#`, `.`, `,` | the non-compact patterns (`#,##0.###`, `#,##0%`); compact patterns use only `0` |
+| `%` | a suffix; a prefix in `tr` (`%#,##0`) and `eu` (`% #,##0` / `"%\u00A0#,##0"`) |
+| `E` | `#E0`; unquoted in a suffix in the `hu` compact patterns (`0 E` / `"0\u00A0E"`) |
+| `'` | quotes `.` in compact patterns: `de` `0 Mio'.'` / `"0\u00A0Mio'.'"`, `ru` `0 тыс'.'` / `"0\u00A0\u0442\u044B\u0441'.'"` |
+| `;`, `-` | only the `blo` percent pattern `% #,#0;% -#,#0` / `"%\u00A0#,#0;%\u00A0-#,#0"` (not a CORE or extended locale) |
+| `+` | only the `en_US_POSIX` scientific pattern `0.000000E+000` (not a CORE or extended locale) |
+| `@`, `1`–`9`, `‰`, `*`, `''`, `,` after `.` | none |
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S7.1** | *"Many characters in a pattern are taken literally; they are matched during parsing and output unchanged during formatting. Special characters, on the other hand, stand for other characters, strings, or classes of characters."* [...] *"Some special characters affect the behavior of the formatter by their presence; for example, if the percent character is seen, then the value is multiplied by 100 before being displayed."* | • **S7.1a**: literal characters (compact suffixes: `format_length = "short"` × `1234565.0`)<br>• **S7.1b**: `#` and `0` replaced by the digits of the numbering system (`"bn"`)<br>• **S7.1c**: `%` × `number_format = "percent"` | • S7.1a: `en` short 1234565.0 → `1.2M`.<br>• S7.1b: `bn` 1234565.0 → `১২,৩৪,৫৬৫`.<br>• S7.1c: `en` 1.2 → `120%`. |
+| **S7.2** | *"To insert a special character in a pattern as a literal, that is, without any special meaning, the character must be quoted. There are some exceptions to this which are noted below."* | • a quoted special character × `"short"` × `input` that reaches it (`"de"` × `1234565.0`; `"ru"` × `-1230.05`) | `de` short 1234565.0 → `1,2 Mio.` / `"1,2\u00A0Mio."`; `ru` short −1230.05 → `-1,2 тыс.` / `"-1,2\u00A0\u0442\u044B\u0441."`. |
+| **S7.3** | *"Invalid sequences of special characters (such as “¤¤¤¤¤¤” in current CLDR) should be handled for formatting and parsing as described in Handling Invalid Patterns."* | — | No CLDR pattern is invalid. |
+| **S7.4** | The rows `0`, `#`, `.`, `,`, `E`, `%`, and `'` of [Number Pattern Character Definitions](../../../docs/ldml/tr35-numbers.md#Number_Pattern_Character_Definitions) | • each character in a CORE pattern (`#,##0.###`, `#,##0%`, `#E0`, compact patterns) | See S7.1, S7.2, and Section 2 (`decimal`, `group`, `percentSign`, `exponential`). |
+| **S7.5** | Row `-`: *"Minus sign."* [...] *"the pattern '-'0.0 is not the same as the pattern -0.0. In the former case, the minus sign is a literal. In the latter case, it is a special symbol, which is replaced by the minusSymbol, and can also be replaced by the plusSymbol for a format like +12% as in Explicit Plus Signs."* | • **S7.5a**: the implicit minus sign × negative `input` (Section 2, S2.8)<br>• **S7.5b**: the minus sign replaced by the plus sign (*"+12%"*): `number_format = "percent"` × `sign_display = "always"` × positive `input` (`1.2`) × several `locale` values (`"en"`, `"de"`, `"ar"`, `"ar_EG"`)<br>• **S7.5c**: a quoted `'-'` | • S7.5a: `en` −1230.05 → `-1,230.05`.<br>• S7.5b: `en` 1.2 → `+120%`; `de` → `+120 %` / `"+120\u00A0%"`; `ar` → `‎+120‎%‎` / `"\u200E+120\u200E%\u200E"`; `ar_EG` → `؜+١٢٠٪؜` / `"\u061C+\u0661\u0662\u0660\u066A\u061C"`.<br>• S7.5c: no CLDR pattern quotes `-`. |
+| **S7.6** | Row `E`: *"Separates mantissa and exponent in scientific notation. Need not be quoted in prefix or suffix."* | • `E` in a suffix (`"hu"` short: `0 E` / `"0\u00A0E"`) × `input` that reaches it (`-1230.05`) | `hu` short −1230.05 → `-1,2 E` / `"-1,2\u00A0E"`. |
+| **S7.7** | Row `%`: *"Multiply by 100 and show as percentage"*, with the location *"Prefix or suffix"* | • `%` as a suffix (CORE) and as a prefix (`"tr"`, `"eu"`) × `number_format = "percent"` | `en` 1.2 → `120%`; `tr` → `%120`; `eu` → `% 120` / `"%\u00A0120"`. |
+| **S7.8** | Row `,`: *"May occur in both the integer part and the fractional part."*, and *"The grouping separator may also occur in the fractional part, such as in “#,##0.###,#”."* [...] | • a pattern with a grouping separator after the decimal point | No CLDR pattern has one. |
+| **S7.9** | The rows `1-9`, `@`, `+`, `‰`, and `*`, and the examples of row `'` | — | No pattern of a CORE or extended locale has these characters or `''`. The settings of `@` and `1`–`9` are described in [Significant Digits](../../../docs/ldml/tr35-numbers.md#sigdig) and [Rounding](../../../docs/ldml/tr35-numbers.md#Rounding); `*` is [Padding](../../../docs/ldml/tr35-numbers.md#Padding). |
+| **S7.10** | Row `;`: *"Separates positive and negative subpatterns. When there is no explicit negative subpattern, an implicit negative subpattern is formed from the positive pattern with a prefixed - (ASCII U+002D HYPHEN-MINUS)."*, and L697–L701: *"A pattern contains a positive subpattern and may contain a negative subpattern"* [...] | • **S7.10a**: the implicit negative subpattern × negative `input` × each pattern with a prefix or suffix<br>• **S7.10b**: an explicit negative subpattern; trailing semicolons, whitespace, and `"#,##0.0#;(#)"` | • S7.10a: `de` −1230.05 → `-1.230,05`; percent → `-123.005 %` / `"-123.005\u00A0%"`.<br>• S7.10b: no CORE or extended locale has an explicit negative subpattern. |
+| **S7.11** | Row `¤` and L705–L711 (the currency symbol placeholders and their placement) | — | Currencies; see Sections 7 and 8 of the currency document. |
+| **S7.12** | *"The thousands separator and decimal separator in patterns are always ASCII ',' and '.'. They are substituted by the code with the correct local values according to other fields in CLDR. The same is true of the - (ASCII minus sign) and other special characters listed above."* | • the same as S7.4 and S7.5a | See Section 6 (S6.1) and S7.5a. |
+| **S7.13** | The table [Sample Patterns and Results](../../../docs/ldml/tr35-numbers.md#Sample_Patterns_and_Results) (`0.00;-0.00`, `0.00;0.00-`, `0.00+;0.00-`) | — | Explicit negative subpatterns and symbols (∸, ∔) that CLDR does not have. |
+| **S7.14** | *"However, care must be taken that the symbols and strings do not conflict, or parsing will be unreliable."* [...] | — | Parsing. |
+| **S7.15** | *"The grouping separator is a character that separates clusters of integer digits to make large numbers more legible."* [...] *"For example, if the primary grouping interval is 3, and the secondary is 2, then this corresponds to the pattern "#,##,##0", and the number 123456789 is formatted as "12,34,56,789"."* [...] | • the same as Section 2, S2.3 and S2.4 | See S2.3a and S2.4a (`bn` 1234565.0 → `১২,৩৪,৫৬৫`). |
+
+---
+
+### 7.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S7.1**, **S7.2**, **S7.4**, **S7.5a**, **S7.10a**, **S7.12**, **S7.15** | the special characters of the CORE patterns | ✅ **Covered** | CORE values: all five styles, all `CORE_LOCALES`, and `CORE_NUMBERS` (`de` and `ru` short reach the quoted `.`). |
+| **S7.5b** | `sign_display = "always"` × `"percent"` | 🟡 **Missing: new dimension** | Section 2 adds `sign_display` rows for `"decimal"` only. **Action**: add `"always"` rows for `"percent"` (see the Summary). |
+| **S7.6**, **S7.7** | `locale = "hu"` (`E` in a suffix), `"tr"` and `"eu"` (`%` as a prefix) | 🟡 **Missing: `locale` in CORE** | Extended locales, in `decimals_modern_locales.tsv` with all five styles and `CORE_NUMBERS`. No action needed. |
+| **S7.3**, **S7.5c**, **S7.8**, **S7.9**, **S7.10b** | — | ⚪ **Out of scope** | No pattern of a CORE or extended locale has these characters or subpatterns. |
+| **S7.11** | — | ⚪ **Out of scope** | Currencies; see the currency document. |
+| **S7.13**, **S7.14** | — | ⚪ **Out of scope** | An illustration with symbols that CLDR does not have, or parsing. |
+
+### 7.4 Notes
+
+* S7.5, S7.13: the text says *"minusSymbol"* and *"plusSymbol"*, and the sample table *"decimalSign"*; the symbols are named `minusSign`, `plusSign`, and `decimal` ([Number Symbols](../../../docs/ldml/tr35-numbers.md#Number_Symbols)).
+* S7.9: the only `+` is in the exponent of `en_US_POSIX` (*"Prefix positive exponents with localized plus sign"*); explicit plus signs for numbers are API settings (Section 9).
+
+---
+
+## Section 8: CLDR Pattern Conventions and `minimumGroupingDigits` (`#Examples_of_minimumGroupingDigits`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Examples_of_minimumGroupingDigits`](../../../docs/ldml/tr35-numbers.md#Examples_of_minimumGroupingDigits) (UTS #35 Part 3, Section 3.2: *Special Pattern Characters*, its last part; L734–L753 at `c33251cf82`). The quote below has L734–L753.
+* **Related specification text**: L730 (grouping sizes; Section 7, S7.15) and Section 2 (S2.3 and S2.4: `group`)
+
+### 8.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> For consistency in the CLDR data, the following conventions are observed:
+>
+> * All number patterns should be minimal: there should be no leading # marks except to specify the position of the grouping separators (for example, avoid  ##,##0.###).
+> * All formats should have one 0 before the decimal point (for example, avoid #,###.##)
+> * Decimal formats should have three hash marks in the fractional position (for example, #,##0.###).
+> * Currency formats should have two zeros in the fractional position (for example, ¤ #,##0.00).
+>     * The exact number of decimals is overridden with the decimal count in supplementary data or by API settings.
+> * The only time two thousands separators need to be used is when the number of digits varies, such as for Hindi: #,##,##0.
+> * The **minimumGroupingDigits** can be used to suppress groupings below a certain value. This is used for languages such as Polish, where one would only write the grouping separator for values above 9999. The minimumGroupingDigits contains the default for the locale.
+>     * The attribute value is used by adding it to the grouping separator value. If the input number has fewer integer digits, the grouping separator is suppressed.
+>     * ##### <a name="Examples_of_minimumGroupingDigits" href="../../../docs/ldml/tr35-numbers.md#Examples_of_minimumGroupingDigits">Examples of minimumGroupingDigits</a>
+>
+>         | minimum­GroupingDigits | Pattern Grouping | Input Number | Formatted |
+>         |-----------------------:|-----------------:|-------------:|----------:|
+>         |                      1 |                3 |         1000 |     1,000 |
+>         |                      1 |                3 |        10000 |    10,000 |
+>         |                      2 |                3 |         1000 |      1000 |
+>         |                      2 |                3 |        10000 |    10,000 |
+>         |                      1 |                4 |        10000 |    1,0000 |
+>         |                      2 |                4 |        10000 |     10000 |
+
+---
+
+### 8.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** The resolved `minimumGroupingDigits` is 2 for `pt_PT` (CORE) and for the extended locales `be`, `bg`, `es` (not `es_419`, `es_MX`, or `es_US`), `et`, `hu`, `hy`, `it`, `ka`, `lv`, `pl`, `sl`, and `sq`. It is 1 for the other CORE and extended locales. Among the other locales, `ee` has 3. `pt_PT` and `ru` have the same `group` (U+00A0) and grouping size 3.
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S8.1** | The conventions: *"All number patterns should be minimal"* [...] *"All formats should have one 0 before the decimal point"* [...] *"Decimal formats should have three hash marks in the fractional position"* [...] *"The only time two thousands separators need to be used is when the number of digits varies, such as for Hindi: #,##,##0."* | — | Constraints on the data. The CORE decimal patterns follow them (`#,##0.###`; `bn`: `#,##,##0.###`). |
+| **S8.2** | **`minimumGroupingDigits`** — *"can be used to suppress groupings below a certain value. This is used for languages such as Polish, where one would only write the grouping separator for values above 9999. The minimumGroupingDigits contains the default for the locale."*; *"The attribute value is used by adding it to the grouping separator value. If the input number has fewer integer digits, the grouping separator is suppressed."* | • a `locale` with `minimumGroupingDigits` 2 (`"pt_PT"`) and one with 1 and the same `group` (`"ru"`) × `input` with 4 integer digits (`-1230.05`) and with 7 (`1234565.0`) | `pt_PT` −1230.05 → `-1230,05` (4 integer digits, fewer than 2 + 3); 1234565.0 → `1 234 565` / `"1\u00A0234\u00A0565"`; `ru` −1230.05 → `-1 230,05` / `"-1\u00A0230,05"`. |
+| **S8.3** | The rows of [Examples of minimumGroupingDigits](../../../docs/ldml/tr35-numbers.md#Examples_of_minimumGroupingDigits) with grouping size 3 | • **S8.3a**: `minimumGroupingDigits` 1 × `1000.0`, `10000.0` (`"en"`)<br>• **S8.3b**: `minimumGroupingDigits` 2 × `1000.0`, `10000.0` (`"pt_PT"`) | • S8.3a: `en` 1000.0 → `1,000`; 10000.0 → `10,000`.<br>• S8.3b: `pt_PT` 1000.0 → `1000`; 10000.0 → `10 000` / `"10\u00A0000"`. |
+| **S8.4** | The rows with grouping size 4 | — | No CLDR pattern has a primary grouping size of 4 (Section 2, S2.3b). |
+
+---
+
+### 8.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S8.1** | — | ⚪ **Out of scope** | Constraints on the data. |
+| **S8.2** | `locale = "pt_PT"`, `"ru"` × `-1230.05`, `1234565.0` | ✅ **Covered** | CORE values: `pt_PT` and `ru` in `CORE_LOCALES`; `-1230.05` and `1234565.0` in `CORE_NUMBERS`. |
+| **S8.3** | `input = 1000.0`, `10000.0` | 🟡 **Missing: `input` in CORE** | Extended values (10³, 10⁴), in `decimals_extended_numbers.tsv` with all `CORE_LOCALES` and all five styles. No action needed. |
+| **S8.4** | grouping size 4 | ⚪ **Out of scope** | No CLDR data. |
+
+### 8.4 Notes
+
+* S8.2: `pl`, the example of the text, is an extended locale with `minimumGroupingDigits` 2. In the text, *"values above 9999"* have at least 5 integer digits, that is, 2 plus the grouping size 3, so *"the grouping separator value"* means the grouping size.
+
+---
+
+## Section 9: Explicit Plus Signs (`#Explicit_Plus`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Explicit_Plus`](../../../docs/ldml/tr35-numbers.md#Explicit_Plus) (UTS #35 Part 3, Section 3.2.1: *Explicit Plus Signs*; L755–L763 at `c33251cf82`). The quote below has L757–L763.
+* **Related specification text**: Section 2 (S2.9: `plusSign`) and Section 7 (S7.5: the `-` row; S7.13: the sample table)
+
+### 9.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> An explicit "plus" format can be formed, so as to show a visible + sign when formatting a non-negative number. The displayed plus sign can be an ASCII plus or another character, such as ＋ U+FF0B FULLWIDTH PLUS SIGN or ➕ U+2795 HEAVY PLUS SIGN; it is taken from whatever is set for plusSign in _[Number Symbols](../../../docs/ldml/tr35-numbers.md#Number_Symbols)_.
+>
+> 1. Get the negative subpattern (explicit or implicit).
+> 2. Replace any unquoted ASCII minus sign by an ASCII plus sign.
+> 3. If there are any replacements, use that for the positive subpattern.
+>
+> For an example, see [Sample Patterns and Results](../../../docs/ldml/tr35-numbers.md#Sample_Patterns_and_Results).
+
+---
+
+### 9.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** `plusSign` is `+` in the CORE locales, except `ar` (`‎+` / `"\u200E+"`) and `ar_EG` (`؜+` / `"\u061C+"`). No locale has U+FF0B or U+2795; the other `plusSign` values are `+` with bidi marks. No pattern of a CORE or extended locale has an explicit negative subpattern (Section 7), so step 1 always gets the implicit one.
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S9.1** | *"An explicit "plus" format can be formed, so as to show a visible + sign when formatting a non-negative number. The displayed plus sign can be an ASCII plus or another character, such as ＋ U+FF0B FULLWIDTH PLUS SIGN or ➕ U+2795 HEAVY PLUS SIGN; it is taken from whatever is set for plusSign in Number Symbols."* | • **S9.1a**: `sign_display = "always"` × non-negative `input`, including zero (`0.0`, `1.2`) × `locale` values with different `plusSign` (`"en"`, `"ar"`, `"ar_EG"`)<br>• **S9.1b**: a `plusSign` other than an ASCII plus | • S9.1a: see S2.9; `en` 0.0 → `+0`.<br>• S9.1b: no CLDR data. |
+| **S9.2** | Steps 1–3: *"Get the negative subpattern (explicit or implicit)."*; *"Replace any unquoted ASCII minus sign by an ASCII plus sign."*; *"If there are any replacements, use that for the positive subpattern."* | • **S9.2a**: the implicit negative subpattern × `sign_display = "always"` × patterns with and without a suffix: `"decimal"` (S2.9) and `"percent"` (S7.5b) × several `locale` values (`"de"`)<br>• **S9.2b**: an explicit negative subpattern, or one without a minus sign | • S9.2a: `de` 1.2 → `+1,2`; percent → `+120 %` / `"+120\u00A0%"`.<br>• S9.2b: no pattern of a CORE or extended locale has one. |
+| **S9.3** | *"For an example, see Sample Patterns and Results."* | — | See S7.13. |
+
+---
+
+### 9.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S9.1a**, **S9.2a** | `sign_display = "always"` × `"decimal"`, `"percent"` × non-negative `input` | 🟡 **Missing: new dimension** | **Action**: Section 2's `sign_display` rows (`"decimal"`) and Section 7's (`"percent"`); see the Summary. |
+| **S9.1b**, **S9.2b**, **S9.3** | — | ⚪ **Out of scope** | No CLDR data, or the sample table of Section 7. |
+
+### 9.4 Notes
+
+* S9.1: the text does not say whether negative zero (`-0.0`, an extended value) counts as a non-negative number.
+
+---
+
 ## Summary: Required Generator Changes
 
 | Change | Needed by |
 | :--- | :--- |
 | Add the `numbering_system` dimension, with its rows in a separate file: `CORE_LOCALES` × `"latn"`, `"native"`, `"traditio"`, `"finance"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (+170 rows: 9 × 4 × 5, minus the 10 `ja` rows for `"traditio"` and `"finance"`, whose numbering systems are algorithmic) | S1.3a–b, S1.5, S1.6b, S1.7b, S1.8 |
-| Add the `sign_display` dimension, with its rows in a separate file: `CORE_LOCALES` × `"always"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (45 rows), and `CORE_LOCALES` × `"approximately"` × the same × the non-negative `CORE_NUMBERS` (36 rows) (+81 rows) | S2.9, S2.10 |
+| Add the `sign_display` dimension, with its rows in a separate file: `CORE_LOCALES` × `"always"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (45 rows), and `CORE_LOCALES` × `"approximately"` × the same × the non-negative `CORE_NUMBERS` (36 rows) (+81 rows) | S2.9, S2.10, S9.1a, S9.2a |
 | Add the `exponent_style` dimension, with its rows in a separate file: the 7 `CORE_LOCALES` with Latin digits (all but `ar_EG` and `bn`) × `"superscript"` × `number_format = "scientific"` × `CORE_NUMBERS` (+35 rows) | S2.12 |
 | Add the special values `Infinity`, `-Infinity`, and `NaN`, with their rows in a separate file: `CORE_LOCALES` × `number_format = "decimal"`, `format_length = ""` (+27 rows) | S2.14 |
 | Add `numbering_system` rows for `number_format = "percent"`, in a separate file: `CORE_LOCALES` × `"latn"`, `"native"` × `format_length = ""` × `CORE_NUMBERS` (+90 rows) | S3.7a |
-| Add the `precision` dimension, with its rows in a separate file: `CORE_LOCALES` × `"significant: 3"`, `"fraction: 1"` × `number_format = "decimal"` × `format_length = "short"`, `"long"` × `CORE_NUMBERS` and `1040000.0` (+216 rows: 9 × 2 × 2 × 6) | S4.7d, S4.8b |
+| Add the `precision` dimension, with its rows in a separate file: `CORE_LOCALES` × `"significant: 3"`, `"fraction: 1"` × `number_format = "decimal"` × `format_length = "short"`, `"long"` × `CORE_NUMBERS` and `1040000.0` (+216 rows: 9 × 2 × 2 × 6) | S4.7d, S4.8b, S5.4 |
 | Add `1040000.0` to the extended numbers (+45 rows in `decimals_extended_numbers.tsv`: `CORE_LOCALES` × the five styles) | S4.7d |
+| Add the `grouping` and `integer_width` dimensions and the `precision` value `"fraction: 4-5"`, with their rows in a separate file: `CORE_LOCALES` × (`grouping = "off"`; `integer_width = "min: 5"` with `grouping = "off"`; `precision = "fraction: 4-5"`) × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (+135 rows: 9 × 3 × 5) | S6.2c, S6.4c–e |
+| Add `sign_display = "always"` rows for `number_format = "percent"`, in a separate file: `CORE_LOCALES` × `format_length = ""` × `CORE_NUMBERS` (+45 rows) | S7.5b, S9.2a |
 
 The rows that change the digits are `ar` × `"native"` and `"traditio"` (`arab`), and `ar_EG` and `bn` × `"latn"`. The other rows check that each key falls back to the expected numbering system.
 
-Together, Sections 1–4 add 664 rows: 619 in separate files (170 + 81 + 35 + 27 + 90 + 216) and 45 in `decimals_extended_numbers.tsv`; `decimals.tsv` is unchanged.
+Together, Sections 1–9 add 844 rows: 799 in separate files (170 + 81 + 35 + 27 + 90 + 216 + 135 + 45) and 45 in `decimals_extended_numbers.tsv`; `decimals.tsv` is unchanged.

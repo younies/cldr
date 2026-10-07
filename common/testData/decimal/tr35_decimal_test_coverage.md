@@ -45,11 +45,13 @@ Values at `c33251cf82`. `decimals.tsv` combines all CORE values with each other 
 | **`format_length`** | Compact length | `""` (non-compact), `"short"`, `"long"` (compact) | — |
 | **`input`** | Number to format | `CORE_NUMBERS`: `0.0`, `1.2`, `0.00831765`, `1234565.0`, `-1230.05` | 10ⁱ, 1.5 × 10ⁱ, and 5 × 10ⁱ for −6 ≤ i ≤ 12; `12`, `123`, `1234.56`, `1234567`, `0.000123`, `0.5`, `2.5`, `3.5`, `0.125`, `0.135`, `999.9`, `999999.9`; the negatives of all positive values, including the CORE ones; and `-0.0` (`getExtendedNumbers()` minus `CORE_NUMBERS`; `decimals_extended_numbers.tsv`) |
 | **`numbering_system`** | The `nu` key of the Unicode locale identifier (`-u-nu-…`) | **Needs to be added** (Section 1): `"latn"`, `"native"`, `"traditio"`, `"finance"`. The current rows use no `nu` key, that is, the locale's default numbering system. | — |
-| **`sign_display`** | When a sign is shown | **Needs to be added** (Section 2): `"always"` (the `plusSign` for positive numbers), `"approximately"` (the `approximatelySign`). The current rows show a sign only for negative numbers. | — |
+| **`sign_display`** | When a sign is shown | **Needs to be added** (Sections 2 and 15): `"always"` (the `plusSign` for positive numbers), `"approximately"` (the `approximatelySign`), and `"approximately, always"` (both, as in `~+1.2`). The current rows show a sign only for negative numbers. | — |
 | **`exponent_style`** | How the exponent of `"scientific"` is written | **Needs to be added** (Section 2): `"superscript"` (`superscriptingExponent`, as in `1.234565×10⁶`). The current rows use the `exponential` symbol (`1.234565E6`). | — |
 | **`precision`** | Rounding of the number | **Needs to be added** (Sections 4, 6, and 11–13): `"significant: 3"` (minimum and maximum 3 significant digits) and `"fraction: 1"` (minimum and maximum 1 fraction digit), the two settings of the specification's compact example; `"fraction: 4-5"` (minimum 4 and maximum 5 fraction digits, as in the pattern `###0.0000#`); `"significant: 2-4"` (minimum 2 and maximum 4 significant digits, as in the pattern `@@##`); `"increment: 50"` and `"increment: 0.65"` (rounding increments). The current rows use the default precision. | — |
 | **`grouping`** | Whether grouping separators are shown | **Needs to be added** (Section 6): `"off"` (as in the pattern `###0.#####`). The current rows use the locale's grouping. | — |
 | **`integer_width`** | Minimum and maximum number of integer digits | **Needs to be added** (Sections 6 and 10): `"min: 5"` (as in the pattern `00000.0000`) and `"max: 2"`. The current rows use a minimum of 1 and no maximum. | — |
+| **`misc_pattern`** | A pattern from `miscPatterns` applied to the formatted number | **Needs to be added** (Section 14): `"atLeast"`, `"atMost"`. The current rows use none of these patterns. | — |
+| **`upper_input`** | Upper bound of a number range | **Needs to be added** (Section 15): `5000000.0`, `-1.2`, `1.2`, `1234567.0`, each paired with one `input` (`1234565.0`, `-1230.05`, `1.2`, `1234565.0`). The current rows format single numbers. | — |
 
 The generator produces 5 of the 9 combinations of `number_format` and `format_length`: `"decimal"` with each length, and `"percent"` and `"scientific"` with `""` only.
 
@@ -289,7 +291,7 @@ Scans of `common/main` (all locales): no decimal, percent, scientific, or curren
 
 ### 2.4 Notes
 
-* S2.10: the specification does not say how the approximately sign combines with a negative number, since both replace the same minus sign. The Summary therefore adds `"approximately"` rows only for non-negative inputs.
+* S2.10: the quoted text does not say how the approximately sign combines with a negative number, since both replace the same minus sign; [Approximate Number Formatting](../../../docs/ldml/tr35-numbers.md#Approximate_Number_Formatting) (L1878) prepends it to the minus sign (`~-5`). The Summary adds `"approximately"` rows for non-negative inputs here and for a negative input in Section 15.
 * S2.12: the example “1.23 × 10<sup>4</sup>” has spaces around `×`, but no CLDR `superscriptingExponent` value has spaces (`en`: `×`), and the text does not say where the `10` comes from or how it is localized (for example with `arab` digits, which have no superscript characters). The expected values above follow the data: `1.234565×10⁶`.
 * S2.14: [Special Values](../../../docs/ldml/tr35-numbers.md#special-values) (L777) says that NaN is shown without the prefixes and suffixes of the pattern; Section 10 checks the other styles.
 
@@ -539,7 +541,7 @@ Scans of `common/main` (all locales): no locale has a `full` or `medium` length,
 
 | # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
 | :---: | :--- | :--- | :--- |
-| **S4.1** | *"A pattern `type` attribute is used for _compact number formats_"*; *"Formats can be supplied for numbers (as above) or for currencies or other units. They can also be used with ranges of numbers [...]"* | • **S4.1a**: `number_format = "decimal"` × `format_length = "short"` and `"long"`<br>• **S4.1b**: currencies and units<br>• **S4.1c**: ranges | • S4.1a: see S4.3–S4.7.<br>• S4.1b: currency formats are in the currency document; units are outside this generator.<br>• S4.1c: checked in a later section on number ranges. |
+| **S4.1** | *"A pattern `type` attribute is used for _compact number formats_"*; *"Formats can be supplied for numbers (as above) or for currencies or other units. They can also be used with ranges of numbers [...]"* | • **S4.1a**: `number_format = "decimal"` × `format_length = "short"` and `"long"`<br>• **S4.1b**: currencies and units<br>• **S4.1c**: ranges | • S4.1a: see S4.3–S4.7.<br>• S4.1b: currency formats are in the currency document; units are outside this generator.<br>• S4.1c: see Section 15. |
 | **S4.2** | Notes: *"A _letter grapheme cluster_ is a grapheme cluster that starts with a letter and then 0 or more combining marks."*; *"All of the pattern elements with the same type must have the same number of zeros in the pattern element value."* | — | The first note is used only by step 4 (currencies). The second is a constraint on the data. |
 | **S4.3** | Step 1: *"Let P be the pattern element with greatest type less than or equal to N, and any count value."* | • **S4.3a**: `format_length = "short"`, `"long"` × `input` values that reach different types (`1234565.0`: 1000000; `-1230.05`: 1000)<br>• **S4.3b**: `input` equal to a type (e.g. `1000.0`, `1000000.0`)<br>• **S4.3c**: `input` below the smallest type (`0.0`, `1.2`, `0.00831765`) | • S4.3a: `en` short 1234565.0 → `1.2M`; −1230.05 → `-1.2K`.<br>• S4.3b: `en` short 1000.0 → `1K`; 1000000.0 → `1M`.<br>• S4.3c: no pattern applies; the number is formatted with the `"0"` pattern (Section 5): `en` short 1.2 → `1.2`. |
 | **S4.4** | Steps 2–3: *"Let V be the pattern element value."*; *"If the element value of P is "0", then use the corresponding non-compact number formatting instead, and skip the rest of these steps — but adjust the precision as described below."* | • explicit `"0"` patterns (`"de"`, `"ja"` type 1000) | See Section 5. |
@@ -557,7 +559,7 @@ Scans of `common/main` (all locales): no locale has a `full` or `medium` length,
 | :---: | :--- | :---: | :--- |
 | **S4.1a**, **S4.3a**, **S4.6a**, **S4.7a**, **S4.8a** | `"decimal"` × `"short"`, `"long"` × `1234565.0`, `-1230.05` × `en`, `de`, `ru` | ✅ **Covered** | CORE values: `"decimal"` with `"short"` and `"long"`, all `CORE_LOCALES`, and `CORE_NUMBERS`. |
 | **S4.1b**, **S4.2**, **S4.5** | — | ⚪ **Out of scope** | Currencies and units, or a constraint on the data. |
-| **S4.1c**, **S4.4** | — | — | Checked in Section 5 (the `"0"` pattern) and in a later section (number ranges). |
+| **S4.1c**, **S4.4** | — | — | Checked in Sections 5 (the `"0"` pattern) and 15 (number ranges). |
 | **S4.3b** | `input` = `1000.0`, `1000000.0` | 🟡 **Missing: `input` in CORE** | Both are extended values (10³, 10⁶); `decimals_extended_numbers.tsv` has them with all `CORE_LOCALES` and all five styles. No action needed. |
 | **S4.3c** | `input` below 1000 | ✅ **Covered** | CORE values: `0.0`, `1.2`, `0.00831765` with `"short"` and `"long"`. |
 | **S4.6b** | `locale = "ja"`, `"bn"` × `1234565.0` | ✅ **Covered** | CORE values: `ja` and `bn` in `CORE_LOCALES`; `1234565.0` in `CORE_NUMBERS`. |
@@ -1210,12 +1212,234 @@ The non-compact pattern of these locales is `#,##0.###` (`group`: `de` `.`, `de_
 
 ---
 
+## Section 14: Miscellaneous Patterns (`#Miscellaneous_Patterns`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Miscellaneous_Patterns`](../../../docs/ldml/tr35-numbers.md#Miscellaneous_Patterns) (UTS #35 Part 3, Section 2.5: *Miscellaneous Patterns*, with the subsections [approximately](../../../docs/ldml/tr35-numbers.md#approximately), [atMost](../../../docs/ldml/tr35-numbers.md#atmost), [atLeast](../../../docs/ldml/tr35-numbers.md#atleast), and [range](../../../docs/ldml/tr35-numbers.md#range); L560–L594 at `c33251cf82`). The quote below has L562–L594.
+* **Related specification text**: L1855 onward ([Number Range Formatting](../../../docs/ldml/tr35-numbers.md#Number_Range_Formatting), Section 15, which uses the `range` pattern) and Section 2 (S2.10: `approximatelySign`)
+
+### 14.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> ```dtd
+> <!ELEMENT miscPatterns (alias | (default*, pattern*, special*)) >
+> <!ATTLIST miscPatterns numberSystem CDATA #IMPLIED >
+> ```
+>
+> The miscPatterns supply additional patterns for special purposes. The currently defined values are:
+>
+> #### approximately
+>
+> > indicates an approximate number, such as: “\~99”. This pattern is not currently in use; see ICU-20163.
+>
+> #### atMost
+>
+> > indicates a number or lower, such as: “`≤`99” to indicate that there are 99 items or fewer.
+>
+> #### atLeast
+>
+> > indicates a number or higher, such as: “99+” to indicate that there are 99 items or more.
+>
+> #### range
+>
+> > indicates a range of numbers, such as: “99–103” to indicate that there are from 99 to 103 items.
+>
+> _For example:_
+>
+> ```xml
+> <miscPatterns numberSystem="…">
+>   <pattern type="approximately">~{0}</pattern>
+>   <pattern type="atLeast">≥{0}</pattern>
+>   <pattern type="atMost">≤{0}</pattern>
+>   <pattern type="range">{0}–{1}</pattern>
+> </miscPatterns>
+> ```
+
+---
+
+### 14.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** Resolved `miscPatterns` of the default numbering system:
+
+| Locale | `approximately` | `atLeast` | `atMost` | `range` |
+| :--- | :--- | :--- | :--- | :--- |
+| `root` | `~{0}` | `≥{0}` | `≤{0}` | `{0}–{1}` |
+| `en`, `bn`, `de`, `de_CH` | `~{0}` (`de`, `de_CH`: `≈{0}`) | `{0}+` | `≤{0}` | `{0}–{1}` |
+| `ar`, `ar_EG` | `~{0}` | `+{0}` | `≤{0}` | `{0}–{1}` |
+| `ja` | `約 {0}` | `{0} 以上` | `{0} 以下` | `{0}～{1}` (U+FF5E) |
+| `pt_PT` | `~{0}` | `+{0}` | `≤{0}` | `{0} - {1}` |
+| `ru` | `≈{0}` | `≥{0}` | `≤{0}` | `{0}–{1}` |
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S14.1** | *"The miscPatterns supply additional patterns for special purposes."* | — (introduces S14.2–S14.5) | — |
+| **S14.2** | **approximately** — *"indicates an approximate number, such as: “\~99”. This pattern is not currently in use; see ICU-20163."* | — | Not in use; approximate numbers use the `approximatelySign` (S2.10, Section 15). |
+| **S14.3** | **atMost** — *"indicates a number or lower, such as: “`≤`99” to indicate that there are 99 items or fewer."* | • `misc_pattern = "atMost"` × `CORE_NUMBERS` × `locale` values with different patterns (`"en"`, `"ja"`) | `en` 1.2 → `≤1.2`; −1230.05 → `≤-1,230.05`; `ja` 1.2 → `1.2 以下`. |
+| **S14.4** | **atLeast** — *"indicates a number or higher, such as: “99+” to indicate that there are 99 items or more."* | • `misc_pattern = "atLeast"` × `CORE_NUMBERS` × `locale` values with the sign before and after the number (`"en"`, `"ar"`, `"ar_EG"`, `"pt_PT"`, `"ru"`) | `en` 1234565.0 → `1,234,565+`; `ar` → `+1,234,565`; `ar_EG` → `+١٬٢٣٤٬٥٦٥`; `pt_PT` → `+1 234 565` / `"+1\u00A0234\u00A0565"`; `ru` → `≥1 234 565` / `"≥1\u00A0234\u00A0565"`. |
+| **S14.5** | **range** — *"indicates a range of numbers, such as: “99–103” to indicate that there are from 99 to 103 items."* | • the `range` pattern | See Section 15. |
+| **S14.6** | The example `miscPatterns` | — | The example's patterns are those of `root`. |
+
+---
+
+### 14.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S14.1**, **S14.6** | — | — | Introduction and example. |
+| **S14.2** | — | ⚪ **Out of scope** | Not in use. |
+| **S14.3**, **S14.4** | `misc_pattern = "atMost"`, `"atLeast"` | 🟡 **Missing: new dimension** | The generator does not use `miscPatterns`. **Action**: add the `misc_pattern` dimension (see the Summary). |
+| **S14.5** | — | — | See Section 15. |
+
+### 14.4 Notes
+
+* S14.3, S14.4: the text does not say how the patterns combine with the rest of the formatting. The expected values substitute the formatted number for `{0}`; for a negative number, `ar` atLeast gives `+‎-1,230.05` / `"+\u200E-1,230.05"`.
+* S14.6: the example's `atLeast` is `≥{0}` (`root`), while the text's example *"99+"* matches `en` (`{0}+`).
+
+---
+
+## Section 15: Number Range Formatting (`#Number_Range_Formatting`)
+
+* **TR35 Specification Link**: [`tr35-numbers.md#Number_Range_Formatting`](../../../docs/ldml/tr35-numbers.md#Number_Range_Formatting) (UTS #35 Part 3: *Number Range Formatting*, with the subsections [Approximate Number Formatting](../../../docs/ldml/tr35-numbers.md#Approximate_Number_Formatting), [Collapsing Number Ranges](../../../docs/ldml/tr35-numbers.md#Collapsing_Number_Ranges), and [Range Pattern Processing](../../../docs/ldml/tr35-numbers.md#Range_Pattern_Processing); L1855–L1940 at `c33251cf82`). The quote below has L1857–L1940.
+* **Related specification text**: L560 onward ([Miscellaneous Patterns](../../../docs/ldml/tr35-numbers.md#Miscellaneous_Patterns), Section 14: the `range` pattern), L1485 onward ([Plural Ranges](../../../docs/ldml/tr35-numbers.md#Plural_Ranges)), Section 2 (S2.10: `approximatelySign`), and Section 4 (compact formats)
+
+### 15.1 Verbatim Specification Snippet (`docs/ldml/tr35-numbers.md`)
+
+> Often ranges of numbers are presented to users, such as in “Length: 3.2–4.5 centimeters”. This means any length from 3.2 cm to 4.5 cm, inclusive.
+>
+> To format a number range, the following steps are taken:
+>
+> 1. Format the lower bound and the upper bound independently following the steps in [Number Format Patterns](../../../docs/ldml/tr35-numbers.md#Number_Format_Patterns), preserving semantic annotations\*.
+> 1. If the resulting values are identical, stop evaluating these steps and, instead, perform the steps in [Approximate Number Formatting](../../../docs/ldml/tr35-numbers.md#Approximate_Number_Formatting).
+>     1. Note: This behavior may be customized in order to, for example, print the range despite the endpoints being identical. However, a spec-compliant implementation must support approximate number formatting.
+> 1. Perform the steps in [Collapsing Number Ranges](../../../docs/ldml/tr35-numbers.md#Collapsing_Number_Ranges), obtaining modified *lower* and *upper* values.
+> 1. Obtain a number range pattern by following the steps in [Range Pattern Processing](../../../docs/ldml/tr35-numbers.md#Range_Pattern_Processing).
+> 1. Substitute *lower* as `{0}` and *upper* as `{1}` into the range pattern from the previous step.
+>
+> \* Semantic annotations are discussed in [Collapsing Number Ranges](../../../docs/ldml/tr35-numbers.md#Collapsing_Number_Ranges).
+>
+> For plural rule selection of number ranges, see [Plural Ranges](../../../docs/ldml/tr35-numbers.md#Plural_Ranges).
+>
+> ### <a name="Approximate_Number_Formatting" href="../../../docs/ldml/tr35-numbers.md#Approximate_Number_Formatting">Approximate Number Formatting</a>
+>
+> *Approximate number formatting* refers to a specific format of numbers in which the value is understood to not be exact; for example, "\~5 minutes".
+>
+> To format an approximate number, follow the normal number formatting procedure in [Number Format Patterns](../../../docs/ldml/tr35-numbers.md#Number_Format_Patterns), but substitute the `approximatelySign` from [Number Symbols](../../../docs/ldml/tr35-numbers.md#Number_Symbols) in for the minus sign placeholder.
+>
+> If the number is negative, or if the formatting options request the sign to be displayed, *prepend* the `approximatelySign` to the plus or minus sign before substituting it into the pattern. For example, "\~-5" means "approximately negative five". This procedure may change in the future.
+>
+> ### <a name="Collapsing_Number_Ranges" href="../../../docs/ldml/tr35-numbers.md#Collapsing_Number_Ranges">Collapsing Number Ranges</a>
+>
+> *Collapsing* a number range refers to the process of removing duplicated information in the *lower* and *upper* values. For example, if the lower string is "3.2 centimeters" and the upper string is "4.5 centimeters", it is desirable to remove the extra "centimeters" token.
+>
+> This operation requires *semantic annotations* on the formatted value. The exact form of the semantic annotations is implementation-dependent. However, implementations may consider the following broad categories of tokens:
+>
+> 1. Numerical value, including decimal and grouping separators
+> 1. Sign symbol
+> 1. Scientific or compact notation
+> 1. Unit of measurement
+>
+> For example, consider the string `-5.3M US dollars`. It may be annotated as follows:
+>
+> - `-` → sign symbol
+> - `5.3` → numerical value
+> - `M` → compact notation
+> - `US dollars` → unit of measurement for the currency USD
+>
+> Two tokens are *semantically equivalent* if they have the same *semantic annotations*, even if they are not the exact same string. For example:
+>
+> 1. "centimeter" is semantically equivalent to "centimeters".
+> 1. "K" (the thousands symbol in compact decimals) is NOT semantically equivalent to "K" (the measurement unit Kelvin).
+>
+> The above description describes the expected output. Internally, the implementation may determine the equivalent units of measurement by passing the codes back from the number formatters, allowing for a precise determination of "semantically equivalent".
+>
+> Two semantically equivalent tokens can be *collapsed* if they appear at the start of both values or the end of both values.
+> However, the implementation may choose different levels of aggressiveness with regard to collapsing tokens.
+> An API for displaying ranges should permit control over whether the tokens are collapsed or not, and the levels of aggressiveness.
+> The currently recommended heuristic is:
+>
+> 1. Never collapse scientific or compact notation. This is to avoid producing ambiguous strings such as "3–5M" (could represent 3–5,000,000 or 3,000,000–5,000,000).
+> 2. Only collapse if the tokens are more than one code point in length. This is to increase clarity of strings such as "$3–$5".
+> 3. To perform the collapse, remove the token that is closest to the range separator.
+> That is, for a prefix element, remove from the end value of the range, and for a suffix element remove it from the start value of the range:
+>     * USD 2 – USD 5 ⇒ USD 2 – 5
+>     * 2M EUR – 5M EUR ⇒  2M – 5M EUR
+>     * 2 km – 5 km ⇒ 2 – 5 km
+>     * 2M ft – 5M ft ⇒ 2M – 5M ft
+> 4. When the tokens can have distinct plural forms, modify the remaining token so that it has the correct plural form. That is, use [Plural Ranges](../../../docs/ldml/tr35-numbers.md#Plural_Ranges) to calculate the correct plural category for the range, and pick the variant of that the remaining token corresponding to that plural form.
+>
+> In bidi contexts, the data is built so that rule #3 works **visually**.
+> For example, if a range from 2 km to 5 km would be presented visually as "_mk 5 – mk 2_", the collapsed form would be "_mk 5 – 2_".
+> (The _mk_ is a stand-in for the native representation.)
+> This requires consistent visually reordering among the elements: the range, the prefixes and the suffixes.
+> Thus a prefix value will be reordered to be visually a suffix value, and the order of the range will be visually reversed.
+>
+> ### <a name="Range_Pattern_Processing" href="../../../docs/ldml/tr35-numbers.md#Range_Pattern_Processing">Range Pattern Processing</a>
+>
+> To obtain a number range pattern, the following steps are taken:
+>
+> 1. Load the range pattern found in [Miscellaneous Patterns](../../../docs/ldml/tr35-numbers.md#Miscellaneous_Patterns).
+> 1. Optionally add spacing to the range pattern.
+>
+> To determine whether to add spacing, the currently recommended heuristic is:
+>
+> 1. If the *lower* string ends with a character other than a digit, or if the *upper* string begins with a character other than a digit.
+> 2. If the range pattern does not contain a character having the `White_Space` binary Unicode property after the `{0}` or before the `{1}` placeholders.
+>
+> These heuristics may be refined in the future.
+>
+> To add spacing, insert a non-breaking space (U+00A0) at the positions in item 2 above.
+
+---
+
+### 15.2 Sentence-by-Sentence `(Dimension / Value)` Coverage Breakdown
+
+**CLDR data.** The `range` patterns (Section 14), and the lengths in code points of the tokens that the collapsing heuristic compares:
+
+| Locale | `range` | `minusSign` | Percent suffix |
+| :--- | :--- | :--- | :--- |
+| `en`, `bn`, `de_CH` | `{0}–{1}` | `-` (1) | `%` (1) |
+| `ja` | `{0}～{1}` | `-` (1) | `%` (1) |
+| `de`, `ru` | `{0}–{1}` | `-` (1) | ` %` / `"\u00A0%"` (2) |
+| `pt_PT` | `{0} - {1}` | `-` (1) | `%` (1) |
+| `ar` | `{0}–{1}` | `‎-` / `"\u200E-"` (2) | `‎%‎` / `"\u200E%\u200E"` (3) |
+| `ar_EG` | `{0}–{1}` | `؜-` / `"\u061C-"` (2) | `٪؜` / `"\u066A\u061C"` (2) |
+
+The breakdown uses four pairs of `input` and `upper_input`: P1 = (1234565.0, 5000000.0), P2 = (−1230.05, −1.2), P3 = (1.2, 1.2), and P4 = (1234565.0, 1234567.0).
+
+| # | Verbatim Sentence / Normative Clause | Required `(Dimension = Value)` Combinations to Cover Clause | CLDR Data Evidence & Expected Behavior |
+| :---: | :--- | :--- | :--- |
+| **S15.1** | Step 1: *"Format the lower bound and the upper bound independently following the steps in Number Format Patterns, preserving semantic annotations"*, and step 5 (substitute the two values into the range pattern) | • `upper_input` × `number_format = "decimal"`, `format_length = ""` × P1 × `locale` values with different `range` patterns (`"en"`, `"ja"`, `"pt_PT"`) | `en` P1 → `1,234,565–5,000,000`; `ja` → `1,234,565～5,000,000`; `pt_PT` → `1 234 565 - 5 000 000` / `"1\u00A0234\u00A0565 - 5\u00A0000\u00A0000"`. |
+| **S15.2** | Step 2: *"If the resulting values are identical, stop evaluating these steps and, instead, perform the steps in Approximate Number Formatting."*, and its note | • **S15.2a**: equal inputs (P3) × several `locale` values (`"en"`, `"de"`, `"ja"`) and `"percent"`<br>• **S15.2b**: different inputs with identical formatted values (P4) × `"short"`, `"long"`, and the same pair × `"decimal"`, where the values differ<br>• **S15.2c**: the customization of the note | • S15.2a: `en` P3 → `~1.2`; `de` → `≈1,2`; `ja` → `約1.2`; `en` percent → `~120%`.<br>• S15.2b: `en` short P4 → `~1.2M`; long → `~1.2 million`; decimal → `1,234,565–1,234,567`.<br>• S15.2c: optional (*"may be customized"*). |
+| **S15.3** | *"To format an approximate number, follow the normal number formatting procedure in Number Format Patterns, but substitute the `approximatelySign` from Number Symbols in for the minus sign placeholder."*; *"If the number is negative, or if the formatting options request the sign to be displayed, [...] the `approximatelySign` to the plus or minus sign before substituting it into the pattern. For example, "\~-5" means "approximately negative five"."* | • **S15.3a**: `sign_display = "approximately"` × non-negative `input` (S2.10)<br>• **S15.3b**: `"approximately"` × negative `input` (`-1230.05`)<br>• **S15.3c**: `sign_display = "approximately, always"` × positive `input` (`1.2`) | • S15.3a: see S2.10.<br>• S15.3b: `en` −1230.05 → `~-1,230.05`; `de` → `≈-1.230,05`; `ja` → `約-1,230.05`; `ar` → `~‎-1,230.05` / `"~\u200E-1,230.05"`.<br>• S15.3c: `en` 1.2 → `~+1.2`; `de` → `≈+1,2`; `ar` → `~‎+1.2` / `"~\u200E+1.2"`. |
+| **S15.4** | Rule 1: *"Never collapse scientific or compact notation. This is to avoid producing ambiguous strings such as "3–5M" (could represent 3–5,000,000 or 3,000,000–5,000,000)."* | • `upper_input` × `"short"`, `"long"`, `"scientific"` × a pair whose values have the same compact or exponent token (P1: `M`; P4: `E6`) | `en` short P1 → `1.2M – 5M` / `"1.2M\u00A0–\u00A05M"`; long → `1.2 million – 5 million` / `"1.2 million\u00A0–\u00A05 million"`; `de` short → `1,2 Mio. – 5 Mio.` / `"1,2\u00A0Mio.\u00A0–\u00A05\u00A0Mio."`; `en` scientific P4 → `1.234565E6–1.234567E6`. |
+| **S15.5** | Rule 2: *"Only collapse if the tokens are more than one code point in length."* | • `upper_input` × tokens of one code point: `%` (`"en"` × `"percent"` × P1) and `-` (`"en"` × P2) | `en` percent P1 → `123,456,500% – 500,000,000%` / `"123,456,500%\u00A0–\u00A0500,000,000%"`; P2 → `-1,230.05 – -1.2` / `"-1,230.05\u00A0–\u00A0-1.2"`. |
+| **S15.6** | Rule 3: *"To perform the collapse, remove the token that is closest to the range separator."*, and its examples | • **S15.6a**: a suffix of more than one code point (`"de"` × `"percent"` × P1)<br>• **S15.6b**: a prefix of more than one code point (`"ar"` × P2) | • S15.6a: `de` percent P1 → `123.456.500–500.000.000 %` / `"123.456.500–500.000.000\u00A0%"`.<br>• S15.6b: ❓ `ar` P2 → `‎-1,230.05–1.2` / `"\u200E-1,230.05–1.2"`; see the notes. |
+| **S15.7** | Rule 4: *"When the tokens can have distinct plural forms, modify the remaining token so that it has the correct plural form."* [...], and the paragraph on bidi contexts (L1920–L1924) | — | Plural forms apply to units, outside this generator (compact tokens are never collapsed); the bidi paragraph describes the visual order. |
+| **S15.8** | *"The exact form of the semantic annotations is implementation-dependent."*; *"However, the implementation may choose different levels of aggressiveness with regard to collapsing tokens."* [...] | — | Implementation choices. The expected values above follow the recommended heuristic. |
+| **S15.9** | Range pattern processing: *"Load the range pattern found in Miscellaneous Patterns."*; *"Optionally add spacing to the range pattern."*; the spacing heuristic (L1933–L1938); *"To add spacing, insert a non-breaking space (U+00A0) at the positions in item 2 above."* | • **S15.9a**: values that end and begin with a digit (no spacing)<br>• **S15.9b**: a value that ends or begins with another character (spacing)<br>• **S15.9c**: a `range` pattern with white space (`"pt_PT"`) × P2 | • S15.9a: see S15.1 (`en` P1 → `1,234,565–5,000,000`).<br>• S15.9b: see S15.4 and S15.5.<br>• S15.9c: `pt_PT` P2 → `-1230,05 - -1,2` (no U+00A0 added). |
+
+---
+
+### 15.3 Comparison Against `GenerateDecimalFormatTestData.java`
+
+| Clause | Required `(Dimension = Value)` Combination | Status | Generator Evidence / Action Required |
+| :---: | :--- | :---: | :--- |
+| **S15.1**, **S15.2a**, **S15.2b**, **S15.4**, **S15.5**, **S15.6**, **S15.9** | `upper_input` × the five styles × P1–P4 | 🟡 **Missing: new dimension** | The generator formats single numbers only. **Action**: add the `upper_input` dimension (see the Summary). |
+| **S15.3a** | `sign_display = "approximately"` × non-negative `input` | 🟡 **Missing: new dimension** | **Action**: Section 2's `sign_display` rows (see the Summary). |
+| **S15.3b**, **S15.3c** | `"approximately"` × `-1230.05`; `"approximately, always"` × `1.2` | 🟡 **Missing: new dimension** | Section 2's `"approximately"` rows have only non-negative inputs. **Action**: add these rows (see the Summary). |
+| **S15.2c**, **S15.7**, **S15.8** | — | ⚪ **Out of scope** | Optional behavior, units, or implementation choices. |
+
+### 15.4 Notes
+
+* S15.6b: in `ar` and `ar_EG` the minus sign has two code points (a bidi mark and `-`), so rule 2 allows the collapse, and rule 3 removes it from the upper value: `ar` P2 → `‎-1,230.05–1.2` / `"\u200E-1,230.05–1.2"`, which reads as a range from −1230.05 to 1.2. In `en` both signs stay (`-` has one code point). The text does not say whether a sign may be collapsed.
+* S15.9: the heuristic adds no spacing to scientific values, which begin and end with digits: `en` scientific P1 → `1.234565E6–5E6`.
+
+---
+
 ## Summary: Required Generator Changes
 
 | Change | Needed by |
 | :--- | :--- |
 | Add the `numbering_system` dimension, with its rows in a separate file: `CORE_LOCALES` × `"latn"`, `"native"`, `"traditio"`, `"finance"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (+170 rows: 9 × 4 × 5, minus the 10 `ja` rows for `"traditio"` and `"finance"`, whose numbering systems are algorithmic) | S1.3a–b, S1.5, S1.6b, S1.7b, S1.8 |
-| Add the `sign_display` dimension, with its rows in a separate file: `CORE_LOCALES` × `"always"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (45 rows), and `CORE_LOCALES` × `"approximately"` × the same × the non-negative `CORE_NUMBERS` (36 rows) (+81 rows) | S2.9, S2.10, S9.1a, S9.2a |
+| Add the `sign_display` dimension, with its rows in a separate file: `CORE_LOCALES` × `"always"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (45 rows), and `CORE_LOCALES` × `"approximately"` × the same × the non-negative `CORE_NUMBERS` (36 rows) (+81 rows) | S2.9, S2.10, S9.1a, S9.2a, S15.3a |
 | Add the `exponent_style` dimension, with its rows in a separate file: the 7 `CORE_LOCALES` with Latin digits (all but `ar_EG` and `bn`) × `"superscript"` × `number_format = "scientific"` × `CORE_NUMBERS` (+35 rows) | S2.12 |
 | Add the special values `Infinity`, `-Infinity`, and `NaN`, with their rows in a separate file: `CORE_LOCALES` × `number_format = "decimal"`, `format_length = ""` (+27 rows) | S2.14 |
 | Add `numbering_system` rows for `number_format = "percent"`, in a separate file: `CORE_LOCALES` × `"latn"`, `"native"` × `format_length = ""` × `CORE_NUMBERS` (+90 rows) | S3.7a |
@@ -1228,7 +1452,10 @@ The non-compact pattern of these locales is `#,##0.###` (`group`: `de` `.`, `de_
 | Add `precision` rows for `number_format = "scientific"`, in a separate file: `CORE_LOCALES` × `"significant: 3"`, `"significant: 2-4"` × `CORE_NUMBERS` (+90 rows) | S11.6b, S12.8 |
 | Add `precision` rows for `number_format = "decimal"`, `format_length = ""`, in a separate file: `CORE_LOCALES` × `"significant: 3"`, `"significant: 2-4"` × `CORE_NUMBERS` (+90 rows) | S12.1b, S12.2, S12.4, S12.6 |
 | Add the `precision` values `"increment: 50"` and `"increment: 0.65"`, with their rows in a separate file: `CORE_LOCALES` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (+90 rows) | S13.1 |
+| Add the `misc_pattern` dimension, with its rows in a separate file: `CORE_LOCALES` × `"atLeast"`, `"atMost"` × `number_format = "decimal"`, `format_length = ""` × `CORE_NUMBERS` (+90 rows) | S14.3, S14.4 |
+| Add the `upper_input` dimension, with its rows in a separate file: `CORE_LOCALES` × the five styles × the four pairs of `input` and `upper_input` (+180 rows: 9 × 5 × 4) | S15.1, S15.2a–b, S15.4–S15.6, S15.9 |
+| Add `sign_display` rows for `"approximately"` × `-1230.05` and `"approximately, always"` × `1.2`, in a separate file: `CORE_LOCALES` × `number_format = "decimal"`, `format_length = ""` (+18 rows) | S15.3b, S15.3c |
 
 The rows that change the digits are `ar` × `"native"` and `"traditio"` (`arab`), and `ar_EG` and `bn` × `"latn"`. The other rows check that each key falls back to the expected numbering system.
 
-Together, Sections 1–13 add 1,267 rows: 1,222 in separate files (170 + 81 + 35 + 27 + 90 + 216 + 135 + 45 + 45 + 108 + 90 + 90 + 90) and 45 in `decimals_extended_numbers.tsv`; `decimals.tsv` is unchanged.
+Together, Sections 1–15 add 1,555 rows: 1,510 in separate files (170 + 81 + 35 + 27 + 90 + 216 + 135 + 45 + 45 + 108 + 90 + 90 + 90 + 90 + 180 + 18) and 45 in `decimals_extended_numbers.tsv`; `decimals.tsv` is unchanged.
